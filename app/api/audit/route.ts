@@ -1,18 +1,21 @@
 import { NextResponse } from "next/server";
-import { promises as fs } from "node:fs";
-import path from "node:path";
+import prisma from "@/lib/prisma";
 
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const entry = {
-      ts: new Date().toISOString(),
-      ip: req.headers.get("x-forwarded-for") ?? "local",
-      ...body,
-    };
-    const file = path.join(process.cwd(), "submissions.jsonl");
-    await fs.appendFile(file, JSON.stringify(entry) + "\n", "utf8");
-    console.log("[AUDIT]", entry);
+    
+    const entry = await prisma.brief.create({
+      data: {
+        name: body.name,
+        email: body.email,
+        company: body.company,
+        stage: body.stage || null,
+        brief: body.brief,
+      }
+    });
+
+    console.log("[AUDIT] Saved to database:", entry);
     return NextResponse.json({ ok: true });
   } catch (e) {
     console.error("[AUDIT] error", e);
