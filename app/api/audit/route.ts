@@ -1,23 +1,10 @@
 import { NextResponse } from "next/server";
-import prisma from "@/lib/prisma";
 import { sendBriefNotification } from "@/lib/mailer";
 import { addBriefToSheet } from "@/lib/sheets";
 
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-
-    const entry = await prisma.brief.create({
-      data: {
-        name: body.name,
-        email: body.email,
-        company: body.company,
-        stage: body.stage || null,
-        brief: body.brief,
-      }
-    });
-
-    console.log("[AUDIT] Saved to database:", entry);
 
     // Send email notification
     try {
