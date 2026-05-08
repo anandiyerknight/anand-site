@@ -85,9 +85,7 @@ export function Hero() {
           transition={{ duration: 0.9, delay: 1.0 }}
           className="mt-10 max-w-xl text-[var(--color-ink-2)] text-lg md:text-xl leading-relaxed"
         >
-          We architect high-output content &amp; revenue systems for the ambitious. Stop solving
-          scaling problems with headcount — deploy custom, automated pipelines that collapse weeks
-          of manual labor into minutes of high-performance output.
+          Systems at the intersection of creative, marketing, branding and engineering.
         </motion.p>
 
         {/* CTAs */}
@@ -100,14 +98,10 @@ export function Hero() {
           <Magnetic strength={0.25}>
             <a href="#audit" className="btn-primary">
               <span className="text-[var(--color-cyan)]">[ 01 ]</span>
-              Request a Systems Audit
+              See If You Qualify
               <span aria-hidden>→</span>
             </a>
           </Magnetic>
-          <a href="#work" className="btn-ghost">
-            View Reels
-            <span aria-hidden>↓</span>
-          </a>
         </motion.div>
 
 

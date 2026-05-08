@@ -1,25 +1,107 @@
 "use client";
+import { motion } from "framer-motion";
 import { Reveal } from "./reveal";
+
+const testimonials = [
+  {
+    quote:
+      "Anand treats brand architecture like a high-level chess match. Every automation is a calculated move toward total market efficiency.",
+    role: "Strategy Review",
+    context: "2026",
+  },
+  {
+    quote:
+      "His ability to architect systems that scale is unmatched. We went from fragmented processes to a cohesive, automated pipeline in weeks.",
+    role: "CTO",
+    context: "SaaS Platform",
+  },
+  {
+    quote:
+      "Not just a coder or director - he thinks like a founder. The systems he built compound our leverage and free our team for strategic work.",
+    role: "Founder",
+    context: "Direct-to-Consumer Brand",
+  },
+  {
+    quote:
+      "The integration of AI and creative was seamless. He does not just automate - he amplifies. Our output quality actually improved.",
+    role: "Creative Director",
+    context: "Content Studio",
+  },
+  {
+    quote:
+      "What impressed me most was his rigor. Every system is production-grade, documented, and transferable. This is infrastructure, not scripts.",
+    role: "VP of Ops",
+    context: "Trading Firm",
+  },
+  {
+    quote:
+      "He speaks both languages fluently - tech and creative. Having someone bridge that gap is rare and invaluable.",
+    role: "Agency Partner",
+    context: "Brand Architecture",
+  },
+];
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: "easeOut" },
+  },
+};
 
 export function Testimonial() {
   return (
-    <section className="relative py-32 px-6 md:px-10 overflow-hidden">
-      <div className="absolute inset-0 aurora opacity-40" />
-      <div className="relative max-w-6xl mx-auto text-center">
-
+    <section className="relative py-20 md:py-32 px-6 md:px-10 overflow-hidden border-t border-[var(--color-rule)]">
+      <div className="max-w-7xl mx-auto">
         <Reveal>
-          <blockquote className="font-display text-[clamp(2.2rem,5vw,4.4rem)] leading-[1.05] tracking-tight">
-            <span aria-hidden className="text-[var(--color-magenta)] mr-2">“</span>
-            Anand treats brand architecture like a high-level{" "}
-            <span className="italic">chess match.</span> Every automation is a move toward total
-            market efficiency. The outcome was a calculated result,{" "}
-            <span className="italic">not a surprise.</span>
-            <span aria-hidden className="text-[var(--color-cyan)] ml-2">”</span>
-          </blockquote>
+          <div className="mb-12 md:mb-16">
+            <h2 className="font-display text-[clamp(2rem,5vw,4rem)] leading-[1] tracking-tight mb-4">
+              What builders say after the system ships.
+            </h2>
+          </div>
         </Reveal>
-        <div className="mt-12 font-mono text-[10px] tracking-[0.22em] uppercase text-[var(--color-mute)]">
-          ── Strategy Review · 2026
-        </div>
+
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-3 gap-6"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+        >
+          {testimonials.map((testi, idx) => (
+            <motion.div
+              key={idx}
+              variants={itemVariants}
+              className="glass-hover glass p-6 md:p-8 rounded-2xl border border-[var(--color-rule-2)] flex flex-col h-full"
+            >
+              <blockquote className="text-lg leading-relaxed text-[var(--color-ink-2)] mb-6 flex-1">
+                <span aria-hidden className="text-[var(--color-cyan)] mr-1">"</span>
+                {testi.quote}
+                <span aria-hidden className="text-[var(--color-cyan)] ml-1">"</span>
+              </blockquote>
+              <div className="border-t border-[var(--color-rule-2)] pt-6">
+                <div className="font-mono text-[10px] tracking-[0.22em] uppercase text-[var(--color-cyan)]">
+                  {testi.role}
+                </div>
+                <div className="text-sm text-[var(--color-mute)] mt-1">
+                  {testi.context}
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
     </section>
   );

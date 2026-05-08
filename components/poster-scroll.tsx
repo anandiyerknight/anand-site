@@ -5,7 +5,6 @@ import { Reveal } from "./reveal";
 
 const posters = [
   { id: 1, title: "Gangs of Wasseypur", meta: "Sound Design", src: "https://m.media-amazon.com/images/M/MV5BMTc5NjY4MjUwNF5BMl5BanBnXkFtZTcwNDIzMTk4Nw@@._V1_FMjpg_UX1000_.jpg" },
-  { id: 2, title: "Sacred Games", meta: "Sonic Architecture", src: "https://m.media-amazon.com/images/M/MV5BMjA5Njk3MjM4OV5BMl5BanBnXkFtZTgwMTc3MjcwNjM@._V1_FMjpg_UX1000_.jpg" },
   { id: 3, title: "The Lift", meta: "Original Score", src: "https://m.media-amazon.com/images/M/MV5BNzFmYzlkM2MtNWI4Yy00YjFmLWFlN2UtNmQ3YjU4YmZlZTRiXkEyXkFqcGdeQXVyMTE0MzQwMjgz._V1_.jpg" },
   { id: 4, title: "Ludo", meta: "Sound Effects", src: "https://m.media-amazon.com/images/M/MV5BMDA4ZjEyZTMtN2Q5MS00OTVlLWE4OTItYTUzMTJjYmZlOWI4XkEyXkFqcGdeQXVyMTAyMTE1NzIz._V1_.jpg" },
   { id: 5, title: "Udaan", meta: "Atmospheric Mixing", src: "https://m.media-amazon.com/images/M/MV5BMjExMTg5OTU0NF5BMl5BanBnXkFtZTcwMjMxMzcyMw@@._V1_.jpg" },

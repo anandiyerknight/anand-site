@@ -1,46 +1,47 @@
 "use client";
-import { Reveal } from "./reveal";
+import { useRef } from "react";
 
 const images = [
-  { id: "calvin", src: "/images/after/calvin.jpg", label: "Calvin Klein · Campaign" },
-  { id: "maggi", src: "/images/after/maggi-korean-spicy-cheesy-cup-noodles-.jpg", label: "Maggi · Product Film" },
-  { id: "magnum", src: "/images/after/magnum_02.jpg", label: "Magnum · Editorial" },
-  { id: "mokobara", src: "/images/after/mokobara.jpg", label: "Mokobara · Travel" },
-  { id: "real", src: "/images/after/real-fruit-power-pomegranate-juice-pack-.jpg", label: "Real · Juice Campaign" },
-  { id: "redbull", src: "/images/after/redbull.jpg", label: "Red Bull · High-Speed" },
-  { id: "reebok", src: "/images/after/reebok.jpg", label: "Reebok · Sport Editorial" },
-  { id: "wagonr", src: "/images/after/wagonr.jpg", label: "Maruti Suzuki WagonR · Automotive" },
+  { id: "calvin", src: "/images/after/calvin.jpg", label: "Calvin Klein" },
+  { id: "maggi", src: "/images/after/maggi-korean-spicy-cheesy-cup-noodles-.jpg", label: "Maggi" },
+  { id: "magnum", src: "/images/after/magnum_02.jpg", label: "Magnum" },
+  { id: "mokobara", src: "/images/after/mokobara.jpg", label: "Mokobara" },
+  { id: "real", src: "/images/after/real-fruit-power-pomegranate-juice-pack-.jpg", label: "Real" },
+  { id: "redbull", src: "/images/after/redbull.jpg", label: "Red Bull" },
+  { id: "reebok", src: "/images/after/reebok.jpg", label: "Reebok" },
+  { id: "wagonr", src: "/images/after/wagonr.jpg", label: "Maruti WagonR" },
 ];
 
 export function AfterGrid() {
-  return (
-    <section id="work-grid" className="relative py-32 px-6 md:px-10 border-t border-[var(--color-rule)]">
-      <div className="max-w-7xl mx-auto">
-        <div className="mb-16">
-          <Reveal>
-            <h2 className="font-display text-[clamp(2.4rem,5.5vw,5rem)] leading-[0.95] tracking-tight max-w-[20ch]">
-              High-performance visuals. <span className="italic">Delivered.</span>
-            </h2>
-          </Reveal>
-        </div>
+  const scrollRef = useRef<HTMLDivElement>(null);
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-          {images.map((img, i) => (
-            <Reveal key={img.id} delay={i * 0.05}>
-              <div className="relative group aspect-[4/5] glass overflow-hidden rounded-[2rem]">
+  return (
+    <section className="relative py-8 px-6 md:px-10 border-t border-[var(--color-rule)]">
+      <div className="max-w-7xl mx-auto">
+        <div
+          ref={scrollRef}
+          className="flex gap-3 overflow-x-auto pb-4 scrollbar-hide snap-x"
+          style={{ scrollbarWidth: 'none' }}
+        >
+          {images.map((img) => (
+            <div
+              key={img.id}
+              className="flex-shrink-0 w-[120px] md:w-[140px] snap-start"
+            >
+              <div className="relative group aspect-[3/4] glass rounded-lg overflow-hidden">
                 <img
                   src={img.src}
                   alt={img.label}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <div className="absolute bottom-4 left-4 right-4 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
-                  <div className="font-mono text-[9px] tracking-[0.18em] uppercase text-white/90">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute bottom-2 left-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="font-mono text-[7px] tracking-[0.1em] uppercase text-white/80">
                     {img.label}
                   </div>
                 </div>
               </div>
-            </Reveal>
+            </div>
           ))}
         </div>
       </div>

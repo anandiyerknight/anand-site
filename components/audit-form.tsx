@@ -33,29 +33,31 @@ export function AuditForm() {
 
           <Reveal>
             <h2 className="font-display text-[clamp(2rem,5vw,4.5rem)] leading-[0.95] tracking-tight">
-              Ready to Build
+              Not everyone
               <br />
-              <span className="italic grad-text">Revenue Infrastructure?</span>
+              <span className="italic">qualifies.</span>
             </h2>
           </Reveal>
           <p className="mt-8 text-[var(--color-ink-2)] text-lg leading-relaxed max-w-md">
-            Currently optimizing pipelines for a select group of ambitious
-            entities. Briefs are reviewed within 48 hours.
+            Currently accepting 2 new systems builds for Q3 2026.
           </p>
           <div className="mt-12 space-y-3 font-mono text-[11px] tracking-[0.18em] uppercase text-[var(--color-mute)]">
             <div className="flex items-center gap-3">
               <span className="text-[var(--color-cyan)]">▸</span>
-              Vetted for unit economics + PMF
+              10x speed compounds
             </div>
             <div className="flex items-center gap-3">
               <span className="text-[var(--color-cyan)]">▸</span>
-              Done-For-You, not Done-With-You
+              Systems compound leverage
             </div>
             <div className="flex items-center gap-3">
               <span className="text-[var(--color-cyan)]">▸</span>
-              Data moats trained on your IP
+              Decisions in days
             </div>
           </div>
+          <p className="mt-12 text-sm text-[var(--color-mute)] italic">
+            If you're still evaluating, this isn't for you.
+          </p>
         </div>
 
         <div className="md:col-span-7">
@@ -64,9 +66,9 @@ export function AuditForm() {
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 md:gap-0 mb-8 font-mono text-[10px] tracking-[0.22em] uppercase">
                 <span className="flex items-center gap-2 text-[var(--color-cyan)]">
                   <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-cyan)] animate-pulse" />
-                  brief_intake.exec()
+                  systems_intake.exec()
                 </span>
-                <span className="text-[var(--color-mute)]">Q3 2026 · 4 of 6 slots</span>
+                <span className="text-[var(--color-mute)]">Q3 2026 · 2 of 4 slots</span>
               </div>
 
               <AnimatePresence mode="wait">
@@ -145,7 +147,7 @@ export function AuditForm() {
                           className="w-full md:w-auto btn-primary px-8 py-3 text-base md:text-sm font-semibold shadow-xl hover:shadow-2xl active:scale-95"
                           disabled={state === "submitting"}
                         >
-                          {state === "submitting" ? "Transmitting…" : "Transmit Brief"}
+                          {state === "submitting" ? "Applying…" : "Apply to Work Together"}
                           <span aria-hidden>{state === "submitting" ? "·" : "→"}</span>
                         </button>
                       </Magnetic>

@@ -3,11 +3,11 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 
 const links = [
+  { label: "Systems", href: "#systems" },
   { label: "Logic", href: "#methodology" },
   { label: "Work", href: "#work-grid" },
-  { label: "Film", href: "#sonic" },
-  { label: "Stack", href: "#stack" },
-  { label: "Audit", href: "#audit" },
+  { label: "Stack", href: "#tech" },
+  { label: "Qualify", href: "#audit" },
 ];
 
 export function Nav() {
@@ -50,8 +50,7 @@ export function Nav() {
 
         <div className="flex items-center gap-2 md:gap-4">
           <a href="#audit" className="btn-primary !py-2 md:!py-2.5 !px-3 md:!px-4 !text-xs md:!text-[10px]">
-            <span className="hidden md:inline">Request Audit</span>
-            <span className="md:hidden">Audit</span>
+            <span>Apply</span>
             <span aria-hidden>→</span>
           </a>
         </div>

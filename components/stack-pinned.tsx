@@ -5,7 +5,7 @@ import { stackLoops } from "@/lib/reels";
 const panels = [
   {
     idx: "01",
-    title: "Content Automation",
+    title: "Creative Systems Architecture",
     logic: "4K broadcast-quality video pipelines tailored for D2C.",
     impact: ["Automated processing", "Scalable output", "Maintains broadcast standards"],
     video: stackLoops.content,
@@ -13,7 +13,7 @@ const panels = [
   },
   {
     idx: "02",
-    title: "SaaS / App Architecture",
+    title: "Custom AI-Native Platforms",
     logic: "Custom AI-native CRM and platform engineering.",
     impact: ["Proprietary data architecture", "Immediate operational efficiency", "Personalized RAG pipelines"],
     video: stackLoops.saas,
@@ -21,7 +21,7 @@ const panels = [
   },
   {
     idx: "03",
-    title: "Revenue Funnels",
+    title: "End-to-End Automation",
     logic: "Automated end-to-end pipelines across WhatsApp, API, and Web.",
     impact: ["High engagement optimization", "Automated distribution", "Sustained performance analytics"],
     video: stackLoops.funnels,

@@ -10,6 +10,10 @@ const apps = [
     fullDesc: "Pulse AI is a production-grade trading infrastructure powering automated multi-pair strategies with real-time A/B testing. Deploy live trading pairs simultaneously, monitor performance metrics across dashboards, and optimize strategy parameters with ML-driven insights.",
     tags: ["Trading", "Automation", "Analytics"],
     color: "from-blue-500/20 to-cyan-500/20",
+    kpis: [
+      { label: "Deploy time", before: "2wk", after: "45min" },
+      { label: "Pairs live", before: "1", after: "6" },
+    ],
     gallery: [
       { title: "Trading Dashboard", desc: "Real-time P&L tracking and pair management", image: "/images/apps/pulse-1.jpg" },
       { title: "A/B Test Analytics", desc: "Live performance comparison across strategies", image: "/images/apps/pulse-2.jpg" },
@@ -23,6 +27,10 @@ const apps = [
     fullDesc: "AutoEdit AI transforms raw footage into broadcast-quality content through intelligent video processing. Automated scene detection, shot transitions, color grading, and format optimization for TikTok, Instagram, YouTube, and beyond.",
     tags: ["Video", "Editing", "AI"],
     color: "from-purple-500/20 to-pink-500/20",
+    kpis: [
+      { label: "Edit cycle", before: "3d", after: "2hr" },
+      { label: "Formats", before: "1", after: "8" },
+    ],
     gallery: [
       { title: "Footage Upload", desc: "Batch processing with drag-and-drop interface", image: "/images/apps/autoedit-1.jpg" },
       { title: "Auto Scene Detection", desc: "AI identifies shots and key moments automatically", image: "/images/apps/autoedit-2.jpg" },
@@ -36,6 +44,10 @@ const apps = [
     fullDesc: "Compass AI is a job search intelligence system for engineers. Score job matches based on company metrics, optimize your portfolio for specific roles, track applications with detailed analytics, and get AI-powered interview prep.",
     tags: ["Jobs", "AI", "Scoring"],
     color: "from-amber-500/20 to-orange-500/20",
+    kpis: [
+      { label: "Jobs scored/day", before: "0", after: "400+" },
+      { label: "Apply time", before: "30min", after: "5min" },
+    ],
     gallery: [
       { title: "Job Matching Engine", desc: "AI scoring for unit economics & PMF alignment", image: "/images/apps/compass-1.jpg" },
       { title: "Portfolio Optimizer", desc: "Tailor GitHub projects and resume for roles", image: "/images/apps/compass-2.jpg" },
@@ -49,6 +61,10 @@ const apps = [
     fullDesc: "Gut Guru is a comprehensive nutrition intelligence platform combining meal composition analysis, nutrient tracking, and AI-powered recipe recommendations. Build meals based on macros, micronutrients, and health objectives with real-time optimization.",
     tags: ["Nutrition", "Health", "Analytics"],
     color: "from-green-500/20 to-emerald-500/20",
+    kpis: [
+      { label: "Meal plan", before: "45min", after: "8min" },
+      { label: "Foods", before: "0", after: "3000+" },
+    ],
     gallery: [
       { title: "Meal Composition UI", desc: "Drag-and-drop meal builder with instant nutrient calc", image: "/images/apps/gutguru-1.jpg" },
       { title: "Food Library", desc: "3000+ food items with detailed nutritional data", image: "/images/apps/gutguru-2.jpg" },
@@ -83,12 +99,12 @@ export function AppsShowcase() {
 
   return (
     <>
-      <section className="relative py-20 md:py-32 px-6 md:px-10 border-t border-[var(--color-rule)]">
+      <section id="systems" className="relative py-20 md:py-32 px-6 md:px-10 border-t border-[var(--color-rule)]">
         <div className="max-w-7xl mx-auto">
           <Reveal>
             <div className="mb-12 md:mb-16">
               <h2 className="font-display text-[clamp(2rem,5vw,4rem)] leading-[1] tracking-tight mb-4">
-                Infrastructure We Ship
+                Systems Built. Running in Production.
               </h2>
               <p className="text-[var(--color-ink-2)] text-base md:text-lg max-w-2xl">
                 Production-grade applications built with precision engineering and deployed at scale.
@@ -112,12 +128,27 @@ export function AppsShowcase() {
               >
                 {/* Image Container */}
                 <div className={`relative w-full aspect-video rounded-lg mb-6 overflow-hidden bg-gradient-to-br ${app.color} flex items-center justify-center`}>
+                  {app.gallery[0]?.image ? (
+                    <>
+                      <img
+                        src={app.gallery[0].image}
+                        alt={app.name}
+                        className="absolute inset-0 w-full h-full object-cover"
+                        onError={(e) => {
+                          e.currentTarget.style.display = 'none';
+                        }}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                    </>
+                  ) : null}
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent" />
                   </div>
-                  <div className="text-center text-[var(--color-mute)] font-display text-sm md:text-base">
-                    {app.name}
-                  </div>
+                  {!app.gallery[0]?.image && (
+                    <div className="text-center text-[var(--color-mute)] font-display text-sm md:text-base">
+                      {app.name}
+                    </div>
+                  )}
                 </div>
 
                 {/* Content */}
@@ -130,7 +161,7 @@ export function AppsShowcase() {
                   </p>
 
                   {/* Tags */}
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2 mb-4">
                     {app.tags.map((tag) => (
                       <span
                         key={tag}
@@ -138,6 +169,15 @@ export function AppsShowcase() {
                       >
                         {tag}
                       </span>
+                    ))}
+                  </div>
+
+                  {/* KPI Metrics */}
+                  <div className="space-y-1 text-xs text-[var(--color-mute)]">
+                    {app.kpis.map((kpi, idx) => (
+                      <div key={idx}>
+                        {kpi.label} <span className="text-[var(--color-cyan)]">{kpi.before}</span> → <span className="text-[var(--color-cyan)]">{kpi.after}</span>
+                      </div>
                     ))}
                   </div>
                 </div>

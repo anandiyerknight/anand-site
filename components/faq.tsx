@@ -5,16 +5,16 @@ import { Reveal } from "./reveal";
 
 const faqs = [
   {
-    q: "Why a Lead Generation form instead of a direct booking?",
-    a: "Our systems are built for high-stakes environments. We vet for unit economics and product-market fit to ensure our automations provide maximum leverage. Direct calendars get filled with browsers; the form filters for operators.",
+    q: "You're a creative director AND an engineer — how?",
+    a: "15 years in both worlds taught me they're not separate. Creative direction without engineering is a spec; engineering without creative is just infrastructure. The leverage emerges at the intersection. I build systems that solve creative problems at scale.",
   },
   {
-    q: 'What makes this "Premium Done-For-You"?',
-    a: "We don't hand you a tool and a tutorial. We build the system, integrate the APIs, train the models on your proprietary data, and hand you the keys to a finished revenue machine. The operating burden never lands on your team.",
+    q: "What exactly do you build?",
+    a: "Custom AI-native platforms, video automation pipelines, revenue systems, trading infrastructure, and content engines. Whatever compounds your leverage and removes friction from high-volume repetitive work. Every system is production-grade, documented, and transferable.",
   },
   {
-    q: "What types of brands and stages do you take on?",
-    a: "Series A startups, luxury entities, and ambitious D2C operators. Anyone with capital to deploy and the discipline to honor unit economics. We work with founders who treat infrastructure as leverage, not overhead.",
+    q: "Who is this NOT for?",
+    a: "If you're still evaluating, exploring, or learning, this isn't for you. I work with founders and teams who already know they need systems built and are ready to deploy. You need capital, conviction, and the discipline to operationalize.",
   },
 ];
 
@@ -25,12 +25,9 @@ export function FAQ() {
     <section className="relative py-32 px-6 md:px-10 border-t border-[var(--color-rule)]">
       <div className="max-w-5xl mx-auto">
         <div className="mb-12">
-
           <Reveal>
             <h2 className="font-display text-[clamp(2.4rem,5vw,4.5rem)] leading-[0.98] tracking-tight">
-              The questions{" "}
-              <span className="italic">serious operators</span>{" "}
-              ask first.
+              Common questions.
             </h2>
           </Reveal>
         </div>

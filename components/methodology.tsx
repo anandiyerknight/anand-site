@@ -1,5 +1,5 @@
 "use client";
-import { PortraitPlaceholder } from "./portrait-placeholder";
+import { Magnetic } from "./magnetic";
 import { Reveal } from "./reveal";
 
 const tier1 = ["Netflix", "Amazon Prime", "Gillette", "Adidas", "Reebok", "HDFC", "Byju's"];
@@ -30,39 +30,19 @@ export function Methodology() {
 
           <Reveal>
             <h2 className="font-display text-[clamp(2.4rem,5.5vw,4.8rem)] leading-[0.98] tracking-tight">
-              I don't provide{" "}
-              <span className="italic text-[var(--color-mute)]">"services."</span>
+              I build the systems.
               <br />
-              I build <span className="italic">Done-For-You</span> Revenue
-              <br />
-              Infrastructure.
+              You focus on the vision.
             </h2>
           </Reveal>
 
           <Reveal delay={0.1}>
             <p className="mt-10 text-lg md:text-xl leading-relaxed text-[var(--color-ink-2)] max-w-2xl">
-              With 15+ years of production pedigree for{" "}
-              {tier1.map((b, i) => (
-                <span key={b}>
-                  <span className="text-[var(--color-ink)] underline decoration-[var(--color-cyan)] decoration-2 underline-offset-4">
-                    {b}
-                  </span>
-                  {i < tier1.length - 1 ? ", " : ""}
-                </span>
-              ))}
-              , I have moved from high-stakes creative direction to building the engines that
-              power it.
+              With 15 years of production pedigree and 6 production apps, I'm a systems builder for creative and tech founders who want to compound their leverage. I architect end-to-end automations that remove friction and amplify impact.
             </p>
           </Reveal>
 
           <Reveal delay={0.2}>
-            <p className="mt-6 text-lg leading-relaxed text-[var(--color-mute)] max-w-2xl">
-              I architect end-to-end digital transformations — from AI-native SaaS platforms to
-              luxury D2C brands. Every automation is a move toward total market efficiency.
-            </p>
-          </Reveal>
-
-          <Reveal delay={0.3}>
             <div className="mt-12 grid grid-cols-2 gap-4 max-w-md">
               {[
                 ["Berklee", "Acoustics"],
@@ -84,6 +64,18 @@ export function Methodology() {
                   <div className="text-sm text-[var(--color-ink-2)] mt-1">{sub}</div>
                 </div>
               ))}
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.3}>
+            <div className="mt-12">
+              <Magnetic strength={0.25}>
+                <a href="#audit" className="btn-primary">
+                  <span className="text-[var(--color-cyan)]">[ 02 ]</span>
+                  See If You Qualify
+                  <span aria-hidden>→</span>
+                </a>
+              </Magnetic>
             </div>
           </Reveal>
         </div>
