@@ -2,7 +2,28 @@
 import { motion } from "framer-motion";
 import { Reveal } from "./reveal";
 
-const films: Array<{ title: string; role: string; poster: string }> = [];
+const films = [
+  {
+    title: "Gangs of Wasseypur",
+    role: "Sound Design",
+    poster: "/images/films/gangs-of-wasseypur.jpg",
+  },
+  {
+    title: "Jawani Janeman",
+    role: "Music · Sound",
+    poster: "/images/films/jawani-janeman.jpg",
+  },
+  {
+    title: "My Friend Ganesha",
+    role: "Sound Design",
+    poster: "/images/films/my-friend-ganesha.jpg",
+  },
+  {
+    title: "1920: Evil Returns",
+    role: "Sound Department",
+    poster: "/images/films/1920-evil-returns.jpg",
+  },
+];
 
 const containerVariants = {
   hidden: { opacity: 0 },
