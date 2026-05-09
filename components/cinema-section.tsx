@@ -6,22 +6,22 @@ const films = [
   {
     title: "Gangs of Wasseypur",
     role: "Sound Design",
-    poster: "https://m.media-amazon.com/images/M/MV5BMTc5NjY4MjUwNF5BMl5BanBnXkFtZTcwNDIzMTk4Nw@@._V1_FMjpg_UX1000_.jpg",
+    poster: "https://images.justwatch.com/poster/262630566/s332/gangs-of-wasseypur.jpg",
   },
   {
     title: "Jawani Janeman",
     role: "Music · Sound",
-    poster: "https://m.media-amazon.com/images/M/MV5BMTk2MmQ1ZjEtZjUwZC00ZjljLTliYjEtMWE3NTk5ZDMyM2I0XkEyXkFqcGdeQXVyMjY5Nzc4MDk@._V1_FMjpg_UX1000_.jpg",
+    poster: "https://images.justwatch.com/poster/253269814/s332/jawani-janeman.jpg",
   },
   {
     title: "My Friend Ganesha",
     role: "Sound Design",
-    poster: "https://m.media-amazon.com/images/M/MV5BMjExOTc0NDk4NV5BMl5BanBnXkFtZTcwMDQxNjk0OA@@._V1_FMjpg_UX1000_.jpg",
+    poster: "https://images.justwatch.com/poster/261625019/s332/my-friend-ganesha.jpg",
   },
   {
     title: "1920: Evil Returns",
     role: "Sound Department",
-    poster: "https://m.media-amazon.com/images/M/MV5BMTQ4NTI1OTQtNzg5Mi00OTEyLWJhY2EtOTA5N2NlMzYxZWIxXkEyXkFqcGdeQXVyNDA3MDEyMzE@._V1_FMjpg_UX1000_.jpg",
+    poster: "https://images.justwatch.com/poster/251644005/s332/1920-evil-returns.jpg",
   },
 ];
 
