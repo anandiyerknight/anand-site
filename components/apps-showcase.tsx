@@ -32,10 +32,10 @@ const apps = [
       { label: "Formats", before: "1", after: "8" },
     ],
     gallery: [
+      { title: "Export Manager", desc: "Multi-format delivery with platform templates", image: "/images/apps/autoedit-4.jpg" },
       { title: "Footage Upload", desc: "Batch processing with drag-and-drop interface", image: "/images/apps/autoedit-1.jpg" },
       { title: "Auto Scene Detection", desc: "AI identifies shots and key moments automatically", image: "/images/apps/autoedit-2.jpg" },
       { title: "Content Optimization", desc: "Format, color, and aspect ratio adaptation", image: "/images/apps/autoedit-3.jpg" },
-      { title: "Export Manager", desc: "Multi-format delivery with platform templates", image: "/images/apps/autoedit-4.jpg" },
     ],
   },
   {
@@ -49,10 +49,10 @@ const apps = [
       { label: "Apply time", before: "30min", after: "5min" },
     ],
     gallery: [
-      { title: "Job Matching Engine", desc: "AI scoring for unit economics & PMF alignment", image: "/images/apps/compass-1.jpg" },
-      { title: "Portfolio Optimizer", desc: "Tailor GitHub projects and resume for roles", image: "/images/apps/compass-2.jpg" },
-      { title: "Application Tracker", desc: "Pipeline management with company intel", image: "/images/apps/compass-3.jpg" },
       { title: "Interview Prep", desc: "AI-powered technical and behavioral coaching", image: "/images/apps/compass-4.jpg" },
+      { title: "Job Matching Engine", desc: "AI scoring for unit economics & PMF alignment", image: "/images/apps/compass-1.jpg" },
+      { title: "Application Tracker", desc: "Pipeline management with company intel", image: "/images/apps/compass-3.jpg" },
+      { title: "Portfolio Optimizer", desc: "Tailor GitHub projects and resume for roles", image: "/images/apps/compass-2.jpg" },
     ],
   },
   {
