@@ -15,6 +15,11 @@ export async function sendBriefNotification(data: {
   stage: string | null;
   brief: string;
 }) {
+  if (!process.env.GMAIL_USER || !process.env.NOTIFICATION_EMAIL || !process.env.GMAIL_APP_PASSWORD) {
+    console.log("[MAILER] Skipped (not configured)");
+    return;
+  }
+
   try {
     await transporter.sendMail({
       from: process.env.GMAIL_USER,

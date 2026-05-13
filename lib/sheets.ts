@@ -33,6 +33,11 @@ export async function addBriefToSheet(data: {
   brief: string;
   timestamp: string;
 }) {
+  if (!process.env.GOOGLE_SERVICE_ACCOUNT_KEY || !process.env.GOOGLE_SHEET_ID) {
+    console.log("[SHEETS] Skipped (not configured)");
+    return;
+  }
+
   try {
     const doc = await getSheet();
     const sheet = doc.sheetsByIndex[0];
