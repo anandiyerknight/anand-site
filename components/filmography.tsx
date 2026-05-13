@@ -7,25 +7,25 @@ const films = [
     title: "Gangs of Wasseypur",
     year: "2012",
     role: "Sound Department",
-    poster: "/images/films/gangs-of-wasseypur.jpg",
+    poster: "/cinema/gangs-of-wasseypur.png",
   },
   {
     title: "Jawani Janeman",
     year: "2020",
     role: "Music · Sound",
-    poster: "/images/films/jawani-janeman.jpg",
+    poster: "/cinema/jawani-janeman.png",
   },
   {
     title: "My Friend Ganesha",
     year: "2012",
     role: "Sound Design",
-    poster: "/images/films/my-friend-ganesha.jpg",
+    poster: "/cinema/ganesha.png",
   },
   {
     title: "1920: Evil Returns",
     year: "2012",
     role: "Sound Department",
-    poster: "/images/films/1920-evil-returns.jpg",
+    poster: "/cinema/1920-evil-returns.png",
   },
 ];
 
