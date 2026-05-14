@@ -39,7 +39,7 @@ export function AuditForm() {
             </h2>
           </Reveal>
           <p className="mt-8 text-[var(--color-ink-2)] text-lg leading-relaxed max-w-md">
-            Currently accepting 2 new systems builds for Q3 2026.
+            Currently accepting 6 new systems builds for Q3 2026.
           </p>
           <div className="mt-12 space-y-3 font-mono text-[11px] tracking-[0.18em] uppercase text-[var(--color-mute)]">
             <div className="flex items-center gap-3">
@@ -68,7 +68,7 @@ export function AuditForm() {
                   <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-cyan)] animate-pulse" />
                   systems_intake.exec()
                 </span>
-                <span className="text-[var(--color-mute)]">Q3 2026 · 2 of 4 slots</span>
+                <span className="text-[var(--color-mute)]">Q3 2026 · 6 slots</span>
               </div>
 
               <AnimatePresence mode="wait">

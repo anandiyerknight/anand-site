@@ -6,22 +6,22 @@ const films = [
   {
     title: "Gangs of Wasseypur",
     role: "Sound Design",
-    poster: "/posters/gangs-of-wasseypur.jpg",
+    poster: "/posters/cinema-gangs-of-wasseypur.jpg",
   },
   {
     title: "Jawani Janeman",
     role: "Music · Sound",
-    poster: "/posters/jawani-janeman.jpg",
+    poster: "/posters/cinema-jawani-janeman.jpg",
   },
   {
     title: "My Friend Ganesha",
     role: "Sound Design",
-    poster: "/posters/ganesha.jpg",
+    poster: "/posters/cinema-ganesha.jpg",
   },
   {
     title: "1920: Evil Returns",
     role: "Sound Department",
-    poster: "/posters/1920-evil-returns.jpg",
+    poster: "/posters/cinema-1920-evil-returns.jpg",
   },
 ];
 
@@ -46,7 +46,6 @@ const itemVariants = {
 };
 
 export function CinemaSection() {
-  // Force rebuild
   return (
     <section className="relative py-20 md:py-28 px-6 md:px-10 border-b border-[var(--color-rule)]">
       <div className="max-w-7xl mx-auto">
