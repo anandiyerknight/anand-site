@@ -205,7 +205,7 @@ export function AppsShowcase() {
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="bg-[var(--color-bg-2)] rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto border border-[var(--color-rule)] glass"
+              className="bg-[var(--color-bg-2)] rounded-2xl max-w-4xl w-full max-h-[90vh] border border-[var(--color-rule)] glass flex flex-col"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Header */}
@@ -224,7 +224,7 @@ export function AppsShowcase() {
               </div>
 
               {/* Gallery */}
-              <div className="p-6 md:p-8">
+              <div className="flex-1 overflow-y-auto p-6 md:p-8">
                 <h3 className="font-display text-2xl mb-6">Features & Gallery</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {selectedApp.gallery.map((item, idx) => (
@@ -263,22 +263,22 @@ export function AppsShowcase() {
                     </motion.div>
                   ))}
                 </div>
-              </div>
 
-              {/* Tags Section */}
-              <div className="px-6 md:px-8 pb-6 md:pb-8">
-                <div className="font-mono text-xs tracking-[0.2em] uppercase text-[var(--color-mute)] mb-3">
-                  Technologies & Domains
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  {selectedApp.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="font-mono text-xs px-3 py-2 rounded border border-[var(--color-cyan)] text-[var(--color-cyan)] bg-cyan-500/10"
-                    >
-                      {tag}
-                    </span>
-                  ))}
+                {/* Tags Section */}
+                <div className="mt-8 pb-6 md:pb-8">
+                  <div className="font-mono text-xs tracking-[0.2em] uppercase text-[var(--color-mute)] mb-3">
+                    Technologies & Domains
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {selectedApp.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="font-mono text-xs px-3 py-2 rounded border border-[var(--color-cyan)] text-[var(--color-cyan)] bg-cyan-500/10"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
             </motion.div>
