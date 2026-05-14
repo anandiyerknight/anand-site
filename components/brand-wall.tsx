@@ -2,17 +2,20 @@
 import { useEffect, useRef } from "react";
 
 const brands = [
-  "Netflix",
-  "Amazon Prime",
-  "Gillette",
-  "Adidas",
-  "Reebok",
-  "HDFC",
-  "Havmor",
-  "Byju's",
-  "Royal Guard of Oman",
-  "Movie Max",
-  "ITC Bingo",
+  { name: "Netflix", src: "/brand-logos/Netflix.png" },
+  { name: "Amazon Prime Video", src: "/brand-logos/amazon-prime-video_12d1.1920.jpg" },
+  { name: "Adidas", src: "/brand-logos/adidas-thmb.jpg" },
+  { name: "Byju's", src: "/brand-logos/byjus.png" },
+  { name: "Cadbury", src: "/brand-logos/Cadbury.png" },
+  { name: "ICICI", src: "/brand-logos/ICICI.jpg" },
+  { name: "LG", src: "/brand-logos/lg_logo_PNG4.png" },
+  { name: "MakeMyTrip", src: "/brand-logos/MMT.png" },
+  { name: "Movies Now", src: "/brand-logos/Movies Now.jpeg" },
+  { name: "Pantaloons", src: "/brand-logos/New-Pantaloons-Logo-big.png" },
+  { name: "Nick", src: "/brand-logos/Nick.png" },
+  { name: "Times of India", src: "/brand-logos/Toi.png" },
+  { name: "Viacom18", src: "/brand-logos/Viacom 18.png" },
+  { name: "ZEE5", src: "/brand-logos/zee 5.png" },
 ];
 
 export function BrandWall() {
@@ -33,37 +36,29 @@ export function BrandWall() {
   }, []);
 
   return (
-    <section className="relative py-16 border-y border-[var(--color-rule)] overflow-hidden">
-      <div className="px-6 md:px-10 mb-8 flex items-center justify-between max-w-7xl mx-auto">
-        <div className="font-mono text-[11px] tracking-[0.22em] uppercase text-[var(--color-mute)]">
-          <span className="text-[var(--color-cyan)]">[ 02 ]</span>
-          <span className="ml-3">Trusted Pedigree</span>
-        </div>
-        <div className="font-mono text-[10px] tracking-[0.22em] uppercase text-[var(--color-mute)]">
-          15 yrs · Tier-1
-        </div>
-      </div>
-
+    <section className="relative py-14 md:py-20 border-y border-[var(--color-rule)] overflow-hidden">
       <div className="relative">
         <div
           ref={ref}
-          className="marquee-track py-4"
-          style={{ animationDuration: "55s" }}
+          className="marquee-track py-2"
+          style={{ animationDuration: "70s" }}
         >
           {[...brands, ...brands].map((b, i) => (
             <div
               key={i}
-              className="flex items-center gap-12 whitespace-nowrap"
+              className="flex items-center gap-4 whitespace-nowrap"
             >
-              <span className="font-display italic text-4xl md:text-6xl text-[var(--color-ink-2)] hover:text-[var(--color-ink)] transition-colors">
-                {b}
-              </span>
-              <span className="text-[var(--color-cyan)] text-3xl">✦</span>
+              <div className="h-24 w-44 md:h-32 md:w-64 rounded-lg border border-white/10 bg-white/[0.03] px-6 py-5 flex items-center justify-center grayscale hover:grayscale-0 transition duration-500">
+                <img
+                  src={b.src}
+                  alt={b.name}
+                  className="max-h-full max-w-full object-contain"
+                />
+              </div>
             </div>
           ))}
         </div>
 
-        {/* edge fades */}
         <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[var(--color-bg)] to-transparent pointer-events-none" />
         <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-[var(--color-bg)] to-transparent pointer-events-none" />
       </div>

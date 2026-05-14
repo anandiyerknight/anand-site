@@ -5,7 +5,6 @@ import { BrandWall } from "@/components/brand-wall";
 import { AfterGrid } from "@/components/after-grid";
 import { Methodology } from "@/components/methodology";
 import { ReelGallery } from "@/components/reel-gallery";
-import { MusicSection } from "@/components/music-section";
 import { CinemaSection } from "@/components/cinema-section";
 import { TechSkills } from "@/components/tech-skills";
 import { Testimonial } from "@/components/testimonial";
@@ -20,11 +19,10 @@ export default function Page() {
       <Hero />
       <AppsShowcase />
       <BrandWall />
+      <CinemaSection />
       <Methodology />
       <ReelGallery />
       <AfterGrid />
-      <MusicSection />
-      <CinemaSection />
       <TechSkills />
       <Testimonial />
       <FAQ />

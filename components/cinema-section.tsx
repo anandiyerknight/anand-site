@@ -6,22 +6,22 @@ const films = [
   {
     title: "Gangs of Wasseypur",
     role: "Sound Design",
-    poster: "https://images.justwatch.com/poster/262630566/s332/gangs-of-wasseypur.jpg",
+    poster: "/cinema/gangs-of-wasseypur.png",
   },
   {
     title: "Jawani Janeman",
     role: "Music · Sound",
-    poster: "https://images.justwatch.com/poster/253269814/s332/jawani-janeman.jpg",
+    poster: "/cinema/jawani-janeman.png",
   },
   {
     title: "My Friend Ganesha",
     role: "Sound Design",
-    poster: "https://images.justwatch.com/poster/261625019/s332/my-friend-ganesha.jpg",
+    poster: "/cinema/ganesha.png",
   },
   {
     title: "1920: Evil Returns",
     role: "Sound Department",
-    poster: "https://images.justwatch.com/poster/251644005/s332/1920-evil-returns.jpg",
+    poster: "/cinema/1920-evil-returns.png",
   },
 ];
 
@@ -47,10 +47,10 @@ const itemVariants = {
 
 export function CinemaSection() {
   return (
-    <section className="relative py-20 md:py-32 px-6 md:px-10 border-t border-[var(--color-rule)]">
+    <section className="relative py-20 md:py-28 px-6 md:px-10 border-b border-[var(--color-rule)]">
       <div className="max-w-7xl mx-auto">
         <Reveal>
-          <h2 className="font-display text-[clamp(2.2rem,5vw,4.4rem)] leading-[1.05] tracking-tight mb-16">
+          <h2 className="font-display text-[clamp(2.2rem,5vw,4.4rem)] leading-[1.05] tracking-tight mb-12">
             From high-stakes <span className="italic">cinema</span> to
             <br />
             digital infrastructure.
@@ -68,24 +68,19 @@ export function CinemaSection() {
             <motion.div
               key={film.title}
               variants={itemVariants}
-              className="group glass-hover glass p-6 rounded-2xl flex flex-col overflow-hidden transition-all duration-300"
+              className="group glass-hover glass p-4 rounded-xl flex flex-col overflow-hidden transition-all duration-300"
             >
-              {/* Poster */}
-              <div className="relative w-full aspect-[2/3] rounded-lg mb-6 overflow-hidden bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center">
+              <div className="relative w-full aspect-[2/3] rounded-lg mb-5 overflow-hidden bg-white/[0.03] flex items-center justify-center">
                 <img
                   src={film.poster}
                   alt={film.title}
                   className="absolute inset-0 w-full h-full object-cover"
-                  onError={(e) => {
-                    e.currentTarget.style.display = 'none';
-                  }}
                 />
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent" />
                 </div>
               </div>
 
-              {/* Content */}
               <div>
                 <h3 className="font-display text-lg md:text-xl mb-2 group-hover:text-[var(--color-cyan)] transition-colors">
                   {film.title}

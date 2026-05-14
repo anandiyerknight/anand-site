@@ -15,7 +15,7 @@ export const reels: Reel[] = [
     client: "Confidential",
     meta: "CGI · High-fidelity production",
     src: "/reels/game-trailer.mp4",
-    poster: "/posters/reel-flippit-2026.jpg",
+    poster: "/posters/hero-flippit-2026.jpg",
     span: "lg",
   },
   {

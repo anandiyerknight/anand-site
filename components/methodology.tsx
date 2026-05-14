@@ -16,13 +16,6 @@ export function Methodology() {
               className="w-full aspect-[4/5] object-cover rounded-[2.5rem] border border-white/10 shadow-[0_0_40px_rgba(255,255,255,0.05)]"
             />
           </Reveal>
-          <div className="mt-6 flex items-center justify-between font-mono text-[10px] tracking-[0.2em] uppercase text-[var(--color-mute)]">
-            <span>// 15+ yrs · pedigree</span>
-            <span className="flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-cyan)] animate-pulse" />
-              In session
-            </span>
-          </div>
         </div>
 
         <div className="md:col-span-7">
@@ -71,7 +64,6 @@ export function Methodology() {
             <div className="mt-12">
               <Magnetic strength={0.25}>
                 <a href="#audit" className="btn-primary">
-                  <span className="text-[var(--color-cyan)]">[ 02 ]</span>
                   See If You Qualify
                   <span aria-hidden>→</span>
                 </a>
