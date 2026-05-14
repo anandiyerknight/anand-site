@@ -65,6 +65,7 @@ export function MusicSection() {
                       muted
                       loop
                       playsInline
+                      controls
                       onMouseEnter={(e) => e.currentTarget.play().catch(() => {})}
                       onMouseLeave={(e) => {
                         e.currentTarget.pause();
