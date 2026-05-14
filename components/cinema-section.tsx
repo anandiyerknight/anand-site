@@ -46,6 +46,7 @@ const itemVariants = {
 };
 
 export function CinemaSection() {
+  // Force rebuild
   return (
     <section className="relative py-20 md:py-28 px-6 md:px-10 border-b border-[var(--color-rule)]">
       <div className="max-w-7xl mx-auto">
