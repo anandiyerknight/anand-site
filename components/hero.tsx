@@ -66,13 +66,15 @@ export function Hero() {
       <div className="aurora" />
       <div className="absolute inset-0 grid-bg opacity-40 pointer-events-none" />
 
-      {/* Hero video — right side, framed */}
+      {/* Hero video — full bleed on mobile, right panel on desktop */}
       <motion.div
         style={{ y: videoY, opacity: videoOpacity }}
-        className="absolute right-0 top-0 h-full w-[58%] hidden md:block"
+        className="absolute right-0 top-0 h-full w-full md:w-[58%]"
       >
         <div className="absolute inset-y-6 right-6 w-[calc(100%-1.5rem)] h-[calc(100%-3rem)] rounded-[2.5rem] overflow-hidden border border-white/10 shadow-[0_0_40px_rgba(255,255,255,0.05)]">
-          <div className="absolute inset-0 bg-gradient-to-l from-transparent via-[rgba(10,10,10,0.3)] to-[var(--color-bg)] z-10 pointer-events-none" />
+          {/* Mobile: dark overlay so text is readable. Desktop: left-gradient only */}
+          <div className="absolute inset-0 bg-black/60 md:bg-transparent z-10 pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-l from-transparent via-[rgba(10,10,10,0.3)] to-[var(--color-bg)] z-10 pointer-events-none hidden md:block" />
           <video
             ref={videoRef}
             src="/reels/game-trailer.mp4"

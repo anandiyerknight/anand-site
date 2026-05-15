@@ -47,18 +47,16 @@ const itemVariants = {
 
 export function CinemaSection() {
   return (
-    <section className="relative py-20 md:py-28 px-6 md:px-10 border-b border-[var(--color-rule)]">
+    <section className="relative py-12 md:py-28 px-6 md:px-10 border-t border-[var(--color-rule)]">
       <div className="max-w-7xl mx-auto">
         <Reveal>
-          <h2 className="font-display text-[clamp(2.2rem,5vw,4.4rem)] leading-[1.05] tracking-tight mb-12">
-            From high-stakes <span className="italic">cinema</span> to
-            <br />
-            digital infrastructure.
+          <h2 className="font-display text-[clamp(1.8rem,5vw,4.4rem)] leading-[1.05] tracking-tight mb-8 md:mb-12">
+            From high-stakes <span className="italic">cinema</span> to digital infrastructure.
           </h2>
         </Reveal>
 
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+          className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -68,9 +66,9 @@ export function CinemaSection() {
             <motion.div
               key={film.title}
               variants={itemVariants}
-              className="group glass-hover glass p-4 rounded-xl flex flex-col overflow-hidden transition-all duration-300"
+              className="group glass-hover glass p-3 md:p-4 rounded-xl flex flex-col overflow-hidden transition-all duration-300"
             >
-              <div className="relative w-full aspect-[2/3] rounded-lg mb-5 overflow-hidden bg-white/[0.03] flex items-center justify-center">
+              <div className="relative w-full aspect-[2/3] rounded-lg mb-3 md:mb-5 overflow-hidden bg-white/[0.03] flex items-center justify-center">
                 <img
                   src={film.poster}
                   alt={film.title}
@@ -82,10 +80,10 @@ export function CinemaSection() {
               </div>
 
               <div>
-                <h3 className="font-display text-lg md:text-xl mb-2 group-hover:text-[var(--color-cyan)] transition-colors">
+                <h3 className="font-display text-sm md:text-xl mb-1 md:mb-2 group-hover:text-[var(--color-cyan)] transition-colors leading-tight">
                   {film.title}
                 </h3>
-                <div className="font-mono text-xs text-[var(--color-mute)] tracking-[0.1em] uppercase">
+                <div className="font-mono text-[10px] md:text-xs text-[var(--color-mute)] tracking-[0.1em] uppercase">
                   {film.role}
                 </div>
               </div>

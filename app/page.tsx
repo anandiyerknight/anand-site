@@ -18,33 +18,43 @@ export default function Page() {
     <main className="relative">
       <Nav />
 
-      {/* Main 4 Sections - Always Visible */}
+      {/* === 4 MAIN SECTIONS - Always Visible === */}
+      {/* 1. Hero with video */}
       <Hero />
-      <AppsShowcase />
+
+      {/* 2. Film section - poster grid (2 cols on mobile) */}
+      <CinemaSection />
+
+      {/* 3. About section */}
       <Methodology />
+
+      {/* 4. Application form */}
       <AuditForm />
 
-      {/* Collapsible Sections Below Form */}
-      <CollapsibleSection title="Gallery & Work" description="Extended gallery of branded work">
-        <BrandWall />
+      {/* === COLLAPSIBLE SECTIONS AFTER FORM === */}
+      <CollapsibleSection title="Product Gallery" description="Production-grade systems built and shipped">
+        <AppsShowcase />
       </CollapsibleSection>
 
-      <CollapsibleSection title="Cinema & Visual Work" description="Behind-the-scenes and cinematic samples">
-        <CinemaSection />
+      <CollapsibleSection title="Reel & Visual Work" description="A decade of broadcast and AI-augmented output">
         <ReelGallery />
         <AfterGrid />
       </CollapsibleSection>
 
-      <CollapsibleSection title="Tech Stack & Architecture" description="Production-grade technologies">
+      <CollapsibleSection title="The Architect Behind" description="Full tech stack powering every system">
         <TechSkills />
       </CollapsibleSection>
 
-      <CollapsibleSection title="What builders say" description="Testimonials from founders">
+      <CollapsibleSection title="What Builders Say" description="Reviews from founders after systems ship">
         <Testimonial />
       </CollapsibleSection>
 
-      <CollapsibleSection title="FAQ" description="Common questions about the approach">
+      <CollapsibleSection title="FAQ" description="Common questions about the approach and process">
         <FAQ />
+      </CollapsibleSection>
+
+      <CollapsibleSection title="Brand Gallery" description="Clients and collaborators across industries">
+        <BrandWall />
       </CollapsibleSection>
 
       <Footer />

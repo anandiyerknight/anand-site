@@ -113,7 +113,7 @@ export function AppsShowcase() {
           </Reveal>
 
           <motion.div
-            className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8"
+            className="grid grid-cols-2 md:grid-cols-2 gap-4 md:gap-8"
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
@@ -124,10 +124,10 @@ export function AppsShowcase() {
                 key={app.name}
                 variants={itemVariants}
                 onClick={() => setSelectedApp(app)}
-                className="group glass-hover glass p-6 md:p-8 rounded-2xl flex flex-col overflow-hidden transition-all duration-300 text-left cursor-pointer hover:scale-[1.02]"
+                className="group glass-hover glass p-4 md:p-8 rounded-xl md:rounded-2xl flex flex-col overflow-hidden transition-all duration-300 text-left cursor-pointer hover:scale-[1.02]"
               >
                 {/* Image Container */}
-                <div className={`relative w-full aspect-video rounded-lg mb-6 overflow-hidden bg-gradient-to-br ${app.color} flex items-center justify-center`}>
+                <div className={`relative w-full aspect-video rounded-lg mb-3 md:mb-6 overflow-hidden bg-gradient-to-br ${app.color} flex items-center justify-center`}>
                   {app.gallery[0]?.image ? (
                     <>
                       <img
@@ -153,15 +153,18 @@ export function AppsShowcase() {
 
                 {/* Content */}
                 <div className="flex-1 flex flex-col">
-                  <h3 className="font-display text-xl md:text-2xl mb-3 group-hover:text-[var(--color-cyan)] transition-colors">
+                  <h3 className="font-display text-base md:text-2xl mb-1 md:mb-3 group-hover:text-[var(--color-cyan)] transition-colors leading-tight">
                     {app.name}
                   </h3>
-                  <p className="text-[var(--color-ink-2)] text-sm md:text-base mb-6 flex-1 leading-relaxed">
+                  <p className="text-[var(--color-ink-2)] text-xs md:text-base mb-3 md:mb-6 flex-1 leading-relaxed hidden md:block">
+                    {app.shortDesc}
+                  </p>
+                  <p className="text-[var(--color-ink-2)] text-[11px] mb-2 flex-1 leading-snug md:hidden line-clamp-2">
                     {app.shortDesc}
                   </p>
 
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-2 mb-4">
+                  {/* Tags — hidden on mobile to save space */}
+                  <div className="hidden md:flex flex-wrap gap-2 mb-4">
                     {app.tags.map((tag) => (
                       <span
                         key={tag}
@@ -173,7 +176,7 @@ export function AppsShowcase() {
                   </div>
 
                   {/* KPI Metrics */}
-                  <div className="space-y-1 text-xs text-[var(--color-mute)]">
+                  <div className="space-y-0.5 md:space-y-1 text-[10px] md:text-xs text-[var(--color-mute)]">
                     {app.kpis.map((kpi, idx) => (
                       <div key={idx}>
                         {kpi.label} <span className="text-[var(--color-cyan)]">{kpi.before}</span> → <span className="text-[var(--color-cyan)]">{kpi.after}</span>
@@ -182,8 +185,8 @@ export function AppsShowcase() {
                   </div>
                 </div>
 
-                <div className="mt-6 text-[var(--color-cyan)] font-mono text-xs tracking-[0.2em] uppercase opacity-0 group-hover:opacity-100 transition-opacity">
-                  Click to explore →
+                <div className="hidden md:block mt-6 text-[var(--color-cyan)] font-mono text-xs tracking-[0.2em] uppercase opacity-0 group-hover:opacity-100 transition-opacity">
+                  Tap to explore →
                 </div>
               </motion.button>
             ))}
