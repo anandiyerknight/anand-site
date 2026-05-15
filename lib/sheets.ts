@@ -2,7 +2,8 @@ export async function addBriefToSheet(data: {
   name: string;
   email: string;
   company: string;
-  stage: string | null;
+  social: string | null;
+  phone: string | null;
   brief: string;
   timestamp: string;
 }) {
@@ -19,7 +20,8 @@ export async function addBriefToSheet(data: {
       name: data.name,
       email: data.email,
       company: data.company,
-      stage: data.stage || "",
+      social: data.social || "",
+      phone: data.phone || "",
       brief: data.brief,
     }),
   });

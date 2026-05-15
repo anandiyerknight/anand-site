@@ -6,14 +6,40 @@ import { Reveal } from "./reveal";
 
 type State = "idle" | "submitting" | "ok" | "err";
 
+const countryCodes = [
+  { label: "🇮🇳 +91", code: "+91", country: "IN", digits: 10 },
+  { label: "🇺🇸 +1", code: "+1", country: "US", digits: 10 },
+  { label: "🇨🇦 +1", code: "+1", country: "CA", digits: 10 },
+  { label: "🇸🇬 +65", code: "+65", country: "SG", digits: 8 },
+  { label: "🇦🇪 +971", code: "+971", country: "AE", digits: 9 },
+];
+
 export function AuditForm() {
   const [state, setState] = useState<State>("idle");
+  const [countryCode, setCountryCode] = useState(countryCodes[0]);
+  const [phoneError, setPhoneError] = useState("");
+
+  const validatePhone = (value: string) => {
+    const digits = value.replace(/\D/g, "");
+    if (digits.length !== countryCode.digits) {
+      setPhoneError(`Must be ${countryCode.digits} digits for ${countryCode.label}`);
+      return false;
+    }
+    setPhoneError("");
+    return true;
+  };
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setState("submitting");
     const fd = new FormData(e.currentTarget);
-    const payload = Object.fromEntries(fd.entries());
+    const phone = fd.get("phone") as string;
+    if (!validatePhone(phone)) return;
+
+    setState("submitting");
+    const payload = {
+      ...Object.fromEntries(fd.entries()),
+      phone: `${countryCode.code} ${phone}`,
+    };
     try {
       const res = await fetch("/api/audit", {
         method: "POST",
@@ -30,7 +56,6 @@ export function AuditForm() {
     <section id="audit" className="relative py-12 md:py-32 px-6 md:px-10 border-t border-[var(--color-rule)] bg-gradient-to-b from-transparent via-transparent to-[var(--color-bg-2)] overflow-hidden">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-10">
         <div className="md:col-span-5 flex flex-col justify-center">
-
           <Reveal>
             <h2 className="font-display text-[clamp(1.8rem,5vw,4.5rem)] leading-[0.95] tracking-tight">
               Not everyone
@@ -42,18 +67,12 @@ export function AuditForm() {
             Currently accepting 6 new systems builds for Q3 2026.
           </p>
           <div className="mt-8 md:mt-12 space-y-2 md:space-y-3 font-mono text-[10px] md:text-[11px] tracking-[0.18em] uppercase text-[var(--color-mute)]">
-            <div className="flex items-center gap-3">
-              <span className="text-[var(--color-cyan)]">▸</span>
-              10x speed compounds
-            </div>
-            <div className="flex items-center gap-3">
-              <span className="text-[var(--color-cyan)]">▸</span>
-              Systems compound leverage
-            </div>
-            <div className="flex items-center gap-3">
-              <span className="text-[var(--color-cyan)]">▸</span>
-              Decisions in days
-            </div>
+            {["10x speed compounds", "Systems compound leverage", "Decisions in days"].map((t) => (
+              <div key={t} className="flex items-center gap-3">
+                <span className="text-[var(--color-cyan)]">▸</span>
+                {t}
+              </div>
+            ))}
           </div>
           <p className="mt-8 md:mt-12 text-xs md:text-sm text-[var(--color-mute)] italic">
             If you're still evaluating, this isn't for you.
@@ -94,8 +113,9 @@ export function AuditForm() {
                     onSubmit={onSubmit}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    className="space-y-7"
+                    className="space-y-6"
                   >
+                    {/* Name + Email */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="field">
                         <label htmlFor="name">▸ Name</label>
@@ -103,51 +123,87 @@ export function AuditForm() {
                       </div>
                       <div className="field">
                         <label htmlFor="email">▸ Email</label>
-                        <input
-                          id="email"
-                          name="email"
-                          required
-                          type="email"
-                          placeholder="you@company.com"
-                        />
+                        <input id="email" name="email" required type="email" placeholder="you@company.com" />
                       </div>
                     </div>
+
+                    {/* Company + IG/Website */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="field">
                         <label htmlFor="company">▸ Company</label>
                         <input id="company" name="company" required placeholder="Brand / venture" />
                       </div>
                       <div className="field">
-                        <label htmlFor="stage">▸ Stage</label>
+                        <label htmlFor="social">▸ IG / Website</label>
                         <input
-                          id="stage"
-                          name="stage"
-                          placeholder="Pre-seed · Seed · Series A · Profitable"
+                          id="social"
+                          name="social"
+                          required
+                          placeholder="@handle or https://..."
                         />
                       </div>
                     </div>
+
+                    {/* Phone with country code */}
+                    <div className="field">
+                      <label htmlFor="phone">▸ Phone</label>
+                      <div className="flex gap-0 border-b-2 border-[var(--color-rule-2)] focus-within:border-[var(--color-cyan)] transition-colors">
+                        <select
+                          value={countryCode.label}
+                          onChange={(e) => {
+                            const found = countryCodes.find((c) => c.label === e.target.value);
+                            if (found) { setCountryCode(found); setPhoneError(""); }
+                          }}
+                          className="bg-transparent text-[var(--color-ink-2)] text-sm py-3 pr-2 outline-none cursor-pointer shrink-0 border-none"
+                          style={{ appearance: "auto" }}
+                        >
+                          {countryCodes.map((c) => (
+                            <option key={c.label} value={c.label} style={{ background: "#0e0e0e" }}>
+                              {c.label}
+                            </option>
+                          ))}
+                        </select>
+                        <input
+                          id="phone"
+                          name="phone"
+                          required
+                          type="tel"
+                          placeholder={`${countryCode.digits}-digit number`}
+                          onChange={(e) => { if (phoneError) validatePhone(e.target.value); }}
+                          className="flex-1 bg-transparent py-3 text-[var(--color-ink)] outline-none border-none placeholder:text-[var(--color-mute)]"
+                          style={{ fontSize: "16px" }}
+                        />
+                      </div>
+                      {phoneError && (
+                        <p className="mt-1 font-mono text-[10px] text-[var(--color-magenta)]">
+                          {phoneError}
+                        </p>
+                      )}
+                    </div>
+
+                    {/* Brief */}
                     <div className="field">
                       <label htmlFor="brief">▸ The Brief</label>
                       <textarea
                         id="brief"
                         name="brief"
                         required
-                        rows={5}
+                        rows={4}
                         placeholder="What should the system do? What's broken? What's the deadline?"
                       />
                     </div>
 
-                    <div className="flex flex-col gap-4 pt-6">
+                    <div className="flex flex-col gap-4 pt-4">
                       <div className="font-mono text-[10px] tracking-[0.22em] uppercase text-[var(--color-mute)]">
                         // We never share. Briefs are confidential.
                       </div>
                       <Magnetic strength={0.2}>
                         <button
                           type="submit"
-                          className="w-full md:w-auto btn-primary px-8 py-3 text-base md:text-sm font-semibold shadow-xl hover:shadow-2xl active:scale-95"
+                          className="w-full md:w-auto btn-primary px-8 py-3 text-sm font-semibold shadow-xl hover:shadow-2xl active:scale-95"
                           disabled={state === "submitting"}
                         >
-                          {state === "submitting" ? "Applying…" : "Apply to Work Together"}
+                          {state === "submitting" ? "Sending…" : "Request an Audit"}
                           <span aria-hidden>{state === "submitting" ? "·" : "→"}</span>
                         </button>
                       </Magnetic>

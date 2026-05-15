@@ -10,7 +10,8 @@ export async function POST(req: Request) {
         name: body.name,
         email: body.email,
         company: body.company,
-        stage: body.stage || null,
+        social: body.social || null,
+        phone: body.phone || null,
         brief: body.brief,
         timestamp: new Date().toISOString(),
       });
