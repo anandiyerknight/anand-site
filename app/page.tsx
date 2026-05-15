@@ -39,20 +39,20 @@ export default function Page() {
         <CinemaSection />
       </CollapsibleSection>
 
-      <CollapsibleSection title="Broadcast & Reel" description="A decade of AI-augmented video and campaign work">
+      <CollapsibleSection title="Performance Marketing" description="A decade of AI-augmented video and campaign work">
         <ReelGallery />
         <AfterGrid />
       </CollapsibleSection>
 
-      <CollapsibleSection title="Stack & Architecture" description="The full tech behind every system I build">
+      <CollapsibleSection title="Skills" description="The full tech behind every system I build">
         <TechSkills />
       </CollapsibleSection>
 
-      <CollapsibleSection title="Client Reviews" description="What founders say after the system ships">
+      <CollapsibleSection title="Reviews" description="What founders say after the system ships">
         <Testimonial />
       </CollapsibleSection>
 
-      <CollapsibleSection title="Common Questions" description="How I work, who this is for, and what to expect">
+      <CollapsibleSection title="FAQ" description="How I work, who this is for, and what to expect">
         <FAQ />
       </CollapsibleSection>
 

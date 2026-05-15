@@ -19,34 +19,44 @@ export function CollapsibleSection({
 
   return (
     <>
-      {/* Header */}
-      <section className="relative py-6 md:py-10 px-6 md:px-10 border-t border-[var(--color-rule)]">
+      {/* Header — identical layout on mobile and desktop */}
+      <div className="border-t border-[var(--color-rule)] px-6 md:px-10 py-5 md:py-7">
         <div className="max-w-7xl mx-auto">
           <button
             onClick={() => setOpen(!open)}
-            className="w-full text-left flex items-center justify-between gap-4 group"
+            className="w-full text-left flex items-center justify-between gap-6 group"
+            aria-expanded={open}
           >
-            <div className="flex-1">
-              <h2 className="font-display text-[clamp(1.6rem,5vw,2.8rem)] leading-[0.95] tracking-tight">
-                {title}
-              </h2>
+            <div className="flex-1 min-w-0">
+              <div className="flex items-baseline gap-4">
+                <h2 className="font-display text-[clamp(1.4rem,3vw,2.2rem)] leading-none tracking-tight">
+                  {title}
+                </h2>
+                {description && (
+                  <span className="hidden md:inline font-mono text-xs tracking-[0.14em] text-[var(--color-mute)] uppercase truncate">
+                    — {description}
+                  </span>
+                )}
+              </div>
               {description && (
-                <p className="mt-1 md:mt-2 text-[var(--color-ink-2)] text-xs md:text-sm max-w-2xl">
+                <p className="md:hidden mt-1 text-[var(--color-mute)] text-xs">
                   {description}
                 </p>
               )}
             </div>
             <div
-              className={`shrink-0 w-8 h-8 md:w-10 md:h-10 rounded-full border border-[var(--color-rule-2)] flex items-center justify-center transition-all ${
-                open ? "rotate-45 border-[var(--color-cyan)] text-[var(--color-cyan)] bg-white/5" : ""
+              className={`shrink-0 w-8 h-8 rounded-full border flex items-center justify-center transition-all duration-300 text-base font-light ${
+                open
+                  ? "rotate-45 border-white text-white bg-white/8"
+                  : "border-[var(--color-rule-2)] text-[var(--color-mute)]"
               }`}
               aria-hidden
             >
-              <span className="text-lg md:text-xl">+</span>
+              +
             </div>
           </button>
         </div>
-      </section>
+      </div>
 
       {/* Content */}
       <AnimatePresence initial={false}>
@@ -55,7 +65,7 @@ export function CollapsibleSection({
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
             className="overflow-hidden"
           >
             {children}
