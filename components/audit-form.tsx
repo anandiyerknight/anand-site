@@ -66,14 +66,6 @@ export function AuditForm() {
           <p className="mt-6 md:mt-8 text-[var(--color-ink-2)] text-base md:text-lg leading-relaxed max-w-md">
             Currently accepting 6 new systems builds for Q3 2026.
           </p>
-          <div className="mt-8 md:mt-12 space-y-2 md:space-y-3 font-mono text-[10px] md:text-[11px] tracking-[0.18em] uppercase text-[var(--color-mute)]">
-            {["10x speed compounds", "Systems compound leverage", "Decisions in days"].map((t) => (
-              <div key={t} className="flex items-center gap-3">
-                <span className="text-[var(--color-cyan)]">▸</span>
-                {t}
-              </div>
-            ))}
-          </div>
           <p className="mt-8 md:mt-12 text-xs md:text-sm text-[var(--color-mute)] italic">
             If you're still evaluating, this isn't for you.
           </p>
@@ -82,13 +74,6 @@ export function AuditForm() {
         <div className="md:col-span-7">
           <Reveal>
             <div className="glass p-6 md:p-10 bg-gradient-to-br from-white/8 to-white/3 border-2 border-white/20 shadow-2xl">
-              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 md:gap-0 mb-8 font-mono text-[10px] tracking-[0.22em] uppercase">
-                <span className="flex items-center gap-2 text-[var(--color-cyan)]">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-cyan)] animate-pulse" />
-                  systems_intake.exec()
-                </span>
-                <span className="text-[var(--color-mute)]">Q3 2026 · 6 slots</span>
-              </div>
 
               <AnimatePresence mode="wait">
                 {state === "ok" ? (
@@ -194,9 +179,6 @@ export function AuditForm() {
                     </div>
 
                     <div className="flex flex-col gap-4 pt-4">
-                      <div className="font-mono text-[10px] tracking-[0.22em] uppercase text-[var(--color-mute)]">
-                        // We never share. Briefs are confidential.
-                      </div>
                       <Magnetic strength={0.2}>
                         <button
                           type="submit"
