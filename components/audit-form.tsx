@@ -27,21 +27,21 @@ export function AuditForm() {
   };
 
   return (
-    <section id="audit" className="relative py-20 md:py-32 px-6 md:px-10 border-t border-[var(--color-rule)] bg-gradient-to-b from-transparent via-transparent to-[var(--color-bg-2)] overflow-hidden">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-10">
+    <section id="audit" className="relative py-12 md:py-32 px-6 md:px-10 border-t border-[var(--color-rule)] bg-gradient-to-b from-transparent via-transparent to-[var(--color-bg-2)] overflow-hidden">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-10">
         <div className="md:col-span-5 flex flex-col justify-center">
 
           <Reveal>
-            <h2 className="font-display text-[clamp(2rem,5vw,4.5rem)] leading-[0.95] tracking-tight">
+            <h2 className="font-display text-[clamp(1.8rem,5vw,4.5rem)] leading-[0.95] tracking-tight">
               Not everyone
               <br />
               <span className="italic">qualifies.</span>
             </h2>
           </Reveal>
-          <p className="mt-8 text-[var(--color-ink-2)] text-lg leading-relaxed max-w-md">
+          <p className="mt-6 md:mt-8 text-[var(--color-ink-2)] text-base md:text-lg leading-relaxed max-w-md">
             Currently accepting 6 new systems builds for Q3 2026.
           </p>
-          <div className="mt-12 space-y-3 font-mono text-[11px] tracking-[0.18em] uppercase text-[var(--color-mute)]">
+          <div className="mt-8 md:mt-12 space-y-2 md:space-y-3 font-mono text-[10px] md:text-[11px] tracking-[0.18em] uppercase text-[var(--color-mute)]">
             <div className="flex items-center gap-3">
               <span className="text-[var(--color-cyan)]">▸</span>
               10x speed compounds
@@ -55,7 +55,7 @@ export function AuditForm() {
               Decisions in days
             </div>
           </div>
-          <p className="mt-12 text-sm text-[var(--color-mute)] italic">
+          <p className="mt-8 md:mt-12 text-xs md:text-sm text-[var(--color-mute)] italic">
             If you're still evaluating, this isn't for you.
           </p>
         </div>

@@ -99,14 +99,14 @@ export function AppsShowcase() {
 
   return (
     <>
-      <section id="systems" className="relative py-20 md:py-32 px-6 md:px-10 border-t border-[var(--color-rule)]">
+      <section id="systems" className="relative py-12 md:py-32 px-6 md:px-10 border-t border-[var(--color-rule)]">
         <div className="max-w-7xl mx-auto">
           <Reveal>
-            <div className="mb-12 md:mb-16">
-              <h2 className="font-display text-[clamp(2rem,5vw,4rem)] leading-[1] tracking-tight mb-4">
+            <div className="mb-8 md:mb-16">
+              <h2 className="font-display text-[clamp(1.8rem,5vw,4rem)] leading-[1] tracking-tight mb-3 md:mb-4">
                 Systems Built. Running in Production.
               </h2>
-              <p className="text-[var(--color-ink-2)] text-base md:text-lg max-w-2xl">
+              <p className="text-[var(--color-ink-2)] text-sm md:text-base max-w-2xl">
                 Production-grade applications built with precision engineering and deployed at scale.
               </p>
             </div>

@@ -60,7 +60,7 @@ export function Hero() {
     <section
       ref={ref}
       id="top"
-      className="relative min-h-screen pt-32 pb-24 px-6 md:px-10 overflow-hidden"
+      className="relative min-h-screen pt-20 md:pt-32 pb-16 md:pb-24 px-6 md:px-10 overflow-hidden"
     >
       {/* Aurora atmosphere */}
       <div className="aurora" />
@@ -99,11 +99,10 @@ export function Hero() {
       </motion.div>
 
 
-      <div className="relative z-10 max-w-7xl mx-auto pt-12">
-
+      <div className="relative z-10 max-w-7xl mx-auto pt-8 md:pt-12">
 
         {/* Headline */}
-        <h1 className="mt-10 font-display text-[clamp(2.8rem,9vw,9rem)] leading-[0.95] tracking-[-0.025em] max-w-[14ch]">
+        <h1 className="mt-6 md:mt-10 font-display text-[clamp(2rem,7vw,9rem)] leading-[0.95] tracking-[-0.025em] max-w-full md:max-w-[14ch] break-words">
           {headlineWords.map((w, i) => (
             <span
               key={i}
@@ -133,7 +132,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 1.0 }}
-          className="mt-10 max-w-xl text-[var(--color-ink-2)] text-lg md:text-xl leading-relaxed"
+          className="mt-6 md:mt-10 max-w-xl text-[var(--color-ink-2)] text-base md:text-lg leading-relaxed"
         >
           Systems at the intersection of creative, marketing, branding and engineering.
         </motion.p>
@@ -143,10 +142,10 @@ export function Hero() {
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 1.15 }}
-          className="mt-12 flex flex-wrap items-center gap-4"
+          className="mt-8 md:mt-12 flex flex-wrap items-center gap-3 md:gap-4"
         >
           <Magnetic strength={0.25}>
-            <a href="#audit" className="btn-primary">
+            <a href="#audit" className="btn-primary text-xs md:text-sm px-6 md:px-8">
               See If You Qualify
               <span aria-hidden>→</span>
             </a>
