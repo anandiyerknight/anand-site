@@ -31,7 +31,7 @@ export function Nav() {
         <Link href="#top" className="flex items-baseline gap-3 group">
           <span className="font-display italic text-2xl tracking-tight">Anand Iyer</span>
           <span className="font-mono text-[10px] tracking-[0.22em] uppercase text-[var(--color-mute)] group-hover:text-[var(--color-cyan)] transition-colors">
-            / Architect
+            / AI Architect
           </span>
         </Link>
 
