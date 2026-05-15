@@ -9,13 +9,12 @@ export function ReelGallery() {
   const [active, setActive] = useState<Reel | null>(null);
 
   return (
-    <section id="work" className="relative py-32 px-6 md:px-10">
+    <section id="work" className="relative py-10 md:py-32 px-6 md:px-10">
       <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 md:gap-6 mb-8 md:mb-12">
           <div>
-
             <Reveal>
-              <h2 className="font-display text-[clamp(2.5rem,6vw,5.5rem)] leading-[0.95] tracking-tight max-w-[16ch]">
+              <h2 className="font-display text-[clamp(1.6rem,5vw,5.5rem)] leading-[0.95] tracking-tight max-w-[16ch]">
                 A decade of broadcast.{" "}
                 <span className="italic">A year of AI-augmented output.</span>
               </h2>

@@ -63,18 +63,18 @@ const itemVariants = {
 
 export function Testimonial() {
   return (
-    <section className="relative py-20 md:py-32 px-6 md:px-10 overflow-hidden border-t border-[var(--color-rule)]">
+    <section className="relative py-10 md:py-32 px-6 md:px-10 overflow-hidden border-t border-[var(--color-rule)]">
       <div className="max-w-7xl mx-auto">
         <Reveal>
-          <div className="mb-12 md:mb-16">
-            <h2 className="font-display text-[clamp(2rem,5vw,4rem)] leading-[1] tracking-tight mb-4">
+          <div className="mb-8 md:mb-16">
+            <h2 className="font-display text-[clamp(1.6rem,5vw,4rem)] leading-[1] tracking-tight mb-3">
               What builders say after the system ships.
             </h2>
           </div>
         </Reveal>
 
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-3 gap-6"
+          className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -84,9 +84,9 @@ export function Testimonial() {
             <motion.div
               key={idx}
               variants={itemVariants}
-              className="glass-hover glass p-6 md:p-8 rounded-2xl border border-[var(--color-rule-2)] flex flex-col h-full"
+              className="glass-hover glass p-5 md:p-8 rounded-xl md:rounded-2xl border border-[var(--color-rule-2)] flex flex-col h-full"
             >
-              <blockquote className="text-lg leading-relaxed text-[var(--color-ink-2)] mb-6 flex-1">
+              <blockquote className="text-sm md:text-lg leading-relaxed text-[var(--color-ink-2)] mb-4 md:mb-6 flex-1">
                 <span aria-hidden className="text-[var(--color-cyan)] mr-1">"</span>
                 {testi.quote}
                 <span aria-hidden className="text-[var(--color-cyan)] ml-1">"</span>

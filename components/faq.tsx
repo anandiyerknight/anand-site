@@ -22,11 +22,11 @@ export function FAQ() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section className="relative py-32 px-6 md:px-10 border-t border-[var(--color-rule)]">
+    <section className="relative py-10 md:py-32 px-6 md:px-10 border-t border-[var(--color-rule)]">
       <div className="max-w-5xl mx-auto">
-        <div className="mb-12">
+        <div className="mb-8 md:mb-12">
           <Reveal>
-            <h2 className="font-display text-[clamp(2.4rem,5vw,4.5rem)] leading-[0.98] tracking-tight">
+            <h2 className="font-display text-[clamp(1.6rem,5vw,4.5rem)] leading-[0.98] tracking-tight">
               Common questions.
             </h2>
           </Reveal>
@@ -39,14 +39,14 @@ export function FAQ() {
               <li key={i}>
                 <button
                   onClick={() => setOpen(isOpen ? null : i)}
-                  className="w-full text-left py-6 md:py-8 flex items-start justify-between gap-6 group"
+                  className="w-full text-left py-4 md:py-8 flex items-start justify-between gap-4 group"
                   data-cursor="link"
                 >
                   <div className="flex items-baseline gap-3 md:gap-6 flex-1">
                     <span className="font-mono text-[10px] tracking-[0.22em] uppercase text-[var(--color-cyan)] shrink-0">
                       Q · 0{i + 1}
                     </span>
-                    <span className="font-display text-lg md:text-3xl leading-tight">
+                    <span className="font-display text-base md:text-3xl leading-tight">
                       {f.q}
                     </span>
                   </div>
