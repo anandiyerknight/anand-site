@@ -104,10 +104,10 @@ export function AppsShowcase() {
           <Reveal>
             <div className="mb-8 md:mb-16">
               <h2 className="font-display text-[clamp(1.8rem,5vw,4rem)] leading-[1] tracking-tight mb-3 md:mb-4">
-                Systems Built. Running in Production.
+                What I've Built.
               </h2>
               <p className="text-[var(--color-ink-2)] text-sm md:text-base max-w-2xl">
-                Production-grade applications built with precision engineering and deployed at scale.
+                Production systems — live, deployed, and compounding.
               </p>
             </div>
           </Reveal>

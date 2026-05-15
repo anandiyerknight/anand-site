@@ -18,43 +18,42 @@ export default function Page() {
     <main className="relative">
       <Nav />
 
-      {/* === 4 MAIN SECTIONS - Always Visible === */}
       {/* 1. Hero with video */}
       <Hero />
 
-      {/* 2. Film section - poster grid (2 cols on mobile) */}
-      <CinemaSection />
+      {/* 2. Product Gallery — the highlight */}
+      <AppsShowcase />
 
-      {/* 3. About section */}
+      {/* 3. Clients & Brands — right below, always visible */}
+      <BrandWall />
+
+      {/* 4. About */}
       <Methodology />
 
-      {/* 4. Application form */}
+      {/* 5. Apply */}
       <AuditForm />
 
-      {/* === COLLAPSIBLE SECTIONS AFTER FORM === */}
-      <CollapsibleSection title="Product Gallery" description="Production-grade systems built and shipped">
-        <AppsShowcase />
+      {/* === COLLAPSIBLE AFTER FORM === */}
+
+      <CollapsibleSection title="Film & Cinema Work" description="Sound design and direction credits across major productions">
+        <CinemaSection />
       </CollapsibleSection>
 
-      <CollapsibleSection title="Reel & Visual Work" description="A decade of broadcast and AI-augmented output">
+      <CollapsibleSection title="Broadcast & Reel" description="A decade of AI-augmented video and campaign work">
         <ReelGallery />
         <AfterGrid />
       </CollapsibleSection>
 
-      <CollapsibleSection title="The Architect Behind" description="Full tech stack powering every system">
+      <CollapsibleSection title="Stack & Architecture" description="The full tech behind every system I build">
         <TechSkills />
       </CollapsibleSection>
 
-      <CollapsibleSection title="What Builders Say" description="Reviews from founders after systems ship">
+      <CollapsibleSection title="Client Reviews" description="What founders say after the system ships">
         <Testimonial />
       </CollapsibleSection>
 
-      <CollapsibleSection title="FAQ" description="Common questions about the approach and process">
+      <CollapsibleSection title="Common Questions" description="How I work, who this is for, and what to expect">
         <FAQ />
-      </CollapsibleSection>
-
-      <CollapsibleSection title="Brand Gallery" description="Clients and collaborators across industries">
-        <BrandWall />
       </CollapsibleSection>
 
       <Footer />
