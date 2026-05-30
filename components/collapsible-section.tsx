@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 interface CollapsibleSectionProps {
@@ -7,24 +7,61 @@ interface CollapsibleSectionProps {
   description?: string;
   children: React.ReactNode;
   defaultOpen?: boolean;
+  autoOpen?: boolean;
 }
 
 export function CollapsibleSection({
   title,
   description,
   children,
-  defaultOpen = false
+  defaultOpen = false,
+  autoOpen = false
 }: CollapsibleSectionProps) {
   const [open, setOpen] = useState(defaultOpen);
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!autoOpen || open) return;
+
+    const section = sectionRef.current;
+    if (!section) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setOpen(true);
+          observer.disconnect();
+        }
+      },
+      {
+        rootMargin: "0px 0px -35% 0px",
+        threshold: 0.2
+      }
+    );
+
+    observer.observe(section);
+
+    return () => observer.disconnect();
+  }, [autoOpen, open]);
+
+  const handleToggle = () => {
+    const next = !open;
+    setOpen(next);
+    if (next) {
+      setTimeout(() => {
+        sectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 50);
+    }
+  };
 
   return (
-    <>
+    <div ref={sectionRef} onMouseEnter={() => autoOpen && setOpen(true)}>
       {/* Header — identical layout on mobile and desktop */}
       <div className="border-t border-[var(--color-rule)] px-6 md:px-10 py-5 md:py-7">
         <div className="max-w-7xl mx-auto">
           <button
-            onClick={() => setOpen(!open)}
-            className="w-full text-left flex items-center justify-between gap-6 group"
+            onClick={handleToggle}
+            className="w-full text-left flex items-center justify-between gap-6 group focus:outline-none"
             aria-expanded={open}
           >
             <div className="flex-1 min-w-0">
@@ -72,6 +109,6 @@ export function CollapsibleSection({
           </motion.div>
         )}
       </AnimatePresence>
-    </>
+    </div>
   );
 }

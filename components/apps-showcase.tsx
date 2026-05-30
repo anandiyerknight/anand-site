@@ -72,6 +72,40 @@ const apps = [
       { title: "AI Recommendations", desc: "Personalized meal suggestions based on preferences", image: "/images/apps/gutguru-4.jpg" },
     ],
   },
+  {
+    name: "LinkedIn Outreach Harness",
+    shortDesc: "Browser-harness automation for LinkedIn at scale — dual scraper, CDP/AX-tree modal navigation, and connection flow automation.",
+    fullDesc: "A production-grade LinkedIn outreach system built on browser-harness automation. Dual scraper (DDG keyword + LinkedIn URL), CDP/AX-tree modal navigation that bypasses DOM limitations, connection request automation with sent-invitation verification, and a real-time outreach dashboard.",
+    tags: ["Automation", "Outreach", "Harness"],
+    color: "from-sky-500/20 to-blue-600/20",
+    kpis: [
+      { label: "Outreach setup", before: "manual", after: "automated" },
+      { label: "Scraper modes", before: "0", after: "2" },
+    ],
+    gallery: [
+      { title: "Outreach Dashboard", desc: "Real-time tracking of connection requests and replies", image: "" },
+      { title: "Dual Scraper", desc: "DDG keyword search + direct LinkedIn URL modes", image: "" },
+      { title: "CDP/AX-Tree Navigator", desc: "Browser harness bypasses DOM for reliable modal clicks", image: "" },
+      { title: "Verification Layer", desc: "Confirms sent invitations before marking DB records", image: "" },
+    ],
+  },
+  {
+    name: "Vita+ Brand Automation",
+    shortDesc: "Full D2C marketing automation stack — ManyChat conversation flows, Meta CAPI server-side dedup, and Railway-hosted lead pipeline.",
+    fullDesc: "Vita+ is a GLP-1 health brand automation system combining ManyChat conversation flows with Meta Pixel + CAPI server-side event deduplication. Railway-hosted Node.js backend handles lead routing, offer qualification, and tracking — fully automated from ad click to lead record.",
+    tags: ["Brand", "Automation", "ManyChat"],
+    color: "from-rose-500/20 to-orange-500/20",
+    kpis: [
+      { label: "Lead pipeline", before: "manual", after: "automated" },
+      { label: "Flow steps", before: "0", after: "6-phase" },
+    ],
+    gallery: [
+      { title: "ManyChat Flow Architecture", desc: "6-phase conversation flow for GLP-1 lead qualification", image: "" },
+      { title: "Meta CAPI Integration", desc: "Server-side event deduplication via shared metaEventId", image: "" },
+      { title: "Railway Backend", desc: "Node.js API handling lead routing and offer logic", image: "" },
+      { title: "Conversion Tracking", desc: "Pixel + CAPI dual-track for accurate attribution", image: "" },
+    ],
+  },
 ];
 
 const containerVariants = {
