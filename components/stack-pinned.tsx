@@ -27,6 +27,14 @@ const panels = [
     video: stackLoops.funnels,
     accent: "var(--color-violet)",
   },
+  {
+    idx: "04",
+    title: "Context & Harness Engineering",
+    logic: "AI harness systems that make LLMs reliable and reproducible in production.",
+    impact: ["Reproducible AI behavior", "Multi-agent coordination", "Zero context-drift protocols"],
+    video: stackLoops.saas,
+    accent: "#10d9a8",
+  },
 ];
 
 export function StackPinned() {

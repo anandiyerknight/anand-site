@@ -136,7 +136,7 @@ export function Hero() {
           transition={{ duration: 0.9, delay: 1.0 }}
           className="mt-6 md:mt-10 max-w-xl text-[var(--color-ink-2)] text-base md:text-lg leading-relaxed"
         >
-          Systems at the intersection of creative, marketing, branding and engineering.
+          AI systems, context engineering, and brand automation — built to compound your leverage.
         </motion.p>
 
         {/* CTAs */}
@@ -148,7 +148,7 @@ export function Hero() {
         >
           <Magnetic strength={0.25}>
             <a href="#audit" className="btn-primary text-xs md:text-sm px-6 md:px-8">
-              See If You Qualify
+              Request an Audit
               <span aria-hidden>→</span>
             </a>
           </Magnetic>

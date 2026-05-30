@@ -1,8 +1,16 @@
 "use client";
-import { Magnetic } from "./magnetic";
 import { Reveal } from "./reveal";
 
-const tier1 = ["Netflix", "Amazon Prime", "Gillette", "Adidas", "Reebok", "HDFC", "Byju's"];
+const credentials = [
+  { label: "Experience", value: "15+ years in Content Production" },
+  { label: "Entrepreneur", value: "5+ years building ventures" },
+  { label: "AI Content", value: "2+ years in AI Content Systems" },
+  { label: "AI Coding", value: "1 year in AI Agentic Coding" },
+  { label: "Context Eng.", value: "Harness architecture · MCP · Agent orchestration" },
+  { label: "Brand Automation", value: "ManyChat · Meta CAPI · D2C pipeline design" },
+  { label: "Education", value: "SAE + Berklee College of Music, Boston MA" },
+  { label: "Mirchi Kaan", value: "Jingle of the Year" },
+];
 
 export function Methodology() {
   return (
@@ -29,43 +37,23 @@ export function Methodology() {
 
           <Reveal delay={0.1}>
             <p className="mt-6 md:mt-10 text-base md:text-lg leading-relaxed text-[var(--color-ink-2)] max-w-2xl">
-              With 15 years of production pedigree and 6 production apps, I'm a systems builder for creative and tech founders who want to compound their leverage. I architect end-to-end automations that remove friction and amplify impact.
+              With 15+ years in content production and 5+ years as an entrepreneur, I build AI-native systems and context engineering frameworks for creative and tech founders who want to compound their leverage through automation.
             </p>
           </Reveal>
 
           <Reveal delay={0.2}>
-            <div className="mt-8 md:mt-12 grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4 max-w-md">
-              {[
-                ["Berklee", "Acoustics"],
-                ["S.A.E", "Audio Eng."],
-                ["Coder", "Revenue Infrastructure"],
-                ["Producer", "Visual Narrative"],
-                ["Director", "Creative Direction"],
-                ["Founder", "Systems Architecture"],
-                ["Jack of all trades", "Master of Some"],
-                ["Mirchi Kaan", "Jingle of the Year"],
-              ].map(([title, sub]) => (
+            <div className="mt-8 md:mt-12 space-y-3">
+              {credentials.map(({ label, value }) => (
                 <div
-                  key={title}
-                  className="border-l border-[var(--color-rule-2)] pl-3 md:pl-4 py-2"
+                  key={label}
+                  className="border-l-2 border-[var(--color-rule-2)] pl-4 py-1.5"
                 >
-                  <div className="font-mono text-[9px] md:text-[10px] tracking-[0.2em] uppercase text-[var(--color-cyan)]">
-                    {title}
+                  <div className="font-mono text-[9px] md:text-[10px] tracking-[0.2em] uppercase text-[var(--color-mute)]">
+                    {label}
                   </div>
-                  <div className="text-xs md:text-sm text-[var(--color-ink-2)] mt-1">{sub}</div>
+                  <div className="text-sm md:text-base text-[var(--color-ink)] mt-0.5 font-medium">{value}</div>
                 </div>
               ))}
-            </div>
-          </Reveal>
-
-          <Reveal delay={0.3}>
-            <div className="mt-8 md:mt-12">
-              <Magnetic strength={0.25}>
-                <a href="#audit" className="btn-primary text-xs md:text-sm px-6 md:px-8">
-                  See If You Qualify
-                  <span aria-hidden>→</span>
-                </a>
-              </Magnetic>
             </div>
           </Reveal>
         </div>

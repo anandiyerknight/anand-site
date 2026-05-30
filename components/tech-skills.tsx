@@ -26,6 +26,10 @@ const categories = [
     label: "Media & Quant",
     skills: ["FFmpeg", "AI video pipelines", "Audio post", "Spatial workflows", "Freqtrade", "Backtrader", "ccxt", "Regime routing"],
   },
+  {
+    label: "Context & Harness",
+    skills: ["Claude Code", "CLAUDE.md architecture", "MCP servers", "Context engineering", "Agent orchestration", "Session protocols", "Hook systems", "Tool scaffolding", "Prompt architecture"],
+  },
 ];
 
 export function TechSkills() {
