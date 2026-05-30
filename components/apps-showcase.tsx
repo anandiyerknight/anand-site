@@ -83,10 +83,10 @@ const apps = [
       { label: "Scraper modes", before: "0", after: "2" },
     ],
     gallery: [
-      { title: "Outreach Dashboard", desc: "Real-time tracking of connection requests and replies", image: "" },
-      { title: "Dual Scraper", desc: "DDG keyword search + direct LinkedIn URL modes", image: "" },
-      { title: "CDP/AX-Tree Navigator", desc: "Browser harness bypasses DOM for reliable modal clicks", image: "" },
-      { title: "Verification Layer", desc: "Confirms sent invitations before marking DB records", image: "" },
+      { title: "System Dashboard", desc: "Live system health, API status, and outreach metrics", image: "/images/apps/linkedin-1.png" },
+      { title: "Leads Pipeline", desc: "ICP-qualified leads with scoring and status tracking", image: "/images/apps/linkedin-2.png" },
+      { title: "Outreach Manager", desc: "Connection request queue with message templates", image: "/images/apps/linkedin-3.png" },
+      { title: "Scheduler", desc: "Automated daily outreach with rate-limit controls", image: "/images/apps/linkedin-4.png" },
     ],
   },
   {
@@ -100,10 +100,10 @@ const apps = [
       { label: "Flow steps", before: "0", after: "6-phase" },
     ],
     gallery: [
-      { title: "ManyChat Flow Architecture", desc: "6-phase conversation flow for GLP-1 lead qualification", image: "" },
-      { title: "Meta CAPI Integration", desc: "Server-side event deduplication via shared metaEventId", image: "" },
-      { title: "Railway Backend", desc: "Node.js API handling lead routing and offer logic", image: "" },
-      { title: "Conversion Tracking", desc: "Pixel + CAPI dual-track for accurate attribution", image: "" },
+      { title: "GLP-1 Weight Loss Ad", desc: "Endocrinologist-led metabolic programme creative", image: "/images/apps/vita-1.png" },
+      { title: "Women's Weight Loss", desc: "PCOS-targeted creative with hormone health angle", image: "/images/apps/vita-2.png" },
+      { title: "PCOS Awareness Creative", desc: "Blood test + online consult funnel entry", image: "/images/apps/vita-3.png" },
+      { title: "GLP Readiness CTA", desc: "Fatty liver / pre-diabetic audience creative", image: "/images/apps/vita-4.png" },
     ],
   },
 ];
