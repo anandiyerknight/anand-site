@@ -21,7 +21,7 @@ export async function addBriefToSheet(data: {
       email: data.email,
       company: data.company,
       social: data.social || "",
-      phone: data.phone || "",
+      phone: data.phone ? data.phone.replace(/^\+(\d+)\s/, "($1) ") : "",
       brief: data.brief,
     }),
   });
