@@ -35,11 +35,19 @@ export default function Page() {
 
       {/* === COLLAPSIBLE AFTER FORM === */}
 
-      <CollapsibleSection title="Film & Cinema Work" description="Sound design and direction credits across major productions">
+      <CollapsibleSection
+        title="Film & Cinema Work"
+        description="Sound design and direction credits across major productions"
+        autoOpen
+      >
         <CinemaSection />
       </CollapsibleSection>
 
-      <CollapsibleSection title="Performance Marketing" description="A decade of AI-augmented video and campaign work">
+      <CollapsibleSection
+        title="Performance Marketing"
+        description="A decade of AI-augmented video and campaign work"
+        autoOpen
+      >
         <ReelGallery />
         <AfterGrid />
       </CollapsibleSection>
