@@ -1,5 +1,6 @@
 import { Nav } from "@/components/nav";
 import { Hero } from "@/components/hero";
+import { ServicesSection } from "@/components/features/ServicesSection";
 import { AppsShowcase } from "@/components/apps-showcase";
 import { BrandWall } from "@/components/brand-wall";
 import { AfterGrid } from "@/components/after-grid";
@@ -21,16 +22,19 @@ export default function Page() {
       {/* 1. Hero with video */}
       <Hero />
 
-      {/* 2. Product Gallery — the highlight */}
+      {/* 2. Services */}
+      <ServicesSection />
+
+      {/* 3. Product Gallery — the highlight */}
       <AppsShowcase />
 
-      {/* 3. Clients & Brands — right below, always visible */}
+      {/* 4. Clients & Brands — right below, always visible */}
       <BrandWall />
 
-      {/* 4. About */}
+      {/* 5. About */}
       <Methodology />
 
-      {/* 5. Apply */}
+      {/* 6. Apply */}
       <AuditForm />
 
       {/* === COLLAPSIBLE AFTER FORM === */}
