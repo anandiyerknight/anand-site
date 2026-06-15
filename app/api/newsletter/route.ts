@@ -16,7 +16,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ ok: false, error: "Missing name, email, or issue." }, { status: 400 });
     }
 
-    const brief = `Newsletter download: Issue ${issue.num} — ${issue.title}`;
+    const brief = `Newsletter download: Issue ${issue.num} - ${issue.title}`;
 
     // Capture the lead two ways so a flaky sheet never loses it.
     try {

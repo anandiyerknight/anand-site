@@ -96,3 +96,15 @@ Fixed: `data.phone.replace(/^\+(\d+)\s/, "($1) ")` → sends `(91) XXXXXXXXXX` i
 - **Script project:** https://script.google.com/u/0/home/projects/1gUFU0H1xgy2bSR1smugCCGNa1yLdVTw5kID7tjs8gPI25ZRi5l-XHSXb/edit
 - **Notification email:** zingaboink@gmail.com
 - **GOOGLE_SCRIPT_URL in Vercel:** ✅ set and verified working
+
+---
+
+# Newsletters section (added 2026-06-15)
+
+**Live:** https://anandiyer.co.in/newsletters — gated free downloads of the 20-issue automation case-study series.
+
+- **Route:** `app/newsletters/page.tsx` (static) → renders `components/newsletter-library.tsx` (client).
+- **Data:** `lib/newsletters.ts` (20 issues: num, slug, title, blurb).
+- **Assets:** `public/newsletters/<slug>.pdf` + `<slug>.png` (hero thumbnail). Source PDFs live in `~/CODE/gmail/newsletters/<slug>/case-study.pdf`; re-copy after regenerating.
+- **Lead wall:** first download opens a form (name + email + optional company) → `POST /api/newsletter` → captured BOTH via `addBriefToSheet` (same Google Sheet as the audit form, Brief = "Newsletter download: Issue NN — Title") AND `sendBriefNotification` (email to zingaboink@gmail.com). After first submit, localStorage `nl_lead` skips the form but still logs each download. Slug is validated against `newsletterIssues` (path-traversal returns 400).
+- **Nav:** "Newsletters" link added to `components/nav.tsx` (hash links changed to `/#...` so they work from non-home routes).
