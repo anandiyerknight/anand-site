@@ -3,11 +3,12 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 
 const links = [
-  { label: "Systems", href: "#systems" },
-  { label: "Logic", href: "#methodology" },
-  { label: "Work", href: "#work-grid" },
-  { label: "Stack", href: "#tech" },
-  { label: "Qualify", href: "#audit" },
+  { label: "Systems", href: "/#systems" },
+  { label: "Logic", href: "/#methodology" },
+  { label: "Work", href: "/#work-grid" },
+  { label: "Newsletters", href: "/newsletters" },
+  { label: "Stack", href: "/#tech" },
+  { label: "Qualify", href: "/#audit" },
 ];
 
 export function Nav() {
