@@ -9,31 +9,39 @@ interface ServiceItem {
   borderClassName: string;
 }
 
+const flagship = {
+  eyebrow: "Flagship · The outreach machine",
+  title: "Multi-channel B2B outreach automation",
+  description:
+    "LinkedIn, email, Instagram and WhatsApp run as one daily, AI-driven machine. It sources the right accounts, personalizes every message, sends the follow-ups, posts the content, and verifies each action, so your pipeline keeps building whether anyone logs in or not.",
+  tags: ["LinkedIn", "Email", "Instagram", "WhatsApp", "5,000+ connections / month"],
+};
+
 const services: ServiceItem[] = [
   {
     eyebrow: "Acquisition",
     title: "Lead gen + AI qualification",
     description:
-      "Funnels that capture demand, score intent, route the right leads, and reduce the manual back-and-forth before sales.",
+      "Funnels that capture demand, score intent with AI, route the right leads, and cut the manual back-and-forth before sales picks up the phone.",
     details: ["Lead capture", "AI scoring", "CRM routing"],
     layoutClassName: "md:col-span-3",
     borderClassName: "md:border-r md:border-b",
   },
   {
-    eyebrow: "Content Ops",
-    title: "Content pipeline automations",
+    eyebrow: "Growth",
+    title: "Performance marketing",
     description:
-      "Systems that turn briefs, raw footage, assets, and approvals into repeatable publishing workflows across channels.",
-    details: ["Brief to output", "Asset workflows", "Approval loops"],
+      "Meta, Google and WhatsApp full-funnel campaigns with server-side tracking, CAPI, creative testing, and conversion loops that actually attribute.",
+    details: ["Meta", "Google", "Pixel + CAPI"],
     layoutClassName: "md:col-span-3",
     borderClassName: "md:border-b",
   },
   {
-    eyebrow: "Growth",
-    title: "Performance marketing",
+    eyebrow: "Content Ops",
+    title: "Content pipeline automation",
     description:
-      "Meta, Google, WhatsApp, and full-funnel campaign infrastructure with tracking, creative testing, and conversion loops.",
-    details: ["Meta", "Google", "WhatsApp"],
+      "Briefs, assets and approvals turned into repeatable publishing workflows, fed by AI image, poster and video engines that ship to every channel daily.",
+    details: ["Brief to output", "Image engine", "Daily publish"],
     layoutClassName: "md:col-span-2",
     borderClassName: "md:border-r",
   },
@@ -41,7 +49,7 @@ const services: ServiceItem[] = [
     eyebrow: "Intelligence",
     title: "BI apps + dashboards",
     description:
-      "Internal tools and business dashboards that make revenue, ops, marketing, and customer data easier to act on.",
+      "Internal tools and dashboards that make revenue, ops, marketing, and customer data easy to act on, instead of buried in spreadsheets.",
     details: ["Ops dashboards", "Data apps", "Decision views"],
     layoutClassName: "md:col-span-2",
     borderClassName: "md:border-r",
@@ -50,7 +58,7 @@ const services: ServiceItem[] = [
     eyebrow: "Engineering",
     title: "AI systems engineering",
     description:
-      "Custom AI workflows, agents, automations, and production systems built around the way your business actually runs.",
+      "Custom AI agents, automations, and production systems built around the way your business actually runs, end to end.",
     details: ["Agents", "RAG", "Automation"],
     layoutClassName: "md:col-span-2",
     borderClassName: "",
@@ -68,14 +76,44 @@ export function ServicesSection() {
                 Services
               </p>
               <h2 className="font-display text-[clamp(1.8rem,5vw,4rem)] leading-[1] tracking-tight">
-                What I can build into your business.
+                The systems that fill your pipeline.
               </h2>
             </div>
             <p className="lg:col-span-5 text-sm md:text-lg leading-relaxed text-[var(--color-ink-2)] lg:pt-9 max-w-2xl">
-              Practical growth and automation systems for teams that need more qualified demand, faster content throughput,
-              cleaner reporting, and AI-native operations.
+              It starts with the outreach machine: LinkedIn, email, Instagram and WhatsApp running as one AI system that
+              fills your pipeline every day. Then the funnels, campaigns, content, and dashboards that turn that demand
+              into revenue.
             </p>
           </div>
+        </Reveal>
+
+        {/* Flagship - the outreach machine */}
+        <Reveal>
+          <article className="group mb-4 md:mb-6 rounded-2xl border border-[var(--color-rule)] bg-white/[0.025] p-6 md:p-9 transition-colors duration-300 hover:bg-white/[0.05]">
+            <div className="font-mono text-[10px] tracking-[0.2em] uppercase text-[var(--color-magenta)] mb-5">
+              {flagship.eyebrow}
+            </div>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-10 items-start">
+              <h3 className="lg:col-span-5 font-display text-2xl md:text-[2.6rem] leading-[1.04] tracking-tight group-hover:text-white transition-colors">
+                {flagship.title}
+              </h3>
+              <div className="lg:col-span-7">
+                <p className="text-sm md:text-lg leading-relaxed text-[var(--color-ink-2)]">
+                  {flagship.description}
+                </p>
+                <div className="mt-6 flex flex-wrap gap-2">
+                  {flagship.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="font-mono text-[10px] md:text-xs px-2.5 py-1.5 rounded-full border border-[var(--color-rule-2)] text-[var(--color-mute)]"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </article>
         </Reveal>
 
         <div className="grid grid-cols-1 md:grid-cols-6 border-y border-[var(--color-rule)]">
