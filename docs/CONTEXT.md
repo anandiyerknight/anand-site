@@ -108,3 +108,9 @@ Fixed: `data.phone.replace(/^\+(\d+)\s/, "($1) ")` → sends `(91) XXXXXXXXXX` i
 - **Assets:** `public/newsletters/<slug>.pdf` + `<slug>.png` (hero thumbnail). Source PDFs live in `~/CODE/gmail/newsletters/<slug>/case-study.pdf`; re-copy after regenerating.
 - **Lead wall:** first download opens a form (name + email + optional company) → `POST /api/newsletter` → captured BOTH via `addBriefToSheet` (same Google Sheet as the audit form, Brief = "Newsletter download: Issue NN — Title") AND `sendBriefNotification` (email to zingaboink@gmail.com). After first submit, localStorage `nl_lead` skips the form but still logs each download. Slug is validated against `newsletterIssues` (path-traversal returns 400).
 - **Nav:** "Newsletters" link added to `components/nav.tsx` (hash links changed to `/#...` so they work from non-home routes).
+
+## METHOD-derived recipes index (migrated from global METHOD.md, 2026-06-19)
+
+Moved out of the always-on `~/.claude/METHOD.md` so it only loads with this project (retrievable via context-harness `hybrid_search`).
+
+- [2026-06-15] [anand-site] **Gated PDF download** → /newsletters page + `POST /api/newsletter` reuses `addBriefToSheet` (same sheet, Brief="Newsletter download: ...") + `sendBriefNotification`. Deploy: `gh auth switch --user anandiyerknight && git push vercel main`. Verify live by byte-matching the PDF size.
