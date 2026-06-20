@@ -21,7 +21,7 @@ export function WorkGrid() {
             </div>
             <Reveal>
               <h2 className="font-display text-[clamp(2.2rem,5vw,4.5rem)] leading-[0.95] tracking-tight">
-                Landing pages, content systems <span className="italic">and the brands behind them.</span>
+                Landing pages <span className="italic">and the brands behind them.</span>
               </h2>
             </Reveal>
           </div>
@@ -36,8 +36,7 @@ export function WorkGrid() {
             <Reveal key={item.slug} delay={(i % 3) * 0.06}>
               <Link
                 href="/work"
-                className="group glass flex flex-col overflow-hidden h-full border border-[var(--color-rule)] hover:border-[var(--color-cyan)] transition-colors duration-300"
-                style={{ borderTopColor: item.brandColor, borderTopWidth: 2 }}
+                className="group flex flex-col overflow-hidden h-full rounded-3xl bg-[var(--color-bg-2)] ring-1 ring-[var(--color-rule)] hover:ring-[var(--color-mute)] transition-shadow duration-300"
               >
                 <div className="relative aspect-[1200/675] bg-[var(--color-bg-2)] border-b border-[var(--color-rule)] overflow-hidden">
                   {item.cover || item.gallery?.[0] ? (

@@ -12,12 +12,10 @@ type Lead = { name: string; email: string; company: string };
 const LS_KEY = "nl_lead"; // shared with the newsletter gate so a returning lead skips the form
 
 type FilterKey = WorkType | "all";
-const FILTERS: { key: FilterKey; label: string }[] = [
-  { key: "all", label: "All" },
+const FILTER_DEFS: { key: WorkType; label: string }[] = [
   { key: "landing-page", label: "Landing Pages" },
   { key: "carousel", label: "Carousels" },
   { key: "guide", label: "Guides" },
-  { key: "case-study", label: "Case Studies" },
 ];
 
 function getStoredLead(): Lead | null {
@@ -64,6 +62,15 @@ export function WorkShowcase({ items }: { items: WorkItem[] }) {
     if (filter === "case-study") return sorted.filter(hasCaseStudy);
     return sorted.filter((w) => w.type === filter);
   }, [sorted, filter]);
+
+  // Only show tabs for the content types actually present.
+  const tabs = useMemo<{ key: FilterKey; label: string }[]>(() => {
+    const present = new Set(items.map((w) => w.type));
+    const list: { key: FilterKey; label: string }[] = [{ key: "all", label: "All" }];
+    for (const f of FILTER_DEFS) if (present.has(f.key)) list.push(f);
+    if (items.some(hasCaseStudy)) list.push({ key: "case-study", label: "Case Studies" });
+    return list;
+  }, [items]);
 
   async function capture(lead: Lead, item: WorkItem) {
     const res = await fetch("/api/work-download", {
@@ -119,22 +126,24 @@ export function WorkShowcase({ items }: { items: WorkItem[] }) {
   return (
     <>
       {/* Filter tabs */}
-      <div className="flex flex-wrap gap-2 mb-10">
-        {FILTERS.map((f) => (
-          <button
-            key={f.key}
-            type="button"
-            onClick={() => setFilter(f.key)}
-            className={`font-mono text-[11px] tracking-[0.18em] uppercase px-4 py-2 rounded-full border transition-colors ${
-              filter === f.key
-                ? "bg-white text-black border-white"
-                : "border-[var(--color-rule)] text-[var(--color-ink-2)] hover:border-[var(--color-cyan)]"
-            }`}
-          >
-            {f.label}
-          </button>
-        ))}
-      </div>
+      {tabs.length > 1 && (
+        <div className="flex flex-wrap gap-2 mb-10">
+          {tabs.map((f) => (
+            <button
+              key={f.key}
+              type="button"
+              onClick={() => setFilter(f.key)}
+              className={`font-mono text-[11px] tracking-[0.18em] uppercase px-4 py-2 rounded-full border transition-colors ${
+                filter === f.key
+                  ? "bg-white text-black border-white"
+                  : "border-[var(--color-rule)] text-[var(--color-ink-2)] hover:border-[var(--color-ink-2)]"
+              }`}
+            >
+              {f.label}
+            </button>
+          ))}
+        </div>
+      )}
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
         {visible.map((item, idx) => {
@@ -142,10 +151,7 @@ export function WorkShowcase({ items }: { items: WorkItem[] }) {
           const cardCase = item.type === "case-study" ? caseById(item.caseStudyId) : null;
           return (
             <Reveal key={item.slug} delay={(idx % 3) * 0.06}>
-              <div
-                className="glass flex flex-col overflow-hidden h-full border border-[var(--color-rule)] hover:border-[var(--color-cyan)] transition-colors duration-300"
-                style={{ borderTopColor: item.brandColor, borderTopWidth: 2 }}
-              >
+              <div className="flex flex-col overflow-hidden h-full rounded-3xl bg-[var(--color-bg-2)] ring-1 ring-[var(--color-rule)] hover:ring-[var(--color-mute)] transition-shadow duration-300">
                 {/* Visual area */}
                 {item.type === "carousel" && item.gallery?.length ? (
                   <button

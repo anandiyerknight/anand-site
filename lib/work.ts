@@ -6,7 +6,7 @@ export type WorkItem = {
   title: string;
   category: string;
   blurb: string;
-  brandColor?: string; // accent hairline on the card
+  brandColor?: string; // accent used in subtle places (not a card border)
   featured?: boolean; // surfaces on the home teaser
   order?: number; // sort within its group (lower first)
   // landing-page
@@ -22,6 +22,7 @@ export type WorkItem = {
 
 // Single source of truth for the /work showcase. Assets live in public/work/<slug>/.
 // New items are appended by the /addwork skill — no component changes needed.
+// (carousel + guide types are still supported by the system; none are seeded right now.)
 export const workItems: WorkItem[] = [
   // ---------- Landing pages ----------
   {
@@ -77,177 +78,6 @@ export const workItems: WorkItem[] = [
     order: 4,
   },
 
-  // ---------- Carousels (B2B LinkedIn series) ----------
-  {
-    slug: "carousel-content-machine",
-    type: "carousel",
-    title: "The Content Machine",
-    category: "B2B LinkedIn carousel",
-    blurb: "The time-trap of manual content, and the machine that replaces it. Hook to proof to CTA.",
-    brandColor: "#ffffff",
-    gallery: [
-      "/work/carousel-content-machine/01.png",
-      "/work/carousel-content-machine/02.png",
-      "/work/carousel-content-machine/03.png",
-      "/work/carousel-content-machine/04.png",
-      "/work/carousel-content-machine/05.png",
-    ],
-    featured: true,
-    order: 5,
-  },
-  {
-    slug: "carousel-automation-roi",
-    type: "carousel",
-    title: "Automation ROI",
-    category: "B2B LinkedIn carousel",
-    blurb: "Which roles AI replaces, what it cannot, and the math on cost per outcome.",
-    brandColor: "#ffffff",
-    gallery: [
-      "/work/carousel-automation-roi/01.png",
-      "/work/carousel-automation-roi/02.png",
-      "/work/carousel-automation-roi/03.png",
-      "/work/carousel-automation-roi/04.png",
-      "/work/carousel-automation-roi/05.png",
-    ],
-    order: 6,
-  },
-  {
-    slug: "carousel-linkedin-authority",
-    type: "carousel",
-    title: "LinkedIn Authority",
-    category: "B2B LinkedIn carousel",
-    blurb: "Scoring, reach and the formats that turn a profile into conversion infrastructure.",
-    brandColor: "#ffffff",
-    gallery: [
-      "/work/carousel-linkedin-authority/01.png",
-      "/work/carousel-linkedin-authority/02.png",
-      "/work/carousel-linkedin-authority/03.png",
-      "/work/carousel-linkedin-authority/04.png",
-      "/work/carousel-linkedin-authority/05.png",
-      "/work/carousel-linkedin-authority/06.png",
-    ],
-    order: 7,
-  },
-  {
-    slug: "carousel-90-day-plan",
-    type: "carousel",
-    title: "The 90-Day Plan",
-    category: "B2B LinkedIn carousel",
-    blurb: "Month one to month three of a growth-system rollout, with the single requirement that makes it work.",
-    brandColor: "#ffffff",
-    gallery: [
-      "/work/carousel-90-day-plan/01.png",
-      "/work/carousel-90-day-plan/02.png",
-      "/work/carousel-90-day-plan/03.png",
-      "/work/carousel-90-day-plan/04.png",
-      "/work/carousel-90-day-plan/05.png",
-      "/work/carousel-90-day-plan/06.png",
-    ],
-    order: 8,
-  },
-
-  // ---------- Brand guides (gated PDF downloads) ----------
-  {
-    slug: "guide-diabetes",
-    type: "guide",
-    title: "Diabetes Protocol",
-    category: "GutGuru · Branded guide",
-    blurb: "A clinician-grade diabetes nutrition protocol, designed as a branded lead magnet.",
-    brandColor: "#6B8A47",
-    pdf: "/work/guide-diabetes/diabetes-protocol.pdf",
-    order: 9,
-  },
-  {
-    slug: "guide-pcos",
-    type: "guide",
-    title: "PCOS Protocol",
-    category: "GutGuru · Branded guide",
-    blurb: "Nutrition and lifestyle protocol for PCOS, packaged as an on-brand downloadable.",
-    brandColor: "#6B8A47",
-    pdf: "/work/guide-pcos/pcos-protocol.pdf",
-    order: 10,
-  },
-  {
-    slug: "guide-thyroid",
-    type: "guide",
-    title: "Thyroid Protocol",
-    category: "GutGuru · Branded guide",
-    blurb: "A practical thyroid-support nutrition protocol guide.",
-    brandColor: "#6B8A47",
-    pdf: "/work/guide-thyroid/thyroid-protocol.pdf",
-    order: 11,
-  },
-  {
-    slug: "guide-fatty-liver",
-    type: "guide",
-    title: "Fatty Liver Protocol",
-    category: "GutGuru · Branded guide",
-    blurb: "Reversal-focused nutrition protocol for fatty liver.",
-    brandColor: "#6B8A47",
-    pdf: "/work/guide-fatty-liver/fatty-liver-protocol.pdf",
-    order: 12,
-  },
-  {
-    slug: "guide-pms",
-    type: "guide",
-    title: "PMS Protocol",
-    category: "GutGuru · Branded guide",
-    blurb: "Cycle-aware nutrition protocol to ease PMS symptoms.",
-    brandColor: "#6B8A47",
-    pdf: "/work/guide-pms/pms-protocol.pdf",
-    order: 13,
-  },
-  {
-    slug: "guide-prenatal",
-    type: "guide",
-    title: "Prenatal Protocol",
-    category: "GutGuru · Branded guide",
-    blurb: "Nutrition protocol for the prenatal stage.",
-    brandColor: "#6B8A47",
-    pdf: "/work/guide-prenatal/prenatal-protocol.pdf",
-    order: 14,
-  },
-  {
-    slug: "guide-postnatal",
-    type: "guide",
-    title: "Postnatal Protocol",
-    category: "GutGuru · Branded guide",
-    blurb: "Recovery and nourishment protocol for the postnatal stage.",
-    brandColor: "#6B8A47",
-    pdf: "/work/guide-postnatal/postnatal-protocol.pdf",
-    order: 15,
-  },
-  {
-    slug: "guide-pregnancy",
-    type: "guide",
-    title: "Pregnancy Protocol",
-    category: "GutGuru · Branded guide",
-    blurb: "Trimester-aware nutrition protocol for pregnancy.",
-    brandColor: "#6B8A47",
-    pdf: "/work/guide-pregnancy/pregnancy-protocol.pdf",
-    order: 16,
-  },
-  {
-    slug: "guide-protein",
-    type: "guide",
-    title: "Protein Guide",
-    category: "GutGuru · Branded guide",
-    blurb: "A practical guide to hitting protein targets on an Indian diet.",
-    brandColor: "#6B8A47",
-    pdf: "/work/guide-protein/protein-guide.pdf",
-    order: 17,
-  },
-  {
-    slug: "guide-alcohol",
-    type: "guide",
-    title: "Alcohol Guide",
-    category: "GutGuru · Branded guide",
-    blurb: "A clear-headed guide to alcohol, metabolism and gut health.",
-    brandColor: "#6B8A47",
-    pdf: "/work/guide-alcohol/alcohol-guide.pdf",
-    order: 18,
-  },
-
   // ---------- Case studies (reference lib/case-studies.ts) ----------
   {
     slug: "case-ecole",
@@ -255,7 +85,7 @@ export const workItems: WorkItem[] = [
     title: "Ecole Chantemerle",
     category: "Education · Hyper-growth",
     blurb: "A Swiss institution turnaround: 2 leads a month to 2,000, and ₹3L of spend into ₹1.5Cr.",
-    brandColor: "#ffffff",
+    brandColor: "#737373",
     caseStudyId: "ecole",
     order: 19,
   },
