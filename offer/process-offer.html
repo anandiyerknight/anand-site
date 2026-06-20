@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Anand Iyer - How It Works & What I Need</title>
+<style>
+  :root{
+    --paper:#faf7f0; --ink:#1c1a17; --muted:#6b665c; --line:#1c1a17;
+    --rule:rgba(28,26,23,.16); --panel:#ffffff; --warm:#fdf4dd;
+    --red:#d63a27; --green:#0d8a64; --blue:#1d64d8;
+  }
+  *{box-sizing:border-box;}
+  @page{ size:A4; margin:0; }
+  html,body{ margin:0; background:var(--paper); }
+  body{
+    color:var(--ink);
+    font-family:"Avenir Next","Gill Sans","Trebuchet MS",Helvetica,Arial,sans-serif;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+  .serif{ font-family:Georgia,serif; }
+  .sheet{
+    width:210mm; height:297mm; padding:9mm 13mm 7mm;
+    background:var(--paper); position:relative; overflow:hidden;
+    page-break-after:always; display:flex; flex-direction:column;
+  }
+  .sheet:last-child{ page-break-after:auto; }
+
+  .topbar{
+    display:flex; align-items:baseline; justify-content:space-between;
+    padding-bottom:8px; border-bottom:2px solid var(--line);
+    text-transform:uppercase; font-size:10px; font-weight:700; letter-spacing:.14em;
+  }
+  .topbar .dom{ color:var(--red); }
+  .topbar .meta{ color:var(--muted); }
+
+  .eyebrow{ display:inline-block; color:var(--red); font-size:10.5px; font-weight:700;
+    letter-spacing:.16em; text-transform:uppercase; margin:15px 0 9px; }
+  h1.head{ margin:0; font-size:30px; line-height:1.05; letter-spacing:-.01em; font-weight:700; max-width:24ch; }
+  h1.head em{ color:var(--red); font-style:italic; }
+  .lead{ margin:12px 0 0; color:#3a3631; font-size:12px; line-height:1.5; font-weight:500; max-width:80ch; }
+  .lead b{ color:var(--ink); font-weight:700; }
+
+  /* ---- boundary band ---- */
+  .band{ margin-top:14px; background:var(--ink); color:var(--paper); border-radius:10px; padding:13px 18px;
+    font-family:Georgia,serif; font-size:14.5px; line-height:1.4; font-weight:700; }
+  .band b{ color:#ff7a6b; font-style:italic; }
+
+  /* ---- compare (build vs your team) ---- */
+  .compare{ display:grid; grid-template-columns:1fr 1fr; gap:11px; margin-top:13px; }
+  .col{ border:1px solid var(--rule); background:var(--panel); border-radius:9px; padding:14px 16px 8px; }
+  .col.good{ border-color:rgba(13,138,100,.4); background:#f6fbf8; }
+  .col.hold{ border-color:rgba(214,58,39,.35); background:#fdf5f3; }
+  .col h3{ margin:0 0 2px; font-family:Georgia,serif; font-size:15px; font-weight:700; }
+  .col.good h3{ color:var(--green); } .col.hold h3{ color:var(--red); }
+  .col .ch-sub{ font-size:9px; text-transform:uppercase; letter-spacing:.1em; color:var(--muted); font-weight:700; }
+  .col ul{ margin:9px 0 0; padding:0; list-style:none; }
+  .col li{ padding:6px 0; border-top:1px solid var(--rule); font-size:11px; line-height:1.3; font-weight:500; color:#3a3631; display:flex; gap:8px; }
+  .col li:first-child{ border-top:0; }
+  .col .mk{ flex:0 0 auto; font-weight:700; font-family:Georgia,serif; }
+  .col.good .mk{ color:var(--green); } .col.hold .mk{ color:var(--red); }
+
+  /* ---- daily loop ---- */
+  .sec{ margin-top:14px; }
+  .sec-ey{ color:var(--red); font-size:10px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; }
+  h2{ margin:6px 0 0; font-family:Georgia,serif; font-size:19px; font-weight:700; line-height:1.05; }
+  .loop{ display:grid; grid-template-columns:repeat(5,1fr); gap:7px; margin-top:11px; }
+  .lstep{ border:1px solid var(--rule); background:var(--panel); border-radius:8px; padding:10px 10px; }
+  .lstep .ln{ font-family:Georgia,serif; color:var(--red); font-size:13px; font-weight:700; }
+  .lstep b{ display:block; margin-top:5px; font-size:11px; font-weight:700; line-height:1.1; }
+  .lstep span{ display:block; margin-top:4px; color:var(--muted); font-size:9px; line-height:1.3; font-weight:500; }
+  .lstep.hand{ background:#f6fbf8; border-color:rgba(13,138,100,.4); }
+  .lstep.hand .ln{ color:var(--green); }
+
+  .grow-page{ flex:1 1 auto; min-height:0; }
+  .pg-foot{ margin-top:11px; padding-top:8px; border-top:1px solid var(--rule);
+    display:flex; justify-content:space-between; font-size:9px; text-transform:uppercase; letter-spacing:.12em; color:var(--muted); font-weight:700; }
+
+  /* ---- requirements grid (page 2) ---- */
+  .reqgrid{ display:grid; grid-template-columns:1fr 1fr; gap:9px; margin-top:14px; }
+  .rcard{ border:1px solid var(--rule); background:var(--panel); border-radius:9px; padding:12px 14px; }
+  .rcard.wide{ grid-column:1 / -1; background:var(--warm); border-color:rgba(28,26,23,.28); }
+  .rcard .re{ font-size:8.5px; text-transform:uppercase; letter-spacing:.13em; color:var(--red); font-weight:700; }
+  .rcard h4{ margin:4px 0 7px; font-family:Georgia,serif; font-size:15px; font-weight:700; line-height:1.05; }
+  .rcard ul{ margin:0; padding:0; list-style:none; }
+  .rcard li{ display:flex; gap:8px; padding:5px 0; font-size:10.5px; line-height:1.32; color:#3a3631; font-weight:500; border-top:1px solid var(--rule); }
+  .rcard li:first-child{ border-top:0; }
+  .rcard li b{ color:var(--ink); font-weight:700; }
+  .bx{ flex:0 0 auto; width:11px; height:11px; border:1.5px solid var(--muted); border-radius:3px; margin-top:2px; }
+
+  .cta{ margin-top:13px; background:var(--ink); color:var(--paper); border-radius:11px; padding:13px 18px;
+    display:flex; align-items:center; justify-content:space-between; gap:20px; }
+  .cta .ctext .ck{ font-family:Georgia,serif; font-size:19px; font-weight:700; line-height:1.04; }
+  .cta .ctext .ck em{ color:#ff7a6b; font-style:italic; }
+  .cta .ctext p{ margin:6px 0 0; font-size:10px; color:#cbc6bc; line-height:1.4; font-weight:500; max-width:50ch; }
+  .cta .cbox{ flex:0 0 auto; text-align:right; }
+  .cta .cbox .cdom{ display:block; font-family:Georgia,serif; color:#ff7a6b; font-size:18px; font-weight:700; text-decoration:none; }
+  .cta .cbox .cmail{ display:block; margin-top:5px; font-size:10px; color:#cbc6bc; font-weight:600; }
+  .cta .cbox .cpill{ display:inline-block; margin-top:10px; font-size:8.5px; text-transform:uppercase; letter-spacing:.13em; font-weight:700; color:var(--ink); background:var(--paper); border-radius:20px; padding:5px 11px; text-decoration:none; }
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1: HOW IT WORKS ============ -->
+<section class="sheet">
+  <div class="topbar">
+    <span class="dom">ANANDIYER.CO.IN</span>
+    <span class="meta">How It Works &amp; What I Need &middot; 2026</span>
+  </div>
+
+  <span class="eyebrow">The Outreach Machine</span>
+  <h1 class="head">How it works, and where <em>your team takes over.</em></h1>
+  <p class="lead">
+    I build and run one AI outreach machine that sources the right accounts, reaches them across LinkedIn,
+    email and WhatsApp, nurtures them daily, and qualifies them automatically. The output is a steady stream
+    of qualified leads handed straight to your team. <b>I build the system. I do not sell.</b> Closing stays
+    with the people who already do it best inside your business.
+  </p>
+
+  <div class="band">
+    I build and run the system. <b>I never do sales.</b> Every qualified lead is handed to your team to close.
+  </div>
+
+  <div class="compare">
+    <div class="col good">
+      <h3>What I build and run</h3>
+      <div class="ch-sub">The machine</div>
+      <ul>
+        <li><span class="mk">+</span><span>Source and enrich contacts to your ICP</span></li>
+        <li><span class="mk">+</span><span>Reach across LinkedIn, email and WhatsApp</span></li>
+        <li><span class="mk">+</span><span>Nurture with daily content and a value drip</span></li>
+        <li><span class="mk">+</span><span>Qualify by ICP fit and intent, automatically</span></li>
+        <li><span class="mk">+</span><span>Log and verify every action, alert if unsure</span></li>
+      </ul>
+    </div>
+    <div class="col hold">
+      <h3>What your team owns</h3>
+      <div class="ch-sub">We never do this</div>
+      <ul>
+        <li><span class="mk">x</span><span>Sales calls, demos and discovery</span></li>
+        <li><span class="mk">x</span><span>Quotes, proposals and negotiation</span></li>
+        <li><span class="mk">x</span><span>Closing, contracts and payment</span></li>
+        <li><span class="mk">x</span><span>Owning the relationship after handoff</span></li>
+        <li><span class="mk">x</span><span>Anything that is selling, not sourcing</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec">
+    <span class="sec-ey">How it runs every day</span>
+    <h2>The daily loop, then a clean handoff.</h2>
+  </div>
+  <div class="loop">
+    <div class="lstep"><span class="ln">01</span><b>Source</b><span>Scrape and enrich the right accounts to your ICP</span></div>
+    <div class="lstep"><span class="ln">02</span><b>Reach</b><span>Personalized outreach across LinkedIn, email, WhatsApp</span></div>
+    <div class="lstep"><span class="ln">03</span><b>Nurture</b><span>Daily content and a value drip keep you top of mind</span></div>
+    <div class="lstep"><span class="ln">04</span><b>Qualify</b><span>AI scores ICP fit and intent, drops the noise</span></div>
+    <div class="lstep hand"><span class="ln">05</span><b>Hand off</b><span>Qualified leads pushed to your team to close</span></div>
+  </div>
+
+  <div class="grow-page"></div>
+
+  <div class="pg-foot">
+    <span>Anand Iyer &middot; AI Growth &amp; Automation</span>
+    <span>Page 1 of 2</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 2: WHAT I NEED ============ -->
+<section class="sheet">
+  <div class="topbar">
+    <span class="dom">ANANDIYER.CO.IN</span>
+    <span class="meta">How It Works &amp; What I Need &middot; 2026</span>
+  </div>
+
+  <span class="eyebrow">What I need from you</span>
+  <h1 class="head">To switch the machine on.</h1>
+  <p class="lead">
+    Work starts the day the advance clears and the access items below are in hand. Everything shared here is
+    covered by the confidentiality terms in the final box. If you already have a sales team, the only addition
+    is telling me <b>where qualified leads should land and who owns them.</b>
+  </p>
+
+  <div class="reqgrid">
+
+    <div class="rcard">
+      <div class="re">01 &middot; Access &amp; credentials</div>
+      <h4>The accounts the machine runs on</h4>
+      <ul>
+        <li><span class="bx"></span><span><b>LinkedIn</b> account used for outreach (profile + company page)</span></li>
+        <li><span class="bx"></span><span><b>Instagram</b> account, and <b>Meta Business Manager</b> full admin</span></li>
+        <li><span class="bx"></span><span><b>Google Analytics</b> access, if a website is in scope</span></li>
+        <li><span class="bx"></span><span>A <b>company-domain email + Google account</b> for outbound and tool logins</span></li>
+      </ul>
+    </div>
+
+    <div class="rcard">
+      <div class="re">02 &middot; Lead handoff &amp; ownership</div>
+      <h4>Where qualified leads go</h4>
+      <ul>
+        <li><span class="bx"></span><span>The <b>destination</b>: your CRM, a shared sheet, or a team inbox (plus access)</span></li>
+        <li><span class="bx"></span><span>The <b>owner</b>: the person or team who receives and closes</span></li>
+        <li><span class="bx"></span><span>Your definition of a <b>qualified lead</b> (ICP fit + intent), so I automate to it</span></li>
+        <li><span class="bx"></span><span>A <b>follow-up SLA</b>: how fast your team works a handed-off lead</span></li>
+      </ul>
+    </div>
+
+    <div class="rcard">
+      <div class="re">03 &middot; Context &amp; reference</div>
+      <h4>So it qualifies in your voice</h4>
+      <ul>
+        <li><span class="bx"></span><span>Your <b>ICP</b>: industry, role, company size, geography</span></li>
+        <li><span class="bx"></span><span><b>Sales docs + a short pipeline explainer</b> (how you sell, objections, FAQs)</span></li>
+        <li><span class="bx"></span><span><b>Product and pricing</b> info (a generic version is fine)</span></li>
+        <li><span class="bx"></span><span><b>Existing clients + logo files</b> for social proof in content</span></li>
+      </ul>
+    </div>
+
+    <div class="rcard">
+      <div class="re">04 &middot; Brand &amp; creative</div>
+      <h4>So content looks like you</h4>
+      <ul>
+        <li><span class="bx"></span><span><b>Brand guidelines</b>: colors, fonts, tone of voice</span></li>
+        <li><span class="bx"></span><span><b>Logo files</b> in vector and standard formats</span></li>
+        <li><span class="bx"></span><span>Any <b>prior content</b> for reference (carousels, brochures, videos)</span></li>
+      </ul>
+    </div>
+
+    <div class="rcard">
+      <div class="re">05 &middot; Commercial</div>
+      <h4>To begin and to run</h4>
+      <ul>
+        <li><span class="bx"></span><span>The <b>advance</b> for your chosen pack, to start</span></li>
+        <li><span class="bx"></span><span><b>Platform budgets</b>: WhatsApp API, contact research at &#8377;1 per contact, Instagram on Scale, billed at actuals with receipts</span></li>
+      </ul>
+    </div>
+
+    <div class="rcard">
+      <div class="re">06 &middot; Confidentiality</div>
+      <h4>How your data is treated</h4>
+      <ul>
+        <li><span class="bx"></span><span>Everything shared is <b>strictly confidential</b>, used solely for this engagement</span></li>
+        <li><span class="bx"></span><span>Governed by a <b>signed NDA</b>. Nothing is repurposed or retained beyond scope</span></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="grow-page"></div>
+
+  <div class="cta">
+    <div class="ctext">
+      <div class="ck">Send these over and <em>we switch it on.</em></div>
+      <p>Once access and the advance are in, I stand up the machine and the first leads start flowing to your team.</p>
+    </div>
+    <div class="cbox">
+      <a class="cdom" href="https://anandiyer.co.in">anandiyer.co.in</a>
+      <span class="cmail">iyeranand91@gmail.com</span>
+      <a class="cpill" href="https://anandiyer.co.in">Book a free audit</a>
+    </div>
+  </div>
+
+  <div class="pg-foot">
+    <span>Anand Iyer &middot; AI Growth &amp; Automation</span>
+    <span>Page 2 of 2</span>
+  </div>
+</section>
+
+</body>
+</html>

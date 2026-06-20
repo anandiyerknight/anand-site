@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Anand Iyer - Engagement Packages</title>
+<style>
+  :root{
+    --paper:#faf7f0; --ink:#1c1a17; --muted:#6b665c; --line:#1c1a17;
+    --rule:rgba(28,26,23,.16); --panel:#ffffff; --warm:#fdf4dd;
+    --red:#d63a27; --green:#0d8a64; --blue:#1d64d8;
+  }
+  *{box-sizing:border-box;}
+  @page{ size:A4; margin:0; }
+  html,body{ margin:0; background:var(--paper); }
+  body{
+    color:var(--ink);
+    font-family:"Avenir Next","Gill Sans","Trebuchet MS",Helvetica,Arial,sans-serif;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+  .sheet{
+    width:210mm; height:297mm; padding:9mm 13mm 7mm;
+    background:var(--paper); position:relative; overflow:hidden;
+    page-break-after:always; display:flex; flex-direction:column;
+  }
+  .sheet:last-child{ page-break-after:auto; }
+
+  .topbar{
+    display:flex; align-items:baseline; justify-content:space-between;
+    padding-bottom:8px; border-bottom:2px solid var(--line);
+    text-transform:uppercase; font-size:10px; font-weight:700; letter-spacing:.14em;
+  }
+  .topbar .dom{ color:var(--red); }
+  .topbar .meta{ color:var(--muted); }
+
+  .eyebrow{
+    display:inline-block; color:var(--red); font-size:10.5px; font-weight:700;
+    letter-spacing:.16em; text-transform:uppercase; margin:14px 0 9px;
+  }
+  h1.head{
+    margin:0; font-size:30px; line-height:1.05; letter-spacing:-.01em; font-weight:700; max-width:22ch;
+  }
+  h1.head em{ color:var(--red); font-style:italic; }
+  .lead{
+    margin:11px 0 0; color:#3a3631; font-size:11.5px; line-height:1.48; font-weight:500; max-width:80ch;
+  }
+  .lead b{ color:var(--ink); font-weight:700; }
+
+  /* ---- pack cards ---- */
+  .packs{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:15px; align-items:stretch; }
+  .pack{
+    border:1px solid var(--rule); background:var(--panel); border-radius:11px;
+    padding:15px 15px 14px; display:flex; flex-direction:column;
+  }
+  .pack.feat{ border:1.6px solid var(--red); background:#fffaf4; box-shadow:0 6px 22px rgba(214,58,39,.10); }
+  .pack .ribbon{
+    align-self:flex-start; font-size:8px; text-transform:uppercase; letter-spacing:.13em; font-weight:700;
+    color:#fff; background:var(--red); border-radius:20px; padding:3px 9px; margin-bottom:9px;
+  }
+  .pack.alt .ribbon{ background:var(--green); }
+  .pack .pn{ font-family:Georgia,serif; font-size:21px; font-weight:700; line-height:1; }
+  .pack .pdur{ display:block; margin-top:5px; color:var(--muted); font-size:10px; font-weight:600; text-transform:uppercase; letter-spacing:.09em; }
+  .pack .price{ margin-top:12px; font-family:Georgia,serif; font-size:33px; font-weight:700; line-height:1; letter-spacing:-.01em; }
+  .pack.feat .price{ color:var(--red); }
+  .pack .pricenote{ display:block; margin-top:4px; color:var(--muted); font-size:9.5px; font-weight:600; }
+  .pack ul{ margin:13px 0 0; padding:0; list-style:none; }
+  .pack li{ padding:6px 0; border-top:1px solid var(--rule); font-size:11px; line-height:1.3; font-weight:500; color:#3a3631; display:flex; gap:8px; }
+  .pack li:first-child{ border-top:0; }
+  .pack li .mk{ flex:0 0 auto; color:var(--green); font-weight:700; font-family:Georgia,serif; }
+  .pack li b{ color:var(--ink); font-weight:700; }
+  .pack li.vid .mk{ color:var(--red); }
+  .pack .grow{ flex:1 1 auto; min-height:0; }
+
+  /* ---- cost stack ---- */
+  .costs{ margin-top:12px; border-top:1px solid var(--rule); padding-top:9px; }
+  .costs .cl{ font-size:8.5px; text-transform:uppercase; letter-spacing:.12em; font-weight:700; color:var(--muted); margin-bottom:6px; }
+  .crow{ display:flex; justify-content:space-between; gap:8px; font-size:10.5px; padding:3px 0; color:#3a3631; font-weight:500; }
+  .crow span:last-child{ font-weight:700; color:var(--ink); white-space:nowrap; }
+  .crow.total{ margin-top:6px; border-top:1.5px solid var(--line); padding-top:8px; align-items:baseline; }
+  .crow.total .tl{ font-family:Georgia,serif; font-size:12.5px; font-weight:700; color:var(--ink); }
+  .crow.total .ta{ font-family:Georgia,serif; font-size:18px; font-weight:700; color:var(--ink); }
+  .pack.feat .crow.total .ta{ color:var(--red); }
+
+  /* ---- note ---- */
+  .note{ margin-top:13px; border:1px solid var(--rule); border-left:3px solid var(--red); background:var(--panel);
+    border-radius:8px; padding:11px 15px; }
+  .note .nh{ font-size:9.5px; text-transform:uppercase; letter-spacing:.12em; font-weight:700; color:var(--red); }
+  .note p{ margin:6px 0 0; font-size:10px; line-height:1.45; color:#3a3631; font-weight:500; }
+  .note p b{ color:var(--ink); font-weight:700; }
+
+  .grow-page{ flex:1 1 auto; min-height:0; }
+
+  .cta{ margin-top:12px; background:var(--ink); color:var(--paper); border-radius:11px; padding:13px 18px;
+    display:flex; align-items:center; justify-content:space-between; gap:20px; }
+  .cta .ctext .ck{ font-family:Georgia,serif; font-size:19px; font-weight:700; line-height:1.04; }
+  .cta .ctext .ck em{ color:#ff7a6b; font-style:italic; }
+  .cta .ctext p{ margin:6px 0 0; font-size:10px; color:#cbc6bc; line-height:1.4; font-weight:500; max-width:48ch; }
+  .cta .cbox{ flex:0 0 auto; text-align:right; }
+  .cta .cbox .cdom{ display:block; font-family:Georgia,serif; color:#ff7a6b; font-size:18px; font-weight:700; text-decoration:none; }
+  .cta .cbox .cmail{ display:block; margin-top:5px; font-size:10px; color:#cbc6bc; font-weight:600; }
+  .cta .cbox .cpill{ display:inline-block; margin-top:10px; font-size:8.5px; text-transform:uppercase; letter-spacing:.13em; font-weight:700; color:var(--ink); background:var(--paper); border-radius:20px; padding:5px 11px; text-decoration:none; }
+
+  .pg-foot{ margin-top:11px; padding-top:8px; border-top:1px solid var(--rule);
+    display:flex; justify-content:space-between; font-size:9px; text-transform:uppercase; letter-spacing:.12em; color:var(--muted); font-weight:700; }
+</style>
+</head>
+<body>
+
+<section class="sheet">
+  <div class="topbar">
+    <span class="dom">ANANDIYER.CO.IN</span>
+    <span class="meta">Engagement Packages &middot; 2026</span>
+  </div>
+
+  <span class="eyebrow">The Outreach Machine</span>
+  <h1 class="head">Pick a pack. <em>The machine runs the rest.</em></h1>
+  <p class="lead">
+    Each pack is a fixed-scope engagement. The big number is the <b>all-in total</b>: my agency fee plus every
+    platform budget the machine spends for you, contact research at &#8377;1 per contact, carousels at &#8377;500
+    each, the WhatsApp API budget, and Instagram on Scale. The build-up inside each pack shows where it goes. No tool subscriptions, no surprises.
+  </p>
+
+  <div class="packs">
+
+    <!-- SPRINT -->
+    <div class="pack">
+      <span class="pn">Sprint</span>
+      <span class="pdur">30 days, daily</span>
+      <span class="price">&#8377;57,000</span>
+      <span class="pricenote">all-in, full engagement</span>
+      <ul>
+        <li><span class="mk">+</span><span><b>2,000</b> contacts reached</span></li>
+        <li><span class="mk">+</span><span>LinkedIn: 20 CR/day, <b>100</b> messages</span></li>
+        <li><span class="mk">+</span><span>Email: <b>100</b>/day + nurture</span></li>
+        <li><span class="mk">+</span><span>WhatsApp flows that qualify and book</span></li>
+        <li><span class="mk">+</span><span>Daily content, <b>30 days</b></span></li>
+      </ul>
+      <div class="grow"></div>
+      <div class="costs">
+        <div class="cl">What's inside</div>
+        <div class="crow"><span>Agency fee</span><span>&#8377;20,000</span></div>
+        <div class="crow"><span>Contact research</span><span>&#8377;2,000</span></div>
+        <div class="crow"><span>Carousels (30 @ &#8377;500)</span><span>&#8377;15,000</span></div>
+        <div class="crow"><span>WhatsApp budget</span><span>&#8377;20,000</span></div>
+      </div>
+    </div>
+
+    <!-- GROWTH -->
+    <div class="pack feat">
+      <span class="ribbon">Most popular</span>
+      <span class="pn">Growth</span>
+      <span class="pdur">60 days, daily</span>
+      <span class="price">&#8377;85,000</span>
+      <span class="pricenote">all-in, full engagement</span>
+      <ul>
+        <li><span class="mk">+</span><span><b>5,000</b> contacts reached</span></li>
+        <li><span class="mk">+</span><span>LinkedIn: 20 CR/day, <b>300</b> messages</span></li>
+        <li><span class="mk">+</span><span>Email: <b>200</b>/day + nurture</span></li>
+        <li><span class="mk">+</span><span>WhatsApp flows that qualify and book</span></li>
+        <li><span class="mk">+</span><span>Daily content, <b>60 days</b></span></li>
+      </ul>
+      <div class="grow"></div>
+      <div class="costs">
+        <div class="cl">What's inside</div>
+        <div class="crow"><span>Agency fee</span><span>&#8377;30,000</span></div>
+        <div class="crow"><span>Contact research</span><span>&#8377;5,000</span></div>
+        <div class="crow"><span>Carousels (60 @ &#8377;500)</span><span>&#8377;30,000</span></div>
+        <div class="crow"><span>WhatsApp budget</span><span>&#8377;20,000</span></div>
+      </div>
+    </div>
+
+    <!-- SCALE -->
+    <div class="pack alt">
+      <span class="ribbon">Best value</span>
+      <span class="pn">Scale</span>
+      <span class="pdur">90 days, daily</span>
+      <span class="price">&#8377;1,60,000</span>
+      <span class="pricenote">all-in, full engagement</span>
+      <ul>
+        <li><span class="mk">+</span><span><b>15,000</b> contacts reached</span></li>
+        <li><span class="mk">+</span><span>LinkedIn: 20 CR/day, <b>500</b> messages</span></li>
+        <li><span class="mk">+</span><span>Email: <b>300</b>/day + nurture</span></li>
+        <li><span class="mk">+</span><span>WhatsApp flows that qualify and book</span></li>
+        <li><span class="mk">+</span><span>Daily content, <b>90 days</b></span></li>
+        <li class="vid"><span class="mk">+</span><span><b>10 videos</b> over 90 days</span></li>
+      </ul>
+      <div class="grow"></div>
+      <div class="costs">
+        <div class="cl">What's inside</div>
+        <div class="crow"><span>Agency fee</span><span>&#8377;50,000</span></div>
+        <div class="crow"><span>Contact research</span><span>&#8377;15,000</span></div>
+        <div class="crow"><span>Carousels (90 @ &#8377;500)</span><span>&#8377;45,000</span></div>
+        <div class="crow"><span>WhatsApp budget</span><span>&#8377;20,000</span></div>
+        <div class="crow"><span>Instagram budget</span><span>&#8377;30,000</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="note">
+    <span class="nh">How the budgets work</span>
+    <p>
+      <b>Contact research from your ICP</b> is billed at <b>&#8377;1 per contact</b> reached, so the cost scales
+      exactly with volume. <b>Daily content</b> is carousels at <b>&#8377;500 each</b> over the engagement, and
+      carousel iterations beyond the first version are billed extra. The <b>WhatsApp API budget</b> and <b>Instagram
+      ad budget</b> are paid to the platforms directly or passed through at actuals, with full receipts. The all-in
+      total is everything you pay.
+    </p>
+  </div>
+
+  <div class="grow-page"></div>
+
+  <div class="cta">
+    <div class="ctext">
+      <div class="ck">Ready to <em>switch it on?</em></div>
+      <p>Start with a free outreach audit. I map your channels, your gaps, and what an always-on engine changes for your pipeline.</p>
+    </div>
+    <div class="cbox">
+      <a class="cdom" href="https://anandiyer.co.in">anandiyer.co.in</a>
+      <span class="cmail">iyeranand91@gmail.com</span>
+      <a class="cpill" href="https://anandiyer.co.in">Book a free audit</a>
+    </div>
+  </div>
+
+  <div class="pg-foot">
+    <span>Anand Iyer &middot; AI Growth &amp; Automation</span>
+    <span>Engagement Packages</span>
+  </div>
+</section>
+
+</body>
+</html>

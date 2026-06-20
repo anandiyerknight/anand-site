@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Anand Iyer - Services & Credentials</title>
+<style>
+  :root{
+    --paper:#faf7f0; --ink:#1c1a17; --muted:#6b665c; --line:#1c1a17;
+    --rule:rgba(28,26,23,.16); --panel:#ffffff; --warm:#fdf4dd;
+    --red:#d63a27; --green:#0d8a64; --blue:#1d64d8;
+  }
+  *{box-sizing:border-box;}
+  @page{ size:A4; margin:0; }
+  html,body{ margin:0; background:var(--paper); }
+  body{
+    color:var(--ink);
+    font-family:"Avenir Next","Gill Sans","Trebuchet MS",Helvetica,Arial,sans-serif;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+  .serif{ font-family:Georgia,"Iowan Old Style","Times New Roman",serif; }
+
+  .sheet{
+    width:210mm; height:297mm; padding:9mm 13mm 7mm;
+    background:var(--paper); position:relative; overflow:hidden;
+    page-break-after:always; display:flex; flex-direction:column;
+  }
+  .sheet:last-child{ page-break-after:auto; }
+
+  /* ---- top bar ---- */
+  .topbar{
+    display:flex; align-items:baseline; justify-content:space-between;
+    padding-bottom:8px; border-bottom:2px solid var(--line);
+    text-transform:uppercase; font-size:10px; font-weight:700; letter-spacing:.14em;
+  }
+  .topbar .dom{ color:var(--red); }
+  .topbar .meta{ color:var(--muted); }
+
+  /* ---- hero ---- */
+  .eyebrow{
+    display:inline-block; color:var(--red); font-size:10.5px; font-weight:700;
+    letter-spacing:.16em; text-transform:uppercase; margin:15px 0 10px;
+  }
+  h1.head{
+    margin:0; font-size:33px; line-height:1.04; letter-spacing:-.01em; font-weight:700;
+    max-width:20ch;
+  }
+  h1.head em{ color:var(--red); font-style:italic; }
+  .lead{
+    margin:13px 0 0; color:#3a3631; font-size:12.5px; line-height:1.5; font-weight:500;
+    max-width:64ch;
+  }
+  .lead b{ color:var(--ink); font-weight:700; }
+
+  /* ---- channel strip ---- */
+  .channels{ display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-top:14px; }
+  .chan{ border:1px solid var(--rule); background:var(--panel); border-radius:8px; padding:11px 12px; }
+  .chan .cn{ font-family:Georgia,serif; font-size:16px; font-weight:700; line-height:1; }
+  .chan .cd{ display:block; margin-top:6px; color:var(--muted); font-size:10px; line-height:1.3; font-weight:500; }
+  .chan.li .cn{ color:var(--blue); }
+  .chan.em .cn{ color:var(--red); }
+  .chan.ig .cn{ color:#b4248c; }
+  .chan.wa .cn{ color:var(--green); }
+
+  /* ---- section heads ---- */
+  .sec{ margin-top:11px; }
+  .sec-ey{ color:var(--red); font-size:10px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; }
+  h2{ margin:6px 0 0; font-family:Georgia,serif; font-size:20px; font-weight:700; line-height:1.05; }
+  .sec-sub{ margin:5px 0 0; color:var(--muted); font-size:11px; line-height:1.38; font-weight:500; max-width:66ch; }
+
+  /* ---- compare (old way / machine) ---- */
+  .compare{ display:grid; grid-template-columns:1fr 1fr; gap:11px; margin-top:12px; }
+  .col{ border:1px solid var(--rule); background:var(--panel); border-radius:9px; padding:15px 16px 7px; }
+  .col.good{ border-color:rgba(13,138,100,.4); background:#f6fbf8; }
+  .col h3{ margin:0 0 5px; font-family:Georgia,serif; font-size:15px; font-weight:700; }
+  .col.bad h3{ color:var(--red); }
+  .col.good h3{ color:var(--green); }
+  .col .ch-sub{ font-size:9.5px; text-transform:uppercase; letter-spacing:.1em; color:var(--muted); font-weight:700; }
+  .col ul{ margin:10px 0 0; padding:0; list-style:none; }
+  .col li{ padding:7px 0; border-top:1px solid var(--rule); font-size:11.5px; line-height:1.32; font-weight:500; color:#3a3631; display:flex; gap:8px; }
+  .col li:first-child{ border-top:0; }
+  .col .mk{ flex:0 0 auto; font-weight:700; font-family:Georgia,serif; }
+  .col.bad .mk{ color:var(--red); }
+  .col.good .mk{ color:var(--green); }
+
+  /* ---- metric board ---- */
+  .metrics{ display:grid; grid-template-columns:repeat(4,1fr); gap:9px; margin-top:12px; }
+  .met{ border:1px solid var(--rule); background:var(--warm); border-radius:9px; padding:13px 13px; }
+  .met .mv{ font-family:Georgia,serif; font-size:27px; line-height:.95; font-weight:700; }
+  .met.r .mv{ color:var(--red); } .met.g .mv{ color:var(--green); } .met.b .mv{ color:var(--blue); }
+  .met .ml{ display:block; margin-top:8px; color:var(--muted); font-size:10px; line-height:1.32; font-weight:600; }
+
+  /* ---- spacer to push footer ---- */
+  .grow{ flex:1 1 auto; min-height:0; }
+  .pg-foot{ margin-top:12px; padding-top:8px; border-top:1px solid var(--rule);
+    display:flex; justify-content:space-between; font-size:9px; text-transform:uppercase; letter-spacing:.12em; color:var(--muted); font-weight:700; }
+
+  /* ---- services grid (page 2) ---- */
+  .svc{ display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-top:9px; }
+  .scard{ border:1px solid var(--rule); background:var(--panel); border-radius:9px; padding:9px 12px; }
+  .scard.wide{ grid-column:1 / -1; background:var(--warm); border-color:rgba(28,26,23,.28); }
+  .scard .se{ font-size:9px; text-transform:uppercase; letter-spacing:.13em; color:var(--red); font-weight:700; }
+  .scard h4{ margin:5px 0 4px; font-family:Georgia,serif; font-size:15px; font-weight:700; line-height:1.05; }
+  .scard p{ margin:0; color:#3a3631; font-size:10px; line-height:1.32; font-weight:500; }
+  .scard .tags{ margin-top:6px; display:flex; flex-wrap:wrap; gap:5px; }
+  .scard .tag{ font-size:8px; letter-spacing:.04em; padding:2.5px 7px; border:1px solid var(--rule); border-radius:20px; color:var(--muted); font-weight:600; text-transform:uppercase; }
+
+  /* ---- daily loop ---- */
+  .loop{ display:grid; grid-template-columns:repeat(5,1fr); gap:6px; margin-top:8px; }
+  .lstep{ border:1px solid var(--rule); background:var(--panel); border-radius:8px; padding:7px 8px; }
+  .lstep .ln{ font-family:Georgia,serif; color:var(--red); font-size:12px; font-weight:700; }
+  .lstep b{ display:block; margin-top:4px; font-size:10.5px; font-weight:700; line-height:1.1; }
+  .lstep span{ display:block; margin-top:3px; color:var(--muted); font-size:8.5px; line-height:1.3; font-weight:500; }
+  .loop-note{ margin-top:6px; font-size:9.5px; color:var(--muted); font-weight:600; text-transform:uppercase; letter-spacing:.08em; }
+  .loop-note b{ color:var(--green); }
+
+  /* ---- credentials ---- */
+  .creds{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:6px; margin-top:8px; }
+  .cred{ border:1px solid var(--rule); background:var(--panel); border-radius:8px; padding:8px 11px; }
+  .cred .ct{ font-family:Georgia,serif; font-size:13.5px; font-weight:700; line-height:1.05; }
+  .cred .cs{ display:block; margin-top:4px; color:var(--muted); font-size:9px; line-height:1.3; font-weight:500; }
+  .cred .cb{ display:inline-block; margin-top:6px; font-size:8px; text-transform:uppercase; letter-spacing:.09em; font-weight:700; color:var(--green); border:1px solid rgba(13,138,100,.4); border-radius:20px; padding:2px 7px; }
+
+  /* ---- CTA dark block ---- */
+  .cta{ margin-top:9px; background:var(--ink); color:var(--paper); border-radius:11px; padding:12px 18px;
+    display:flex; align-items:center; justify-content:space-between; gap:20px; }
+  .cta .ctext .ck{ font-family:Georgia,serif; font-size:20px; font-weight:700; line-height:1.04; }
+  .cta .ctext .ck em{ color:#ff7a6b; font-style:italic; }
+  .cta .ctext p{ margin:6px 0 0; font-size:10px; color:#cbc6bc; line-height:1.4; font-weight:500; max-width:44ch; }
+  .cta .cbox{ flex:0 0 auto; text-align:right; }
+  .cta .cbox .cdom{ display:block; font-family:Georgia,serif; color:#ff7a6b; font-size:19px; font-weight:700; text-decoration:none; }
+  .cta .cbox .cmail{ display:block; margin-top:5px; font-size:10.5px; color:#cbc6bc; font-weight:600; letter-spacing:.02em; }
+  .cta .cbox .cpill{ display:inline-block; margin-top:10px; font-size:8.5px; text-transform:uppercase; letter-spacing:.13em; font-weight:700; color:var(--ink); background:var(--paper); border-radius:20px; padding:5px 11px; text-decoration:none; }
+</style>
+</head>
+<body>
+
+<!-- ================= PAGE 1 ================= -->
+<section class="sheet">
+  <div class="topbar">
+    <span class="dom">ANANDIYER.CO.IN</span>
+    <span class="meta">Services &amp; Credentials · 2026</span>
+  </div>
+
+  <span class="eyebrow">The Outreach Machine</span>
+  <h1 class="head">I build the system that fills your pipeline. <em>On autopilot, across every channel.</em></h1>
+  <p class="lead">
+    B2B lead generation breaks for one reason: it depends on a person showing up. Someone has to
+    write the message, send the follow-up, post the content, chase the reply. The day your team
+    gets busy, pipeline stops. <b>I replace that with one AI-run outreach machine</b> that does it
+    every single day across LinkedIn, email, Instagram and WhatsApp, and shows you exactly what it
+    produced. Automation is not a strategy. It is the infrastructure your growth runs on.
+  </p>
+
+  <div class="channels">
+    <div class="chan li"><span class="cn">LinkedIn</span><span class="cd">Connect, message and post, automated daily</span></div>
+    <div class="chan em"><span class="cn">Email</span><span class="cd">Cold outreach plus a 20-issue nurture drip</span></div>
+    <div class="chan ig"><span class="cn">Instagram</span><span class="cd">Carousels and posts published every day</span></div>
+    <div class="chan wa"><span class="cn">WhatsApp</span><span class="cd">ManyChat flows that qualify and book</span></div>
+  </div>
+
+  <div class="sec">
+    <span class="sec-ey">The Shift</span>
+    <h2>From doing outreach to owning the machine that does it.</h2>
+    <p class="sec-sub">Same goal, opposite economics. One depends on willpower and hours. The other runs while you sleep and logs every action it takes.</p>
+  </div>
+
+  <div class="compare">
+    <div class="col bad">
+      <h3>The manual way</h3>
+      <div class="ch-sub">What most teams do</div>
+      <ul>
+        <li><span class="mk">x</span><span>Outreach depends on a human remembering to do it</span></li>
+        <li><span class="mk">x</span><span>One channel at a time, copy-pasted by hand</span></li>
+        <li><span class="mk">x</span><span>Follow-ups slip, warm leads quietly go cold</span></li>
+        <li><span class="mk">x</span><span>Content gets posted only when there is time</span></li>
+        <li><span class="mk">x</span><span>No proof of what actually went out, or to whom</span></li>
+      </ul>
+    </div>
+    <div class="col good">
+      <h3>The machine</h3>
+      <div class="ch-sub">What I build for you</div>
+      <ul>
+        <li><span class="mk">+</span><span>Runs daily on its own, unattended, every morning</span></li>
+        <li><span class="mk">+</span><span>LinkedIn, email, Instagram and WhatsApp as one engine</span></li>
+        <li><span class="mk">+</span><span>Every follow-up sequenced, sent and tracked</span></li>
+        <li><span class="mk">+</span><span>Content posts itself across channels, every day</span></li>
+        <li><span class="mk">+</span><span>Every send logged and verified, alerts on anything unsure</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec">
+    <span class="sec-ey">Built to run, not to demo</span>
+    <h2>The numbers behind the engine.</h2>
+  </div>
+  <div class="metrics">
+    <div class="met r"><span class="mv">4</span><span class="ml">Channels driven by one AI system</span></div>
+    <div class="met g"><span class="mv">Daily</span><span class="ml">Autonomous send and post, no human in the loop</span></div>
+    <div class="met b"><span class="mv">20</span><span class="ml">Issue nurture series, auto-dripped to every lead</span></div>
+    <div class="met r"><span class="mv">5,000+</span><span class="ml">New connections reached per month, and beyond</span></div>
+  </div>
+
+  <div class="grow"></div>
+  <div class="pg-foot"><span>Anand Iyer · AI growth &amp; automation</span><span>Page 1 of 2</span></div>
+</section>
+
+<!-- ================= PAGE 2 ================= -->
+<section class="sheet">
+  <div class="topbar">
+    <span class="dom">ANANDIYER.CO.IN</span>
+    <span class="meta">Services &amp; Credentials · 2026</span>
+  </div>
+
+  <div class="sec" style="margin-top:10px;">
+    <span class="sec-ey">What I build</span>
+    <h2>Five systems. One growth infrastructure.</h2>
+    <p class="sec-sub">Practical AI systems for teams that need more qualified demand, outreach that never stops, and reporting they can act on.</p>
+  </div>
+
+  <div class="svc">
+    <div class="scard wide">
+      <div class="se">Flagship · The outreach machine</div>
+      <h4>Multi-channel B2B outreach automation</h4>
+      <p>LinkedIn, email, Instagram and WhatsApp run as one daily, AI-driven machine. It sources the right accounts, personalizes the message, sends the follow-ups, posts the content and verifies every action, so pipeline keeps building whether anyone logs in or not.</p>
+      <div class="tags"><span class="tag">LinkedIn</span><span class="tag">Email</span><span class="tag">Instagram</span><span class="tag">WhatsApp</span><span class="tag">Auto follow-up</span></div>
+    </div>
+    <div class="scard">
+      <div class="se">Acquisition</div>
+      <h4>Lead gen + AI qualification</h4>
+      <p>Funnels that capture demand, score intent with AI, route the right leads, and cut the manual back-and-forth before sales picks up the phone.</p>
+      <div class="tags"><span class="tag">Lead capture</span><span class="tag">AI scoring</span><span class="tag">CRM routing</span></div>
+    </div>
+    <div class="scard">
+      <div class="se">Growth</div>
+      <h4>Performance marketing</h4>
+      <p>Meta, Google and WhatsApp full-funnel campaigns with server-side tracking, CAPI, creative testing and conversion loops that actually attribute.</p>
+      <div class="tags"><span class="tag">Meta</span><span class="tag">Google</span><span class="tag">Pixel + CAPI</span></div>
+    </div>
+    <div class="scard">
+      <div class="se">Content Ops</div>
+      <h4>Content pipeline automation</h4>
+      <p>Briefs, assets and approvals turned into repeatable publishing workflows. AI image, poster and video engines that feed every channel daily.</p>
+      <div class="tags"><span class="tag">Brief to output</span><span class="tag">Image engine</span><span class="tag">Daily publish</span></div>
+    </div>
+    <div class="scard">
+      <div class="se">Engineering</div>
+      <h4>AI systems + dashboards</h4>
+      <p>Custom agents, automations and BI dashboards built around how your business actually runs, so revenue, ops and marketing data is easy to act on.</p>
+      <div class="tags"><span class="tag">Agents</span><span class="tag">Automation</span><span class="tag">Dashboards</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <span class="sec-ey">How it runs every day</span>
+    <h2>The daily loop.</h2>
+  </div>
+  <div class="loop">
+    <div class="lstep"><span class="ln">01</span><b>Source</b><span>Scrape and enrich the right accounts to your ICP</span></div>
+    <div class="lstep"><span class="ln">02</span><b>Qualify</b><span>AI scores intent and drops the noise</span></div>
+    <div class="lstep"><span class="ln">03</span><b>Reach</b><span>Personalized message across LinkedIn, email, WhatsApp</span></div>
+    <div class="lstep"><span class="ln">04</span><b>Nurture</b><span>20-issue value series plus daily content posted for you</span></div>
+    <div class="lstep"><span class="ln">05</span><b>Verify</b><span>Every send logged, every post confirmed, alert if unsure</span></div>
+  </div>
+  <div class="loop-note">The loop repeats every day, on its own. <b>You review results, not run errands.</b></div>
+
+  <div class="sec">
+    <span class="sec-ey">Credentials · built and running</span>
+    <h2>Systems I have shipped.</h2>
+  </div>
+  <div class="creds">
+    <div class="cred">
+      <div class="ct">Outreach OS</div>
+      <span class="cs">Gmail, LinkedIn and Instagram posting plus a 20-issue newsletter, all sending autonomously on a daily schedule.</span>
+      <span class="cb">Live · autonomous</span>
+    </div>
+    <div class="cred">
+      <div class="ct">Hoopr Smash</div>
+      <span class="cs">B2B lead generation engine running LinkedIn and WhatsApp outreach for a media-tech brand.</span>
+      <span class="cb">Live engagement</span>
+    </div>
+    <div class="cred">
+      <div class="ct">GutGuru</div>
+      <span class="cs">Lead funnel and CRM live at thegutguru.co.in, with Meta Pixel and server-side CAPI wired end to end.</span>
+      <span class="cb">Live · tracking</span>
+    </div>
+    <div class="cred">
+      <div class="ct">Vita+</div>
+      <span class="cs">GLP-1 acquisition funnel for high-intent leads, ManyChat WhatsApp flows, Pixel and CAPI.</span>
+      <span class="cb">Funnel + WhatsApp</span>
+    </div>
+    <div class="cred">
+      <div class="ct">Content pipeline</div>
+      <span class="cs">AI image, poster and video engine that produces channel-ready assets, covered by an automated test suite.</span>
+      <span class="cb">Production system</span>
+    </div>
+    <div class="cred">
+      <div class="ct">Meta Ads control layer</div>
+      <span class="cs">A 135-tool automation layer over Meta ad accounts for campaign builds, insights and conversion events.</span>
+      <span class="cb">Ops automation</span>
+    </div>
+  </div>
+
+  <div class="cta">
+    <div class="ctext">
+      <div class="ck">Let's build your <em>outreach machine.</em></div>
+      <p>Start with a free outreach audit. I will map your channels, your gaps and what an always-on engine would change for your pipeline.</p>
+    </div>
+    <div class="cbox">
+      <a class="cdom" href="https://anandiyer.co.in">anandiyer.co.in</a>
+      <span class="cmail">iyeranand91@gmail.com</span>
+      <a class="cpill" href="https://anandiyer.co.in">Book a free audit</a>
+    </div>
+  </div>
+
+  <div class="grow"></div>
+  <div class="pg-foot"><span>Anand Iyer · AI growth &amp; automation</span><span>Page 2 of 2</span></div>
+</section>
+
+</body>
+</html>
