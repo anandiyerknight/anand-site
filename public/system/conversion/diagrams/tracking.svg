@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" font-family="Geist, 'Helvetica Neue', Arial, sans-serif">
+  <rect width="1200" height="675" fill="#0a0a0a"/>
+  <text x="64" y="74" fill="#8e9192" font-size="15" letter-spacing="4" font-weight="600">CONVERSION · TRACKING</text>
+  <text x="64" y="108" fill="#f5f5f7" font-size="30" font-weight="700">Every action measured, deduped, and fed back to targeting.</text>
+
+  <!-- 4 stage boxes in a row -->
+  <g>
+    <rect x="64"  y="250" width="240" height="120" rx="16" fill="#0e0e0e" stroke="#353535"/>
+    <text x="184" y="300" fill="#f5f5f7" font-size="19" font-weight="700" text-anchor="middle">Visit</text>
+    <text x="184" y="330" fill="#8e9192" font-size="13" text-anchor="middle">page + click events</text>
+
+    <rect x="384" y="250" width="240" height="120" rx="16" fill="#0e0e0e" stroke="#353535"/>
+    <text x="504" y="300" fill="#f5f5f7" font-size="19" font-weight="700" text-anchor="middle">Capture</text>
+    <text x="504" y="330" fill="#8e9192" font-size="13" text-anchor="middle">browser + server, deduped</text>
+
+    <rect x="704" y="250" width="240" height="120" rx="16" fill="#0e0e0e" stroke="#353535"/>
+    <text x="824" y="300" fill="#f5f5f7" font-size="19" font-weight="700" text-anchor="middle">Convert</text>
+    <text x="824" y="330" fill="#8e9192" font-size="13" text-anchor="middle">lead · booking · sale</text>
+
+    <rect x="1024" y="250" width="112" height="120" rx="16" fill="#101010" stroke="#5a5d5f"/>
+    <text x="1080" y="300" fill="#f5f5f7" font-size="17" font-weight="700" text-anchor="middle">Report</text>
+    <text x="1080" y="330" fill="#8e9192" font-size="12" text-anchor="middle">what worked</text>
+  </g>
+
+  <!-- forward arrows -->
+  <g stroke="#8e9192" stroke-width="2" fill="none">
+    <path d="M304 310 H372" marker-end="url(#c)"/>
+    <path d="M624 310 H692" marker-end="url(#c)"/>
+    <path d="M944 310 H1012" marker-end="url(#c)"/>
+  </g>
+
+  <!-- feedback loop back to start -->
+  <g stroke="#5a5d5f" stroke-width="2" fill="none" stroke-dasharray="6 8">
+    <path d="M1080 370 C1080 500 184 500 184 380" marker-end="url(#c)"/>
+  </g>
+  <text x="600" y="540" fill="#8e9192" font-size="15" text-anchor="middle">results sharpen the next cycle's targeting</text>
+
+  <defs>
+    <marker id="c" markerWidth="9" markerHeight="9" refX="6" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 Z" fill="#8e9192"/></marker>
+  </defs>
+</svg>

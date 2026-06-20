@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" font-family="Geist, 'Helvetica Neue', Arial, sans-serif">
+  <rect width="1200" height="675" fill="#0a0a0a"/>
+  <text x="64" y="74" fill="#8e9192" font-size="15" letter-spacing="4" font-weight="600">OUTREACH · CHANNELS</text>
+  <text x="64" y="108" fill="#f5f5f7" font-size="30" font-weight="700">One list. The same offer. Every channel, in sync.</text>
+
+  <!-- source -->
+  <rect x="96" y="276" width="240" height="120" rx="16" fill="#101010" stroke="#5a5d5f"/>
+  <text x="216" y="330" fill="#f5f5f7" font-size="20" font-weight="700" text-anchor="middle">Qualified list</text>
+  <text x="216" y="362" fill="#8e9192" font-size="14" text-anchor="middle">+ your offer</text>
+
+  <!-- fan lines -->
+  <g stroke="#444748" stroke-width="2" fill="none">
+    <path d="M336 336 C520 336 560 150 760 150" marker-end="url(#b)"/>
+    <path d="M336 336 C520 336 560 243 760 243" marker-end="url(#b)"/>
+    <path d="M336 336 C540 336 600 336 760 336" marker-end="url(#b)"/>
+    <path d="M336 336 C520 336 560 429 760 429" marker-end="url(#b)"/>
+    <path d="M336 336 C520 336 560 522 760 522" marker-end="url(#b)"/>
+  </g>
+
+  <!-- channel pills -->
+  <g font-size="20" font-weight="600">
+    <g><rect x="760" y="118" width="344" height="64" rx="32" fill="#0e0e0e" stroke="#353535"/><text x="790" y="158" fill="#f5f5f7">WhatsApp</text></g>
+    <g><rect x="760" y="211" width="344" height="64" rx="32" fill="#0e0e0e" stroke="#353535"/><text x="790" y="251" fill="#f5f5f7">LinkedIn</text></g>
+    <g><rect x="760" y="304" width="344" height="64" rx="32" fill="#0e0e0e" stroke="#353535"/><text x="790" y="344" fill="#f5f5f7">Email</text></g>
+    <g><rect x="760" y="397" width="344" height="64" rx="32" fill="#0e0e0e" stroke="#353535"/><text x="790" y="437" fill="#f5f5f7">Instagram</text></g>
+    <g><rect x="760" y="490" width="344" height="64" rx="32" fill="#0e0e0e" stroke="#353535"/><text x="790" y="530" fill="#f5f5f7">Messenger</text></g>
+  </g>
+
+  <text x="64" y="610" fill="#8e9192" font-size="14">scheduled · deduped · paced for account safety</text>
+
+  <defs>
+    <marker id="b" markerWidth="9" markerHeight="9" refX="6" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 Z" fill="#5a5d5f"/></marker>
+  </defs>
+</svg>

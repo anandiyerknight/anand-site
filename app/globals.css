@@ -368,3 +368,28 @@
   }
 
 }
+
+/* === System loop (/system) === */
+@keyframes sysflow {
+  to {
+    stroke-dashoffset: -28;
+  }
+}
+.sys-wire-base {
+  stroke: var(--color-rule-2);
+  stroke-width: 1.4;
+  fill: none;
+  opacity: 0.5;
+}
+.sys-wire-flow {
+  stroke: var(--color-ink);
+  stroke-width: 1.4;
+  fill: none;
+  stroke-dasharray: 4 10;
+  animation: sysflow 1s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .sys-wire-flow {
+    animation: none;
+  }
+}
