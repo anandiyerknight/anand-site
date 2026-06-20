@@ -2,6 +2,7 @@ import { Nav } from "@/components/nav";
 import { Hero } from "@/components/hero";
 import { ServicesSection } from "@/components/features/ServicesSection";
 import { AppsShowcase } from "@/components/apps-showcase";
+import { WorkGrid } from "@/components/work-grid";
 import { BrandWall } from "@/components/brand-wall";
 import { AfterGrid } from "@/components/after-grid";
 import { Methodology } from "@/components/methodology";
@@ -27,6 +28,9 @@ export default function Page() {
 
       {/* 3. Product Gallery — the highlight */}
       <AppsShowcase />
+
+      {/* 3b. Selected Work teaser — fills the nav's /#work-grid anchor, links to /work */}
+      <WorkGrid />
 
       {/* 4. Clients & Brands — right below, always visible */}
       <BrandWall />

@@ -109,8 +109,20 @@ Fixed: `data.phone.replace(/^\+(\d+)\s/, "($1) ")` → sends `(91) XXXXXXXXXX` i
 - **Lead wall:** first download opens a form (name + email + optional company) → `POST /api/newsletter` → captured BOTH via `addBriefToSheet` (same Google Sheet as the audit form, Brief = "Newsletter download: Issue NN — Title") AND `sendBriefNotification` (email to zingaboink@gmail.com). After first submit, localStorage `nl_lead` skips the form but still logs each download. Slug is validated against `newsletterIssues` (path-traversal returns 400).
 - **Nav:** "Newsletters" link added to `components/nav.tsx` (hash links changed to `/#...` so they work from non-home routes).
 
+# Work showcase (added 2026-06-20)
+
+**Live:** https://anandiyer.co.in/work — public portfolio grid + a teaser on the home page. Plus the `/addwork` skill that adds new work in one command.
+
+- **Data (single source of truth):** `lib/work.ts` — `WorkItem[]` with a discriminated `type`: `landing-page` (cover screenshot + `liveUrl`), `carousel` (`gallery[]` → lightbox), `guide` (`pdf`, gated download), `case-study` (`caseStudyId` → reuses `lib/case-studies.ts`). Helper `hasCaseStudy()`. Each item owns `public/work/<slug>/` (cover.png / 01.png… / *.pdf).
+- **Pages/components:** `app/work/page.tsx` (static) → `components/work-showcase.tsx` (client: filter tabs, per-type cards, gated-download form reusing the `nl_lead` localStorage + lead modal, case-study modal). Carousel lightbox = `components/work-lightbox.tsx`. Home teaser = `components/work-grid.tsx` (renders `featured` items into `<section id="work-grid">`, fills the nav's pre-existing dead `/#work-grid` anchor; wired into `app/page.tsx` after `AppsShowcase`).
+- **Gated guide downloads:** `POST /api/work-download` mirrors `/api/newsletter` — validates slug against `workItems` (type `guide`), `addBriefToSheet` (Brief = "Work download: <title>") + `sendBriefNotification`. No new backend/env needed.
+- **Reused orphan:** `lib/case-studies.ts` + `components/case-studies.tsx` existed but rendered nowhere — `/work` now surfaces them (GutGuru/Kvarski via `caseStudyId` on their cards, Ecole as a standalone case-study card).
+- **Seeded v1:** 4 landing pages (Vita+, GutGuru, Bihari Swad, Kvarski-dashboard), 4 B2B carousels (from `~/CODE/growth/services/linkedin-carousel`), 10 GutGuru guide PDFs (from `~/CODE/gutguru/crm/public/guides`), 1 Ecole case study.
+- **Adding work:** run **`/addwork`** (`~/.claude/skills/addwork/SKILL.md`) — screenshots the live page via Brave 9666, copies assets, appends to `lib/work.ts`, builds, stops before deploy. No component edits needed; the grid `.map()`s the data.
+
 ## METHOD-derived recipes index (migrated from global METHOD.md, 2026-06-19)
 
 Moved out of the always-on `~/.claude/METHOD.md` so it only loads with this project (retrievable via context-harness `hybrid_search`).
 
 - [2026-06-15] [anand-site] **Gated PDF download** → /newsletters page + `POST /api/newsletter` reuses `addBriefToSheet` (same sheet, Brief="Newsletter download: ...") + `sendBriefNotification`. Deploy: `gh auth switch --user anandiyerknight && git push vercel main`. Verify live by byte-matching the PDF size.
+- [2026-06-20] [anand-site] **Work/portfolio showcase + /addwork skill** → `/work` page is data-driven from `lib/work.ts` (4 types: landing-page/carousel/guide/case-study), assets in `public/work/<slug>/`, home teaser `components/work-grid.tsx` fills the nav's dead `/#work-grid` anchor. Gated guides reuse `POST /api/work-download` (mirrors /api/newsletter). LP covers = Brave 9666 CDP `Page.captureScreenshot` viewport shot (1440×810 @2x, 7s settle) — top-of-page hero, NO captureBeyondViewport (avoids scroll-reveal-blank). New work added via the `/addwork` skill. Deploy: `gh auth switch --user anandiyerknight && git push vercel main`.
