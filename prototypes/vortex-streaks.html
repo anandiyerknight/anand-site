@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Golden vortex streaks — prototype</title>
+<style>
+  html,body{margin:0;background:#070b16;overflow-x:hidden}
+  #c{position:fixed;inset:0;width:100vw;height:100vh;display:block;z-index:0}
+  .spacer{height:300vh}
+  .hud{position:fixed;left:16px;bottom:14px;z-index:3;font:11px/1 ui-monospace,monospace;
+    letter-spacing:.15em;text-transform:uppercase;color:#9fb0c8;background:rgba(0,0,0,.35);
+    border:1px solid #223; border-radius:999px;padding:6px 12px}
+  #bar{position:fixed;top:0;left:0;height:2px;width:0;background:#ffc15a;z-index:4;box-shadow:0 0 12px #ffb238}
+</style>
+</head>
+<body>
+  <canvas id="c"></canvas>
+  <div id="bar"></div>
+  <div class="hud">Prototype · scroll to fire the vortex blast</div>
+  <div class="spacer"></div>
+<script>
+const cv = document.getElementById('c');
+const ctx = cv.getContext('2d');
+let W=0,H=0,DPR=Math.min(devicePixelRatio||1,2);
+function resize(){ W=innerWidth;H=innerHeight; cv.width=W*DPR; cv.height=H*DPR; ctx.setTransform(DPR,0,0,DPR,0,0); }
+resize(); addEventListener('resize',resize);
+
+const A=new Image(), B=new Image();
+A.src='../public/experience/frames/frame-a.png';
+B.src='../public/experience/frames/frame-b.png';
+
+function cover(img,alpha){
+  if(alpha<=0.002 || !img.complete || !img.naturalWidth) return;
+  const ir=img.naturalWidth/img.naturalHeight, cr=W/H;
+  let dw,dh; if(cr>ir){dw=W;dh=W/ir;} else {dh=H;dw=H*ir;}
+  ctx.globalAlpha=alpha; ctx.drawImage(img,(W-dw)/2,(H-dh)/2,dw,dh); ctx.globalAlpha=1;
+}
+
+// vortex streaks
+const N=90;
+const streaks=[];
+function spawn(s, fresh){
+  s.a = Math.random()*Math.PI*2;
+  s.r = fresh ? (40+Math.random()*90) : (40+Math.random()* (Math.hypot(W,H)*0.55));
+  s.av = (0.004+Math.random()*0.010)*(Math.random()<0.5?-1:1);
+  s.rv = 0.2+Math.random()*0.7;
+  s.w  = 0.7+Math.random()*1.8;
+  s.len= 16+(Math.random()*16|0);
+  s.trail=[];
+  return s;
+}
+for(let i=0;i<N;i++) streaks.push(spawn({},true));
+
+function smooth(x){ x=Math.max(0,Math.min(1,x)); return x*x*(3-2*x); }
+function prog(){ const m=document.body.scrollHeight-innerHeight; return m>0?Math.min(1,Math.max(0,scrollY/m)):0; }
+
+let tprev=0;
+function frame(t){
+  requestAnimationFrame(frame);
+  const dt=Math.min(2,(t-tprev)/16.67||1); tprev=t;
+  const p=prog();
+  document.getElementById('bar').style.width=(p*100)+'%';
+
+  // background frames crossfade across the blast
+  const aA=1-smooth((p-0.40)/0.22);
+  const bB=smooth((p-0.40)/0.22);
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle='#070b16'; ctx.fillRect(0,0,W,H);
+  cover(A,aA); cover(B,bB);
+
+  // deep-blue unifying vignette
+  const vg=ctx.createRadialGradient(W*0.5,H*0.5,Math.min(W,H)*0.2,W*0.5,H*0.5,Math.max(W,H)*0.75);
+  vg.addColorStop(0,'rgba(6,10,22,0)'); vg.addColorStop(1,'rgba(4,7,16,0.72)');
+  ctx.fillStyle=vg; ctx.fillRect(0,0,W,H);
+
+  // vortex parameters
+  const cx=W*0.5, cy=H*0.5;
+  const maxR=Math.hypot(W,H)*0.62, minR=34;
+  const blast=Math.exp(-Math.pow((p-0.5)/0.06,2));      // bell, peaks at mid-scroll
+  const radialFlow=(p-0.46)*2.4;                          // inward, then outward
+  const spin=1+p*1.6+blast*9;
+
+  ctx.globalCompositeOperation='lighter';
+  ctx.lineCap='round';
+  for(const s of streaks){
+    s.a += s.av*spin*dt;
+    s.r += (s.rv*0.4 + radialFlow + blast*7*dt);
+    if(s.r>maxR || s.r<8){ spawn(s,true); continue; }
+    const x=cx+Math.cos(s.a)*s.r*1.28;
+    const y=cy+Math.sin(s.a)*s.r;
+    s.trail.push([x,y]); if(s.trail.length>s.len) s.trail.shift();
+    const tr=s.trail;
+    for(let i=1;i<tr.length;i++){
+      const k=i/(tr.length-1);
+      ctx.beginPath(); ctx.moveTo(tr[i-1][0],tr[i-1][1]); ctx.lineTo(tr[i][0],tr[i][1]);
+      // soft glow
+      ctx.lineWidth=s.w*(0.8+k*2.6)*(1+blast*1.6);
+      ctx.strokeStyle='rgba(255,170,60,'+(0.05*k)+')';
+      ctx.stroke();
+      // bright core
+      ctx.lineWidth=s.w*(0.25+k*0.95);
+      ctx.strokeStyle='rgba(255,'+(225+(k*30|0))+','+(170+(k*60|0))+','+(0.55*k)+')';
+      ctx.stroke();
+    }
+  }
+
+  // golden bokeh dust
+  for(let i=0;i<46;i++){
+    const a=i*2.39+t*0.0002*(i%5+1);
+    const rr=(Math.sin(i*12.9)*0.5+0.5)*maxR*0.7+40;
+    const x=cx+Math.cos(a)*rr*1.2, y=cy+Math.sin(a)*rr;
+    const s=(Math.sin(i*7.3)*0.5+0.5)*2.4+0.6;
+    const g=ctx.createRadialGradient(x,y,0,x,y,s*6);
+    g.addColorStop(0,'rgba(255,210,140,'+(0.5+blast*0.4)+')'); g.addColorStop(1,'rgba(255,180,80,0)');
+    ctx.fillStyle=g; ctx.beginPath(); ctx.arc(x,y,s*6,0,7); ctx.fill();
+  }
+  ctx.globalCompositeOperation='source-over';
+
+  // blast flash
+  if(blast>0.01){
+    const fg=ctx.createRadialGradient(cx,cy,0,cx,cy,Math.max(W,H)*0.7);
+    fg.addColorStop(0,'rgba(255,236,196,'+(blast*0.45)+')');
+    fg.addColorStop(0.4,'rgba(255,190,90,'+(blast*0.18)+')');
+    fg.addColorStop(1,'rgba(255,180,80,0)');
+    ctx.fillStyle=fg; ctx.fillRect(0,0,W,H);
+  }
+}
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>

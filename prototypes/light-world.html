@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Light-world — immersive prototype</title>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;800&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"></script>
+<style>
+  :root{ --ink:#f3f1ec; }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:#03040a;color:var(--ink);font-family:"Geist",system-ui,sans-serif;overflow-x:hidden}
+  #gl{position:fixed;inset:0;z-index:0;display:block;width:100vw;height:100vh}
+  .scroll{position:relative;z-index:2;height:760vh;pointer-events:none}
+  /* overlays held to ONE side so the light + visuals own the rest of the frame */
+  .ov{position:fixed;inset:0;z-index:3;display:flex;flex-direction:column;justify-content:center;
+      opacity:0;transform:translateY(14px);pointer-events:none;padding:0 7vw}
+  .ov .in{max-width:430px}
+  .ov.left{align-items:flex-start;text-align:left}
+  .ov.right{align-items:flex-end;text-align:right}
+  .ov.center{align-items:center;text-align:center}
+  .ov.center .in{max-width:680px}
+  .tag{font-family:"Geist Mono",monospace;font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:#e9c08a;margin-bottom:18px;opacity:.9}
+  .h{font-weight:800;letter-spacing:-.035em;line-height:1.04;font-size:clamp(30px,4.6vw,60px);margin:0;text-shadow:0 2px 40px rgba(0,0,0,.95)}
+  .h .g{color:#f2c98f}
+  .sub{margin:20px 0 0;color:#cfc8bc;font-size:clamp(15px,1.4vw,18px);line-height:1.55;text-shadow:0 1px 8px rgba(0,0,0,.95)}
+  .cta{pointer-events:auto;margin-top:26px;display:inline-block;font-weight:600;font-size:15px;color:#1a1205;
+     background:#f2c98f;border-radius:999px;padding:13px 28px;text-decoration:none;box-shadow:0 0 40px rgba(242,201,143,.35)}
+  #bar{position:fixed;top:0;left:0;height:2px;width:0;background:#f2c98f;z-index:6;box-shadow:0 0 12px #f2c98f}
+  .nav{position:fixed;top:0;left:0;right:0;z-index:6;display:flex;justify-content:space-between;align-items:center;
+     padding:18px 26px;font-family:"Geist Mono",monospace;font-size:12px;letter-spacing:.12em;color:#cfd6e2}
+  .nav .r{display:flex;gap:18px;opacity:.7}
+  #pre{position:fixed;inset:0;z-index:9;background:#03040a;display:flex;align-items:center;justify-content:center;
+     font-family:"Geist Mono",monospace;color:#9fb0c8;letter-spacing:.2em;transition:opacity .7s}
+  .hud{position:fixed;left:16px;bottom:14px;z-index:6;font:11px/1 "Geist Mono",monospace;letter-spacing:.15em;text-transform:uppercase;
+     color:#8b97a8;background:rgba(0,0,0,.4);border:1px solid #1c2330;border-radius:999px;padding:6px 12px}
+</style>
+</head>
+<body>
+  <canvas id="gl"></canvas>
+  <div class="nav"><b>ANAND.IYER.CO.IN</b><span class="r">[CASES] [EXPERTISE] [CONTACT]</span></div>
+
+  <div class="ov center" data-from="0.00" data-to="0.12"><div class="in">
+    <span class="tag">The growth machine</span>
+    <h1 class="h">One light. An <span class="g">entire growth system</span>.</h1>
+    <p class="sub">Scroll to move through it.</p></div></div>
+  <div class="ov left" data-from="0.15" data-to="0.30"><div class="in">
+    <span class="tag">The context engine</span>
+    <h1 class="h">One piece of content becomes <span class="g">hundreds</span>.</h1>
+    <p class="sub">Carousels, videos, posters, blogs, newsletters. On brand, on demand.</p></div></div>
+  <div class="ov right" data-from="0.32" data-to="0.46"><div class="in">
+    <span class="tag">Distribution</span>
+    <h1 class="h">Delivered where they <span class="g">actually look</span>.</h1>
+    <p class="sub">LinkedIn, Instagram, WhatsApp, YouTube, Meta. In sync, on time.</p></div></div>
+  <div class="ov left" data-from="0.48" data-to="0.62"><div class="in">
+    <span class="tag">Validated leads</span>
+    <h1 class="h">The right people. <span class="g">Not cheap lists</span>.</h1>
+    <p class="sub">Rerankers and AI scoring tuned to the business surface only the leads worth your time.</p></div></div>
+  <div class="ov right" data-from="0.64" data-to="0.76"><div class="in">
+    <span class="tag">Built work</span>
+    <h1 class="h">Products and pages, <span class="g">shipped</span>.</h1>
+    <p class="sub">Pulse, GutGuru, Compass, Vita+, AutoEdit and more, built end to end.</p></div></div>
+  <div class="ov left" data-from="0.78" data-to="0.90"><div class="in">
+    <span class="tag">Trusted by</span>
+    <h1 class="h">Brands that have <span class="g">put me on screen</span>.</h1>
+    <p class="sub">Netflix, Adidas, Cadbury, ICICI, Zee and more, across 15+ years of production.</p></div></div>
+  <div class="ov center" data-from="0.93" data-to="1.0"><div class="in">
+    <span class="tag">Build it for me</span>
+    <h1 class="h">Want this machine running for <span class="g">you</span>?</h1>
+    <p class="sub">A done-for-you revenue system, wired end to end.</p>
+    <a class="cta" href="#">Request an audit</a></div></div>
+
+  <div class="scroll"></div>
+  <div id="bar"></div>
+  <div class="hud">Prototype · scroll to move the light</div>
+  <div id="pre">ENTERING THE WORLD &nbsp;<span id="pct">0%</span></div>
+
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+}}
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+
+const V3=THREE.Vector3;
+const canvas=document.getElementById('gl');
+const renderer=new THREE.WebGLRenderer({canvas,antialias:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio,1.7));
+renderer.setSize(innerWidth,innerHeight);
+renderer.outputColorSpace=THREE.SRGBColorSpace;
+renderer.toneMapping=THREE.ACESFilmicToneMapping; renderer.toneMappingExposure=1.0;
+
+const scene=new THREE.Scene();
+scene.fog=new THREE.FogExp2(0x03040a, 0.02);
+const camera=new THREE.PerspectiveCamera(55, innerWidth/innerHeight, 0.1, 240);
+
+// SUBTLE bloom (no blinding)
+const composer=new EffectComposer(renderer);
+composer.addPass(new RenderPass(scene,camera));
+const bloom=new UnrealBloomPass(new THREE.Vector2(innerWidth,innerHeight), 0.28, 0.6, 0.55);
+composer.addPass(bloom);
+composer.addPass(new OutputPass());
+
+// moody base: low ambient, the orb's coloured light + per-station pools do the work
+scene.add(new THREE.AmbientLight(0x223044, 0.5));
+const hemi=new THREE.HemisphereLight(0x4a5a80, 0x0a0a12, 0.35); scene.add(hemi);
+
+// ---- loaders / preload ----
+let need=0,got=0; const pre=document.getElementById('pre'),pct=document.getElementById('pct');
+function bump(){got++;pct.textContent=Math.round(got/Math.max(1,need)*100)+'%';if(got>=need){pre.style.opacity=0;setTimeout(()=>pre.remove(),700);}}
+const TL=new THREE.TextureLoader();
+function tex(url){need++;return TL.load(url,t=>{t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=8;bump();},undefined,bump);}
+need++; const pmrem=new THREE.PMREMGenerator(renderer);
+new RGBELoader().load('../public/experience/hdri/studio.hdr',h=>{const e=pmrem.fromEquirectangular(h).texture;scene.environment=e;h.dispose();pmrem.dispose();bump();},undefined,bump);
+
+// ---- asset pools (real anandiyer.co.in content) ----
+const W='../public/experience/world/', TX='../public/experience/textures/', LG='../public/experience/logos/';
+const APPS=['pulse-1','pulse-2','gutguru-1','gutguru-2','compass-1','compass-2','vita-1','vita-2','autoedit-1','autoedit-2','linkedin-1','linkedin-2'];
+const POSTERS=['reel-gulabi','reel-perfume','reel-kiki','reel-bingo','reel-vested','reel-bakewills','reel-moviemax','music-mohabbat','cinema-ganesha','hero-flippit-2026'];
+const WORK=['igfs-01','igfs-03','igcr-02','gut-02','gut-05','li90-02','poster-03','poster-06'];
+const CLIENTS=['netflix','adidas-thmb','cadbury','icici','zee-5','viacom-18','mmt','byjus','nick','movies-now','eatigo','toi'];
+const TOOLS=[['linkedin',0.9],['whatsapp',0.66],['instagram',0.66],['slack',0.58],['hubspot',0.58]];
+
+// ---- helpers ----
+function panel(url, w, h, emis=0.9){
+  const m=tex(url), g=new THREE.Group();
+  g.add(new THREE.Mesh(new THREE.BoxGeometry(w+0.1,h+0.1,0.05),
+    new THREE.MeshPhysicalMaterial({color:0x0a0c12,roughness:0.3,metalness:0.5,envMapIntensity:1.1,transmission:0.3,thickness:0.3,transparent:true})));
+  const f=new THREE.Mesh(new THREE.PlaneGeometry(w,h),
+    new THREE.MeshStandardMaterial({map:m,emissive:0xffffff,emissiveMap:m,emissiveIntensity:emis,roughness:0.55,metalness:0.05,envMapIntensity:0.5}));
+  f.position.z=0.05; g.add(f); g.userData.face=f.material; return g;
+}
+function logoBall(url,r){
+  const g=new THREE.Group();
+  g.add(new THREE.Mesh(new THREE.SphereGeometry(r,40,40),
+    new THREE.MeshPhysicalMaterial({transmission:1,thickness:r*0.5,roughness:0.05,ior:1.4,clearcoat:1,envMapIntensity:1.6,color:0xdfeaff,transparent:true})));
+  const p=new THREE.Mesh(new THREE.PlaneGeometry(r*1.5,r*1.5),
+    new THREE.MeshBasicMaterial({map:tex(url),transparent:true,toneMapped:false,depthWrite:false}));
+  p.position.z=r+0.05; g.add(p); g.userData.bill=p; return g;
+}
+function clientPlate(url,s){ // white logo on a dark glass plate
+  const g=new THREE.Group();
+  g.add(new THREE.Mesh(new THREE.BoxGeometry(s*1.5,s,0.06),
+    new THREE.MeshPhysicalMaterial({color:0x0b0d14,roughness:0.25,metalness:0.7,envMapIntensity:1.3,transparent:true})));
+  const p=new THREE.Mesh(new THREE.PlaneGeometry(s*1.1,s*0.7),
+    new THREE.MeshBasicMaterial({map:tex(url),transparent:true,toneMapped:false,opacity:0.92,depthWrite:false}));
+  p.position.z=0.05; g.add(p); return g;
+}
+
+// ---- the world: a subliminal landscape built from real content elements ----
+const world=new THREE.Group(); scene.add(world);
+const worldFiles=[...APPS.map(f=>W+'apps/'+f+'.jpg'), ...POSTERS.map(f=>W+'posters/'+f+'.jpg'), ...WORK.map(f=>TX+f+'.jpg')];
+const worldPanels=[];
+worldFiles.forEach((url,i)=>{
+  const ar=0.7+Math.random()*0.7, h=0.9+Math.random()*0.7, w=h*ar;
+  const p=panel(url,w,h,0.16);                       // dim: subliminal
+  const ang=i*2.399, rad=10+((i*7)%26);
+  p.position.set(Math.cos(ang)*rad*1.2 + (Math.random()-0.5)*8,
+                 (Math.random()-0.5)*22,
+                 8 - (i/worldFiles.length)*78 + (Math.random()-0.5)*6);
+  p.rotation.set((Math.random()-0.5)*0.5,(Math.random()-0.5)*1.0,(Math.random()-0.5)*0.4);
+  p.userData.base=0.16; world.add(p); worldPanels.push(p);
+});
+
+// ---- stations (real content), placed through the world ----
+function makeGrid(files,maker,cx,cy,cz,cols,gx,gy){
+  const g=new THREE.Group(); g.position.set(cx,cy,cz); scene.add(g);
+  files.forEach((mk,i)=>{ const o=maker(mk); const c=i%cols,r=Math.floor(i/cols);
+    o.position.set((c-(cols-1)/2)*gx,((Math.ceil(files.length/cols)-1)/2-r)*gy,(c%2?0.3:-0.3)); g.add(o); });
+  return g;
+}
+const sContent=makeGrid(['igfs-01','igfs-03','gut-02','poster-03','li90-02','igcr-02'],f=>panel(TX+f+'.jpg',1.7,2.1,1.0),18,1,-9,3,2.3,2.6);
+const sDist=new THREE.Group(); sDist.position.set(2,-2,-30); scene.add(sDist);
+TOOLS.forEach(([f,r],i)=>{const b=logoBall(LG+f+'.png',r); b.position.set((i-2)*1.75,Math.sin(i*1.3)*0.5,(i%2?0.5:-0.5)); sDist.add(b);});
+// validated leads: a field of dim points, a few bright
+const sLeads=new THREE.Group(); sLeads.position.set(-15,1,-46); scene.add(sLeads);
+for(let i=0;i<60;i++){ const on=i%9===0; const m=new THREE.Mesh(new THREE.SphereGeometry(on?0.22:0.12,16,16),
+  new THREE.MeshStandardMaterial({color:on?0xffd9a0:0x33405a,emissive:on?0xffc06a:0x0,emissiveIntensity:on?2.2:0,roughness:0.4}));
+  m.position.set((Math.random()-0.5)*9,(Math.random()-0.5)*6,(Math.random()-0.5)*5); sLeads.add(m);}
+const sGallery=makeGrid(['pulse-1','gutguru-1','compass-1','vita-1','autoedit-1','linkedin-1'],f=>panel(W+'apps/'+f+'.jpg',2.0,1.3,0.95),12,3.5,-58,3,2.5,1.9);
+const sClients=makeGrid(CLIENTS,f=>clientPlate(W+'clients/'+f+'.png',1.1),-8,-2,-70,4,1.9,1.4);
+const sProfile=new THREE.Group(); sProfile.position.set(2,1,-82); scene.add(sProfile);
+sProfile.add(panel(W+'profile.jpg',2.6,3.2,1.0));
+
+// per-station moody light pools (focused light hitting the visuals)
+function pool(x,y,z,c,inten){const l=new THREE.PointLight(c,inten,26,2);l.position.set(x,y,z);scene.add(l);return l;}
+pool(18,3,-5,0xffe6c4,26); pool(2,0,-26,0xc9e0ff,20); pool(-15,3,-42,0xffd0a0,22);
+pool(12,5,-54,0xe0d0ff,22); pool(-8,0,-66,0xbfe0ff,22); pool(2,3,-78,0xffe0c0,24);
+
+// ---- the orb: subtle, psychedelic, throws a soft coloured light ----
+const vehicle=new THREE.Group(); scene.add(vehicle);
+const orbMat=new THREE.MeshStandardMaterial({color:0x111018,emissive:0xff7cc8,emissiveIntensity:0.55,roughness:0.25,metalness:0.2});
+vehicle.add(new THREE.Mesh(new THREE.SphereGeometry(0.55,48,48),orbMat));
+const halo=new THREE.Mesh(new THREE.SphereGeometry(0.9,32,32),new THREE.MeshBasicMaterial({color:0xff7cc8,transparent:true,opacity:0.06}));
+vehicle.add(halo);
+const orbLight=new THREE.PointLight(0xff7cc8, 14, 24, 2.0); vehicle.add(orbLight);
+const rings=[];
+for(let i=0;i<3;i++){const r=new THREE.Mesh(new THREE.TorusGeometry(1.1+i*0.55,0.03,14,120),
+  new THREE.MeshPhysicalMaterial({transmission:1,thickness:0.4,roughness:0.05,ior:1.4,clearcoat:1,envMapIntensity:1.4,color:0xeef2ff,transparent:true}));
+  r.rotation.set(Math.random()*3,Math.random()*3,0); r.userData.sp=(0.1+Math.random()*0.2)*(i%2?1:-1); vehicle.add(r); rings.push(r);}
+
+// dust
+const pg=new THREE.BufferGeometry(),pc=700,pp=new Float32Array(pc*3);
+for(let i=0;i<pc;i++){pp[i*3]=(Math.random()-0.5)*80;pp[i*3+1]=(Math.random()-0.5)*46;pp[i*3+2]=10-Math.random()*94;}
+pg.setAttribute('position',new THREE.BufferAttribute(pp,3));
+scene.add(new THREE.Points(pg,new THREE.PointsMaterial({color:0xbfa9ff,size:0.04,transparent:true,opacity:0.4})));
+
+// ---- camera choreography: fly between stations; orb beside each, lighting it ----
+const STN=[
+ {t:0.00,c:new V3(0,0.6,15),    l:new V3(0,0,9),     o:new V3(0,0,9)},
+ {t:0.22,c:new V3(13,2,-2),     l:new V3(20,0.4,-9), o:new V3(11,-0.4,-6)},
+ {t:0.39,c:new V3(-3,-0.6,-22), l:new V3(5,-2.4,-30),o:new V3(-3,-1,-27)},
+ {t:0.55,c:new V3(-21,2,-42),   l:new V3(-12,0.6,-46),o:new V3(-20,2,-44)},
+ {t:0.70,c:new V3(5,4,-52),     l:new V3(15,2.6,-58),o:new V3(6,5,-55)},
+ {t:0.84,c:new V3(-15,-1,-68),  l:new V3(-5,-2.4,-70),o:new V3(-13,0,-66)},
+ {t:1.00,c:new V3(2,1.4,-74),   l:new V3(2,0.6,-82), o:new V3(-3,1,-80)},
+];
+function sample(arr,prop,p){let i=0;while(i<arr.length-1&&p>arr[i+1].t)i++;const a=arr[i],b=arr[Math.min(i+1,arr.length-1)];const k=Math.max(0,Math.min(1,(p-a.t)/((b.t-a.t)||1)));return a[prop].clone().lerp(b[prop],k);}
+
+const noLenis=new URLSearchParams(location.search).has('nolenis');
+if(window.Lenis&&!noLenis){const l=new Lenis({duration:1.25,smoothWheel:true});function lr(t){l.raf(t);requestAnimationFrame(lr);}requestAnimationFrame(lr);}
+function clamp01(x){return Math.max(0,Math.min(1,x));}
+function band(p,a,b){return clamp01((p-a)/(b-a));}
+function prog(){const m=document.body.scrollHeight-innerHeight;return m>0?clamp01(scrollY/m):0;}
+const ovs=[...document.querySelectorAll('.ov')],bar=document.getElementById('bar');
+const tmpColor=new THREE.Color();
+let camPos=new V3(0,0.6,15),look=new V3(0,0,9),sp=0;
+const clock=new THREE.Clock();
+
+function tick(){
+  requestAnimationFrame(tick);
+  const t=clock.getElapsedTime(), target=prog(); sp+=(target-sp)*0.07; bar.style.width=(target*100)+'%';
+
+  // psychedelic hue cycle on the orb + its light + the world sheen
+  const hue=(t*0.04)%1; tmpColor.setHSL(hue,0.7,0.6);
+  orbMat.emissive.copy(tmpColor); halo.material.color.copy(tmpColor); orbLight.color.copy(tmpColor);
+  orbMat.emissiveIntensity=0.5+Math.sin(t*1.2)*0.12;
+
+  // orb travels beside the stations
+  vehicle.position.copy(sample(STN,'o',sp)); vehicle.position.y+=Math.sin(t*0.7)*0.2;
+  rings.forEach(r=>{r.rotation.z+=r.userData.sp*0.02;r.rotation.y+=r.userData.sp*0.01;});
+
+  // camera frames each station (work + light on one side, text on the other)
+  camPos.lerp(sample(STN,'c',sp),0.07); camera.position.copy(camPos);
+  look.lerp(sample(STN,'l',sp),0.09); camera.lookAt(look);
+
+  // subliminal world: gentle drift + faint psychedelic sheen that shifts with the orb
+  world.rotation.y=Math.sin(t*0.04)*0.05;
+  for(let i=0;i<worldPanels.length;i+=4){ const wp=worldPanels[i]; wp.userData.face.emissiveIntensity=wp.userData.base*(0.7+0.6*Math.sin(t*0.5+i)); }
+  sDist.children.forEach(b=>{if(b.userData.bill)b.userData.bill.lookAt(camera.position);});
+  sLeads.children.forEach((m,i)=>{ if(m.material.emissiveIntensity>0) m.material.emissiveIntensity=1.6+Math.sin(t*2+i)*0.8; });
+
+  for(const ov of ovs){const a=parseFloat(ov.dataset.from),b=parseFloat(ov.dataset.to),mid=(a+b)/2,half=(b-a)/2;
+    const e=clamp01((1-Math.min(1,Math.abs(target-mid)/half))*1.5); ov.style.opacity=e; ov.style.transform=`translateY(${(1-e)*14}px)`;}
+  composer.render();
+}
+tick();
+addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);composer.setSize(innerWidth,innerHeight);bloom.setSize(innerWidth,innerHeight);});
+</script>
+</body>
+</html>

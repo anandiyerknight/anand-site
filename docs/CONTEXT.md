@@ -129,6 +129,41 @@ Moved out of the always-on `~/.claude/METHOD.md` so it only loads with this proj
 - [2026-06-20] [anand-site] **Work/portfolio showcase + /addwork skill** → `/work` page is data-driven from `lib/work.ts` (4 types: landing-page/carousel/guide/case-study), assets in `public/work/<slug>/`, home teaser `components/work-grid.tsx` fills the nav's dead `/#work-grid` anchor. Gated guides reuse `POST /api/work-download` (mirrors /api/newsletter). LP covers = Brave 9666 CDP `Page.captureScreenshot` viewport shot (1440×810 @2x, 7s settle) — top-of-page hero, NO captureBeyondViewport (avoids scroll-reveal-blank). New work added via the `/addwork` skill. Deploy: `gh auth switch --user anandiyerknight && git push vercel main`.
 - [2026-06-20] [anand-site] **/system "compounding loop" experience** → new route `app/system/page.tsx` (Nav + `components/system/SystemExperience` + Footer). Data-driven from `lib/system.ts` (`STAGES: SystemStage[]` — 4 stages: data/content/outreach/conversion; each has `howWeDoIt[]`, `howItWorks[]` (GENERIC names only, NO tool names — "WhatsApp" not the tool), `categories[]` → `assets[]` with `kind: carousel|image|pdf|site|diagram`). Three levels: `StageLoop.tsx` (loop hero — 4 cards + measured-SVG forward connectors + feedback arc + animated flow; recomputes via ResizeObserver; mobile <780 stacks with ↓ chevrons + a loop-back pill, svg hidden) → `StagePanel.tsx` (How we do it / How it works / category accordion) → `AssetLightbox.tsx` (plain `<img>` so it handles png/jpg/svg; carousel/image/diagram open lightbox, pdf/site are `<a target=_blank>`). Loop CSS (`@keyframes sysflow`, `.sys-wire-base/.sys-wire-flow`) appended to `app/globals.css`. Assets in `public/system/<stage>/<category>/` — real WORK carousels/posters/case-study-PDFs (thumbs via `pdftoppm -png -singlefile -scale-to 1000`), 3 live LP screenshots (Brave 9666 crisp-thumbnail recipe), + 4 hand-written monochrome SVG diagrams for the data/outreach/tracking gaps. Verified: `npm run typecheck` + `npm run build` clean (/system static, 7KB). NOT linked from the homepage nav yet; prod untouched. Branch `system-loop` (pushed to origin). Preview deployed via `vercel deploy --yes` (non-prod, `target:null`) but gated by Vercel Deployment Protection (401 to anyone not logged into Vercel) — review LOCALLY at `localhost:3000/system`.
 
+## ⏳ PENDING — /experience immersive page (ACTIVE, branch `experience-3d`, prod untouched)
+
+Flagship immersive `/experience` page (ref: drop.peachworlds.com, an 8/10 bar). After many iterations this session the DECISION is locked: **go the cinematic route. Hand-coded real-time WebGL is ABANDONED** — it cannot reach the reference bar by hand (user rated the best WebGL attempt 1/10). That ceiling needs PeachWeb (the no-code tool that built the reference) or a specialist 3D studio; in-house, the cinematic-render route is the realistic 7-8/10. See [[feedback_design_fidelity_no_overclaim]].
+
+### THE METHOD (do not lose — this is the agreed workflow)
+1. **Prompt the stills first** (Gemini / Imagen): 5 frame-prompts already written in `docs/IMMERSIVE_3D_PROMPTS.md` section C, in the user's photoreal deep-blue + golden-streak aesthetic, one per story beat, streaks lined up across cuts.
+2. **Generate the videos** from those stills (Veo 3 / Gemini Flow): Veo prompts in `docs/IMMERSIVE_3D_PROMPTS.md` section A. **Render every clip WITHOUT any text baked in** (text breaks when the video is scrubbed).
+3. **Scroll-scrub the clips** as the page backdrop and **add ALL text / CTAs / numbers / logos as code overlays on top** — editable forever, no re-render. This is what makes it maintainable and is why we do NOT bake text into the render.
+
+### Proven scrub engine (the keeper)
+`prototypes/scroll-video.html` — **frame-sequence canvas scrub** + editable DOM text overlays. Why frame-sequence not `<video>`: MP4 `currentTime` seeking HANGS in-browser (verified, readyState drops, never completes). Extract frames: `ffmpeg -i clip.mp4 -vf "select=not(mod(n\,2)),scale=1152:-2" -vsync 0 -q:v 5 frames/f_%03d.jpg` (~96 frames, ~5MB); preload images; per scroll draw `imgs[round(progress*(N-1))]` cover-fit to a fixed canvas; text overlays fade in by scroll band. Example built from `public/experience/video/cards-burst.mp4` → `public/experience/video/frames/` (96 frames).
+
+### 7-section narrative (FAQ REMOVED per user)
+Hero → Content multiplication (1→100s: carousels/videos/posters/blogs/newsletters) → Distribution (LinkedIn/Instagram/WhatsApp/YouTube/Meta) → Validated leads (ICP, rerankers + AI scoring, NOT cheap lists) → Product gallery (Pulse/GutGuru/Compass/Vita+/AutoEdit) → Clients (Netflix/Adidas/Cadbury/ICICI/Zee…) → Profile + CTA (request an audit). Pull the rest of anandiyer.co.in content in too.
+
+### Assets already prepped (all under `public/experience/`, reuse)
+`hdri/studio.hdr`; `textures/*.jpg` (36 work shots @640); `logos/*.png` (8 full-colour tool logos: linkedin/whatsapp/instagram/slack/hubspot/salesforce/zapier/googleanalytics, rasterised via Brave); `world/apps/*.jpg` (25 product gallery); `world/clients/*.png` (15 white client logos); `world/profile.jpg`; `world/posters/*.jpg` (17 reels/cinema); `frames/frame-a|b.png` (Gemini stills); `video/cards-burst.mp4` + `video/frames/` (cinematic clip + scrub sequence).
+
+### Prototypes built (in `prototypes/`)
+- `scroll-video.html` — **THE KEEPER** (frame-sequence scrub + editable overlays = the decided engine).
+- `vortex-streaks.html` — golden vortex streaks over the Gemini frames (user liked; may inform overlay transitions/blasts).
+- `light-world.html` — real-time WebGL orb/world (ABANDONED look, reference only).
+- `experience-3d.html` — first cyan-wireframe fly-through (superseded).
+
+### In-app scaffolding (branch `experience-3d`, all UNCOMMITTED-then-committed this session)
+`app/experience/page.tsx` + `components/experience/*` currently hold the R3F bubble scene (IntegrationHub/Bubble/Card/Grade) — **to be REPLACED** by the cinematic frame-scrub engine. `next.config.ts` has `transpilePackages` for three/r3f; deps installed (three 0.184, @react-three/fiber 9, drei 10, postprocessing 3) — likely removable if going pure-canvas cinematic.
+
+### Recipes (derive-once)
+- WebGL textures DO NOT load over `file://` (Chromium taints them → blank). Serve prototypes over http: `python3 -m http.server 8765` at repo root, open `http://localhost:8765/prototypes/<file>.html` (relative `../public/...` resolves). Next dev server also works.
+- Prototypes that init Lenis need `?nolenis=1` so `window.scrollTo` sticks for screenshot capture (Lenis fights programmatic scroll).
+- Screenshots via Brave 9666 CDP `Page.captureScreenshot` (browser-harness, `BU_CDP_URL=http://127.0.0.1:9666`).
+
+### ▶ NEXT SESSION STARTS HERE (/experience)
+User is going to: generate the 5 stills (prompts in `docs/IMMERSIVE_3D_PROMPTS.md` C) → generate videos (Veo prompts, section A) → render all clips WITHOUT text → drop clips into `public/experience/video/`. THEN: build the cinematic `/experience` route = scroll-scrub each clip per section using the `scroll-video.html` frame-sequence engine + editable DOM text/CTA overlays, 7 sections (no FAQ), mobile fallback, wire CTA to the audit form. Replace the R3F bubble scaffolding. Deploy (anand-site is report-only / protected): `gh auth switch --user anandiyerknight && git push vercel main` after approval.
+
 ## Next Session Starts Here (/system)
 
 On branch `system-loop`. Built `/system` (the compounding-loop client-explainer) — Anand loved the direction; opened it locally. **Iterate, then decide on promotion.** Concrete next steps:
