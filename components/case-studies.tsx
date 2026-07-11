@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { caseStudies, type CaseStudy } from "@/lib/case-studies";
 import { Spotlight } from "./spotlight";
 import { Reveal } from "./reveal";
+import { EASE } from "@/lib/motion";
 
 export function CaseStudies() {
   const [active, setActive] = useState<CaseStudy | null>(null);
@@ -91,7 +92,7 @@ export function CaseStudies() {
               initial={{ y: 30, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: 30, opacity: 0 }}
-              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.5, ease: EASE }}
               onClick={(e) => e.stopPropagation()}
               className="relative w-full max-w-3xl glass p-8 md:p-12"
             >

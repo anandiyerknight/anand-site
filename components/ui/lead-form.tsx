@@ -136,7 +136,8 @@ export function GateModal({ gate }: { gate: ReturnType<typeof useGatedDownload> 
       >
         {state === "done" ? (
           <div className="py-10 text-center">
-            <div className="w-14 h-14 mx-auto rounded-full border-2 border-[var(--color-accent)] flex items-center justify-center text-[var(--color-accent)] text-2xl">
+            <div // @allow-circle: success badge
+              className="w-14 h-14 mx-auto rounded-full border-2 border-[var(--color-accent)] flex items-center justify-center text-[var(--color-accent)] text-2xl">
               ✓
             </div>
             <div className="mt-5 font-display italic text-2xl">Your download is starting.</div>
@@ -251,7 +252,8 @@ export function LeadForm({ type }: { type: "audit" }) {
           exit={{ opacity: 0 }}
           className="py-16 text-center"
         >
-          <div className="w-16 h-16 mx-auto rounded-full border-2 border-[var(--color-accent)] flex items-center justify-center text-[var(--color-accent)] text-2xl">
+          <div // @allow-circle: success badge
+            className="w-16 h-16 mx-auto rounded-full border-2 border-[var(--color-accent)] flex items-center justify-center text-[var(--color-accent)] text-2xl">
             ✓
           </div>
           <div className="mt-6 font-display italic text-3xl">Brief received.</div>

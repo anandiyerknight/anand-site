@@ -3,6 +3,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
+import { EASE } from "@/lib/motion";
 
 export type LightboxData = { title: string; images: string[] };
 
@@ -62,7 +63,7 @@ export function WorkLightbox({
             key={i}
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.35, ease: EASE }}
             onClick={(e) => e.stopPropagation()}
             className="relative w-full max-w-3xl aspect-[4/5] glass overflow-hidden"
           >
@@ -89,7 +90,7 @@ export function WorkLightbox({
                   key={idx}
                   onClick={() => setI(idx)}
                   aria-label={`Go to slide ${idx + 1}`}
-                  className={`h-1.5 rounded-full transition-all ${
+                  className={`h-1.5 rounded-xs transition-all ${
                     idx === i ? "w-6 bg-[var(--color-accent)]" : "w-1.5 bg-[var(--color-rule-2)]"
                   }`}
                 />

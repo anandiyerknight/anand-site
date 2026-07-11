@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { EASE } from "@/lib/motion";
 
 interface CollapsibleSectionProps {
   title: string;
@@ -82,7 +83,7 @@ export function CollapsibleSection({
               )}
             </div>
             <div
-              className={`shrink-0 w-8 h-8 rounded-full border flex items-center justify-center transition-all duration-300 text-base font-light ${
+              className={`shrink-0 w-8 h-8 rounded-md border flex items-center justify-center transition-all duration-300 text-base font-light ${
                 open
                   ? "rotate-45 border-white text-white bg-white/8"
                   : "border-[var(--color-rule-2)] text-[var(--color-mute)]"
@@ -102,7 +103,7 @@ export function CollapsibleSection({
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.4, ease: EASE }}
             className="overflow-hidden"
           >
             {children}

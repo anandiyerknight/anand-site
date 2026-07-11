@@ -22,7 +22,7 @@ export function NewsletterLibrary({ issues }: { issues: NewsletterIssue[] }) {
         {issues.map((issue) => (
           <div
             key={issue.slug}
-            className="glass flex flex-col overflow-hidden border border-[var(--color-rule)] hover:border-[var(--color-accent)] transition-colors duration-300"
+            className="flex flex-col overflow-hidden rounded-xl bg-[var(--color-bg-2)] ring-1 ring-[var(--color-rule)] hover:ring-[var(--color-accent)] transition-shadow duration-300"
           >
             <div className="relative aspect-[1200/675] bg-[var(--color-bg-2)] border-b border-[var(--color-rule)]">
               <Image

@@ -39,7 +39,9 @@ function scan(file) {
   lines.forEach((line, i) => {
     const loc = `${rel}:${i + 1}`;
 
-    if (line.includes("rounded-full") && !line.includes("@allow-circle")) {
+    // @allow-circle may sit on the same line or up to 2 lines above (JSX attribute comments)
+    const context = lines.slice(Math.max(0, i - 2), i + 1).join("\n");
+    if (line.includes("rounded-full") && !context.includes("@allow-circle")) {
       errors.push(`${loc} [PILL_SHAPE] rounded-full is banned — use rounded-(--radius-sm|md|lg); genuine circles need an @allow-circle comment`);
     }
 

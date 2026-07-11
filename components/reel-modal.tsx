@@ -2,6 +2,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import type { Reel } from "@/lib/reels";
 import { useEffect } from "react";
+import { EASE } from "@/lib/motion";
 
 export function ReelModal({ reel, onClose }: { reel: Reel | null; onClose: () => void }) {
   useEffect(() => {
@@ -29,7 +30,7 @@ export function ReelModal({ reel, onClose }: { reel: Reel | null; onClose: () =>
             initial={{ scale: 0.95, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.95, opacity: 0 }}
-            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.5, ease: EASE }}
             onClick={(e) => e.stopPropagation()}
             className="relative w-full max-w-6xl"
           >

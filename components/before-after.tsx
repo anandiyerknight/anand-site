@@ -106,7 +106,8 @@ function Slider({ pair, idx }: { pair: typeof pairs[number]; idx: number }) {
         className="absolute top-0 bottom-0 w-px bg-[var(--color-accent)] pointer-events-none"
         style={{ left: `${pos}%`, boxShadow: "0 0 24px var(--color-accent)" }}
       >
-        <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-[var(--color-bg)] border border-[var(--color-accent)] flex items-center justify-center font-mono text-xs">
+        <div // @allow-circle: slider drag knob
+          className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-[var(--color-bg)] border border-[var(--color-accent)] flex items-center justify-center font-mono text-xs">
           ↔
         </div>
       </div>

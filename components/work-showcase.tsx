@@ -8,6 +8,7 @@ import { WorkLightbox, type LightboxData } from "./work-lightbox";
 import { hasCaseStudy, type WorkItem, type WorkType } from "@/lib/work";
 import { caseStudies, type CaseStudy } from "@/lib/case-studies";
 import { useGatedDownload, GateModal } from "./ui/lead-form";
+import { EASE } from "@/lib/motion";
 
 type FilterKey = WorkType | "all";
 const FILTER_DEFS: { key: WorkType; label: string }[] = [
@@ -69,9 +70,9 @@ export function WorkShowcase({ items }: { items: WorkItem[] }) {
               key={f.key}
               type="button"
               onClick={() => setFilter(f.key)}
-              className={`font-mono text-[11px] tracking-[0.18em] uppercase px-4 py-2 rounded-full border transition-colors ${
+              className={`font-mono text-[11px] tracking-[0.18em] uppercase px-4 py-2 rounded-sm border transition-colors ${
                 filter === f.key
-                  ? "bg-white text-black border-white"
+                  ? "bg-[var(--color-accent)] text-black border-[var(--color-accent)]"
                   : "border-[var(--color-rule)] text-[var(--color-ink-2)] hover:border-[var(--color-ink-2)]"
               }`}
             >
@@ -234,7 +235,7 @@ export function WorkShowcase({ items }: { items: WorkItem[] }) {
               initial={{ y: 30, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: 30, opacity: 0 }}
-              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.5, ease: EASE }}
               onClick={(e) => e.stopPropagation()}
               className="relative w-full max-w-3xl glass p-8 md:p-12 max-h-[88vh] overflow-y-auto"
             >

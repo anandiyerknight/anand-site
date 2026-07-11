@@ -51,7 +51,7 @@ export function TechSkills() {
                 </h3>
                 <div className="md:col-span-9 flex flex-wrap gap-x-3 gap-y-2 md:gap-x-6">
                   {cat.skills.map((skill) => (
-                    <span
+                    <span // @allow-circle: 4px bullet dot
                       key={skill}
                       className="text-sm md:text-lg text-[var(--color-ink-2)] leading-none before:content-[''] before:inline-block before:w-1 before:h-1 before:rounded-full before:bg-white/35 before:mr-2 before:align-middle"
                     >

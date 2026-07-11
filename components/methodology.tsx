@@ -25,12 +25,15 @@ export function Methodology() {
             <img
               src="/profile.jpg"
               alt="Anand Iyer"
-              className="w-full aspect-[4/5] object-cover rounded-[2rem] md:rounded-[2.5rem] border border-white/10 shadow-[0_0_40px_rgba(255,255,255,0.05)]"
+              className="w-full aspect-[4/5] object-cover rounded-2xl border border-white/10 shadow-[0_0_40px_rgba(255,255,255,0.05)]"
             />
           </Reveal>
         </div>
 
         <div className="md:col-span-7">
+          <p className="font-mono text-[10px] md:text-xs tracking-[0.22em] uppercase text-[var(--color-mute)] mb-4">
+            <span className="text-[var(--color-accent)] mr-3">04</span>About
+          </p>
           <Reveal>
             <h2 className="font-display text-[clamp(1.8rem,5vw,4.8rem)] leading-[0.98] tracking-tight">
               I build the systems.

@@ -16,7 +16,7 @@ export function WorkGrid() {
     <Section id="work-grid" spacing="xl">
         <SectionHead
           size="lg"
-          index="[ Work ]"
+          index="03"
           tag="Selected builds"
           title={
             <>

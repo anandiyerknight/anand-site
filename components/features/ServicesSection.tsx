@@ -72,6 +72,7 @@ export function ServicesSection() {
     <Section id="services" spacing="base">
       <SectionHead
         layout="split"
+        index="01"
         tag="Services"
         title="The systems that fill your pipeline."
         description="It starts with the outreach machine: LinkedIn, email, Instagram and WhatsApp running as one AI system that fills your pipeline every day. Then the funnels, campaigns, content, and dashboards that turn that demand into revenue."
@@ -95,7 +96,7 @@ export function ServicesSection() {
                   {flagship.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="font-mono text-[10px] md:text-xs px-2.5 py-1.5 rounded-full border border-[var(--color-rule-2)] text-[var(--color-mute)]"
+                      className="font-mono text-[10px] md:text-xs px-2.5 py-1.5 rounded-sm border border-[var(--color-rule-2)] text-[var(--color-mute)]"
                     >
                       {tag}
                     </span>
@@ -127,7 +128,7 @@ export function ServicesSection() {
                   {service.details.map((detail) => (
                     <span
                       key={detail}
-                      className="font-mono text-[10px] md:text-xs px-2.5 py-1.5 rounded-full border border-[var(--color-rule-2)] text-[var(--color-mute)]"
+                      className="font-mono text-[10px] md:text-xs px-2.5 py-1.5 rounded-sm border border-[var(--color-rule-2)] text-[var(--color-mute)]"
                     >
                       {detail}
                     </span>

@@ -33,7 +33,7 @@ const panels = [
     logic: "AI harness systems that make LLMs reliable and reproducible in production.",
     impact: ["Reproducible AI behavior", "Multi-agent coordination", "Zero context-drift protocols"],
     video: stackLoops.saas,
-    accent: "#10d9a8",
+    accent: "var(--color-accent)",
   },
 ];
 

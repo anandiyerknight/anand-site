@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { Section } from "./ui/section";
 import { SectionHead } from "./ui/section-head";
+import { EASE } from "@/lib/motion";
 
 const faqs = [
   {
@@ -45,7 +46,7 @@ export function FAQ() {
                     </span>
                   </div>
                   <span
-                    className={`shrink-0 w-10 h-10 rounded-full border border-[var(--color-rule-2)] flex items-center justify-center transition-transform ${
+                    className={`shrink-0 w-10 h-10 rounded-md border border-[var(--color-rule-2)] flex items-center justify-center transition-transform ${
                       isOpen ? "rotate-45 border-[var(--color-accent)] text-[var(--color-accent)]" : ""
                     }`}
                     aria-hidden
@@ -60,7 +61,7 @@ export function FAQ() {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                      transition={{ duration: 0.45, ease: EASE }}
                       className="overflow-hidden"
                     >
                       <div className="pb-8 pl-0 md:pl-[calc(40px+1.5rem)] pr-4 md:pr-12 max-w-3xl text-[var(--color-ink-2)] leading-relaxed text-sm md:text-base">

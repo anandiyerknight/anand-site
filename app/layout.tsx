@@ -1,11 +1,15 @@
 import type { Metadata } from "next";
-import { Inter, Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { LenisProvider } from "@/components/lenis-provider";
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
+// Display face — Clash Display (Fontshare, ITF Free Font License; see app/fonts/).
+// Variable font, weights 200–700; headlines use 600.
+const clash = localFont({
+  src: "./fonts/ClashDisplay-Variable.woff2",
+  variable: "--font-clash",
+  weight: "200 700",
   display: "swap",
 });
 
@@ -36,7 +40,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${geist.variable} ${geistMono.variable}`}>
+    <html lang="en" className={`${clash.variable} ${geist.variable} ${geistMono.variable}`}>
       <body>
         <LenisProvider>{children}</LenisProvider>
       </body>

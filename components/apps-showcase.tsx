@@ -136,6 +136,8 @@ export function AppsShowcase() {
     <>
       <Section id="systems" spacing="large">
           <SectionHead
+            index="02"
+            tag="Systems"
             title="What I've Built."
             description="Production systems — live, deployed, and compounding."
           />
@@ -152,7 +154,7 @@ export function AppsShowcase() {
                 key={app.name}
                 variants={itemVariants}
                 onClick={() => setSelectedApp(app)}
-                className="group glass-hover glass p-4 md:p-8 rounded-xl md:rounded-2xl flex flex-col overflow-hidden transition-all duration-300 text-left cursor-pointer hover:scale-[1.02]"
+                className="group p-4 md:p-8 rounded-xl md:rounded-2xl bg-[var(--color-bg-2)] ring-1 ring-[var(--color-rule)] hover:ring-[var(--color-accent)] flex flex-col overflow-hidden transition-all duration-300 text-left cursor-pointer hover:scale-[1.02]"
               >
                 {/* Image Container */}
                 <div className={`relative w-full aspect-video rounded-lg mb-3 md:mb-6 overflow-hidden bg-gradient-to-br ${app.color} flex items-center justify-center`}>
@@ -246,7 +248,7 @@ export function AppsShowcase() {
                 </div>
                 <button
                   onClick={() => setSelectedApp(null)}
-                  className="shrink-0 w-10 h-10 rounded-full border border-[var(--color-rule-2)] flex items-center justify-center hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] transition-colors"
+                  className="shrink-0 w-10 h-10 rounded-md border border-[var(--color-rule-2)] flex items-center justify-center hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] transition-colors"
                   aria-label="Close"
                 >
                   ✕
@@ -263,7 +265,7 @@ export function AppsShowcase() {
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: idx * 0.05 }}
-                      className="glass p-6 rounded-xl border border-[var(--color-rule-2)] hover:border-[var(--color-accent)] transition-colors group cursor-pointer"
+                      className="p-6 rounded-xl bg-[var(--color-bg)] ring-1 ring-[var(--color-rule-2)] hover:ring-[var(--color-accent)] transition-colors group cursor-pointer"
                     >
                       <div className={`relative w-full aspect-video rounded-lg mb-4 bg-gradient-to-br ${selectedApp.color} flex items-center justify-center overflow-hidden group`}>
                         {item.image ? (

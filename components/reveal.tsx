@@ -1,6 +1,7 @@
 "use client";
 import { motion, type Variants } from "framer-motion";
 import { type ReactNode } from "react";
+import { EASE } from "@/lib/motion";
 
 const v: Variants = {
   hidden: { opacity: 0, y: 24, filter: "blur(6px)" },
@@ -8,7 +9,7 @@ const v: Variants = {
     opacity: 1,
     y: 0,
     filter: "blur(0px)",
-    transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.9, ease: EASE },
   },
 };
 

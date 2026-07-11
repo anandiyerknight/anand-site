@@ -78,7 +78,7 @@ export function Testimonial() {
             <motion.div
               key={idx}
               variants={itemVariants}
-              className="glass-hover glass p-5 md:p-8 rounded-xl md:rounded-2xl border border-[var(--color-rule-2)] flex flex-col h-full"
+              className="p-5 md:p-8 rounded-xl md:rounded-2xl bg-[var(--color-bg-2)] ring-1 ring-[var(--color-rule)] hover:ring-[var(--color-mute)] transition-shadow flex flex-col h-full"
             >
               <blockquote className="text-sm md:text-lg leading-relaxed text-[var(--color-ink-2)] mb-4 md:mb-6 flex-1">
                 <span aria-hidden className="text-[var(--color-accent)] mr-1">"</span>

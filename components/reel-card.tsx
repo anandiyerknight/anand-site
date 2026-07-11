@@ -65,7 +65,8 @@ export function ReelCard({
             {reel.client}
           </div>
         </div>
-        <div className="shrink-0 w-10 h-10 rounded-full border border-white/30 flex items-center justify-center group-hover:bg-[var(--color-accent)] group-hover:border-[var(--color-accent)] group-hover:text-[var(--color-bg)] transition">
+        <div // @allow-circle: play button
+          className="shrink-0 w-10 h-10 rounded-full border border-white/30 flex items-center justify-center group-hover:bg-[var(--color-accent)] group-hover:border-[var(--color-accent)] group-hover:text-[var(--color-bg)] transition">
           <span aria-hidden>▸</span>
         </div>
       </div>

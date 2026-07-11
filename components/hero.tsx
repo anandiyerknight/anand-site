@@ -2,6 +2,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { Magnetic } from "./magnetic";
+import { EASE } from "@/lib/motion";
 
 const headlineWords = [
   { text: "Automation", italic: false },
@@ -62,8 +63,6 @@ export function Hero() {
       id="top"
       className="relative min-h-screen pt-20 md:pt-32 pb-16 md:pb-24 px-6 md:px-10 overflow-hidden"
     >
-      {/* Aurora atmosphere */}
-      <div className="aurora" />
       <div className="absolute inset-0 grid-bg opacity-40 pointer-events-none" />
 
       {/* Hero video — full bleed on mobile, right panel on desktop */}
@@ -71,7 +70,7 @@ export function Hero() {
         style={{ y: videoY, opacity: videoOpacity }}
         className="absolute right-0 top-0 h-full w-full md:w-[58%]"
       >
-        <div className="absolute inset-y-6 right-6 w-[calc(100%-1.5rem)] h-[calc(100%-3rem)] rounded-[2.5rem] overflow-hidden border border-white/10 shadow-[0_0_40px_rgba(255,255,255,0.05)]">
+        <div className="absolute inset-y-6 right-6 w-[calc(100%-1.5rem)] h-[calc(100%-3rem)] rounded-2xl overflow-hidden border border-white/10 shadow-[0_0_40px_rgba(255,255,255,0.05)]">
           {/* Mobile: dark overlay so text is readable. Desktop: left-gradient only */}
           <div className="absolute inset-0 bg-black/60 md:bg-transparent z-10 pointer-events-none" />
           <div className="absolute inset-0 bg-gradient-to-l from-transparent via-[rgba(10,10,10,0.3)] to-[var(--color-bg)] z-10 pointer-events-none hidden md:block" />
@@ -87,12 +86,12 @@ export function Hero() {
           <button
             type="button"
             onClick={toggleSound}
-            className="absolute right-5 bottom-5 z-20 inline-flex items-center gap-2 rounded-full border border-white/20 bg-black/45 px-4 py-2 text-xs font-medium text-white/90 backdrop-blur-md transition hover:border-white/50 hover:bg-black/65"
+            className="absolute right-5 bottom-5 z-20 inline-flex items-center gap-2 rounded-md border border-white/20 bg-black/45 px-4 py-2 text-xs font-medium text-white/90 backdrop-blur-md transition hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]"
             aria-pressed={!muted}
             aria-label={muted ? "Turn hero video sound on" : "Mute hero video"}
           >
             <span
-              className={`h-2 w-2 rounded-full ${muted ? "bg-white/35" : "bg-white"}`}
+              className={`h-2 w-2 rounded-full ${muted ? "bg-white/35" : "bg-[var(--color-accent)]"}`} // @allow-circle status dot
               aria-hidden
             />
             {muted ? "Sound" : "Mute"}
@@ -119,11 +118,11 @@ export function Hero() {
                 transition={{
                   duration: 0.95,
                   delay: 0.15 + i * 0.08,
-                  ease: [0.22, 1, 0.36, 1],
+                  ease: EASE,
                 }}
               >
                 {w.text}
-                {!w.brk && i < headlineWords.length - 1 ? " " : ""}
+                {i < headlineWords.length - 1 ? " " : ""}
               </motion.span>
             </span>
           ))}
