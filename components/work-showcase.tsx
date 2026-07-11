@@ -7,9 +7,7 @@ import { Reveal } from "./reveal";
 import { WorkLightbox, type LightboxData } from "./work-lightbox";
 import { hasCaseStudy, type WorkItem, type WorkType } from "@/lib/work";
 import { caseStudies, type CaseStudy } from "@/lib/case-studies";
-
-type Lead = { name: string; email: string; company: string };
-const LS_KEY = "nl_lead"; // shared with the newsletter gate so a returning lead skips the form
+import { useGatedDownload, GateModal } from "./ui/lead-form";
 
 type FilterKey = WorkType | "all";
 const FILTER_DEFS: { key: WorkType; label: string }[] = [
@@ -17,25 +15,6 @@ const FILTER_DEFS: { key: WorkType; label: string }[] = [
   { key: "carousel", label: "Carousels" },
   { key: "guide", label: "Guides" },
 ];
-
-function getStoredLead(): Lead | null {
-  if (typeof window === "undefined") return null;
-  try {
-    const raw = localStorage.getItem(LS_KEY);
-    return raw ? (JSON.parse(raw) as Lead) : null;
-  } catch {
-    return null;
-  }
-}
-
-function triggerDownload(pdf: string, title: string) {
-  const a = document.createElement("a");
-  a.href = pdf;
-  a.download = `Anand Iyer - ${title}.pdf`;
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-}
 
 function caseById(id?: string): CaseStudy | null {
   if (!id) return null;
@@ -47,10 +26,8 @@ export function WorkShowcase({ items }: { items: WorkItem[] }) {
   const [lightbox, setLightbox] = useState<LightboxData | null>(null);
   const [caseActive, setCaseActive] = useState<CaseStudy | null>(null);
 
-  // Gated-download state (mirrors components/newsletter-library.tsx)
-  const [activeGuide, setActiveGuide] = useState<WorkItem | null>(null);
-  const [formState, setFormState] = useState<"idle" | "sending" | "done" | "error">("idle");
-  const [busySlug, setBusySlug] = useState<string | null>(null);
+  // Gated-download flow — shared LeadForm module (same nl_lead gate as /newsletters)
+  const gate = useGatedDownload("/api/work-download");
 
   const sorted = useMemo(
     () => [...items].sort((a, b) => (a.order ?? 999) - (b.order ?? 999)),
@@ -72,55 +49,14 @@ export function WorkShowcase({ items }: { items: WorkItem[] }) {
     return list;
   }, [items]);
 
-  async function capture(lead: Lead, item: WorkItem) {
-    const res = await fetch("/api/work-download", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ...lead, slug: item.slug }),
-    });
-    if (!res.ok) throw new Error("capture failed");
-    return (await res.json()) as { ok: boolean; pdf: string; title: string };
-  }
-
-  async function onDownloadClick(item: WorkItem) {
+  function onDownloadClick(item: WorkItem) {
     if (!item.pdf) return;
-    const stored = getStoredLead();
-    if (stored) {
-      setBusySlug(item.slug);
-      try {
-        const data = await capture(stored, item);
-        triggerDownload(data.pdf, data.title);
-      } catch {
-        triggerDownload(item.pdf, item.title);
-      } finally {
-        setBusySlug(null);
-      }
-      return;
-    }
-    setActiveGuide(item);
-    setFormState("idle");
-  }
-
-  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    if (!activeGuide) return;
-    const fd = new FormData(e.currentTarget);
-    const lead: Lead = {
-      name: (fd.get("name") || "").toString().trim(),
-      email: (fd.get("email") || "").toString().trim(),
-      company: (fd.get("company") || "").toString().trim(),
-    };
-    if (!lead.name || !lead.email) return;
-    setFormState("sending");
-    try {
-      const data = await capture(lead, activeGuide);
-      localStorage.setItem(LS_KEY, JSON.stringify(lead));
-      triggerDownload(data.pdf, data.title);
-      setFormState("done");
-      setTimeout(() => setActiveGuide(null), 1600);
-    } catch {
-      setFormState("error");
-    }
+    gate.request({
+      slug: item.slug,
+      title: item.title,
+      tag: item.category,
+      fallbackPdf: item.pdf,
+    });
   }
 
   return (
@@ -241,10 +177,10 @@ export function WorkShowcase({ items }: { items: WorkItem[] }) {
                       <button
                         type="button"
                         onClick={() => onDownloadClick(item)}
-                        disabled={busySlug === item.slug}
+                        disabled={gate.busySlug === item.slug}
                         className="btn-primary !py-2.5 !px-4 !text-[10px] disabled:opacity-60"
                       >
-                        <span>{busySlug === item.slug ? "Preparing…" : "Download"}</span>
+                        <span>{gate.busySlug === item.slug ? "Preparing…" : "Download"}</span>
                         <span aria-hidden>↓</span>
                       </button>
                     )}
@@ -281,70 +217,8 @@ export function WorkShowcase({ items }: { items: WorkItem[] }) {
       {/* Carousel lightbox */}
       <WorkLightbox data={lightbox} onClose={() => setLightbox(null)} />
 
-      {/* Gated download form */}
-      {activeGuide && (
-        <div
-          className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
-          onClick={() => formState !== "sending" && setActiveGuide(null)}
-        >
-          <div
-            className="glass w-full max-w-md p-6 md:p-8 border-2 border-white/20 shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {formState === "done" ? (
-              <div className="py-10 text-center">
-                <div className="w-14 h-14 mx-auto rounded-full border-2 border-[var(--color-cyan)] flex items-center justify-center text-[var(--color-cyan)] text-2xl">
-                  ✓
-                </div>
-                <div className="mt-5 font-display italic text-2xl">Your download is starting.</div>
-                <p className="mt-2 text-sm text-[var(--color-ink-2)]">Check your downloads folder.</p>
-              </div>
-            ) : (
-              <>
-                <div className="font-mono text-[10px] tracking-[0.22em] uppercase text-[var(--color-mute)]">
-                  {activeGuide.category}
-                </div>
-                <h3 className="mt-2 font-display text-2xl leading-tight">{activeGuide.title}</h3>
-                <p className="mt-2 text-sm text-[var(--color-ink-2)]">
-                  Free download. Tell me where to send it and it is yours.
-                </p>
-                <form onSubmit={onSubmit} className="mt-6 space-y-5">
-                  <div className="field">
-                    <label htmlFor="w-name">Name</label>
-                    <input id="w-name" name="name" required placeholder="Your name" />
-                  </div>
-                  <div className="field">
-                    <label htmlFor="w-email">Email</label>
-                    <input id="w-email" name="email" required type="email" placeholder="you@company.com" />
-                  </div>
-                  <div className="field">
-                    <label htmlFor="w-company">Company (optional)</label>
-                    <input id="w-company" name="company" placeholder="Brand / venture" />
-                  </div>
-                  {formState === "error" && (
-                    <p className="font-mono text-[11px] text-[var(--color-magenta)]">
-                      Something broke. Try again in a moment.
-                    </p>
-                  )}
-                  <div className="flex items-center gap-4 pt-2">
-                    <button type="submit" disabled={formState === "sending"} className="btn-primary disabled:opacity-60">
-                      <span>{formState === "sending" ? "Sending…" : "Get the PDF"}</span>
-                      <span aria-hidden>↓</span>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setActiveGuide(null)}
-                      className="font-mono text-[11px] tracking-[0.18em] uppercase text-[var(--color-mute)] hover:text-[var(--color-ink)] transition-colors"
-                    >
-                      Cancel
-                    </button>
-                  </div>
-                </form>
-              </>
-            )}
-          </div>
-        </div>
-      )}
+      {/* Gated download form — shared module */}
+      <GateModal gate={gate} />
 
       {/* Case study modal (reuses lib/case-studies.ts) */}
       <AnimatePresence>
