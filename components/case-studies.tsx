@@ -24,7 +24,7 @@ export function CaseStudies() {
       <div className="max-w-7xl mx-auto">
         <div className="mb-12 max-w-3xl">
           <div className="font-mono text-[11px] tracking-[0.22em] uppercase text-[var(--color-mute)] mb-6">
-            <span className="text-[var(--color-cyan)]">[ 08 ]</span>
+            <span className="text-[var(--color-accent)]">[ 08 ]</span>
             <span className="ml-3">Case Studies — Logic in Production</span>
           </div>
           <Reveal>
@@ -60,7 +60,7 @@ export function CaseStudies() {
                 <div className="mt-10 grid grid-cols-2 gap-4">
                   {c.metrics.slice(0, 4).map((m) => (
                     <div key={m.label}>
-                      <div className="font-mono text-[10px] tracking-[0.22em] uppercase text-[var(--color-cyan)]">
+                      <div className="font-mono text-[10px] tracking-[0.22em] uppercase text-[var(--color-accent)]">
                         {m.label}
                       </div>
                       <div className="font-display italic text-2xl mt-1 grad-text">
@@ -97,7 +97,7 @@ export function CaseStudies() {
             >
               <div className="flex items-center justify-between mb-8 font-mono text-[10px] tracking-[0.22em] uppercase text-[var(--color-mute)]">
                 <span>{active.category}</span>
-                <button onClick={() => setActive(null)} className="hover:text-[var(--color-cyan)]">
+                <button onClick={() => setActive(null)} className="hover:text-[var(--color-accent)]">
                   Close [esc] ✕
                 </button>
               </div>
@@ -108,7 +108,7 @@ export function CaseStudies() {
               <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
                 {active.metrics.map((m) => (
                   <div key={m.label} className="border-l border-[var(--color-rule-2)] pl-3">
-                    <div className="font-mono text-[10px] tracking-[0.22em] uppercase text-[var(--color-cyan)]">
+                    <div className="font-mono text-[10px] tracking-[0.22em] uppercase text-[var(--color-accent)]">
                       {m.label}
                     </div>
                     <div className="font-display italic text-xl md:text-2xl mt-1">{m.value}</div>

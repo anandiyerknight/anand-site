@@ -81,12 +81,12 @@ export function Testimonial() {
               className="glass-hover glass p-5 md:p-8 rounded-xl md:rounded-2xl border border-[var(--color-rule-2)] flex flex-col h-full"
             >
               <blockquote className="text-sm md:text-lg leading-relaxed text-[var(--color-ink-2)] mb-4 md:mb-6 flex-1">
-                <span aria-hidden className="text-[var(--color-cyan)] mr-1">"</span>
+                <span aria-hidden className="text-[var(--color-accent)] mr-1">"</span>
                 {testi.quote}
-                <span aria-hidden className="text-[var(--color-cyan)] ml-1">"</span>
+                <span aria-hidden className="text-[var(--color-accent)] ml-1">"</span>
               </blockquote>
               <div className="border-t border-[var(--color-rule-2)] pt-6">
-                <div className="font-mono text-[10px] tracking-[0.22em] uppercase text-[var(--color-cyan)]">
+                <div className="font-mono text-[10px] tracking-[0.22em] uppercase text-[var(--color-accent)]">
                   {testi.role}
                 </div>
                 <div className="text-sm text-[var(--color-mute)] mt-1">

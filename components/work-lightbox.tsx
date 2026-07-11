@@ -53,7 +53,7 @@ export function WorkLightbox({
             <span>
               {data.title} — {i + 1}/{count}
             </span>
-            <button onClick={onClose} className="hover:text-[var(--color-cyan)]">
+            <button onClick={onClose} className="hover:text-[var(--color-accent)]">
               Close [esc] ✕
             </button>
           </div>
@@ -90,7 +90,7 @@ export function WorkLightbox({
                   onClick={() => setI(idx)}
                   aria-label={`Go to slide ${idx + 1}`}
                   className={`h-1.5 rounded-full transition-all ${
-                    idx === i ? "w-6 bg-[var(--color-cyan)]" : "w-1.5 bg-[var(--color-rule-2)]"
+                    idx === i ? "w-6 bg-[var(--color-accent)]" : "w-1.5 bg-[var(--color-rule-2)]"
                   }`}
                 />
               ))}

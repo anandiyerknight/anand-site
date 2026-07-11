@@ -80,7 +80,7 @@ export function CinemaSection() {
               </div>
 
               <div>
-                <h3 className="font-display text-sm md:text-xl mb-1 md:mb-2 group-hover:text-[var(--color-cyan)] transition-colors leading-tight">
+                <h3 className="font-display text-sm md:text-xl mb-1 md:mb-2 group-hover:text-[var(--color-accent)] transition-colors leading-tight">
                   {film.title}
                 </h3>
                 <div className="font-mono text-[10px] md:text-xs text-[var(--color-mute)] tracking-[0.1em] uppercase">

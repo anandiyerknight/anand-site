@@ -97,16 +97,16 @@ function Slider({ pair, idx }: { pair: typeof pairs[number]; idx: number }) {
       <div className="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-white/85 bg-black/40 px-2 py-1 backdrop-blur">
         Before
       </div>
-      <div className="absolute top-3 right-3 font-mono text-[10px] tracking-[0.22em] uppercase text-[var(--color-cyan)] bg-black/40 px-2 py-1 backdrop-blur">
+      <div className="absolute top-3 right-3 font-mono text-[10px] tracking-[0.22em] uppercase text-[var(--color-accent)] bg-black/40 px-2 py-1 backdrop-blur">
         After
       </div>
 
       {/* divider */}
       <div
-        className="absolute top-0 bottom-0 w-px bg-[var(--color-cyan)] pointer-events-none"
-        style={{ left: `${pos}%`, boxShadow: "0 0 24px var(--color-cyan)" }}
+        className="absolute top-0 bottom-0 w-px bg-[var(--color-accent)] pointer-events-none"
+        style={{ left: `${pos}%`, boxShadow: "0 0 24px var(--color-accent)" }}
       >
-        <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-[var(--color-bg)] border border-[var(--color-cyan)] flex items-center justify-center font-mono text-xs">
+        <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-[var(--color-bg)] border border-[var(--color-accent)] flex items-center justify-center font-mono text-xs">
           ↔
         </div>
       </div>
@@ -124,7 +124,7 @@ export function BeforeAfter() {
       <div className="max-w-7xl mx-auto">
         <div className="mb-12">
           <div className="font-mono text-[11px] tracking-[0.22em] uppercase text-[var(--color-mute)] mb-6">
-            <span className="text-[var(--color-cyan)]">[ 07 ]</span>
+            <span className="text-[var(--color-accent)]">[ 07 ]</span>
             <span className="ml-3">Before / After — Transformation Proof</span>
           </div>
           <Reveal>

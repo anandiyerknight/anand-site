@@ -31,13 +31,13 @@ export function Footer() {
             </div>
             <a
               href="mailto:iyeranand91@gmail.com"
-              className="block text-[var(--color-ink)] hover:text-[var(--color-cyan)] transition-colors"
+              className="block text-[var(--color-ink)] hover:text-[var(--color-accent)] transition-colors"
             >
               iyeranand91@gmail.com
             </a>
             <a
               href="tel:+919833764750"
-              className="block text-[var(--color-ink-2)] hover:text-[var(--color-cyan)] transition-colors mt-1"
+              className="block text-[var(--color-ink-2)] hover:text-[var(--color-accent)] transition-colors mt-1"
             >
               +91 9833 764 750
             </a>
@@ -66,7 +66,7 @@ export function Footer() {
                 <li key={h}>
                   <a
                     href={h}
-                    className="font-mono text-xs tracking-[0.18em] uppercase text-[var(--color-ink-2)] hover:text-[var(--color-cyan)] transition-colors"
+                    className="font-mono text-xs tracking-[0.18em] uppercase text-[var(--color-ink-2)] hover:text-[var(--color-accent)] transition-colors"
                   >
                     {l}
                   </a>

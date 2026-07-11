@@ -7,7 +7,7 @@ export function SectionTag({
 }) {
   return (
     <div className="section-tag">
-      <span className="text-[var(--color-cyan)]">[ {index} ]</span>
+      <span className="text-[var(--color-accent)]">[ {index} ]</span>
       <span>{label}</span>
     </div>
   );

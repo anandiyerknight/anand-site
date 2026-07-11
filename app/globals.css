@@ -8,14 +8,41 @@
   --color-mute: #8e9192;
   --color-rule: #353535;
   --color-rule-2: #444748;
+
+  /* The one brand accent. Emerald — keyed to the hero video's green glow.
+     `accent` carries text/borders on black; `accent-deep` carries fills/hovers. */
+  --color-accent: #34d399;
+  --color-accent-deep: #22c55e;
+
+  /* Radius scale — small rectangles only. Pills (rounded-full) are banned
+     site-wide by scripts/design-gate.mjs; genuine circles need @allow-circle. */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 12px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
+  --radius-3xl: 16px;
+
+  /* Motion tokens. lib/motion.ts mirrors these for Framer Motion (seconds). */
+  --duration-fast: 150ms;
+  --duration-base: 300ms;
+  --duration-slow: 400ms;
+  --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --font-display: var(--font-clash), var(--font-geist), "Helvetica Neue", Arial, sans-serif;
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+}
+
+/* Legacy grayscale aliases — referenced ONLY by the WIP /system and /experience
+   trees (branches system-loop / experience-3d). Live components use the real
+   tokens above; delete these once the WIP routes are migrated. */
+:root {
   --color-cyan: #ffffff;
   --color-magenta: #c6c6c8;
   --color-violet: #737373;
-  --color-acid: #D4D4D4;
-
-  --font-display: var(--font-geist), "Helvetica Neue", Arial, sans-serif;
-  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --color-acid: #d4d4d4;
 }
 
 @layer base {
@@ -37,7 +64,7 @@
     overflow-x: hidden;
   }
   ::selection {
-    background: var(--color-magenta);
+    background: var(--color-accent);
     color: var(--color-bg);
   }
   button {
@@ -345,8 +372,8 @@
 }
 .field input:focus,
 .field textarea:focus {
-  border-color: var(--color-cyan);
-  box-shadow: 0 2px 0 var(--color-cyan);
+  border-color: var(--color-accent);
+  box-shadow: 0 2px 0 var(--color-accent);
 }
 .field input::placeholder,
 .field textarea::placeholder {

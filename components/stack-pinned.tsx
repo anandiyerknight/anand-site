@@ -9,7 +9,7 @@ const panels = [
     logic: "4K broadcast-quality video pipelines tailored for D2C.",
     impact: ["Automated processing", "Scalable output", "Maintains broadcast standards"],
     video: stackLoops.content,
-    accent: "var(--color-cyan)",
+    accent: "var(--color-accent)",
   },
   {
     idx: "02",
@@ -17,7 +17,7 @@ const panels = [
     logic: "Custom AI-native CRM and platform engineering.",
     impact: ["Proprietary data architecture", "Immediate operational efficiency", "Personalized RAG pipelines"],
     video: stackLoops.saas,
-    accent: "var(--color-magenta)",
+    accent: "var(--color-accent)",
   },
   {
     idx: "03",
@@ -25,7 +25,7 @@ const panels = [
     logic: "Automated end-to-end pipelines across WhatsApp, API, and Web.",
     impact: ["High engagement optimization", "Automated distribution", "Sustained performance analytics"],
     video: stackLoops.funnels,
-    accent: "var(--color-violet)",
+    accent: "var(--color-mute)",
   },
   {
     idx: "04",

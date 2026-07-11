@@ -101,7 +101,7 @@ export function Filmography() {
 
               {/* Content */}
               <div className="flex-1 flex flex-col">
-                <h3 className="font-display text-xl md:text-2xl mb-2 group-hover:text-[var(--color-cyan)] transition-colors">
+                <h3 className="font-display text-xl md:text-2xl mb-2 group-hover:text-[var(--color-accent)] transition-colors">
                   {film.title}
                 </h3>
                 <p className="text-[var(--color-ink-2)] text-sm md:text-base mb-4 flex-1">

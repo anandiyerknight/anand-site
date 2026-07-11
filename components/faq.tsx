@@ -37,7 +37,7 @@ export function FAQ() {
                   data-cursor="link"
                 >
                   <div className="flex items-baseline gap-3 md:gap-6 flex-1">
-                    <span className="font-mono text-[10px] tracking-[0.22em] uppercase text-[var(--color-cyan)] shrink-0">
+                    <span className="font-mono text-[10px] tracking-[0.22em] uppercase text-[var(--color-accent)] shrink-0">
                       Q · 0{i + 1}
                     </span>
                     <span className="font-display text-base md:text-3xl leading-tight">
@@ -46,7 +46,7 @@ export function FAQ() {
                   </div>
                   <span
                     className={`shrink-0 w-10 h-10 rounded-full border border-[var(--color-rule-2)] flex items-center justify-center transition-transform ${
-                      isOpen ? "rotate-45 border-[var(--color-cyan)] text-[var(--color-cyan)]" : ""
+                      isOpen ? "rotate-45 border-[var(--color-accent)] text-[var(--color-accent)]" : ""
                     }`}
                     aria-hidden
                   >

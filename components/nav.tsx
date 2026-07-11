@@ -31,7 +31,7 @@ export function Nav() {
       <div className="px-6 md:px-10 flex items-center justify-between gap-8">
         <Link href="#top" className="flex items-baseline gap-3 group">
           <span className="font-display italic text-2xl tracking-tight">Anand Iyer</span>
-          <span className="font-mono text-[10px] tracking-[0.22em] uppercase text-[var(--color-mute)] group-hover:text-[var(--color-cyan)] transition-colors">
+          <span className="font-mono text-[10px] tracking-[0.22em] uppercase text-[var(--color-mute)] group-hover:text-[var(--color-accent)] transition-colors">
             / AI Architect
           </span>
         </Link>
@@ -41,7 +41,7 @@ export function Nav() {
             <li key={l.href}>
               <a
                 href={l.href}
-                className="font-mono text-[11px] tracking-[0.2em] uppercase text-[var(--color-ink-2)] hover:text-[var(--color-cyan)] transition-colors"
+                className="font-mono text-[11px] tracking-[0.2em] uppercase text-[var(--color-ink-2)] hover:text-[var(--color-accent)] transition-colors"
               >
                 {l.label}
               </a>

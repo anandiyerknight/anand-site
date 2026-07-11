@@ -240,7 +240,7 @@ export function WorkShowcase({ items }: { items: WorkItem[] }) {
             >
               <div className="flex items-center justify-between mb-8 font-mono text-[10px] tracking-[0.22em] uppercase text-[var(--color-mute)]">
                 <span>{caseActive.category}</span>
-                <button onClick={() => setCaseActive(null)} className="hover:text-[var(--color-cyan)]">
+                <button onClick={() => setCaseActive(null)} className="hover:text-[var(--color-accent)]">
                   Close [esc] ✕
                 </button>
               </div>
@@ -249,7 +249,7 @@ export function WorkShowcase({ items }: { items: WorkItem[] }) {
               <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
                 {caseActive.metrics.map((m) => (
                   <div key={m.label} className="border-l border-[var(--color-rule-2)] pl-3">
-                    <div className="font-mono text-[10px] tracking-[0.22em] uppercase text-[var(--color-cyan)]">
+                    <div className="font-mono text-[10px] tracking-[0.22em] uppercase text-[var(--color-accent)]">
                       {m.label}
                     </div>
                     <div className="font-display italic text-xl md:text-2xl mt-1">{m.value}</div>

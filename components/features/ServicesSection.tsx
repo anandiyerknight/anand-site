@@ -80,7 +80,7 @@ export function ServicesSection() {
         {/* Flagship - the outreach machine */}
         <Reveal>
           <article className="group mb-4 md:mb-6 rounded-2xl border border-[var(--color-rule)] bg-white/[0.025] p-6 md:p-9 transition-colors duration-300 hover:bg-white/[0.05]">
-            <div className="font-mono text-[10px] tracking-[0.2em] uppercase text-[var(--color-magenta)] mb-5">
+            <div className="font-mono text-[10px] tracking-[0.2em] uppercase text-[var(--color-accent)] mb-5">
               {flagship.eyebrow}
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-10 items-start">

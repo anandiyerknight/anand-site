@@ -45,7 +45,7 @@ export function ProofGrid() {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
           <div>
             <div className="font-mono text-[11px] tracking-[0.22em] uppercase text-[var(--color-mute)] mb-6">
-              <span className="text-[var(--color-cyan)]">[ 03 ]</span>
+              <span className="text-[var(--color-accent)]">[ 03 ]</span>
               <span className="ml-3">The Proof — Engineering the Delta</span>
             </div>
             <Reveal>
@@ -80,7 +80,7 @@ export function ProofGrid() {
                     </div>
                     <span
                       className={`text-[10px] font-mono ${
-                        c.accent === "cyan" ? "text-[var(--color-cyan)]" : "text-[var(--color-magenta)]"
+                        c.accent === "cyan" ? "text-[var(--color-accent)]" : "text-[var(--color-accent)]"
                       }`}
                     >
                       ●

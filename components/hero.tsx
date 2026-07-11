@@ -112,7 +112,7 @@ export function Hero() {
             >
               <motion.span
                 className={`inline-block ${w.italic ? "italic" : ""} ${
-                  w.text === "not" ? "text-[var(--color-magenta)]" : ""
+                  w.text === "not" ? "text-[var(--color-accent)]" : ""
                 } ${w.text === "Infrastructure." ? "grad-text" : ""}`}
                 initial={{ y: "115%", opacity: 0 }}
                 animate={{ y: "0%", opacity: 1 }}

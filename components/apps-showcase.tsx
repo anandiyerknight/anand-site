@@ -181,7 +181,7 @@ export function AppsShowcase() {
 
                 {/* Content */}
                 <div className="flex-1 flex flex-col">
-                  <h3 className="font-display text-base md:text-2xl mb-1 md:mb-3 group-hover:text-[var(--color-cyan)] transition-colors leading-tight">
+                  <h3 className="font-display text-base md:text-2xl mb-1 md:mb-3 group-hover:text-[var(--color-accent)] transition-colors leading-tight">
                     {app.name}
                   </h3>
                   <p className="text-[var(--color-ink-2)] text-xs md:text-base mb-3 md:mb-6 flex-1 leading-relaxed hidden md:block">
@@ -196,7 +196,7 @@ export function AppsShowcase() {
                     {app.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="font-mono text-xs px-2 py-1 rounded border border-[var(--color-rule-2)] text-[var(--color-mute)] group-hover:border-[var(--color-cyan)] group-hover:text-[var(--color-cyan)] transition-colors"
+                        className="font-mono text-xs px-2 py-1 rounded border border-[var(--color-rule-2)] text-[var(--color-mute)] group-hover:border-[var(--color-accent)] group-hover:text-[var(--color-accent)] transition-colors"
                       >
                         {tag}
                       </span>
@@ -207,13 +207,13 @@ export function AppsShowcase() {
                   <div className="space-y-0.5 md:space-y-1 text-[10px] md:text-xs text-[var(--color-mute)]">
                     {app.kpis.map((kpi, idx) => (
                       <div key={idx}>
-                        {kpi.label} <span className="text-[var(--color-cyan)]">{kpi.before}</span> → <span className="text-[var(--color-cyan)]">{kpi.after}</span>
+                        {kpi.label} <span className="text-[var(--color-accent)]">{kpi.before}</span> → <span className="text-[var(--color-accent)]">{kpi.after}</span>
                       </div>
                     ))}
                   </div>
                 </div>
 
-                <div className="hidden md:block mt-6 text-[var(--color-cyan)] font-mono text-xs tracking-[0.2em] uppercase opacity-0 group-hover:opacity-100 transition-opacity">
+                <div className="hidden md:block mt-6 text-[var(--color-accent)] font-mono text-xs tracking-[0.2em] uppercase opacity-0 group-hover:opacity-100 transition-opacity">
                   Tap to explore →
                 </div>
               </motion.button>
@@ -246,7 +246,7 @@ export function AppsShowcase() {
                 </div>
                 <button
                   onClick={() => setSelectedApp(null)}
-                  className="shrink-0 w-10 h-10 rounded-full border border-[var(--color-rule-2)] flex items-center justify-center hover:border-[var(--color-cyan)] hover:text-[var(--color-cyan)] transition-colors"
+                  className="shrink-0 w-10 h-10 rounded-full border border-[var(--color-rule-2)] flex items-center justify-center hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] transition-colors"
                   aria-label="Close"
                 >
                   ✕
@@ -263,7 +263,7 @@ export function AppsShowcase() {
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: idx * 0.05 }}
-                      className="glass p-6 rounded-xl border border-[var(--color-rule-2)] hover:border-[var(--color-cyan)] transition-colors group cursor-pointer"
+                      className="glass p-6 rounded-xl border border-[var(--color-rule-2)] hover:border-[var(--color-accent)] transition-colors group cursor-pointer"
                     >
                       <div className={`relative w-full aspect-video rounded-lg mb-4 bg-gradient-to-br ${selectedApp.color} flex items-center justify-center overflow-hidden group`}>
                         {item.image ? (
@@ -284,7 +284,7 @@ export function AppsShowcase() {
                           </div>
                         )}
                       </div>
-                      <h4 className="font-display text-lg mb-2 group-hover:text-[var(--color-cyan)] transition-colors">
+                      <h4 className="font-display text-lg mb-2 group-hover:text-[var(--color-accent)] transition-colors">
                         {item.title}
                       </h4>
                       <p className="text-[var(--color-ink-2)] text-sm leading-relaxed">
@@ -303,7 +303,7 @@ export function AppsShowcase() {
                     {selectedApp.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="font-mono text-xs px-3 py-2 rounded border border-[var(--color-cyan)] text-[var(--color-cyan)] bg-cyan-500/10"
+                        className="font-mono text-xs px-3 py-2 rounded border border-[var(--color-accent)] text-[var(--color-accent)] bg-accent/10"
                       >
                         {tag}
                       </span>

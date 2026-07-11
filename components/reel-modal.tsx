@@ -35,12 +35,12 @@ export function ReelModal({ reel, onClose }: { reel: Reel | null; onClose: () =>
           >
             <div className="flex justify-between items-start mb-4 font-mono text-[11px] tracking-[0.22em] uppercase text-[var(--color-mute)]">
               <div>
-                <span className="text-[var(--color-cyan)]">●</span>
+                <span className="text-[var(--color-accent)]">●</span>
                 <span className="ml-2">Now Playing — {reel.client}</span>
               </div>
               <button
                 onClick={onClose}
-                className="hover:text-[var(--color-cyan)] transition"
+                className="hover:text-[var(--color-accent)] transition"
               >
                 Close [esc] ✕
               </button>
