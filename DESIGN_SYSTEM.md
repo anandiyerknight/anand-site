@@ -485,3 +485,7 @@ Definition of done:   [all states present / mobile tested / consistent with desi
 
 *This rulebook applies to every UI, animation, layout, and styling decision in this project, without exception.*
 *Design consistency is not aesthetic preference. It is product quality.*
+
+## Design rule - NO capsule / pill shapes (LOCKED, user directive 2026-06-28)
+
+Never use fully-rounded "capsule" / "pill" elements (`border-radius: 999px` / `9999px`, Tailwind `rounded-full`) for badges, tags, labels, chips, or buttons. Fully-rounded pills are a dead AI/Claude design giveaway. Use rectangles with a small radius (0-8px) instead. Reserve full rounding only for genuine circles (avatars, small status dots). Applies to this project and all new ones.
