@@ -3,6 +3,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Magnetic } from "./magnetic";
 import { Reveal } from "./reveal";
+import { Section } from "./ui/section";
 
 type State = "idle" | "submitting" | "ok" | "err";
 
@@ -53,8 +54,12 @@ export function AuditForm() {
   };
 
   return (
-    <section id="audit" className="relative py-12 md:py-32 px-6 md:px-10 border-t border-[var(--color-rule)] bg-gradient-to-b from-transparent via-transparent to-[var(--color-bg-2)] overflow-hidden">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-10">
+    <Section
+      id="audit"
+      spacing="large"
+      className="bg-gradient-to-b from-transparent via-transparent to-[var(--color-bg-2)] overflow-hidden"
+      containerClassName="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-10"
+    >
         <div className="md:col-span-5 flex flex-col justify-center">
           <Reveal>
             <h2 className="font-display text-[clamp(1.8rem,5vw,4.5rem)] leading-[0.95] tracking-tight">
@@ -201,7 +206,6 @@ export function AuditForm() {
             </div>
           </Reveal>
         </div>
-      </div>
-    </section>
+    </Section>
   );
 }

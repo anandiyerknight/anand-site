@@ -1,6 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
-import { Reveal } from "./reveal";
+import { Section } from "./ui/section";
+import { SectionHead } from "./ui/section-head";
 
 const testimonials = [
   {
@@ -63,15 +64,8 @@ const itemVariants = {
 
 export function Testimonial() {
   return (
-    <section className="relative py-10 md:py-32 px-6 md:px-10 overflow-hidden border-t border-[var(--color-rule)]">
-      <div className="max-w-7xl mx-auto">
-        <Reveal>
-          <div className="mb-8 md:mb-16">
-            <h2 className="font-display text-[clamp(1.6rem,5vw,4rem)] leading-[1] tracking-tight mb-3">
-              What builders say after the system ships.
-            </h2>
-          </div>
-        </Reveal>
+    <Section spacing="large" className="overflow-hidden">
+        <SectionHead title="What builders say after the system ships." />
 
         <motion.div
           className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6"
@@ -102,7 +96,6 @@ export function Testimonial() {
             </motion.div>
           ))}
         </motion.div>
-      </div>
-    </section>
+    </Section>
   );
 }

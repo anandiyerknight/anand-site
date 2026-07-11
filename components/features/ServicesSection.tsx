@@ -1,4 +1,6 @@
 import { Reveal } from "../reveal";
+import { Section } from "../ui/section";
+import { SectionHead } from "../ui/section-head";
 
 interface ServiceItem {
   eyebrow: string;
@@ -67,25 +69,13 @@ const services: ServiceItem[] = [
 
 export function ServicesSection() {
   return (
-    <section id="services" className="relative py-12 md:py-28 px-6 md:px-10 border-t border-[var(--color-rule)]">
-      <div className="max-w-7xl mx-auto">
-        <Reveal>
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 mb-8 md:mb-14">
-            <div className="lg:col-span-7">
-              <p className="font-mono text-[10px] md:text-xs tracking-[0.22em] uppercase text-[var(--color-mute)] mb-4">
-                Services
-              </p>
-              <h2 className="font-display text-[clamp(1.8rem,5vw,4rem)] leading-[1] tracking-tight">
-                The systems that fill your pipeline.
-              </h2>
-            </div>
-            <p className="lg:col-span-5 text-sm md:text-lg leading-relaxed text-[var(--color-ink-2)] lg:pt-9 max-w-2xl">
-              It starts with the outreach machine: LinkedIn, email, Instagram and WhatsApp running as one AI system that
-              fills your pipeline every day. Then the funnels, campaigns, content, and dashboards that turn that demand
-              into revenue.
-            </p>
-          </div>
-        </Reveal>
+    <Section id="services" spacing="base">
+      <SectionHead
+        layout="split"
+        tag="Services"
+        title="The systems that fill your pipeline."
+        description="It starts with the outreach machine: LinkedIn, email, Instagram and WhatsApp running as one AI system that fills your pipeline every day. Then the funnels, campaigns, content, and dashboards that turn that demand into revenue."
+      />
 
         {/* Flagship - the outreach machine */}
         <Reveal>
@@ -147,7 +137,6 @@ export function ServicesSection() {
             </Reveal>
           ))}
         </div>
-      </div>
-    </section>
+    </Section>
   );
 }

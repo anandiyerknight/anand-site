@@ -1,7 +1,8 @@
 "use client";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Reveal } from "./reveal";
+import { Section } from "./ui/section";
+import { SectionHead } from "./ui/section-head";
 
 const apps = [
   {
@@ -133,18 +134,11 @@ export function AppsShowcase() {
 
   return (
     <>
-      <section id="systems" className="relative py-12 md:py-32 px-6 md:px-10 border-t border-[var(--color-rule)]">
-        <div className="max-w-7xl mx-auto">
-          <Reveal>
-            <div className="mb-8 md:mb-16">
-              <h2 className="font-display text-[clamp(1.8rem,5vw,4rem)] leading-[1] tracking-tight mb-3 md:mb-4">
-                What I've Built.
-              </h2>
-              <p className="text-[var(--color-ink-2)] text-sm md:text-base max-w-2xl">
-                Production systems — live, deployed, and compounding.
-              </p>
-            </div>
-          </Reveal>
+      <Section id="systems" spacing="large">
+          <SectionHead
+            title="What I've Built."
+            description="Production systems — live, deployed, and compounding."
+          />
 
           <motion.div
             className="grid grid-cols-2 md:grid-cols-2 gap-4 md:gap-8"
@@ -225,8 +219,7 @@ export function AppsShowcase() {
               </motion.button>
             ))}
           </motion.div>
-        </div>
-      </section>
+      </Section>
 
       {/* Modal */}
       <AnimatePresence>

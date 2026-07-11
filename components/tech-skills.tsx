@@ -1,5 +1,7 @@
 "use client";
 import { Reveal } from "./reveal";
+import { Section } from "./ui/section";
+import { SectionHead } from "./ui/section-head";
 
 const categories = [
   {
@@ -34,18 +36,11 @@ const categories = [
 
 export function TechSkills() {
   return (
-    <section id="tech" className="relative py-10 md:py-28 px-6 md:px-10 border-t border-[var(--color-rule)]">
-      <div className="max-w-7xl mx-auto">
-        <Reveal>
-          <div className="mb-8 md:mb-14 max-w-5xl">
-            <h2 className="font-display text-[clamp(1.6rem,5vw,4rem)] leading-[1] tracking-tight mb-3">
-              The architecture behind the systems.
-            </h2>
-            <p className="text-sm md:text-xl text-[var(--color-ink-2)] leading-relaxed max-w-3xl">
-              A practical stack for building, shipping, automating, and maintaining production workflows across creative and technical teams.
-            </p>
-          </div>
-        </Reveal>
+    <Section id="tech" spacing="base">
+        <SectionHead
+          title="The architecture behind the systems."
+          description="A practical stack for building, shipping, automating, and maintaining production workflows across creative and technical teams."
+        />
 
         <div className="divide-y divide-[var(--color-rule)] border-y border-[var(--color-rule)]">
           {categories.map((cat, idx) => (
@@ -68,7 +63,6 @@ export function TechSkills() {
             </Reveal>
           ))}
         </div>
-      </div>
-    </section>
+    </Section>
   );
 }

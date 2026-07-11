@@ -1,6 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Reveal } from "./reveal";
+import { Section } from "./ui/section";
+import { SectionHead } from "./ui/section-head";
 import { workItems } from "@/lib/work";
 
 // Home-page teaser. Shows the featured work and links through to the full /work page.
@@ -11,25 +13,23 @@ export function WorkGrid() {
     .slice(0, 6);
 
   return (
-    <section id="work-grid" className="relative py-24 md:py-32 px-6 md:px-10 border-t border-[var(--color-rule)]">
-      <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
-          <div className="max-w-2xl">
-            <div className="font-mono text-[11px] tracking-[0.22em] uppercase text-[var(--color-mute)] mb-5">
-              <span className="text-[var(--color-cyan)]">[ Work ]</span>
-              <span className="ml-3">Selected builds</span>
-            </div>
-            <Reveal>
-              <h2 className="font-display text-[clamp(2.2rem,5vw,4.5rem)] leading-[0.95] tracking-tight">
-                Landing pages <span className="italic">and the brands behind them.</span>
-              </h2>
-            </Reveal>
-          </div>
-          <Link href="/work" className="btn-ghost shrink-0">
-            <span>See all work</span>
-            <span aria-hidden>→</span>
-          </Link>
-        </div>
+    <Section id="work-grid" spacing="xl">
+        <SectionHead
+          size="lg"
+          index="[ Work ]"
+          tag="Selected builds"
+          title={
+            <>
+              Landing pages <span className="italic">and the brands behind them.</span>
+            </>
+          }
+          right={
+            <Link href="/work" className="btn-ghost shrink-0">
+              <span>See all work</span>
+              <span aria-hidden>→</span>
+            </Link>
+          }
+        />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
           {featured.map((item, i) => (
@@ -63,7 +63,6 @@ export function WorkGrid() {
             </Reveal>
           ))}
         </div>
-      </div>
-    </section>
+    </Section>
   );
 }

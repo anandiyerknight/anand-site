@@ -1,7 +1,8 @@
 "use client";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
-import { Reveal } from "./reveal";
+import { Section } from "./ui/section";
+import { SectionHead } from "./ui/section-head";
 
 const faqs = [
   {
@@ -22,15 +23,8 @@ export function FAQ() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section className="relative py-10 md:py-32 px-6 md:px-10 border-t border-[var(--color-rule)]">
-      <div className="max-w-5xl mx-auto">
-        <div className="mb-8 md:mb-12">
-          <Reveal>
-            <h2 className="font-display text-[clamp(1.6rem,5vw,4.5rem)] leading-[0.98] tracking-tight">
-              Common questions.
-            </h2>
-          </Reveal>
-        </div>
+    <Section spacing="large" width="narrow">
+        <SectionHead title="Common questions." />
 
         <ul className="divide-y divide-[var(--color-rule-2)] border-y border-[var(--color-rule-2)]">
           {faqs.map((f, i) => {
@@ -79,7 +73,6 @@ export function FAQ() {
             );
           })}
         </ul>
-      </div>
-    </section>
+    </Section>
   );
 }

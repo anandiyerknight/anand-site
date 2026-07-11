@@ -1,5 +1,6 @@
 "use client";
 import { Reveal } from "./reveal";
+import { Section } from "./ui/section";
 
 const credentials = [
   { label: "Experience", value: "15+ years in Content Production" },
@@ -14,8 +15,11 @@ const credentials = [
 
 export function Methodology() {
   return (
-    <section id="methodology" className="relative py-12 md:py-32 px-6 md:px-10 border-t border-[var(--color-rule)]">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-start">
+    <Section
+      id="methodology"
+      spacing="large"
+      containerClassName="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-start"
+    >
         <div className="md:col-span-5 md:sticky md:top-32">
           <Reveal>
             <img
@@ -57,7 +61,6 @@ export function Methodology() {
             </div>
           </Reveal>
         </div>
-      </div>
-    </section>
+    </Section>
   );
 }
