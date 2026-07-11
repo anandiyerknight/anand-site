@@ -171,3 +171,37 @@ On branch `system-loop`. Built `/system` (the compounding-loop client-explainer)
 2. If he wants to show clients: make the preview shareable — Vercel dashboard → Settings → Deployment Protection (disable Vercel Authentication for previews, or use a protection-bypass token). Currently the preview URL hits a Vercel login wall.
 3. When approved: promote `/system` to the homepage hero (reorganise `app/page.tsx` sections) and ship to prod (`gh auth switch --user anandiyerknight && git push vercel main`). Add a nav link.
 Standalone HTML prototypes (superseded by the React build) live at `~/CODE/growth-machine-capabilities-mindmap.html` + `~/CODE/automation-loop-visualiser.html`.
+
+
+---
+
+# REBRAND + ARCHITECTURE CONSOLIDATION (2026-07-11, branch `rebrand-tokens`, NOT yet merged/deployed)
+
+Full token-deepened visual rebrand + component consolidation. **Awaiting Anand's screenshot review before merge to main + `git push vercel main`.**
+
+## What changed (visual)
+- **Display font: Clash Display** (Fontshare, ITF Free Font License) — `app/fonts/ClashDisplay-Variable.woff2` via `next/font/local` as `--font-clash`; `.font-display` weight 600. Body stays Geist. Unused Inter load removed.
+- **Brand accent: emerald** — `--color-accent: #34d399` / `--color-accent-deep: #22c55e` in `@theme`. Applied at: hero "not" + grad-text (white→emerald), numbered section eyebrows, KPI numbers, active /work filter tab, form focus, btn hovers, ::selection.
+- **De-pill sweep**: no `rounded-full` anywhere except genuine circles marked `@allow-circle` (status dots, play button, slider knob, success badges). Buttons = `var(--radius-md)` 6px; chips = 4px; cards = 12–16px (rounded-xl/2xl/3xl REDEFINED in @theme to 12/16/16px).
+- **Aurora background deleted**, glass cards replaced with solid `bg-2 + ring` (glass kept for modals/nav only), numbered editorial rhythm (01 Services / 02 Systems / 03 Work / 04 About).
+- **Hero typo fixed**: "Strategy.It's" → space now joins every headline word (the joining "space" char in hero.tsx is a non-ASCII space — grep-by-eye won't match ASCII space). Hero video untouched.
+
+## New modules (the seams)
+- `components/ui/section.tsx` — `<Section spacing bordered width containerClassName>`: THE wrapper for every page band (owns px/py/rule/container). All main sections migrated.
+- `components/ui/section-head.tsx` — `<SectionHead tag index title description layout="default|split|indexed" size right>`: every heading block; layout variants live here.
+- `components/ui/page-header.tsx` — secondary-route hero (used by /work, /newsletters).
+- `components/ui/lead-form.tsx` — ALL lead capture: `<LeadForm type="audit">` (audit panel) + `useGatedDownload(endpoint)`/`<GateModal>` (gated PDFs, shared `nl_lead` localStorage gate). The 3 previous duplicate implementations are gone; API routes unchanged.
+- `lib/motion.ts` — `EASE`/`DUR` constants for Framer Motion; inline easing arrays are gate-banned.
+- Deleted orphans: `accordion.tsx`, `portrait-placeholder.tsx`, `music-section.tsx`.
+
+## Mechanical design gate
+`scripts/design-gate.mjs` runs before every build (`npm run build` = gate && next build; also `npm run design-gate`). FAILS on: `rounded-full` without same-line-or-2-above `@allow-circle`; raw hex in app/components (allowlist #000/#fff/#0e0e0e); `ease: [` outside lib/motion.ts. `/system` + `/experience` trees excluded until migrated. Legacy grayscale tokens (`--color-cyan/magenta/violet/acid`) survive ONLY as `:root` aliases in globals.css for those WIP trees — delete when migrated.
+
+## Tests
+`npm test` (vitest + testing-library + jsdom, `__tests__/`): work.ts data integrity (unique slugs, assets exist, caseStudyIds resolve), LeadForm audit flow (phone validation blocks API, payload carries country code, success state), Section/SectionHead/PageHeader render. 13 assertions. IntersectionObserver stubbed in `__tests__/setup.ts`.
+
+## Verified 2026-07-11
+typecheck ✓ · design-gate ✓ · `npm run build` ✓ (all 11 routes incl. /system + /experience) · vitest 13/13 ✓ · Brave screenshots desktop 1440 + mobile 390 ✓ · gate modal opens with correct fields ✓ · /work filters function ✓.
+
+## ▶ Next step
+Anand reviews the after_*.png screenshots (session scratchpad) or runs `npm run dev` → approve/veto accent + font → merge `rebrand-tokens` → main → `gh auth switch --user anandiyerknight && git push vercel main` → verify live at anandiyer.co.in.
