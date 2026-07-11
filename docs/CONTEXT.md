@@ -10,6 +10,7 @@
 **Code:** `~/CODE/anand-site`
 **Stack:** Next.js 15.5.18 · React 19 · TypeScript · Tailwind v4 · Framer Motion · GSAP
 **Status:** LIVE on Vercel at https://anandiyer.co.in (custom domain via GoDaddy A record 76.76.21.21)
+**Domain note (2026-07-11):** `anand.co.in` is a SEPARATE domain — registered (expiry 2027-05-03, Endurance/BigRock) but has ZERO DNS records (no NS/A anywhere); it does not serve this site. If wanted as an alias: point its DNS at Vercel + add to the project. The live domain is anandiyer.co.in only.
 
 ## Git Remotes — IMPORTANT
 
