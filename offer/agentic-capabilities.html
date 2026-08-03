@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Anand Iyer - The AI Growth System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Archivo:wght@500;600;700;800;900&family=Newsreader:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F8FAFD; --card:#FFFFFF; --card2:#EFF4FB; --border:#DFE6F1;
+    --ink:#111A26; --muted:#46536A; --soft:#7A8598;
+    --accent:#1F5673; --accent2:#2E7396; --green:#0E9F6E;
+    --ribbon:linear-gradient(90deg,#BFD6E4,#2E7396 55%,#123A4E);
+  }
+  @page{ size:A4; margin:0; }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  html,body{background:#fff;}
+  body{font-family:'Inter',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+  .page{width:210mm;height:296mm;overflow:hidden;background:var(--paper);margin:0 auto;padding:14mm 16mm 10mm;position:relative;display:flex;flex-direction:column;}
+  .page > *{flex-shrink:0;}
+
+  .top{display:flex;justify-content:space-between;align-items:baseline;}
+  .brand{font-family:'Archivo',sans-serif;color:var(--accent);font-weight:800;font-size:17px;letter-spacing:.07em;}
+  .top .tr{font-family:'Archivo',sans-serif;color:var(--soft);font-weight:700;font-size:16px;letter-spacing:.1em;text-transform:uppercase;}
+  .ribbon{height:3px;background:var(--ribbon);border-radius:3px;margin-top:10px;}
+
+  .eyebrow{font-family:'Archivo',sans-serif;color:var(--accent);font-weight:700;font-size:16px;letter-spacing:.18em;text-transform:uppercase;margin-top:15px;}
+  h1.headline{font-family:'Archivo',sans-serif;font-weight:800;font-size:33px;line-height:1.1;letter-spacing:-.015em;margin-top:9px;color:var(--ink);}
+  h1.headline em{font-family:'Newsreader',Georgia,serif;font-style:italic;font-weight:600;color:var(--accent);}
+  .lead{margin-top:10px;font-size:17px;color:var(--muted);line-height:1.5;max-width:172mm;}
+  .lead b{color:var(--ink);font-weight:600;}
+
+  .foot{margin-top:auto;padding-top:11px;border-top:1px solid var(--border);display:flex;justify-content:space-between;color:var(--soft);font-size:16px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;}
+
+  .sec-k{font-family:'Archivo',sans-serif;color:var(--accent);font-weight:700;font-size:16px;letter-spacing:.14em;text-transform:uppercase;margin-top:14px;}
+
+  /* four pillars, 2x2 */
+  .pillars{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:11px;}
+  .pillars .pl{border:1px solid var(--border);border-radius:12px;background:var(--card);padding:14px 17px;}
+  .pillars .pl .ph{display:flex;align-items:center;gap:11px;}
+  .pillars .pl .pn{font-family:'Archivo',sans-serif;font-weight:800;font-size:16px;color:var(--accent);background:rgba(31,86,115,.08);border:1px solid rgba(31,86,115,.25);border-radius:6px;padding:2px 9px;letter-spacing:.06em;flex:none;}
+  .pillars .pl h4{font-family:'Archivo',sans-serif;font-weight:800;font-size:20px;color:var(--ink);letter-spacing:.02em;}
+  .pillars .pl .prob{font-family:'Newsreader',Georgia,serif;font-style:italic;font-size:17px;color:var(--accent);line-height:1.35;margin-top:9px;}
+  .pillars .pl p{font-size:16px;color:var(--muted);line-height:1.42;margin-top:7px;}
+  .pillars .pl p b{color:var(--ink);font-weight:600;}
+
+  .proofmini{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:13px;}
+  .proofmini .pm{border:1px solid var(--border);border-radius:11px;background:var(--card);padding:14px 16px;display:flex;flex-direction:column;align-items:flex-start;gap:8px;}
+  .proofmini .pm .v{font-family:'Archivo',sans-serif;font-weight:800;font-size:28px;color:var(--accent);line-height:1;flex:none;letter-spacing:-.01em;}
+  .proofmini .pm .k{font-size:16px;color:var(--muted);line-height:1.3;}
+  .proofmini .pm .k b{color:var(--ink);font-weight:700;}
+
+  .aside{margin-top:8px;text-align:center;font-family:'Newsreader',serif;font-style:italic;font-size:19px;color:var(--muted);line-height:1.45;}
+  .aside b{color:var(--accent);font-style:normal;font-weight:700;}
+
+  /* deliverables table */
+  .esttable{margin-top:10px;border:1px solid var(--border);border-radius:12px;overflow:hidden;background:var(--card);}
+  .esttable .er{display:grid;grid-template-columns:0.66fr 3fr;gap:15px;padding:9px 17px;border-top:1px solid var(--border);align-items:baseline;}
+  .esttable .er:first-child{border-top:none;}
+  .esttable .er.h{background:var(--card2);}
+  .esttable .er .ei{font-family:'Archivo',sans-serif;font-weight:800;font-size:17px;color:var(--accent);line-height:1.2;letter-spacing:.03em;text-transform:uppercase;}
+  .esttable .er .ed{font-size:16px;color:var(--muted);line-height:1.42;}
+  .esttable .er .ed b{color:var(--ink);font-weight:600;}
+  .esttable .er.h .ei,.esttable .er.h .ed{font-family:'Archivo',sans-serif;font-size:16px;letter-spacing:.09em;text-transform:uppercase;color:var(--soft);font-weight:700;}
+
+  .note{margin-top:10px;font-size:16px;color:var(--muted);background:rgba(46,115,150,.05);border:1px solid rgba(31,86,115,.2);border-left:3px solid var(--accent);border-radius:0 9px 9px 0;padding:11px 16px;line-height:1.45;}
+  .note b{color:var(--ink);font-weight:600;}
+  .note .nk{font-family:'Archivo',sans-serif;font-size:16px;letter-spacing:.13em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:5px;font-weight:700;}
+
+  .cols2{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:8px;}
+  .panel{border:1px solid var(--border);border-radius:12px;padding:12px 16px;background:var(--card);}
+  .panel.go{background:rgba(14,159,110,.05);border-color:rgba(14,159,110,.25);}
+  .panel .pt{font-family:'Archivo',sans-serif;font-weight:800;font-size:18px;color:var(--ink);letter-spacing:.02em;}
+  .panel.go .pt{color:var(--green);}
+  .panel ul{list-style:none;margin-top:7px;}
+  .panel li{font-size:16px;color:var(--ink);line-height:1.36;padding:4px 0;border-top:1px solid var(--border);display:flex;gap:9px;}
+  .panel li:first-child{border-top:none;}
+  .panel li .mk{font-weight:800;flex:none;}
+  .panel.go li .mk{color:var(--green);}
+  .panel.no li .mk{color:var(--soft);}
+
+  .cta{position:relative;background:var(--card2);border:1px solid var(--border);border-radius:13px;padding:14px 22px 14px 26px;margin-top:9px;display:flex;justify-content:space-between;align-items:center;gap:20px;overflow:hidden;}
+  .cta::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--ribbon);}
+  .cta .l h3{font-family:'Archivo',sans-serif;font-weight:800;color:var(--ink);font-size:23px;letter-spacing:-.01em;}
+  .cta .l h3 em{font-family:'Newsreader',serif;font-style:italic;font-weight:600;color:var(--accent);}
+  .cta .l p{color:var(--muted);font-size:16px;margin-top:5px;line-height:1.4;max-width:118mm;}
+  .cta .r{text-align:right;flex:none;}
+  .cta .r .site{font-family:'Archivo',sans-serif;color:var(--accent);font-size:18px;font-weight:800;}
+  .cta .r .mail{color:var(--soft);font-size:16px;margin-top:3px;}
+</style>
+</head>
+<body>
+
+<!-- ============================ PAGE 1 ============================ -->
+<section class="page">
+  <div class="top">
+    <div class="brand">ANANDIYER.CO.IN</div>
+    <div class="tr">The AI Growth System &middot; 2026</div>
+  </div>
+  <div class="ribbon"></div>
+
+  <div class="eyebrow">The System</div>
+  <h1 class="headline">Four pillars. <em>One engine that never stops.</em></h1>
+  <p class="lead">
+    B2B growth breaks the same way everywhere: it depends on somebody remembering to do it. We replace
+    that with one AI run engine that finds your buyers, reaches them daily on three channels, and hands
+    your team the warm replies. <b>You close. The engine keeps the pipeline full.</b>
+  </p>
+
+  <div class="sec-k">Four pillars, one loop</div>
+  <div class="pillars">
+    <div class="pl">
+      <div class="ph"><div class="pn">01</div><h4>Content</h4></div>
+      <div class="prob">"We post when somebody remembers to."</div>
+      <p>Website, LinkedIn and Instagram pages, daily carousels, articles and ad videos. Written by AI,
+      gated before anything ships, delivered <b>ready to post with a calendar.</b></p>
+    </div>
+    <div class="pl">
+      <div class="ph"><div class="pn">02</div><h4>Outreach</h4></div>
+      <div class="prob">"Pipeline stops the week we get busy."</div>
+      <p>LinkedIn, email and WhatsApp run as one daily machine. Requests, sequences and follow ups go
+      out every morning, and <b>every single send is verified as landed.</b></p>
+    </div>
+    <div class="pl">
+      <div class="ph"><div class="pn">03</div><h4>Enrich</h4></div>
+      <div class="prob">"You cannot message a buyer you cannot find."</div>
+      <p>Your ideal customer turned into a real list: decision makers by name, title, phone and verified
+      email, scored for fit. <b>Paid per working contact</b>, measured before any scale spend.</p>
+    </div>
+    <div class="pl">
+      <div class="ph"><div class="pn">04</div><h4>Revenue</h4></div>
+      <div class="prob">"Nobody can tell us what actually worked."</div>
+      <p>Every action logged and every reply tracked, warm ones handed to your team same day. A weekly
+      plain English report, so <b>month three beats month one.</b></p>
+    </div>
+  </div>
+
+  <div class="sec-k">The proof &middot; my measured numbers</div>
+  <div class="proofmini">
+    <div class="pm"><div class="v">87-96%</div><div class="k"><b>WhatsApp delivery</b> on our measured send method</div></div>
+    <div class="pm"><div class="v">12%</div><div class="k"><b>reply rate</b>, the best of any channel</div></div>
+    <div class="pm"><div class="v">12.5x</div><div class="k"><b>ROAS</b> - Rs 8 spent per Rs 100 earned</div></div>
+  </div>
+
+  <div class="aside">
+    Four pillars, one loop. Each one feeds the next,<br>
+    <b>and the loop gets sharper every month it runs.</b>
+  </div>
+
+  <div class="foot"><span>Anand Iyer &middot; AI Growth &amp; Automation</span><span>Page 1 of 2</span></div>
+</section>
+
+<!-- ============================ PAGE 2 ============================ -->
+<section class="page">
+  <div class="top">
+    <div class="brand">ANANDIYER.CO.IN</div>
+    <div class="tr">The AI Growth System &middot; 2026</div>
+  </div>
+  <div class="ribbon"></div>
+
+  <div class="eyebrow">What you actually get</div>
+  <h1 class="headline">Every system, <em>and who owns it.</em></h1>
+  <p class="lead">
+    None of this is a pilot. Every item below is built and running for real businesses today.
+  </p>
+
+  <div class="esttable">
+    <div class="er">
+      <div class="ei">Content</div>
+      <div class="ed">Website live. LinkedIn and Instagram pages built from scratch. Daily carousels and post
+      images. Articles and newsletters under your name. Ad videos. One long video cut into many,
+      <b>in your market's languages.</b></div>
+    </div>
+    <div class="er">
+      <div class="ei">Outreach</div>
+      <div class="ed">20 LinkedIn connection requests a day plus InMails. Email sequences with automatic
+      follow ups. WhatsApp templates that clear approval and land. <b>Every send verified, every reply
+      routed to you same day.</b></div>
+    </div>
+    <div class="er">
+      <div class="ei">Enrich</div>
+      <div class="ed">Buyer list built to your ideal customer and scored by fit, not guesswork. Decision makers
+      by name, title, phone and verified email, paid per working contact. <b>Opt out lists honoured
+      permanently.</b></div>
+    </div>
+    <div class="er">
+      <div class="ei">Revenue</div>
+      <div class="ed">Every action logged and reported in plain English weekly. Warm replies handed to your team.
+      A knowledge graph of your market that <b>learns what worked and feeds it into next month.</b></div>
+    </div>
+  </div>
+
+  <div class="aside">
+    What makes it AI and not a person with templates: it <b>remembers</b> your business,<br>
+    it <b>acts</b> rather than suggests, and it <b>cannot send</b> twice or without your word.
+  </div>
+
+  <div class="cols2">
+    <div class="panel go">
+      <div class="pt">What we run</div>
+      <ul>
+        <li><span class="mk">+</span><span>Finding and verifying your buyer list</span></li>
+        <li><span class="mk">+</span><span>All outreach on LinkedIn, email and WhatsApp</span></li>
+        <li><span class="mk">+</span><span>Website, both pages, and every piece of content, plus a weekly plain English report</span></li>
+      </ul>
+    </div>
+    <div class="panel no">
+      <div class="pt">What stays with you</div>
+      <ul>
+        <li><span class="mk">x</span><span>Daily posting, which arrives ready to post</span></li>
+        <li><span class="mk">x</span><span>Quotes, specifications and site visits</span></li>
+        <li><span class="mk">x</span><span>Pricing, negotiation, closing and the relationship after</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="cta">
+    <div class="l">
+      <h3>Start with <em>one pillar.</em></h3>
+      <p>The one costing your team the most time. Proven on your own buyers, then we switch on the next.</p>
+    </div>
+    <div class="r">
+      <div class="site">anandiyer.co.in</div>
+      <div class="mail">iyeranand91@gmail.com</div>
+    </div>
+  </div>
+
+  <div class="foot"><span>Anand Iyer &middot; AI Growth &amp; Automation</span><span>Page 2 of 2</span></div>
+</section>
+
+</body>
+</html>
