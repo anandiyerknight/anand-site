@@ -1,4 +1,4 @@
-
+> STATUS 2026-08-07: Dormant as a tracker row — merged into Anand Outreach for tracking (user order 2026-08-07); site work + NEEDS-YOU live on that status line. Repo and deploy unchanged: git push vercel main.
 
 ---
 
@@ -162,7 +162,7 @@ Hero → Content multiplication (1→100s: carousels/videos/posters/blogs/newsle
 - Prototypes that init Lenis need `?nolenis=1` so `window.scrollTo` sticks for screenshot capture (Lenis fights programmatic scroll).
 - Screenshots via Brave 9666 CDP `Page.captureScreenshot` (browser-harness, `BU_CDP_URL=http://127.0.0.1:9666`).
 
-### ▶ NEXT SESSION STARTS HERE (/experience)
+### ▶ Parked thread (/experience)
 User is going to: generate the 5 stills (prompts in `docs/IMMERSIVE_3D_PROMPTS.md` C) → generate videos (Veo prompts, section A) → render all clips WITHOUT text → drop clips into `public/experience/video/`. THEN: build the cinematic `/experience` route = scroll-scrub each clip per section using the `scroll-video.html` frame-sequence engine + editable DOM text/CTA overlays, 7 sections (no FAQ), mobile fallback, wire CTA to the audit form. Replace the R3F bubble scaffolding. Deploy (anand-site is report-only / protected): `gh auth switch --user anandiyerknight && git push vercel main` after approval.
 
 ## Next Session Starts Here (/system)
