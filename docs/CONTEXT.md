@@ -1,4 +1,4 @@
-> STATUS 2026-08-07: Dormant as a tracker row — merged into Anand Outreach for tracking (user order 2026-08-07); site work + NEEDS-YOU live on that status line. Repo and deploy unchanged: git push vercel main.
+> STATUS 2026-08-14: Dormant as a tracker row - merged into Anand Outreach for tracking (user order 2026-08-07); site work + NEEDS-YOU live on that status line. Nothing has changed in this repo since apart from that status refresh itself (10-Aug). | NEEDS-YOU: nothing here - see Anand Outreach
 
 ---
 
