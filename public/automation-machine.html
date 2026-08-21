@@ -1,0 +1,1164 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Automation Machine · Anand Iyer</title>
+<meta name="description" content="Eight machines, one team of thirty eight agents. Content in, revenue out, every send gated by a human. The full B2B outbound system, machine by machine.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;800&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#000; --bg2:#0e0e0e; --ink:#f5f5f7; --ink2:#e2e2e2; --mute:#8e9192;
+  --rule:#353535; --rule2:#444748; --accent:#fff; --dim:#c6c6c8;
+  --sans:"Geist",ui-sans-serif,system-ui,-apple-system,sans-serif;
+  --mono:"Geist Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  background:var(--bg); color:var(--ink); font-family:var(--sans);
+  font-size:16px; line-height:1.5; overflow:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+.font-display{font-family:var(--sans);font-weight:800;font-feature-settings:"liga","ss01";letter-spacing:-0.02em}
+.grad-text{color:transparent;background:linear-gradient(135deg,#fff,#f5f5f7 50%,#c6c6c8);-webkit-background-clip:text;background-clip:text}
+
+/* ── atmosphere ─ (pre-blurred gradients: a filter blur here costs whole frames on software raster) */
+.aurora{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(60vw 60vw at 12% 6%, rgba(255,255,255,.075), transparent 62%),
+    radial-gradient(52vw 52vw at 90% 94%, rgba(255,255,255,.055), transparent 62%);
+}
+
+/* ── stage / 3d board ─ */
+#stage{position:fixed;inset:0;z-index:1;perspective:1500px;cursor:grab;touch-action:none;overflow:hidden}
+#stage.dragging{cursor:grabbing}
+#tilt{position:absolute;inset:0;transform-style:preserve-3d;will-change:transform}
+#board{position:absolute;left:50%;top:50%;transform-origin:0 0;transform-style:preserve-3d;will-change:transform}
+#board::before{
+  content:"";position:absolute;left:-4400px;top:-4400px;width:8800px;height:8800px;
+  background-image:linear-gradient(90deg,rgba(255,255,255,.028) 1px,transparent 0),
+                   linear-gradient(rgba(255,255,255,.028) 1px,transparent 0);
+  background-size:80px 80px;
+  -webkit-mask-image:radial-gradient(closest-side,#000 32%,transparent 78%);
+  mask-image:radial-gradient(closest-side,#000 32%,transparent 78%);
+}
+#wires{position:absolute;left:-3200px;top:-3200px;width:6400px;height:6400px;overflow:visible;pointer-events:none}
+#wires text{font-family:var(--mono);font-size:16px;fill:var(--mute);letter-spacing:.08em}
+.wflow{stroke:#fff;stroke-opacity:.85;fill:none;stroke-width:2.6;stroke-dasharray:10 150;animation:flow 3.2s linear infinite}
+@keyframes flow{to{stroke-dashoffset:-160}}
+.wloop{animation:loopflow 2.6s linear infinite}
+@keyframes loopflow{to{stroke-dashoffset:-24}}
+
+/* ── nodes ─ */
+.node{position:absolute;left:0;top:0;will-change:transform;transform-style:preserve-3d}
+.card{
+  width:100%;height:100%;text-align:left;color:var(--ink);cursor:pointer;
+  background:rgba(12,12,13,.72);border:1px solid rgba(255,255,255,.16);border-radius:12px;
+  -webkit-backdrop-filter:blur(18px) saturate(1.2);backdrop-filter:blur(18px) saturate(1.2);
+  padding:20px 22px;display:flex;flex-direction:column;gap:8px;
+  transition:border-color .25s,box-shadow .25s,transform .25s,background .25s;
+  font-family:var(--sans);font-size:16px;
+}
+.card:hover,.card:focus-visible{transform:translateZ(26px);border-color:rgba(255,255,255,.55);background:rgba(20,20,22,.8);outline:none}
+.node.sel .card{border-color:#fff;box-shadow:0 0 0 1px #fff,0 0 44px rgba(255,255,255,.14)}
+.card .eyebrow{font-family:var(--mono);font-size:16px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);white-space:nowrap}
+.card .eyebrow b{color:var(--dim);font-weight:500}
+.card .claim{font-size:16px;line-height:1.42;color:var(--ink2)}
+.card .statusline{margin-top:auto;display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:16px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
+.sw{display:inline-block;width:22px;height:0;border-top:2px solid var(--dim)}
+.sw.live{border-top-style:solid;border-top-color:#fff}
+.sw.build{border-top-style:dashed}
+.sw.spec{border-top-style:dotted}
+
+.node.hub{z-index:5}
+.node.hub .card{padding:26px 30px;background:rgba(8,8,9,.85);border-color:rgba(255,255,255,.4);box-shadow:0 0 70px rgba(255,255,255,.10);transform:translateZ(0)}
+.node.hub .card:hover{transform:translateZ(30px)}
+.node.hub h1{font-size:34px;line-height:1.04}
+.node.hub .claim{color:var(--ink2)}
+
+.node.machine{z-index:4}
+.node.machine h2{font-size:24px;line-height:1.1;font-weight:800;letter-spacing:-0.01em}
+.node.machine .card{transform:translateZ(0)}
+.node.machine.st-live .card{border-color:rgba(255,255,255,.42);box-shadow:0 0 34px rgba(255,255,255,.07)}
+.node.machine.st-build .card{border-style:dashed;border-color:rgba(255,255,255,.3)}
+.node.machine.st-spec .card{border-style:dotted;border-color:rgba(255,255,255,.26)}
+
+.node.agent{z-index:3}
+.node.agent h3{font-size:18px;font-weight:600;line-height:1.15}
+.node.agent .card{padding:16px 18px;gap:6px;background:rgba(13,13,15,.94);-webkit-backdrop-filter:none;backdrop-filter:none}
+.node.agent.st-live .card{border-color:rgba(255,255,255,.3)}
+.node.agent.st-build .card{border-style:dashed;border-color:rgba(255,255,255,.24)}
+.node.agent.st-spec .card{border-style:dotted;border-color:rgba(255,255,255,.2)}
+.node.agent .claim{color:var(--mute)}
+
+.node{opacity:0;visibility:hidden}
+.node.in{opacity:1;visibility:visible;transition:opacity .5s ease}
+
+/* ── chrome ─ */
+.chrome{position:fixed;z-index:10;font-size:16px}
+header.chrome{top:0;left:0;right:0;display:flex;align-items:center;gap:18px;padding:16px 24px;
+  background:linear-gradient(rgba(0,0,0,.82),rgba(0,0,0,0));}
+.brand{display:flex;align-items:baseline;gap:10px;text-decoration:none;color:var(--ink);white-space:nowrap}
+.brand .nm{font-weight:800;font-size:18px;letter-spacing:-0.01em}
+.brand .rl{font-family:var(--mono);font-size:16px;color:var(--mute);letter-spacing:.1em;text-transform:uppercase}
+.brand:hover .rl{color:#fff}
+.spacer{flex:1}
+#legend{display:flex;gap:18px;align-items:center;font-family:var(--mono);font-size:16px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+#legend span{display:flex;align-items:center;gap:8px;white-space:nowrap}
+.btnc{
+  font-family:var(--mono);font-size:16px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink2);background:rgba(12,12,13,.6);border:1px solid var(--rule2);border-radius:8px;
+  padding:10px 14px;cursor:pointer;transition:all .25s;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+  min-width:44px;min-height:44px;
+}
+.btnc:hover{border-color:#fff;color:#fff}
+.btn-primary{
+  font-family:var(--mono);font-size:16px;letter-spacing:.12em;text-transform:uppercase;
+  background:#fff;color:#000;border:1px solid #fff;border-radius:8px;padding:11px 18px;
+  cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:10px;
+  box-shadow:0 0 20px rgba(255,255,255,.15);transition:all .3s;white-space:nowrap;min-height:44px;
+}
+.btn-primary:hover{box-shadow:0 0 34px rgba(255,255,255,.3)}
+
+#intro{top:86px;left:24px;max-width:520px;pointer-events:none;transition:opacity .45s ease}
+body.mapon #intro{opacity:0}
+#intro .eyebrow{font-family:var(--mono);font-size:16px;letter-spacing:.2em;text-transform:uppercase;color:var(--mute);margin-bottom:10px}
+#intro .eyebrow b{color:#fff;font-weight:500}
+#intro h1{font-size:clamp(34px,4.4vw,56px);line-height:.98;margin-bottom:12px}
+#intro .sub{font-family:var(--mono);font-size:16px;letter-spacing:.06em;color:var(--mute);text-transform:uppercase}
+
+footer.chrome{bottom:0;left:0;right:0;display:flex;align-items:center;gap:16px;padding:14px 24px;
+  font-family:var(--mono);font-size:16px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);
+  background:linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.8))}
+#hint{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* ── panel ─ */
+#panel{
+  position:fixed;z-index:20;top:84px;right:24px;bottom:24px;width:min(470px,calc(100vw - 48px));
+  background:rgba(8,8,9,.88);border:1px solid rgba(255,255,255,.16);border-radius:16px;
+  -webkit-backdrop-filter:blur(32px) saturate(1.2);backdrop-filter:blur(32px) saturate(1.2);
+  padding:28px;overflow-y:auto;overscroll-behavior:contain;
+  transform:translateX(26px);opacity:0;visibility:hidden;pointer-events:none;
+  transition:transform .35s cubic-bezier(.2,.7,.2,1),opacity .35s,visibility .35s;
+}
+#panel.open{transform:none;opacity:1;visibility:visible;pointer-events:auto}
+#panel .phead{display:flex;align-items:flex-start;gap:12px;margin-bottom:6px}
+#panel .crumb{font-family:var(--mono);font-size:16px;letter-spacing:.16em;text-transform:uppercase;color:var(--mute);flex:1;padding-top:6px}
+#panel .crumb b{color:var(--dim);font-weight:500}
+#pback{display:none}
+#pback.show{display:inline-flex}
+#panel h2{font-size:30px;line-height:1.05;margin:8px 0 6px}
+#panel .pstatus{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:16px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:14px}
+#panel .pclaim{font-size:18px;line-height:1.45;color:var(--ink2);margin-bottom:20px}
+#panel .sect{font-family:var(--mono);font-size:16px;letter-spacing:.18em;text-transform:uppercase;color:var(--mute);margin:22px 0 10px;padding-top:18px;border-top:1px solid var(--rule)}
+#panel ul.det{list-style:none;display:flex;flex-direction:column;gap:10px}
+#panel ul.det li{position:relative;padding-left:20px;color:var(--ink2);font-size:16px;line-height:1.5}
+#panel ul.det li::before{content:"";position:absolute;left:2px;top:11px;width:8px;height:1px;background:var(--dim)}
+.arow{
+  display:flex;align-items:center;gap:12px;width:100%;text-align:left;cursor:pointer;
+  background:rgba(255,255,255,.03);border:1px solid var(--rule);border-radius:10px;
+  padding:12px 14px;margin-bottom:8px;color:var(--ink);font-family:var(--sans);font-size:16px;transition:all .2s;
+}
+.arow:hover{border-color:rgba(255,255,255,.5);background:rgba(255,255,255,.06)}
+.arow .an{flex:1;font-weight:600}
+.arow .as{font-family:var(--mono);font-size:16px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);display:flex;align-items:center;gap:8px;white-space:nowrap}
+.lnk{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  border:1px solid var(--rule2);border-radius:10px;padding:13px 15px;margin-bottom:8px;
+  color:var(--ink);text-decoration:none;font-size:16px;transition:all .2s;background:rgba(255,255,255,.02);
+}
+.lnk:hover{border-color:#fff;background:rgba(255,255,255,.06)}
+.lnk .arr{font-family:var(--mono);color:var(--mute)}
+.lnk:hover .arr{color:#fff}
+.xbtn{
+  width:44px;height:44px;border-radius:8px;border:1px solid var(--rule2);background:transparent;
+  color:var(--mute);font-size:20px;line-height:1;cursor:pointer;transition:all .2s;flex:none;
+}
+.xbtn:hover{border-color:#fff;color:#fff}
+
+/* ── modal (the real list) ─ */
+#modal{position:fixed;inset:0;z-index:30;display:none;align-items:center;justify-content:center;padding:24px;
+  background:rgba(0,0,0,.74);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+#modal.open{display:flex}
+#modal .mcard{
+  width:min(1120px,100%);max-height:calc(100vh - 48px);overflow-y:auto;overscroll-behavior:contain;
+  background:rgba(10,10,11,.92);border:1px solid rgba(255,255,255,.2);border-radius:16px;padding:30px;
+}
+#modal .mhead{display:flex;align-items:flex-start;gap:14px;margin-bottom:4px}
+#modal .mhead .crumb{flex:1;font-family:var(--mono);font-size:16px;letter-spacing:.16em;text-transform:uppercase;color:var(--mute);padding-top:6px}
+#modal h2{font-size:30px;margin:6px 0 8px}
+#modal .lede{color:var(--ink2);font-size:17px;max-width:70ch;margin-bottom:22px}
+.twrap{overflow-x:auto;border:1px solid var(--rule);border-radius:12px}
+table{border-collapse:collapse;width:100%;min-width:880px;font-size:16px}
+th{font-family:var(--mono);font-size:16px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);text-align:left;font-weight:400;padding:13px 16px;border-bottom:1px solid var(--rule2);white-space:nowrap}
+td{padding:13px 16px;border-bottom:1px solid var(--rule);color:var(--ink2);vertical-align:top;white-space:nowrap}
+tr:last-child td{border-bottom:none}
+td .dm{color:var(--ink);font-weight:600}
+td .dt{font-size:16px;color:var(--mute)}
+td.monoc{font-family:var(--mono)}
+.mgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:22px 0 6px}
+.mstat{border:1px solid var(--rule);border-radius:10px;padding:14px 16px;background:rgba(255,255,255,.02)}
+.mstat .n{font-weight:800;font-size:26px;letter-spacing:-0.01em}
+.mstat .l{font-family:var(--mono);font-size:16px;color:var(--mute);letter-spacing:.06em;text-transform:uppercase;margin-top:2px}
+#modal .src{font-size:16px;color:var(--mute);margin-top:16px;font-style:italic}
+#modal .sect{font-family:var(--mono);font-size:16px;letter-spacing:.18em;text-transform:uppercase;color:var(--mute);margin:24px 0 10px}
+#modal ul.det{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:8px 24px}
+#modal ul.det li{position:relative;padding-left:20px;color:var(--ink2);font-size:16px}
+#modal ul.det li::before{content:"";position:absolute;left:2px;top:11px;width:8px;height:1px;background:var(--dim)}
+
+/* ── responsive ─ */
+@media (max-width:900px){
+  #legend{display:none}
+  #intro{left:16px;right:16px;top:78px;max-width:none}
+  header.chrome{padding:12px 16px;gap:10px}
+  #panel{top:auto;left:12px;right:12px;bottom:12px;width:auto;max-height:60vh;transform:translateY(26px)}
+  #panel.open{transform:none}
+  #modal ul.det{grid-template-columns:1fr}
+  footer.chrome{padding:12px 16px}
+  #copyline{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  .aurora i,.wflow,.wloop{animation:none}
+  #panel,.card,.node.in{transition:none}
+}
+</style>
+</head>
+<body>
+
+<div class="aurora" aria-hidden="true"></div>
+
+<div id="stage">
+  <div id="tilt">
+    <div id="board">
+      <svg id="wires" viewBox="0 0 6400 6400" aria-hidden="true">
+        <defs>
+          <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#8e9192"></path>
+          </marker>
+        </defs>
+        <g id="wstatic"></g>
+        <g id="wflows"></g>
+        <g id="wloops"></g>
+      </svg>
+      <div id="nodes"></div>
+    </div>
+  </div>
+</div>
+
+<header class="chrome">
+  <a class="brand" href="https://anandiyer.co.in">
+    <span class="nm">Anand Iyer</span><span class="rl">/ AI Architect</span>
+  </a>
+  <div class="spacer"></div>
+  <div id="legend" aria-hidden="true">
+    <span><i class="sw live"></i>Running today</span>
+    <span><i class="sw build"></i>In build</span>
+    <span><i class="sw spec"></i>Designed</span>
+  </div>
+  <button class="btnc" id="bExpand" aria-pressed="false">Expand all</button>
+  <button class="btnc" id="bFit" aria-label="Fit the map to the screen">Fit</button>
+  <button class="btnc" id="bZoomOut" aria-label="Zoom out">&minus;</button>
+  <button class="btnc" id="bZoomIn" aria-label="Zoom in">+</button>
+  <a class="btn-primary" href="https://anandiyer.co.in/#audit">Request an Audit <span aria-hidden="true">&rarr;</span></a>
+</header>
+
+<div class="chrome" id="intro">
+  <div class="eyebrow">[ <b>The Offer</b> ] &middot; B2B Outbound</div>
+  <h1 class="font-display grad-text">The Automation Machine</h1>
+  <div class="sub">8 machines &middot; 38 agents &middot; every send gated by a human</div>
+</div>
+
+<footer class="chrome">
+  <span id="hint">Drag to move &middot; scroll to zoom &middot; click any machine to open it</span>
+  <div class="spacer"></div>
+  <span id="copyline">&copy; 2026 &middot; Flippit Media</span>
+</footer>
+
+<aside id="panel" aria-label="Detail panel">
+  <div class="phead">
+    <button class="btnc" id="pback">&larr; Back</button>
+    <div class="crumb" id="pcrumb"></div>
+    <button class="xbtn" id="pclose" aria-label="Close panel">&times;</button>
+  </div>
+  <h2 class="font-display" id="ptitle"></h2>
+  <div class="pstatus" id="pstatus"></div>
+  <p class="pclaim" id="pclaim"></p>
+  <div id="pbody"></div>
+</aside>
+
+<div id="modal" role="dialog" aria-modal="true" aria-label="A live target list">
+  <div class="mcard">
+    <div class="mhead">
+      <div class="crumb">[ Data machine ] &middot; A real list</div>
+      <button class="xbtn" id="mclose" aria-label="Close">&times;</button>
+    </div>
+    <h2 class="font-display">A live target list</h2>
+    <p class="lede">Real rows from a client build. Every brand, every named decision maker, every address and mobile is one we found and checked ourselves.</p>
+    <div class="twrap">
+      <table>
+        <thead><tr><th>Brand</th><th>Revenue</th><th>Decision maker</th><th>Work email</th><th>Mobile</th><th>Checked</th></tr></thead>
+        <tbody id="mtbody"></tbody>
+      </table>
+    </div>
+    <div class="sect">Also on every row</div>
+    <ul class="det" id="malso"></ul>
+    <div class="sect">The scale behind it</div>
+    <div class="mgrid" id="mstats"></div>
+    <p class="src">Read from the client's own database on 10 August 2026. Addresses and mobiles are real, part masked because this page is public. Full records on a call.</p>
+  </div>
+</div>
+
+<script>
+/* ───────────────────────── data ───────────────────────── */
+var HUB = {
+  id:"hub", title:"The Automation Machine",
+  claim:"Agents that make the work, put it out, chase the market and learn from it.",
+  detail:[
+    "One brief in, one team of machines running. Eight machines, thirty eight agents, and an orchestration layer that makes them behave like a team.",
+    "Everything runs on infrastructure the brand owns: its accounts, its domains, its data.",
+    "Nothing sends in bulk and nothing spends money without a person approving that exact run.",
+    "Every machine on this map is marked with what it is really doing today: running, in build, or designed and stood up per brand. Nothing is marked running unless it is.",
+    "Open any machine on the map to see the agents inside it."
+  ],
+  links:[
+    ["Vita plus, health tech landing page","https://vita-lp-hni.vercel.app"],
+    ["The Gut Guru, D2C brand site","https://thegutguru.co.in"],
+    ["Bihari Swad, demand validation page","https://bihari-swad.vercel.app"],
+    ["Brick n Bull, luxury real estate","https://bricknbull.vercel.app"],
+    ["The full work archive","https://anandiyer.co.in/work"],
+    ["Twenty case studies, free to download","https://anandiyer.co.in/newsletters"]
+  ]
+};
+
+var MACHINES = [
+{ id:"content", idx:"01", side:"right", status:"live", title:"Content machine",
+  claim:"Makes the work: reels, carousels, blogs, posts and ad creative.",
+  detail:[
+    "One brief goes in. Finished assets come out, in the brand's own colours, type and voice.",
+    "Every asset is checked against the brand's rules before it leaves the machine.",
+    "Formats are produced together, so one idea ships as a reel, a carousel and a post."
+  ],
+  links:[
+    ["Twenty written case studies we produced","https://anandiyer.co.in/newsletters"],
+    ["The full work archive","https://anandiyer.co.in/work"]
+  ],
+  agents:[
+    { id:"research", status:"spec", title:"Research agent",
+      claim:"Reads the brand and the category, and returns the angles worth making.",
+      detail:[
+        "Angles arrive with their evidence attached, so a brief can be challenged before anything is made.",
+        "An angle with no source behind it is not returned, so nothing enters production on a hunch.",
+        "The output is a brief, not a finished asset, so a weak angle can be killed before any production cost is spent.",
+        "Runs against the brand's own file, never a generic category template."
+      ]},
+    { id:"script", status:"live", title:"Script agent",
+      claim:"Turns an angle into a reel script, a carousel outline or a blog brief.",
+      detail:[
+        "Turns one angle into the three shapes the channels need: a reel script with shot direction, a carousel outline, and a long form brief.",
+        "Written to the brand's voice rules rather than a house style.",
+        "Every script carries the angle it came from, so a reel that performs can be traced back to the research that produced it.",
+        "Length and pacing are set by the platform the asset is for, decided before writing rather than trimmed afterwards."
+      ]},
+    { id:"video", status:"live", title:"Video agent",
+      claim:"Builds the reel from the script: shots, voice, cuts and captions.",
+      detail:[
+        "The script drives the edit, so the cut follows the argument rather than the footage.",
+        "Captions are burned in, because most of the audience watches with the sound off.",
+        "Voice is generated in the accent the brand's audience actually speaks.",
+        "Renders are repeatable, so the same script gives the same video and a change can be reviewed rather than guessed at."
+      ]},
+    { id:"carousel", status:"live", title:"Carousel agent",
+      claim:"Designs the slides in the brand's own colours, type and layout.",
+      detail:[
+        "Lays out slides in the brand's own colours, type and grid, taken from the brand file rather than a template pack.",
+        "Text is fitted to the slide at design time. Nothing is shrunk below readable size to make it fit.",
+        "Exports at the exact dimensions each platform wants, so nothing is cropped on upload.",
+        "The same outline can be re rendered when the brand's look changes, without rewriting the copy."
+      ]},
+    { id:"writing", status:"live", title:"Writing agent",
+      claim:"Captions, hooks, headlines and long form, run through a mechanical language check.",
+      detail:[
+        "Written to the brand's voice rules, so the same offer sounds the same on every channel.",
+        "Every piece runs through a mechanical language check before it can be delivered.",
+        "The check counts characters against each platform's real limit, and catches the punctuation and phrasing that mark copy as machine written.",
+        "It fails the copy rather than warning about it, so nothing ships on a promise to be careful.",
+        "Limits are verified by the checker, never estimated by eye."
+      ]},
+    { id:"brandguard", status:"build", title:"Brand guard",
+      claim:"Checks every asset against the brand's own rules before it can leave.",
+      detail:[
+        "The check runs before delivery, never after, so a wrong asset does not reach a channel and get pulled back.",
+        "Checks the things that embarrass a brand: the wrong colour, the wrong logo treatment, a claim the brand is not allowed to make, type below readable size.",
+        "A failed asset goes back with the reason. It is not quietly corrected.",
+        "The rules live in the brand file, so tightening one rule tightens every future asset at once."
+      ]}
+  ]},
+{ id:"whatsapp", idx:"04", side:"right", status:"live", title:"WhatsApp machine",
+  claim:"Notice style business messaging, measured at 87 to 96 percent delivered.",
+  detail:[
+    "On the same audience, the ordinary promotional route reached 21 to 28 percent.",
+    "The difference is the message category and how the message is written, not the sending tool.",
+    "Every send is logged the instant it fires, so a stopped run never messages anyone twice."
+  ],
+  links:[],
+  agents:[
+    { id:"template", status:"live", title:"Template agent",
+      claim:"Writes and files the message templates, and tracks approval.",
+      detail:[
+        "Approval is tracked per template, because an unapproved template cannot send at all.",
+        "The category is the whole game. The notice style category is exempt from the per user cap that suppresses promotional messages, and costs roughly seven times less to send.",
+        "Wording is checked against what pushes a template back into the promotional category, because a single call to action can reclassify it.",
+        "Every message carries a stop button, so opting out is one tap rather than a typed reply."
+      ]},
+    { id:"audience", status:"live", title:"Audience agent",
+      claim:"Builds the list, cleans it, and removes anyone who should not be messaged.",
+      detail:[
+        "The list is rebuilt for every run rather than reused, so exclusions added yesterday still apply today.",
+        "Junk numbers are caught by shape: the same digit repeated, sequential runs, the wrong length. Landlines and vanity numbers are kept, because they are real.",
+        "A person with no name on file is skipped. A message that cannot address someone should not be sent.",
+        "Anyone already messaged on any other channel is excluded, unless a human overrides it for that run.",
+        "Nothing is deleted for looking weak. It is flagged, and the brand decides what is usable."
+      ]},
+    { id:"send", status:"live", title:"Send agent",
+      claim:"Fires only on a human instruction, and logs every message the instant it goes.",
+      detail:[
+        "Fires only on an explicit human instruction for that exact run. The approval is a phrase typed in the session and checked by the machine, not a setting left switched on.",
+        "Eighteen checks run in order before the first message leaves, covering do not contact, opt outs, dead numbers, existing customers, duplicates and prior contact on any channel.",
+        "The message shape is proved on a single send before a batch is allowed, and that proof expires after 48 hours.",
+        "The full list of who is about to be messaged is written out first, so it can be read before anything fires.",
+        "Every message is logged the instant it fires, so a stopped run never messages anyone twice.",
+        "Three outcomes, never two. A message that fired but could not be confirmed is left alone and raised to a human, never retried."
+      ]},
+    { id:"delivery", status:"live", title:"Delivery agent",
+      claim:"Reads the platform's own delivery events. Accepted is not the same as arrived.",
+      detail:[
+        "Reads the platform's own delivery events. Accepted by the interface is not the same as delivered to a person, and the two never share a column.",
+        "Refused messages are counted apart and never appear as sent.",
+        "The refusal reason is captured from the platform itself, so a blocked send can be diagnosed rather than guessed at.",
+        "Read receipts and button taps arrive on the same feed, which is how an opt out is caught within seconds.",
+        "On the last measured run, the notice style category delivered 87 to 96 percent where the promotional one reached 21 to 28 on the same audience."
+      ]},
+    { id:"wareply", status:"live", title:"Reply agent",
+      claim:"Routes a real reply to a human in minutes and records every opt out permanently.",
+      detail:[
+        "Routes a real reply to a human in minutes, with the brand, the campaign and the message.",
+        "A stop is honoured before anything else, even when the sender cannot be matched to a campaign, because a missed opt out costs far more than one honoured too eagerly.",
+        "Other companies' chatbots are filtered out, so an automated greeting never reaches the sales team as a lead.",
+        "Every opt out is written to a permanent list that every future send reads.",
+        "That list is append only. It can add an exclusion and can never remove one."
+      ]}
+  ]},
+{ id:"data", idx:"07", side:"right", status:"live", title:"Data machine",
+  claim:"Who to talk to, and who to never talk to again.",
+  detail:[
+    "The target list is built from evidence, not bought as a bulk file and hoped over.",
+    "Paid enrichment happens only after a human sees the exact list and the exact cost.",
+    "Nothing is deleted for looking weak. It is flagged, and the human decides."
+  ],
+  links:[],
+  agents:[
+    { id:"example", status:"live", sheet:true, title:"See a real list",
+      claim:"What a finished target list looks like, from a live client build.",
+      detail:[]},
+    { id:"discovery", status:"live", title:"Discovery agent",
+      claim:"Finds the companies and people who fit the brand's customer.",
+      detail:[
+        "Finds the companies and people who fit the brand's customer, working from a written description of that customer rather than a job title guess.",
+        "Names are harvested free from public listings and a de duplicated candidate pool before anything is paid for.",
+        "Each brand is resolved to its real social handle from the brand's own website first, then proved against the platform itself. A handle that cannot be proved is left blank rather than guessed, because a wrong handle points the whole campaign at a stranger.",
+        "Size is confirmed positively. A brand qualifies only when its revenue has actually been read, never because nobody flagged it as small.",
+        "Every record carries the evidence for why it qualified."
+      ]},
+    { id:"enrichment", status:"live", title:"Enrichment agent",
+      claim:"Fills in contact details, and only spends after a human approves the list and the cost.",
+      detail:[
+        "Contact details are bought last, and only for the records that already passed every free check.",
+        "Checks what is already held before buying anything, so nothing is paid for twice.",
+        "The cheapest sufficient source runs first. If the question is only whether there is any way to reach this company, the cheap answer settles it.",
+        "Before spending it prints the split: already contacted, already on file, and genuinely new. That report appears whether the answer is yes or no, because seeing the split is the point.",
+        "Approval is per list and expires within hours, so yesterday's yes cannot authorise today's spend."
+      ]},
+    { id:"verification", status:"live", title:"Verification agent",
+      claim:"Flags what looks weak. It never deletes a row.",
+      detail:[
+        "A weak looking record is marked, and the mark says exactly what looked wrong about it.",
+        "Counts are reported as total and flagged, never as one filtered number that hides what was removed.",
+        "A record that could not be checked is marked unchecked, never clean. Those are two different facts and they are never allowed to share a value.",
+        "The decision about what is usable belongs to the brand, not to the machine."
+      ]},
+    { id:"suppression", status:"live", title:"Suppression agent",
+      claim:"Opt outs, do not contact, and existing customers, honoured on every send.",
+      detail:[
+        "One stop reaches every channel, not only the one it arrived on.",
+        "A stop is recorded against four identifiers at once: the brand, the social handle, the phone and the email, because one row rarely carries all four.",
+        "A do not contact typed by your team into their own sheet reaches every channel within thirty minutes.",
+        "The lists are append only, and a send refuses to run at all if any of them cannot be read.",
+        "Suppressing someone from future contact never deletes the record that they were contacted. That record is the evidence if anyone ever complains."
+      ]}
+  ]},
+{ id:"orchestration", idx:"08", side:"right", status:"live", title:"Orchestration layer",
+  claim:"The layer that makes a set of agents behave like one team.",
+  detail:[
+    "Without it, agents are clever tools that duplicate work and contradict each other.",
+    "This is where a brand's rules, approvals and history live.",
+    "It is also what makes the machine safe enough to point at a real brand's audience."
+  ],
+  links:[],
+  agents:[
+    { id:"brief", status:"live", title:"The brand file",
+      claim:"One file every agent reads: colours, voice, offers, and the claims allowed.",
+      detail:[
+        "One file, read by every agent, so the brand is defined once rather than separately in each tool.",
+        "Change it once and every agent's next run changes with it.",
+        "It is also where the brand's hard rules live, which is what stops an agent being creative in the wrong direction.",
+        "Rules that can be checked by a machine are checked by a machine, not left as a note."
+      ]},
+    { id:"queue", status:"build", title:"The queue",
+      claim:"What runs, in what order, and what waits for what.",
+      detail:[
+        "Order is enforced, so nothing is sent off the back of work that has not finished yet.",
+        "Long jobs checkpoint as they go, so a job that dies resumes rather than restarting from the beginning.",
+        "A step that could not complete is marked as needing to go back, never as finished. An infrastructure failure recorded as a real result is how a gap becomes permanent.",
+        "A job that saves the same thing twice is stopped at the source, so scheduled work does not quietly fill the disk with copies."
+      ]},
+    { id:"gates", status:"live", title:"The gates",
+      claim:"Nothing sends in bulk and nothing spends money without a human saying so.",
+      detail:[
+        "The machine can do a great deal on its own. It cannot spend money or send in bulk on its own.",
+        "Approval is a phrase typed in the session and valid for a few hours. It is checked by the machine before the action, and it is not a setting that can be left on.",
+        "Before spending, the machine shows who is already contacted, who already has details on file, and who is genuinely new, then spends only on your yes.",
+        "The bulk send wall is separate and stricter: it will not run until the underlying work is finished and two independently written calculations agree, brand for brand.",
+        "Where the machine writes to something your team also uses, the wall exists twice, once in our code and once on the other side, so a future script that skips the first still meets the second."
+      ]},
+    { id:"ledger", status:"live", title:"The ledger",
+      claim:"Every action written once, deduplicated, with three states.",
+      detail:[
+        "Every action written once, with three states: confirmed, unconfirmed, failed.",
+        "Unconfirmed is never rounded into either neighbour. It is raised to a person.",
+        "The cursor moves the moment an action fires, so a restart can never catch the same person twice.",
+        "The same person is recognised across channels by phone and email together, never by name, because names are typed differently every single time."
+      ]},
+    { id:"memory", status:"build", title:"The memory",
+      claim:"What was said, to whom, and what worked, carried into the next run.",
+      detail:[
+        "The next run starts knowing what the last one did, so nobody is treated as a stranger twice.",
+        "Contact history survives even when a data source is retired, so nobody receives a first message twice.",
+        "History is kept even for people who are excluded, because knowing you have already contacted someone is exactly the point."
+      ]}
+  ]},
+{ id:"distribution", idx:"02", side:"left", status:"build", title:"Distribution machine",
+  claim:"Puts the work out, on time, on the right account, and proves it landed.",
+  detail:[
+    "One calendar across every channel, so the brand speaks in a rhythm rather than in bursts.",
+    "Posting runs through each platform's own interface, on accounts the brand owns.",
+    "A post is only reported as done once it has been seen live on the account."
+  ],
+  links:[],
+  agents:[
+    { id:"calendar", status:"build", title:"Scheduling agent",
+      claim:"Holds the calendar and decides what goes out, where, and when.",
+      detail:[
+        "One calendar across every channel, so the brand speaks in a rhythm rather than in bursts.",
+        "Knows what has already gone out, so the same asset is never posted twice to the same account.",
+        "Slots are held per platform and per account, so a busy week on one channel does not starve another.",
+        "A slot with nothing approved for it stays empty rather than being filled with whatever is ready."
+      ]},
+    { id:"posting", status:"live", title:"Posting agents",
+      claim:"One per platform, each speaking that platform's own interface.",
+      detail:[
+        "Every account is the brand's own. Nothing is routed through a third party posting tool.",
+        "Nothing is cross posted by default. An account posts what was made for it.",
+        "The account is confirmed before the post, so work never lands on the wrong profile.",
+        "A post fires once. If the outcome cannot be confirmed it is never retried automatically, because a duplicate post is public and permanent."
+      ]},
+    { id:"landingcheck", status:"live", title:"Landing check",
+      claim:"Confirms the post actually appeared, and never guesses.",
+      detail:[
+        "Opens the account after the post and confirms the item is actually there.",
+        "Three outcomes, never two: confirmed, unconfirmed, failed.",
+        "Unconfirmed is raised to a person. It is never rounded up into success or down into failure.",
+        "This check is what marks a post done, not the fact that a button was clicked."
+      ]},
+    { id:"repurpose", status:"spec", title:"Repurpose agent",
+      claim:"Turns one asset into the formats the other channels want.",
+      detail:[
+        "A format is added where it earns attention, not to fill an empty slot in a calendar.",
+        "Works from the source asset and the original outline, not by cropping the finished video.",
+        "Keeps one idea recognisable across formats, instead of producing four unrelated pieces."
+      ]}
+  ]},
+{ id:"email", idx:"03", side:"left", status:"build", title:"Outbound email",
+  claim:"Cold email at scale, without ever burning the brand's main domain.",
+  detail:[
+    "Sending runs on infrastructure built for the brand, not on a rented per seat tool.",
+    "Up to fifty sending domains per brand, each warmed before it is used.",
+    "Replies are the number that counts. Open tracking is directional at best, so it stays off."
+  ],
+  links:[],
+  agents:[
+    { id:"domains", status:"spec", title:"Domain agent",
+      claim:"Stands up lookalike sending domains with the records that keep them trusted.",
+      detail:[
+        "Stands up lookalike sending domains, so the brand's main domain is never used for cold outreach.",
+        "Each domain carries the authentication records that keep it trusted by inbox providers.",
+        "The main domain stays clean. A burned sending domain is replaced, not repaired."
+      ]},
+    { id:"warmup", status:"spec", title:"Warmup agent",
+      claim:"Brings each mailbox up slowly for two to three weeks before it sends anything cold.",
+      detail:[
+        "The warm up is a cost of entry, not a delay to be shortened because a campaign is urgent.",
+        "Volume rises on a schedule, not on impatience.",
+        "A mailbox that is not warm is not eligible to send, and the sender enforces that rather than trusting it."
+      ]},
+    { id:"sequence", status:"live", title:"Sequence agent",
+      claim:"Five touches, and it stops the moment someone replies, bounces or opts out.",
+      detail:[
+        "A reply, a bounce or an opt out ends that person's sequence immediately, mid flight.",
+        "Before every run it reads five separate memories: who was already sent to, who is suppressed, who replied, who the provider has blocked, and who a human has excluded.",
+        "If any of those cannot be read, the run refuses to start. A missing stop list used to read as nobody opted out, which is the most expensive silent failure in outreach.",
+        "Those memories expire on a clock. Older than a week and a live send will not proceed on them.",
+        "Sends are capped per day against the provider's real quota, and a quota error stops the run instead of burning the rest of the list.",
+        "Open tracking stays off by default. It is the strongest signal for landing in the promotions tab, and replies are the number that counts."
+      ]},
+    { id:"rotation", status:"spec", title:"Rotation agent",
+      claim:"Spreads sends so no mailbox goes over its daily cap, enforced by a ledger.",
+      detail:[
+        "No single mailbox carries a campaign, so one bad day cannot take the whole channel down.",
+        "The cap is enforced from a ledger of what actually sent, never from an intended plan.",
+        "A mailbox that starts misbehaving is pulled out of rotation rather than merely slowed down."
+      ]},
+    { id:"replies", status:"live", title:"Reply agent",
+      claim:"Sorts the inbox into bounce, auto reply, not interested, and interested.",
+      detail:[
+        "Bounces are separated from real rejections, so a dead address is never recorded as a no.",
+        "An answer it does not recognise stays in the interested pile. The opposite rule was tried, and it silently dropped three real leads.",
+        "Rejection and interest are read together, so a reply that says not right now but send me your rates is a lead, not a no.",
+        "Out of office notices and delivery failures never reach a human and never count as a reply.",
+        "A real reply reaches a person in minutes, carrying the brand, the campaign and what they actually said."
+      ]}
+  ]},
+{ id:"demand", idx:"05", side:"left", status:"spec", title:"Demand machine",
+  claim:"Paid distribution fed by the same content and the same feedback loop.",
+  detail:[
+    "Ads are built from the work that already earned attention organically.",
+    "Spend follows evidence. What is not working is stopped, not defended.",
+    "The page the ad points at is part of the machine, not somebody else's problem."
+  ],
+  links:[],
+  agents:[
+    { id:"creative", status:"spec", title:"Creative agent",
+      claim:"Turns the best organic work into ad variants, in volume.",
+      detail:[
+        "Builds ad variants from the organic work that already earned attention, rather than inventing fresh creative to test.",
+        "Variants change one thing at a time, so a winner explains itself.",
+        "The brand rules apply to paid exactly as they do to organic."
+      ]},
+    { id:"targeting", status:"spec", title:"Audience agent",
+      claim:"Builds and refreshes the targeting from real customer data.",
+      detail:[
+        "Builds targeting from the brand's own customer data rather than from interest guesses.",
+        "Refreshes as the customer list grows, so the targeting ages with the business.",
+        "Excludes existing customers from acquisition spend."
+      ]},
+    { id:"budget", status:"spec", title:"Budget agent",
+      claim:"Reads performance daily and moves spend off what is not working.",
+      detail:[
+        "Spend is read on a daily cycle, not at the end of a campaign when the money is already gone.",
+        "Decisions are made on the metric that matters to the brand, not the one the platform prefers to show.",
+        "Every spend change is logged with its reason, so a bad week can be explained rather than argued about."
+      ]},
+    { id:"page", status:"spec", title:"Page agent",
+      claim:"Builds the landing page the ad points at, and tests it.",
+      links:[
+        ["Vita plus, health tech","https://vita-lp-hni.vercel.app"],
+        ["The Gut Guru, D2C","https://thegutguru.co.in"],
+        ["Bihari Swad, F and B","https://bihari-swad.vercel.app"],
+        ["Brick n Bull, real estate","https://bricknbull.vercel.app"]
+      ],
+      detail:[
+        "Built in the brand's design language, fast, and tracked from the first visit.",
+        "Tracking is proved end to end before spend starts. Unattributed spend is unmeasurable spend.",
+        "One page per offer, so a test is a real test.",
+        "Page and ad change together, never separately.",
+        "Every page linked here was built by this machine and is live right now."
+      ]}
+  ]},
+{ id:"intelligence", idx:"06", side:"left", status:"build", title:"Intelligence machine",
+  claim:"Collects what happened, explains why, and feeds it back into the work.",
+  detail:[
+    "One place for every channel's numbers, defined once so the same question always gets the same answer.",
+    "The loop closes: what performed becomes next week's brief automatically.",
+    "Replies and revenue outrank impressions in everything reported."
+  ],
+  links:[],
+  agents:[
+    { id:"collector", status:"live", title:"Collector agent",
+      claim:"Pulls the numbers from every channel into one place.",
+      detail:[
+        "Pulls every channel's numbers into one place on a schedule, with nobody at the keyboard.",
+        "Sources are registered, and anything unregistered is reported loudly rather than skipped quietly. A hand maintained list of what to report will always miss the newest campaign.",
+        "The raw events are kept, so any number can be traced back to the thing that produced it."
+      ]},
+    { id:"analyst", status:"live", title:"Analyst agent",
+      claim:"Says which hook, format and offer actually moved, per channel.",
+      detail:[
+        "Performance is read per channel and per format, because an idea that works on one rarely works on all.",
+        "Every reported number has one definition in one place. Six people writing their own count is how one question ends up with six answers.",
+        "The parts must add up to the whole. A funnel that widens as it descends is flagged automatically, because that is two definitions stacked in one column.",
+        "Where two independent calculations disagree, the disagreement is the finding. Neither one is quietly chosen."
+      ]},
+    { id:"learning", status:"spec", title:"Learning agent",
+      claim:"Feeds the winners back into the content machine as the next brief.",
+      detail:[
+        "Next week's brief is written from last week's numbers rather than from taste.",
+        "This loop is what makes the machine improve rather than simply repeat.",
+        "Winners are promoted on evidence across a window, never on one good day."
+      ]},
+    { id:"reporting", status:"build", title:"Reporting agent",
+      claim:"One dashboard per brand, written in plain language.",
+      detail:[
+        "Written for the person paying for it, so it opens with what changed and what it cost.",
+        "Refreshes on a schedule, so the numbers are current without anyone asking for them.",
+        "Attempted, refused, reached, read and replied are separate columns. There is no single sent number, because it would hide the messages nobody ever received.",
+        "Every figure names the live source it came from, and a claim with no source behind it is blocked before it reaches you."
+      ]}
+  ]}
+];
+
+var SHEET_ROWS = [
+  ["ITC Limited","70,000 Cr+","Sanjiv Puri","Chief Executive Officer","sa•••••@itc.in","98•••••777","Email"],
+  ["Parle Products","15,000 Cr+","Mayank Shah","Chief Marketing Officer","ma•••••@parle.biz","98•••••751","Email"],
+  ["Tata Consumer Products","14,000 Cr+","Sunil D'Souza","CEO and Managing Director","su•••••@tataconsumer.com","95•••••717","Email"],
+  ["Godrej Consumer Products","14,000 Cr+","Sudhir Sitapati","Managing Director and CEO","su•••••@godrejcp.com","99•••••271","Email"],
+  ["Dabur","12,000 Cr+","Abhishek Jugran","Vice President Marketing","ab•••••@dabur.com","85•••••665","Email"],
+  ["Croma","8,000 Cr+","Pooja Raturi","Brand Manager","po•••••@croma.com","75•••••964","Email"],
+  ["PhonePe","5,000 Cr+","Sameer Nigam","Founder and CEO","sa••••@phonepe.com","99•••••050","Email"],
+  ["Decathlon India","5,000 Cr+","Sankar Chatterjee","CEO, Decathlon Sports India","sa•••••@decathlon.com","89•••••112","Email, phone"],
+  ["Myntra","5,000 Cr+","Sunder Balasubramanian","Chief Marketing Officer","su•••••@myntra.com","99•••••254","Email, phone"],
+  ["Nykaa","5,000 Cr+","Vijay Sharma","Vice President Marketing","vi•••••@nykaa.com","80•••••815","Email"]
+];
+var SHEET_ALSO = [
+  "Instagram handle, follower count, website and category",
+  "An estimated revenue band, so the list can be cut by size",
+  "The decision maker by name, with their function and seniority",
+  "A direct work address and a direct mobile, each checked separately",
+  "The evidence behind the reason to contact them, per brand",
+  "Where every field came from, and when it was last checked"
+];
+var SHEET_SCALE = [
+  ["2,939","brands profiled"],["2,648","handles resolved"],["8,430","named contacts held"],
+  ["1,206","brands with evidence"],["25","campaigns run"],["9,299","messages sent"]
+];
+var LOOPS = [
+  ["intelligence","content","winners become the next brief"],
+  ["data","email","clean lists feed every send"],
+  ["content","distribution","assets flow to the channels"],
+  ["data","whatsapp","suppression honoured on every send"]
+];
+var STATUS_WORD = { live:"Running today", build:"In build", spec:"Designed" };
+
+/* ───────────────────────── layout ───────────────────────── */
+var HUBW=440, HUBH=196, MW=352, MH=168, AW=316, AH=128, APITCH=148, MGAP=170, MX=660, AX=1350;
+var byId={}; MACHINES.forEach(function(m){ byId[m.id]=m; });
+var SIDES={ right:["content","whatsapp","data","orchestration"], left:["distribution","email","demand","intelligence"] };
+var expanded={}; // machineId -> bool
+
+function computeTargets(){
+  var t={ hub:{x:0,y:0,s:1,o:1} };
+  ["right","left"].forEach(function(side){
+    var sign = side==="right" ? 1 : -1;
+    var ids = SIDES[side];
+    var blocks = ids.map(function(id){
+      var m=byId[id], n=m.agents.length;
+      var h = expanded[id] ? Math.max(MH,(n-1)*APITCH+AH) : MH;
+      return { m:m, h:h };
+    });
+    var total = blocks.reduce(function(a,b){return a+b.h;},0) + MGAP*(blocks.length-1);
+    var y = -total/2;
+    blocks.forEach(function(b){
+      var cy = y + b.h/2;
+      t[b.m.id] = { x:sign*MX, y:cy, s:1, o:1 };
+      var n = b.m.agents.length;
+      var startY = cy - ((n-1)*APITCH)/2;
+      b.m.agents.forEach(function(a,i){
+        var key = b.m.id+"/"+a.id;
+        if (expanded[b.m.id]) t[key] = { x:sign*AX, y:startY + i*APITCH, s:1, o:1 };
+        else                  t[key] = { x:sign*MX, y:cy, s:0.55, o:0 };
+      });
+      y += b.h + MGAP;
+    });
+  });
+  return t;
+}
+
+/* ───────────────────────── dom build ───────────────────────── */
+var nodesEl = document.getElementById("nodes");
+var nodeState = {}; // key -> {el,w,h,cur:{x,y,s,o},tgt}
+
+function mkNode(key, cls, w, h, html, label, onclick){
+  var d=document.createElement("div");
+  d.className="node "+cls; d.style.width=w+"px"; d.style.height=h+"px";
+  var b=document.createElement("button");
+  b.className="card"; b.type="button"; b.innerHTML=html; b.setAttribute("aria-label",label);
+  b.addEventListener("click",function(e){ if(suppressClick) return; e.stopPropagation(); onclick(); });
+  d.appendChild(b);
+  nodesEl.appendChild(d);
+  nodeState[key]={ el:d, w:w, h:h, cur:{x:0,y:0,s:0.55,o:0}, tgt:{x:0,y:0,s:1,o:1} };
+  return d;
+}
+
+function esc(s){ return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+
+mkNode("hub","hub",HUBW,HUBH,
+  '<div class="eyebrow">[ <b>The Offer</b> ]</div>'+
+  '<h1 class="font-display grad-text">'+esc(HUB.title)+'</h1>'+
+  '<div class="claim">'+esc(HUB.claim)+'</div>',
+  "The Automation Machine, open the overview",
+  function(){ openHubPanel(); });
+
+MACHINES.forEach(function(m){
+  mkNode(m.id,"machine st-"+m.status,MW,MH,
+    '<div class="eyebrow"><b>'+m.idx+'</b> &middot; '+m.agents.length+' agents</div>'+
+    '<h2 class="font-display">'+esc(m.title)+'</h2>'+
+    '<div class="claim">'+esc(m.claim)+'</div>'+
+    '<div class="statusline"><i class="sw '+m.status+'"></i>'+STATUS_WORD[m.status]+'</div>',
+    m.title+", "+STATUS_WORD[m.status]+", click to open",
+    function(){ toggleMachine(m.id,true); });
+  m.agents.forEach(function(a){
+    mkNode(m.id+"/"+a.id,"agent st-"+a.status,AW,AH,
+      '<h3>'+esc(a.title)+'</h3>'+
+      '<div class="claim">'+esc(a.claim)+'</div>'+
+      '<div class="statusline"><i class="sw '+a.status+'"></i>'+STATUS_WORD[a.status]+'</div>',
+      a.title+" inside "+m.title,
+      function(){ a.sheet ? openModal() : openAgentPanel(m,a); });
+  });
+});
+
+/* ───────────────────────── tween + wires ───────────────────────── */
+var animating=false, lastT=0;
+function setTargets(){
+  document.body.classList.toggle("mapon", MACHINES.some(function(m){return expanded[m.id];}));
+  var t=computeTargets();
+  Object.keys(t).forEach(function(k){ if(nodeState[k]) nodeState[k].tgt=t[k]; });
+  if(!animating){ animating=true; lastT=performance.now(); requestAnimationFrame(tick); }
+}
+function tick(now){
+  var dt=Math.min(0.05,(now-lastT)/1000); lastT=now;
+  var k=1-Math.exp(-9*dt), done=true;
+  Object.keys(nodeState).forEach(function(key){
+    var n=nodeState[key], c=n.cur, t=n.tgt;
+    c.x+=(t.x-c.x)*k; c.y+=(t.y-c.y)*k; c.s+=(t.s-c.s)*k; c.o+=(t.o-c.o)*k;
+    if(Math.abs(t.x-c.x)>0.5||Math.abs(t.y-c.y)>0.5||Math.abs(t.s-c.s)>0.005||Math.abs(t.o-c.o)>0.01) done=false;
+    apply(n);
+  });
+  drawWires();
+  if(done){ Object.keys(nodeState).forEach(function(key){ var n=nodeState[key]; n.cur={x:n.tgt.x,y:n.tgt.y,s:n.tgt.s,o:n.tgt.o}; apply(n); }); drawWires(); animating=false; }
+  else requestAnimationFrame(tick);
+}
+function apply(n){
+  var c=n.cur;
+  n.el.style.transform="translate3d("+(c.x-n.w/2)+"px,"+(c.y-n.h/2)+"px,0) scale("+c.s+")";
+  n.el.style.opacity=c.o;
+  n.el.style.pointerEvents = c.o>0.6 ? "auto" : "none";
+}
+
+var W_OFF=3200;
+function bez(x1,y1,x2,y2){
+  var mx=(x2-x1);
+  return "M"+(x1+W_OFF)+","+(y1+W_OFF)+" C"+(x1+mx*0.45+W_OFF)+","+(y1+W_OFF)+" "+(x1+mx*0.55+W_OFF)+","+(y2+W_OFF)+" "+(x2+W_OFF)+","+(y2+W_OFF);
+}
+function dashFor(st){ return st==="build" ? "10 8" : st==="spec" ? "2 7" : "none"; }
+function drawWires(){
+  var stat=[], flows=[], loops=[];
+  var hub=nodeState.hub.cur;
+  MACHINES.forEach(function(m){
+    var mc=nodeState[m.id].cur;
+    var d=bez(hub.x,hub.y,mc.x,mc.y);
+    stat.push('<path d="'+d+'" fill="none" stroke="rgba(255,255,255,.48)" stroke-width="3"'+(m.status!=="live"?' stroke-dasharray="'+dashFor(m.status)+'"':'')+'></path>');
+    if(m.status==="live") flows.push('<path class="wflow" d="'+d+'"></path>');
+    m.agents.forEach(function(a){
+      var ac=nodeState[m.id+"/"+a.id].cur;
+      if(ac.o<0.03) return;
+      var d2=bez(mc.x,mc.y,ac.x,ac.y);
+      stat.push('<path d="'+d2+'" fill="none" stroke="rgba(255,255,255,'+(0.3*ac.o)+')" stroke-width="2"'+(a.status!=="live"?' stroke-dasharray="'+dashFor(a.status)+'"':'')+'></path>');
+    });
+  });
+  var lxs=[], lys=[];
+  Object.keys(nodeState).forEach(function(k){
+    var n=nodeState[k];
+    if(n.cur.o>0.5){ lxs.push(n.cur.x-n.w/2,n.cur.x+n.w/2); lys.push(n.cur.y-n.h/2,n.cur.y+n.h/2); }
+  });
+  var topE=Math.min.apply(null,lys)-230, botE=Math.max.apply(null,lys)+230, rightE=Math.max.apply(null,lxs)+250;
+  var ROUTES={ "intelligence>content":["bottom",0], "data>email":["bottom",180],
+               "content>distribution":["top",0], "data>whatsapp":["right",0] };
+  LOOPS.forEach(function(L){
+    var a=nodeState[L[0]].cur, b=nodeState[L[1]].cur, cap=L[2];
+    var R=ROUTES[L[0]+">"+L[1]]||["top",0], via=R[0], off=R[1];
+    var p0x,p0y,p3x,p3y,c1x,c1y,c2x,c2y,capdy;
+    if(via==="right"){
+      p0x=a.x+MW/2; p0y=a.y; p3x=b.x+MW/2; p3y=b.y;
+      c1x=rightE+off; c1y=a.y; c2x=rightE+off; c2y=b.y; capdy=-14;
+    } else {
+      var edge=(via==="top")?(topE-off):(botE+off);
+      p0x=a.x; p3x=b.x;
+      p0y=(via==="top")?(a.y-MH/2):(a.y+MH/2);
+      p3y=(via==="top")?(b.y-MH/2):(b.y+MH/2);
+      c1x=a.x*0.8; c1y=edge; c2x=b.x*0.8; c2y=edge;
+      capdy=(via==="top")?-14:30;
+    }
+    var d="M"+(p0x+W_OFF)+","+(p0y+W_OFF)+" C"+(c1x+W_OFF)+","+(c1y+W_OFF)+" "+(c2x+W_OFF)+","+(c2y+W_OFF)+" "+(p3x+W_OFF)+","+(p3y+W_OFF);
+    loops.push('<path class="wloop" d="'+d+'" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="2.2" stroke-dasharray="7 9" marker-end="url(#arr)"></path>');
+    var mx=(p0x+3*c1x+3*c2x+p3x)/8, my=(p0y+3*c1y+3*c2y+p3y)/8;
+    loops.push('<text x="'+(mx+W_OFF)+'" y="'+(my+W_OFF+capdy)+'" text-anchor="middle">'+esc(cap)+'</text>');
+  });
+  document.getElementById("wstatic").innerHTML=stat.join("");
+  document.getElementById("wflows").innerHTML=flows.join("");
+  document.getElementById("wloops").innerHTML=loops.join("");
+}
+
+/* ───────────────────────── camera ───────────────────────── */
+var stage=document.getElementById("stage"), board=document.getElementById("board"), tilt=document.getElementById("tilt");
+var cam={x:0,y:0,s:0.5}, camT={x:0,y:0,s:0.5}, camAnim=false;
+function applyCam(){ board.style.transform="translate3d("+cam.x+"px,"+cam.y+"px,0) scale("+cam.s+")"; }
+function camTween(){
+  if(camAnim) return; camAnim=true;
+  var last=performance.now();
+  (function step(now){
+    var dt=Math.min(0.05,(now-last)/1000); last=now;
+    var k=1-Math.exp(-7*dt), done=true;
+    ["x","y","s"].forEach(function(p){ cam[p]+=(camT[p]-cam[p])*k; if(Math.abs(camT[p]-cam[p])>(p==="s"?0.002:0.5)) done=false; });
+    applyCam();
+    if(done){ cam.x=camT.x; cam.y=camT.y; cam.s=camT.s; applyCam(); camAnim=false; }
+    else requestAnimationFrame(step);
+  })(performance.now());
+}
+function visibleBBox(machinesOnly){
+  var xs=[],ys=[];
+  function add(n,w,h){ xs.push(n.tgt.x-w/2,n.tgt.x+w/2); ys.push(n.tgt.y-h/2,n.tgt.y+h/2); }
+  add(nodeState.hub,HUBW,HUBH);
+  MACHINES.forEach(function(m){
+    add(nodeState[m.id],MW,MH);
+    if(!machinesOnly && expanded[m.id]) m.agents.forEach(function(a){ add(nodeState[m.id+"/"+a.id],AW,AH); });
+  });
+  var x1=Math.min.apply(null,xs), x2=Math.max.apply(null,xs), y1=Math.min.apply(null,ys), y2=Math.max.apply(null,ys);
+  return {x:(x1+x2)/2, y:(y1+y2)/2, w:x2-x1, h:y2-y1};
+}
+function fitTo(bb,instant){
+  var vw=innerWidth, vh=innerHeight;
+  var s=Math.max(0.16,Math.min(1.5,Math.min((vw-120)/bb.w,(vh-190)/bb.h)));
+  camT={ x:-bb.x*s+70, y:-bb.y*s+26, s:s };
+  if(instant){ cam={x:camT.x,y:camT.y,s:camT.s}; applyCam(); } else camTween();
+}
+function fitAll(instant){ fitTo(visibleBBox(false),instant); }
+function focusMachine(id){
+  var m=byId[id], mc=nodeState[id].tgt, sign=mc.x>0?1:-1;
+  var n=m.agents.length, blockH=Math.max(MH,(n-1)*APITCH+AH);
+  var bb={ x:(mc.x+sign*AX)/2 - sign*40, y:mc.y, w:AX-MX+MW/2+AW+220, h:blockH+240 };
+  fitTo(bb,false);
+}
+
+/* ───────────────────────── interactions ───────────────────────── */
+var suppressClick=false;
+var pointers={}, panStart=null, pinchStart=null, moved=0;
+stage.addEventListener("pointerdown",function(e){
+  pointers[e.pointerId]={x:e.clientX,y:e.clientY};
+  var ks=Object.keys(pointers);
+  if(ks.length===1){ panStart={x:e.clientX,y:e.clientY,cx:cam.x,cy:cam.y}; moved=0; stage.classList.add("dragging"); }
+  else if(ks.length===2){
+    var a=pointers[ks[0]], b=pointers[ks[1]];
+    pinchStart={ d:Math.hypot(a.x-b.x,a.y-b.y), s:cam.s, mx:(a.x+b.x)/2, my:(a.y+b.y)/2, cx:cam.x, cy:cam.y };
+    panStart=null;
+  }
+  /* no setPointerCapture here: capturing to the stage retargets pointerup,
+     which kills the click event on every node button */
+});
+addEventListener("pointermove",function(e){
+  if(!pointers[e.pointerId]) return;
+  pointers[e.pointerId]={x:e.clientX,y:e.clientY};
+  var ks=Object.keys(pointers);
+  if(ks.length===1 && panStart){
+    var dx=e.clientX-panStart.x, dy=e.clientY-panStart.y;
+    moved=Math.max(moved,Math.abs(dx)+Math.abs(dy));
+    camT.x=cam.x=panStart.cx+dx; camT.y=cam.y=panStart.cy+dy; applyCam();
+  } else if(ks.length===2 && pinchStart){
+    var a=pointers[ks[0]], b=pointers[ks[1]];
+    var d=Math.hypot(a.x-b.x,a.y-b.y), mx=(a.x+b.x)/2, my=(a.y+b.y)/2;
+    var ns=Math.max(0.16,Math.min(1.8,pinchStart.s*d/pinchStart.d));
+    var cx=innerWidth/2, cy=innerHeight/2;
+    var bx=(pinchStart.mx-cx-pinchStart.cx)/pinchStart.s, by=(pinchStart.my-cy-pinchStart.cy)/pinchStart.s;
+    camT.s=cam.s=ns;
+    camT.x=cam.x=(mx-cx)-bx*ns; camT.y=cam.y=(my-cy)-by*ns;
+    applyCam(); moved=99;
+  }
+});
+function endPointer(e){
+  delete pointers[e.pointerId];
+  if(Object.keys(pointers).length===0){
+    stage.classList.remove("dragging");
+    if(moved>6){ suppressClick=true; setTimeout(function(){suppressClick=false;},0); }
+    panStart=null; pinchStart=null;
+  }
+}
+addEventListener("pointerup",endPointer);
+addEventListener("pointercancel",endPointer);
+stage.addEventListener("click",function(e){ if(!suppressClick && (e.target===stage||e.target===tilt||e.target===board)) closePanel(); });
+stage.addEventListener("wheel",function(e){
+  e.preventDefault();
+  var f=Math.exp(-e.deltaY*0.0016);
+  var ns=Math.max(0.16,Math.min(1.8,cam.s*f));
+  var cx=innerWidth/2, cy=innerHeight/2;
+  var px=e.clientX-cx, py=e.clientY-cy;
+  var bx=(px-cam.x)/cam.s, by=(py-cam.y)/cam.s;
+  cam.s=ns; cam.x=px-bx*ns; cam.y=py-by*ns;
+  camT={x:cam.x,y:cam.y,s:cam.s}; applyCam();
+},{passive:false});
+
+/* tilt */
+var reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+var tRX=0,tRY=0,cRX=14,cRY=0;
+if(!reduced){
+  addEventListener("pointermove",function(e){
+    tRX=((e.clientY/innerHeight)-0.5)*-4.4;
+    tRY=((e.clientX/innerWidth)-0.5)*4.4;
+  });
+  (function tiltLoop(){
+    var dx=tRX-cRX, dy=tRY-cRY;
+    if(Math.abs(dx)>0.008||Math.abs(dy)>0.008){
+      cRX+=dx*0.06; cRY+=dy*0.06;
+      tilt.style.transform="rotateX("+cRX+"deg) rotateY("+cRY+"deg)";
+    }
+    requestAnimationFrame(tiltLoop);
+  })();
+} else { tilt.style.transform="none"; }
+
+/* ───────────────────────── panels ───────────────────────── */
+var panel=document.getElementById("panel"), pcrumb=document.getElementById("pcrumb"),
+    ptitle=document.getElementById("ptitle"), pstatus=document.getElementById("pstatus"),
+    pclaim=document.getElementById("pclaim"), pbody=document.getElementById("pbody"),
+    pback=document.getElementById("pback");
+var selKey=null, backTo=null;
+
+function select(key){
+  if(selKey && nodeState[selKey]) nodeState[selKey].el.classList.remove("sel");
+  selKey=key;
+  if(key && nodeState[key]) nodeState[key].el.classList.add("sel");
+}
+function statusHTML(st){ return '<i class="sw '+st+'"></i>'+STATUS_WORD[st]; }
+function detList(items){
+  return '<ul class="det">'+items.map(function(d){return "<li>"+esc(d)+"</li>";}).join("")+"</ul>";
+}
+function linkList(links){
+  return links.map(function(l){
+    return '<a class="lnk" href="'+l[1]+'" target="_blank" rel="noopener">'+esc(l[0])+'<span class="arr">&nearr;</span></a>';
+  }).join("");
+}
+function openPanelShell(crumbHTML, title, st, claim, bodyHTML, showBack){
+  pcrumb.innerHTML=crumbHTML; ptitle.textContent=title;
+  pstatus.innerHTML=st?statusHTML(st):""; pstatus.style.display=st?"flex":"none";
+  pclaim.textContent=claim; pbody.innerHTML=bodyHTML;
+  pback.classList.toggle("show",!!showBack);
+  panel.classList.add("open"); panel.scrollTop=0;
+}
+function closePanel(){ panel.classList.remove("open"); select(null); backTo=null; }
+document.getElementById("pclose").addEventListener("click",closePanel);
+pback.addEventListener("click",function(){ if(backTo) openMachinePanel(byId[backTo]); });
+
+function openHubPanel(){
+  select("hub"); backTo=null;
+  openPanelShell('[ <b>The Offer</b> ]',HUB.title,null,HUB.claim,
+    '<div class="sect">How it runs</div>'+detList(HUB.detail)+
+    '<div class="sect">Built by this machine, live now</div>'+linkList(HUB.links),false);
+}
+function openMachinePanel(m){
+  select(m.id); backTo=null;
+  var agents=m.agents.map(function(a){
+    return '<button class="arow" type="button" data-m="'+m.id+'" data-a="'+a.id+'">'+
+      '<span class="an">'+esc(a.title)+'</span><span class="as"><i class="sw '+a.status+'"></i>'+STATUS_WORD[a.status]+'</span></button>';
+  }).join("");
+  openPanelShell('[ <b>'+m.idx+'</b> ] &middot; Machine',m.title,m.status,m.claim,
+    '<div class="sect">What it does</div>'+detList(m.detail)+
+    '<div class="sect">The agents inside</div>'+agents+
+    (m.links.length?'<div class="sect">See the real thing</div>'+linkList(m.links):""),false);
+  pbody.querySelectorAll(".arow").forEach(function(b){
+    b.addEventListener("click",function(){
+      var m2=byId[b.getAttribute("data-m")];
+      var a2=m2.agents.filter(function(x){return x.id===b.getAttribute("data-a");})[0];
+      a2.sheet ? openModal() : openAgentPanel(m2,a2);
+    });
+  });
+}
+function openAgentPanel(m,a){
+  select(m.id+"/"+a.id); backTo=m.id;
+  openPanelShell('[ <b>'+m.idx+'</b> ] &middot; '+esc(m.title),a.title,a.status,a.claim,
+    (a.detail.length?'<div class="sect">How it behaves</div>'+detList(a.detail):"")+
+    (a.links&&a.links.length?'<div class="sect">Real examples, live now</div>'+linkList(a.links):""),true);
+}
+function toggleMachine(id,focus){
+  var m=byId[id];
+  if(!expanded[id]){
+    expanded[id]=true; setTargets();
+    if(focus) focusMachine(id);
+  } else if(selKey===id){
+    expanded[id]=false; setTargets(); closePanel(); refreshExpandBtn(); return;
+  }
+  openMachinePanel(m); refreshExpandBtn();
+}
+
+/* ───────────────────────── modal ───────────────────────── */
+var modal=document.getElementById("modal");
+document.getElementById("mtbody").innerHTML = SHEET_ROWS.map(function(r){
+  return "<tr><td class='dm'>"+esc(r[0])+"</td><td>"+esc(r[1])+"</td>"+
+    "<td><div class='dm'>"+esc(r[2])+"</div><div class='dt'>"+esc(r[3])+"</div></td>"+
+    "<td class='monoc'>"+esc(r[4])+"</td><td class='monoc'>"+esc(r[5])+"</td><td>"+esc(r[6])+"</td></tr>";
+}).join("");
+document.getElementById("malso").innerHTML = SHEET_ALSO.map(function(x){return "<li>"+esc(x)+"</li>";}).join("");
+document.getElementById("mstats").innerHTML = SHEET_SCALE.map(function(s){
+  return '<div class="mstat"><div class="n font-display">'+s[0]+'</div><div class="l">'+esc(s[1])+"</div></div>";
+}).join("");
+function openModal(){ modal.classList.add("open"); }
+function closeModal(){ modal.classList.remove("open"); }
+document.getElementById("mclose").addEventListener("click",closeModal);
+modal.addEventListener("click",function(e){ if(e.target===modal) closeModal(); });
+
+/* ───────────────────────── chrome buttons ───────────────────────── */
+var bExpand=document.getElementById("bExpand");
+function allExpanded(){ return MACHINES.every(function(m){return expanded[m.id];}); }
+function refreshExpandBtn(){
+  var all=allExpanded();
+  bExpand.textContent = all ? "Collapse" : "Expand all";
+  bExpand.setAttribute("aria-pressed", all ? "true":"false");
+}
+bExpand.addEventListener("click",function(){
+  var all=allExpanded();
+  MACHINES.forEach(function(m){ expanded[m.id]=!all; });
+  setTargets(); refreshExpandBtn();
+  fitAll(false);
+});
+document.getElementById("bFit").addEventListener("click",function(){ fitAll(false); });
+document.getElementById("bZoomIn").addEventListener("click",function(){ camT.s=Math.min(1.8,camT.s*1.28); camTween(); });
+document.getElementById("bZoomOut").addEventListener("click",function(){ camT.s=Math.max(0.16,camT.s/1.28); camTween(); });
+addEventListener("keydown",function(e){
+  if(e.key==="Escape"){ if(modal.classList.contains("open")) closeModal(); else closePanel(); }
+});
+addEventListener("resize",function(){ if(!panStart&&!pinchStart) fitAll(true); });
+
+/* ───────────────────────── intro ───────────────────────── */
+setTargets();
+Object.keys(nodeState).forEach(function(k){ var n=nodeState[k]; n.cur={x:n.tgt.x,y:n.tgt.y,s:n.tgt.s,o:n.tgt.o}; apply(n); });
+drawWires();
+fitAll(true);
+if(!reduced){
+  cam.s*=0.7; applyCam(); fitAll(false);
+  cRX=16;
+  var order=["hub"].concat(SIDES.right).concat(SIDES.left);
+  order.forEach(function(id,i){ setTimeout(function(){ nodeState[id].el.classList.add("in"); }, 160+i*110); });
+  Object.keys(nodeState).forEach(function(k){ if(k.indexOf("/")>-1) nodeState[k].el.classList.add("in"); });
+} else {
+  Object.keys(nodeState).forEach(function(k){ nodeState[k].el.classList.add("in"); });
+}
+</script>
+</body>
+</html>
