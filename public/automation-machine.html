@@ -99,7 +99,7 @@ body{
 
 /* ── chrome ─ */
 .chrome{position:fixed;z-index:10;font-size:16px}
-header.chrome{top:0;left:0;right:0;display:flex;align-items:center;gap:18px;padding:16px 24px;
+header.chrome{top:0;left:0;right:0;display:flex;align-items:center;gap:20px;padding:18px 28px;
   background:linear-gradient(rgba(0,0,0,.82),rgba(0,0,0,0));}
 .brand{display:flex;align-items:baseline;gap:10px;text-decoration:none;color:var(--ink);white-space:nowrap}
 .brand .nm{font-weight:800;font-size:18px;letter-spacing:-0.01em}
@@ -123,21 +123,21 @@ header.chrome{top:0;left:0;right:0;display:flex;align-items:center;gap:18px;padd
 }
 .btn-primary:hover{box-shadow:0 0 34px rgba(255,255,255,.3)}
 
-#intro{top:86px;left:24px;max-width:520px;pointer-events:none;transition:opacity .45s ease}
+#intro{top:98px;left:28px;max-width:520px;pointer-events:none;transition:opacity .45s ease}
 body.mapon #intro{opacity:0}
 #intro .eyebrow{font-family:var(--mono);font-size:16px;letter-spacing:.2em;text-transform:uppercase;color:var(--mute);margin-bottom:10px}
 #intro .eyebrow b{color:#fff;font-weight:500}
 #intro h1{font-size:clamp(34px,4.4vw,56px);line-height:.98;margin-bottom:12px}
 #intro .sub{font-family:var(--mono);font-size:16px;letter-spacing:.06em;color:var(--mute);text-transform:uppercase}
 
-footer.chrome{bottom:0;left:0;right:0;display:flex;align-items:center;gap:16px;padding:14px 24px;
+footer.chrome{bottom:0;left:0;right:0;display:flex;align-items:center;gap:16px;padding:16px 28px;
   font-family:var(--mono);font-size:16px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);
   background:linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.8))}
 #hint{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
 /* ── panel ─ */
 #panel{
-  position:fixed;z-index:20;top:84px;right:24px;bottom:24px;width:min(470px,calc(100vw - 48px));
+  position:fixed;z-index:20;top:96px;right:28px;bottom:28px;width:min(470px,calc(100vw - 56px));
   background:rgba(8,8,9,.88);border:1px solid rgba(255,255,255,.16);border-radius:16px;
   -webkit-backdrop-filter:blur(32px) saturate(1.2);backdrop-filter:blur(32px) saturate(1.2);
   padding:28px;overflow-y:auto;overscroll-behavior:contain;
@@ -185,7 +185,7 @@ footer.chrome{bottom:0;left:0;right:0;display:flex;align-items:center;gap:16px;p
 #modal.open{display:flex}
 #modal .mcard{
   width:min(1120px,100%);max-height:calc(100vh - 48px);overflow-y:auto;overscroll-behavior:contain;
-  background:rgba(10,10,11,.92);border:1px solid rgba(255,255,255,.2);border-radius:16px;padding:30px;
+  background:rgba(10,10,11,.92);border:1px solid rgba(255,255,255,.2);border-radius:16px;padding:32px;
 }
 #modal .mhead{display:flex;align-items:flex-start;gap:14px;margin-bottom:4px}
 #modal .mhead .crumb{flex:1;font-family:var(--mono);font-size:16px;letter-spacing:.16em;text-transform:uppercase;color:var(--mute);padding-top:6px}
@@ -219,6 +219,54 @@ td.monoc{font-family:var(--mono)}
   #modal ul.det{grid-template-columns:1fr}
   footer.chrome{padding:12px 16px}
   #copyline{display:none}
+}
+/* ── mobile flow (phones get a native vertical build of the same system) ─ */
+#mflow{display:none}
+.mcardx{border:1px solid rgba(255,255,255,.22);border-radius:12px;background:rgba(13,13,15,.92);margin-bottom:12px}
+.mcardx.st-live{border-color:rgba(255,255,255,.45)}
+.mcardx.st-build{border-style:dashed;border-color:rgba(255,255,255,.3)}
+.mcardx.st-spec{border-style:dotted;border-color:rgba(255,255,255,.26)}
+.mcardx.hubx{background:rgba(8,8,9,.95);border-color:rgba(255,255,255,.4);box-shadow:0 0 44px rgba(255,255,255,.08)}
+.mhead2{width:100%;text-align:left;background:none;border:0;color:var(--ink);padding:18px;font-family:var(--sans);font-size:16px;cursor:pointer;display:block}
+.mhead2 .eyebrow{font-family:var(--mono);font-size:16px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.mhead2 .eyebrow b{color:var(--dim);font-weight:500}
+.mhead2 h2{font-size:23px;line-height:1.08;margin:8px 0;letter-spacing:-0.01em}
+.mhead2 .claim{font-size:16px;line-height:1.45;color:var(--ink2)}
+.mhead2 .statusline{margin-top:12px;display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:16px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+.mhead2 .chev{margin-left:auto;color:var(--dim);font-size:20px;line-height:1;transition:transform .25s}
+.mcardx.open .chev{transform:rotate(45deg)}
+.magents{display:none;border-top:1px solid var(--rule);padding:10px 12px 12px}
+.mcardx.open .magents{display:block}
+.marow{display:flex;align-items:center;gap:10px;width:100%;text-align:left;cursor:pointer;background:rgba(255,255,255,.03);border:1px solid var(--rule);border-radius:10px;padding:13px 14px;margin-top:8px;color:var(--ink);font-family:var(--sans);font-size:16px}
+.marow .an{flex:1;font-weight:600}
+.marow .as{font-family:var(--mono);font-size:16px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);display:flex;align-items:center;gap:8px;white-space:nowrap}
+.marow.about{background:rgba(255,255,255,.06);border-color:var(--rule2)}
+.mloops{border:1px solid var(--rule);border-radius:12px;padding:18px;margin:20px 0 8px;background:rgba(255,255,255,.02)}
+.mloops .sect2{font-family:var(--mono);font-size:16px;letter-spacing:.18em;text-transform:uppercase;color:var(--mute);margin-bottom:10px}
+.mloops .lp{padding:11px 0;border-top:1px solid var(--rule);font-size:16px;color:var(--ink2)}
+.mloops .lp:first-of-type{border-top:0}
+.mloops .lp b{color:var(--ink);font-weight:600}
+.mloops .lp span{display:block;font-family:var(--mono);font-size:16px;color:var(--mute);margin-top:4px}
+.mcta{display:flex;justify-content:center;padding:22px 0 10px}
+@media (max-width:760px){
+  body{overflow-y:auto;overflow-x:hidden}
+  #stage,#legend,#bExpand,#bFit,#bZoomOut,#bZoomIn,#hint{display:none}
+  header.chrome{padding:12px 16px;gap:12px;background:rgba(0,0,0,.9);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid var(--rule)}
+  .brand .rl{display:none}
+  .btn-primary{padding:10px 13px}
+  #intro{position:static;top:auto;left:auto;right:auto;max-width:none;padding:88px 18px 4px;pointer-events:auto}
+  #intro h1{font-size:38px}
+  body.mapon #intro{opacity:1}
+  #mflow{display:block;position:relative;z-index:1;padding:10px 16px 4px}
+  footer.chrome{position:static;display:flex;padding:14px 18px 32px;background:none}
+  #copyline{display:block}
+  #modal{padding:10px}
+  #modal .mcard{padding:20px}
+  #modal h2{font-size:26px}
+  #panel .phead{flex-wrap:wrap}
+  #pback{order:1}
+  #panel .xbtn{order:2;margin-left:auto}
+  #panel .crumb{order:3;flex-basis:100%;padding-top:10px}
 }
 @media (prefers-reduced-motion:reduce){
   .aurora i,.wflow,.wloop{animation:none}
@@ -270,6 +318,8 @@ td.monoc{font-family:var(--mono)}
   <h1 class="font-display grad-text">The Automation Machine</h1>
   <div class="sub">8 machines &middot; 38 agents &middot; every send gated by a human</div>
 </div>
+
+<main id="mflow" aria-label="The system, machine by machine"></main>
 
 <footer class="chrome">
   <span id="hint">Drag to move &middot; scroll to zoom &middot; click any machine to open it</span>
@@ -759,6 +809,8 @@ var LOOPS = [
   ["data","whatsapp","suppression honoured on every send"]
 ];
 var STATUS_WORD = { live:"Running today", build:"In build", spec:"Designed" };
+var MOBILE = window.matchMedia("(max-width:760px)").matches;
+window.matchMedia("(max-width:760px)").addEventListener("change", function(){ location.reload(); });
 
 /* ───────────────────────── layout ───────────────────────── */
 var HUBW=440, HUBH=196, MW=352, MH=168, AW=316, AH=128, APITCH=148, MGAP=170, MX=660, AX=1350;
@@ -799,6 +851,7 @@ var nodesEl = document.getElementById("nodes");
 var nodeState = {}; // key -> {el,w,h,cur:{x,y,s,o},tgt}
 
 function mkNode(key, cls, w, h, html, label, onclick){
+  if(MOBILE) return null;
   var d=document.createElement("div");
   d.className="node "+cls; d.style.width=w+"px"; d.style.height=h+"px";
   var b=document.createElement("button");
@@ -912,7 +965,8 @@ function drawWires(){
     var d="M"+(p0x+W_OFF)+","+(p0y+W_OFF)+" C"+(c1x+W_OFF)+","+(c1y+W_OFF)+" "+(c2x+W_OFF)+","+(c2y+W_OFF)+" "+(p3x+W_OFF)+","+(p3y+W_OFF);
     loops.push('<path class="wloop" d="'+d+'" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="2.2" stroke-dasharray="7 9" marker-end="url(#arr)"></path>');
     var mx=(p0x+3*c1x+3*c2x+p3x)/8, my=(p0y+3*c1y+3*c2y+p3y)/8;
-    loops.push('<text x="'+(mx+W_OFF)+'" y="'+(my+W_OFF+capdy)+'" text-anchor="middle">'+esc(cap)+'</text>');
+    var anch=(via==="right")?"end":"middle", capx=(via==="right")?(mx-18):mx;
+    loops.push('<text x="'+(capx+W_OFF)+'" y="'+(my+W_OFF+capdy)+'" text-anchor="'+anch+'">'+esc(cap)+'</text>');
   });
   document.getElementById("wstatic").innerHTML=stat.join("");
   document.getElementById("wflows").innerHTML=flows.join("");
@@ -949,7 +1003,8 @@ function visibleBBox(machinesOnly){
 function fitTo(bb,instant){
   var vw=innerWidth, vh=innerHeight;
   var s=Math.max(0.16,Math.min(1.5,Math.min((vw-120)/bb.w,(vh-190)/bb.h)));
-  camT={ x:-bb.x*s+70, y:-bb.y*s+26, s:s };
+  var open=document.body.classList.contains("mapon");
+  camT={ x:-bb.x*s+(open?40:170), y:-bb.y*s+(open?28:48), s:s };
   if(instant){ cam={x:camT.x,y:camT.y,s:camT.s}; applyCam(); } else camTween();
 }
 function fitAll(instant){ fitTo(visibleBBox(false),instant); }
@@ -1019,7 +1074,7 @@ stage.addEventListener("wheel",function(e){
 /* tilt */
 var reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
 var tRX=0,tRY=0,cRX=14,cRY=0;
-if(!reduced){
+if(!reduced && !MOBILE){
   addEventListener("pointermove",function(e){
     tRX=((e.clientY/innerHeight)-0.5)*-4.4;
     tRY=((e.clientX/innerWidth)-0.5)*4.4;
@@ -1143,21 +1198,72 @@ document.getElementById("bZoomOut").addEventListener("click",function(){ camT.s=
 addEventListener("keydown",function(e){
   if(e.key==="Escape"){ if(modal.classList.contains("open")) closeModal(); else closePanel(); }
 });
-addEventListener("resize",function(){ if(!panStart&&!pinchStart) fitAll(true); });
+addEventListener("resize",function(){ if(!MOBILE && !panStart && !pinchStart) fitAll(true); });
+
+/* ───────────────────────── mobile flow ───────────────────────── */
+function buildMobile(){
+  var mf=document.getElementById("mflow"), h="";
+  h+='<section class="mcardx hubx"><button type="button" class="mhead2" id="mhub" aria-label="The Automation Machine, open the overview">'
+    +'<div class="eyebrow">[ <b>Overview</b> ]</div>'
+    +'<div class="claim">'+esc(HUB.claim)+'</div>'
+    +'<div class="statusline">How it runs &middot; live examples<span class="chev">&rarr;</span></div></button></section>';
+  MACHINES.slice().sort(function(a,b){return a.idx<b.idx?-1:1;}).forEach(function(m){
+    h+='<section class="mcardx st-'+m.status+'" id="mx-'+m.id+'">'
+      +'<button type="button" class="mhead2" data-m="'+m.id+'" aria-expanded="false">'
+      +'<div class="eyebrow"><b>'+m.idx+'</b> &middot; '+m.agents.length+' agents</div>'
+      +'<h2 class="font-display">'+esc(m.title)+'</h2>'
+      +'<div class="claim">'+esc(m.claim)+'</div>'
+      +'<div class="statusline"><i class="sw '+m.status+'"></i>'+STATUS_WORD[m.status]+'<span class="chev">+</span></div></button>'
+      +'<div class="magents">'
+      +'<button type="button" class="marow about" data-m="'+m.id+'"><span class="an">About this machine'+(m.links.length?' &middot; live examples':'')+'</span><span class="as">&rarr;</span></button>'
+      +m.agents.map(function(a){
+        return '<button type="button" class="marow" data-m="'+m.id+'" data-a="'+a.id+'">'
+          +'<span class="an">'+esc(a.title)+'</span>'
+          +'<span class="as"><i class="sw '+a.status+'"></i>'+STATUS_WORD[a.status]+'</span></button>';
+      }).join("")
+      +'</div></section>';
+  });
+  h+='<section class="mloops"><div class="sect2">How it loops</div>'+LOOPS.map(function(L){
+    return '<div class="lp"><b>'+esc(byId[L[0]].title)+'</b> &rarr; <b>'+esc(byId[L[1]].title)+'</b><span>'+esc(L[2])+'</span></div>';
+  }).join("")+'</section>';
+  h+='<div class="mcta"><a class="btn-primary" href="https://anandiyer.co.in/#audit">Request an Audit <span aria-hidden="true">&rarr;</span></a></div>';
+  mf.innerHTML=h;
+  document.getElementById("mhub").addEventListener("click",function(){ openHubPanel(); });
+  mf.querySelectorAll(".mhead2[data-m]").forEach(function(b){
+    b.addEventListener("click",function(){
+      var sec=document.getElementById("mx-"+b.getAttribute("data-m"));
+      var open=sec.classList.toggle("open");
+      b.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+  });
+  mf.querySelectorAll(".marow").forEach(function(b){
+    b.addEventListener("click",function(){
+      var m=byId[b.getAttribute("data-m")];
+      if(b.classList.contains("about")){ openMachinePanel(m); return; }
+      var a=m.agents.filter(function(x){return x.id===b.getAttribute("data-a");})[0];
+      a.sheet ? openModal() : openAgentPanel(m,a);
+    });
+  });
+}
 
 /* ───────────────────────── intro ───────────────────────── */
-setTargets();
-Object.keys(nodeState).forEach(function(k){ var n=nodeState[k]; n.cur={x:n.tgt.x,y:n.tgt.y,s:n.tgt.s,o:n.tgt.o}; apply(n); });
-drawWires();
-fitAll(true);
-if(!reduced){
-  cam.s*=0.7; applyCam(); fitAll(false);
-  cRX=16;
-  var order=["hub"].concat(SIDES.right).concat(SIDES.left);
-  order.forEach(function(id,i){ setTimeout(function(){ nodeState[id].el.classList.add("in"); }, 160+i*110); });
-  Object.keys(nodeState).forEach(function(k){ if(k.indexOf("/")>-1) nodeState[k].el.classList.add("in"); });
+if(MOBILE){
+  document.body.classList.add("mobile");
+  buildMobile();
 } else {
-  Object.keys(nodeState).forEach(function(k){ nodeState[k].el.classList.add("in"); });
+  setTargets();
+  Object.keys(nodeState).forEach(function(k){ var n=nodeState[k]; n.cur={x:n.tgt.x,y:n.tgt.y,s:n.tgt.s,o:n.tgt.o}; apply(n); });
+  drawWires();
+  fitAll(true);
+  if(!reduced){
+    cam.s*=0.7; applyCam(); fitAll(false);
+    cRX=16;
+    var order=["hub"].concat(SIDES.right).concat(SIDES.left);
+    order.forEach(function(id,i){ setTimeout(function(){ nodeState[id].el.classList.add("in"); }, 160+i*110); });
+    Object.keys(nodeState).forEach(function(k){ if(k.indexOf("/")>-1) nodeState[k].el.classList.add("in"); });
+  } else {
+    Object.keys(nodeState).forEach(function(k){ nodeState[k].el.classList.add("in"); });
+  }
 }
 </script>
 </body>

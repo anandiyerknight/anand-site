@@ -38,6 +38,7 @@ profile = tempfile.mkdtemp(prefix="am-checkui-")
 proc = subprocess.Popen(launch_args(profile), stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 ws = None
 py_expanded = set()
+emu = {"mobile": False, "media": False}
 
 INSTALL_T = """window.T={
   rect:function(sel){var el=document.querySelector(sel);if(!el)return null;var r=el.getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2,w:r.width,h:r.height};},
@@ -72,8 +73,16 @@ def hard_restart(reason):
     for dom in ("Page.enable", "Runtime.enable", "Log.enable", "Network.enable"):
         _send_recv(dom, {}, 20)
     time.sleep(3.5)
+    if emu.get("media"):
+        _send_recv("Emulation.setEmulatedMedia",
+                   {"features": [{"name": "prefers-reduced-motion", "value": "no-preference"}]}, 20)
+    if emu.get("mobile"):
+        _send_recv("Emulation.setDeviceMetricsOverride",
+                   {"width": 390, "height": 844, "deviceScaleFactor": 3, "mobile": True}, 20)
+        _send_recv("Page.navigate", {"url": FILE_URL}, 20)
+        time.sleep(4.0)
     _eval_raw(INSTALL_T)
-    if py_expanded:
+    if py_expanded and not emu.get("mobile"):
         expr = "".join(f"expanded[{json.dumps(m)}]=true;" for m in sorted(py_expanded))
         _eval_raw(expr + "setTargets();refreshExpandBtn();'restored'")
         time.sleep(1.5)
@@ -414,6 +423,7 @@ try:
            "tilt disabled (transform none)", f"reduced={red}, transform='{t0}'",
            (not red) or t0 == "none")
     current[0] = "tilt-parallax"
+    emu["media"] = True
     cdp("Emulation.setEmulatedMedia", features=[{"name": "prefers-reduced-motion", "value": "no-preference"}])
     cdp("Page.navigate", url=FILE_URL)
     time.sleep(4.5); drain()
@@ -437,6 +447,17 @@ try:
     click_node("hub"); time.sleep(0.6); drain()
     linkinfo = json.loads(js("JSON.stringify(Array.from(document.querySelectorAll('#pbody .lnk')).map(function(a){return {href:a.href,txt:a.textContent.trim()}}))"))
     tabs_before = {t["id"] for t in http("/json/list")}
+    def lclick(i):
+        js(f"(function(){{var el=document.querySelectorAll('#pbody .lnk')[{i}];if(el)el.scrollIntoView({{block:'center'}});}})()")
+        time.sleep(0.3)
+        r = json.loads(js(f"JSON.stringify(T.lnk({i}))") or "null")
+        hit = r and js(f"(function(){{var e=document.elementFromPoint({r['x']},{r['y']});"
+                       f"var t=document.querySelectorAll('#pbody .lnk')[{i}];return !!(e&&t&&(t===e||t.contains(e)));}})()")
+        if hit:
+            click_xy(r["x"], r["y"]); return "tap"
+        js(f"(function(){{var el=document.querySelectorAll('#pbody .lnk')[{i}];if(el)el.click();}})()")
+        return "el.click (popup may be blocked headless)"
+
     def wait_new_tab(before, want, tries=10):
         for _ in range(tries):
             time.sleep(0.5)
@@ -449,18 +470,14 @@ try:
 
     for i, li in enumerate(linkinfo):
         current[0] = f"link-hub-{i}"
-        r = json.loads(js(f"JSON.stringify(T.lnk({i}))") or "null")
-        hitl = r and js(f"T.hitSel({r['x']},{r['y']},'#pbody .lnk:nth-of-type(0)') || "
-                        f"(function(){{var e=document.elementFromPoint({r['x']},{r['y']});"
-                        f"var t=document.querySelectorAll('#pbody .lnk')[{i}];return !!(e&&t&&t.contains(e));}})()")
-        if hitl:
-            click_xy(r["x"], r["y"])
-        else:
-            js(f"document.querySelectorAll('#pbody .lnk')[{i}].click()")
+        if not js("panel.classList.contains('open') && document.querySelectorAll('#pbody .lnk').length===6"):
+            js("openHubPanel()"); time.sleep(0.5); drain()
+        tabs_before = {t["id"] for t in http("/json/list")}
+        meth3 = lclick(i)
         new = wait_new_tab(tabs_before, li["href"])
         ok = any(li["href"].rstrip("/") in (t.get("url", "").rstrip("/")) or
                  t.get("url", "").rstrip("/").startswith(li["href"].rstrip("/")) for t in new)
-        record(f"link-hub-{i}", f"click '{li['txt'][:40]}'", f"new tab opens at {li['href']}",
+        record(f"link-hub-{i}", f"{meth3} '{li['txt'][:40]}'", f"new tab opens at {li['href']}",
                f"newTabs={[t.get('url','')[:60] for t in new]}", ok)
         for t in new:
             try:
@@ -475,9 +492,12 @@ try:
     current[0] = "link-content-machine"
     click_node("content"); time.sleep(1.0); drain()
     tabs_before = {t["id"] for t in http("/json/list")}
+    if not js("panel.classList.contains('open') && document.querySelectorAll('#pbody .lnk').length>0"):
+        js("openMachinePanel(byId['content'])"); time.sleep(0.5); drain()
+    tabs_before = {t["id"] for t in http("/json/list")}
     r = json.loads(js("JSON.stringify(T.lnk(0))") or "null")
     href = r and r.get("href")
-    js("document.querySelectorAll('#pbody .lnk')[0].click()")
+    lclick(0)
     new = wait_new_tab(tabs_before, href or "")
     record("link-content-machine", "click first link in Content machine panel",
            f"new tab at {href}", f"newTabs={[t.get('url','')[:60] for t in new]}",
@@ -495,8 +515,12 @@ try:
     tabs_before = {t["id"] for t in http("/json/list")}
     ok_all, seen = True, []
     for i in range(n):
+        if not js("panel.classList.contains('open') && document.querySelectorAll('#pbody .lnk').length===4"):
+            js("(function(){var m=byId['demand'],a=m.agents.filter(function(x){return x.id==='page'})[0];openAgentPanel(m,a);})()")
+            time.sleep(0.5); drain()
+        tabs_before = {t["id"] for t in http("/json/list")}
         r = json.loads(js(f"JSON.stringify(T.lnk({i}))") or "null")
-        js(f"document.querySelectorAll('#pbody .lnk')[{i}].click()")
+        lclick(i)
         new = wait_new_tab(tabs_before, r["href"])
         hit = any((r["href"]).rstrip("/") in t.get("url", "") for t in new)
         ok_all = ok_all and hit
@@ -526,6 +550,103 @@ try:
         time.sleep(3.0)
         drain()
         js(INSTALL_T)
+
+    # ────────────────── mobile mode (390x844 phone emulation) ──────────────────
+    current[0] = "mobile-load"
+    emu["mobile"] = True
+    cdp("Emulation.setDeviceMetricsOverride", width=390, height=844, deviceScaleFactor=3, mobile=True)
+    cdp("Page.navigate", url=FILE_URL); time.sleep(4.5); drain()
+    js(INSTALL_T)
+    is_mob = js("document.body.classList.contains('mobile')")
+    ncards = js("document.querySelectorAll('#mflow .mcardx').length")
+    nloops = js("document.querySelectorAll('#mflow .mloops .lp').length")
+    stage_off = js("getComputedStyle(document.getElementById('stage')).display")
+    overx = js("document.documentElement.scrollWidth - document.documentElement.clientWidth")
+    record("mobile-load", "emulate 390x844 phone, reload",
+           "mobile flow renders: hub + 8 machine cards, 4 loop rows, board hidden, no sideways overflow",
+           f"mobile={is_mob}, cards={ncards}, loopRows={nloops}, stage={stage_off}, xOverflow={overx}px",
+           bool(is_mob) and ncards == 9 and nloops == 4 and stage_off == "none" and (overx or 0) <= 0)
+    shot("am_mobile_top.png")
+
+    def mclick(sel_expr):
+        js(f"(function(){{var el={sel_expr};if(el)el.scrollIntoView({{block:'center'}});}})()")
+        time.sleep(0.3)
+        r = js(f"(function(){{var el={sel_expr};if(!el)return null;var b=el.getBoundingClientRect();return JSON.stringify({{x:b.x+b.width/2,y:b.y+b.height/2}});}})()")
+        p = json.loads(r) if r else None
+        hit = p and js(f"(function(){{var e=document.elementFromPoint({p['x']},{p['y']});var t={sel_expr};return !!(e&&t&&(t===e||t.contains(e)));}})()")
+        if hit:
+            click_xy(p["x"], p["y"]); return "tap"
+        js(f"(function(){{var el={sel_expr};if(el)el.click();}})()"); return "el.click()"
+
+    current[0] = "mob-hub"
+    m0 = mclick("document.getElementById('mhub')")
+    time.sleep(0.5); drain(); s1 = state()
+    record("mob-hub", f"{m0} on hub card", "overview bottom sheet opens with 6 links",
+           f"panel={s1['panel']}, title='{s1['title']}', links=" + str(js("document.querySelectorAll('#pbody .lnk').length")),
+           s1["panel"] and s1["title"] == "The Automation Machine")
+    key_escape(); time.sleep(0.3); drain()
+
+    for mo in machines:
+        mid = mo["id"]
+        current[0] = f"mob-machine-{mid}"
+        meth = mclick(f"document.querySelector('#mx-{mid} .mhead2')")
+        time.sleep(0.4); drain()
+        opened = js(f"document.getElementById('mx-{mid}').classList.contains('open')")
+        nrows = js(f"document.querySelectorAll('#mx-{mid} .marow').length")
+        record(f"mob-machine-{mid}", f"{meth} machine card", "expands inline agent list",
+               f"open={opened}, rows={nrows}", bool(opened) and nrows == len(mo["agents"]) + 1)
+        current[0] = f"mob-about-{mid}"
+        mclick(f"document.querySelector('#mx-{mid} .marow.about')")
+        time.sleep(0.5); drain(); s2 = state()
+        record(f"mob-about-{mid}", "tap About this machine", "machine bottom sheet opens",
+               f"panel={s2['panel']}, title='{s2['title']}'", s2["panel"] and s2["title"] == mo["title"])
+        key_escape(); time.sleep(0.3); drain()
+        for ai, ao in enumerate(mo["agents"]):
+            current[0] = f"mob-agent-{mid}-{ao['id']}"
+            mm = mclick(f"document.querySelectorAll('#mx-{mid} .marow:not(.about)')[{ai}]")
+            time.sleep(0.45); drain(); s3 = state()
+            if ao["sheet"]:
+                record(f"mob-agent-{mid}-{ao['id']}", f"{mm} agent row", "real-list modal opens",
+                       f"modal={s3['modal']}", s3["modal"])
+            else:
+                record(f"mob-agent-{mid}-{ao['id']}", f"{mm} agent row", "agent bottom sheet opens",
+                       f"title='{s3['title']}'", s3["title"] == ao["title"])
+            key_escape(); time.sleep(0.25); drain()
+        current[0] = f"mob-collapse-{mid}"
+        if not js(f"document.getElementById('mx-{mid}').classList.contains('open')"):
+            mclick(f"document.querySelector('#mx-{mid} .mhead2')"); time.sleep(0.35)
+        mclick(f"document.querySelector('#mx-{mid} .mhead2')")
+        time.sleep(0.35)
+        opened = js(f"document.getElementById('mx-{mid}').classList.contains('open')")
+        record(f"mob-collapse-{mid}", "tap the open machine card again", "collapses the agent list",
+               f"open={opened}", not opened)
+
+    js("document.getElementById('mx-content').classList.add('open');document.getElementById('mx-content').scrollIntoView({block:'start'})")
+    time.sleep(0.4); shot("am_mobile_machine.png")
+    js("(function(){var m=byId['data'],a=m.agents[1];openAgentPanel(m,a);})()"); time.sleep(0.6); shot("am_mobile_sheet.png")
+    key_escape(); time.sleep(0.3)
+    js("openModal()"); time.sleep(0.4); shot("am_mobile_modal.png"); js("closeModal()"); time.sleep(0.2)
+
+    current[0] = "mob-scroll"
+    js("window.scrollTo(0,0)"); time.sleep(0.2)
+    y0 = js("window.scrollY") or 0
+    js("window.scrollTo(0,1400)"); time.sleep(0.3)
+    y1 = js("window.scrollY") or 0
+    record("mob-scroll", "scroll the page", "vertical scroll works", f"{y0} -> {y1}", y1 > 600)
+
+    current[0] = "mob-cta"
+    ctahref = js("(function(){var a=document.querySelector('#mflow .mcta a');return a?a.href:null;})()")
+    mclick("document.querySelector('#mflow .mcta a')")
+    time.sleep(3.0)
+    curl = js("location.href") or ""
+    ext = ctl_errors.pop("mob-cta", [])
+    if ext:
+        stall_notes.append("mob-cta: errors from the live anandiyer.co.in site itself (not this page): " + "; ".join(ext))
+    record("mob-cta", "tap bottom CTA", "navigates to the audit form",
+           f"href={ctahref}, location={curl[:60]}",
+           ctahref == "https://anandiyer.co.in/#audit" and curl.startswith("https://anandiyer.co.in"))
+    emu["mobile"] = False
+    cdp("Emulation.clearDeviceMetricsOverride")
 
     untested("pinch-zoom", "two-finger pinch", "zooms around pinch midpoint",
              "touch-hardware path; not exercisable with mouse CDP events in this pass")
