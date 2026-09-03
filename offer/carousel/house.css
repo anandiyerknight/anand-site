@@ -1,0 +1,54 @@
+/* Anand Iyer / Wapaash carousel house style.
+   The version Anand approved, with the neon glow and 3D extrusion REMOVED (2026-09-03).
+   No glow, no text-shadow, no rules, no dividers, no pills. */
+
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-print-color-adjust: exact; }
+html, body { overflow: hidden; }
+body {
+  background:
+    radial-gradient(900px 520px at 78% 30%, rgba(94,214,255,.13), transparent 62%),
+    radial-gradient(700px 460px at 12% 88%, rgba(94,214,255,.07), transparent 60%),
+    #08080a;
+  color: #fff;
+  font-family: Helvetica, Arial, sans-serif;   /* never -apple-system: headless renders it heavy */
+  font-weight: 400;
+  padding: 64px 68px;
+  display: flex; flex-direction: column;
+}
+/* A flex column shrinks its children rather than overflowing, which hides real overflow
+   from the gate. This makes overflow measurable. */
+body > * { flex-shrink: 0; }
+
+.eyebrow {
+  font-size: 21px; font-weight: 700; letter-spacing: .26em;
+  text-transform: uppercase; color: #6f7681;
+}
+h1 {
+  font-size: 72px; font-weight: 700; line-height: 1.03;
+  letter-spacing: -0.028em; margin-top: 20px;
+}
+h1 em { font-style: normal; color: #6f7681; }
+
+.hero { margin-top: 34px; }
+.hero .cap {
+  font-size: 21px; font-weight: 700; letter-spacing: .2em;
+  text-transform: uppercase; color: #6f7681; margin-bottom: 12px;
+}
+.hero .row { display: flex; align-items: baseline; gap: 26px; }
+.from { font-size: 60px; font-weight: 700; color: #4b525c; letter-spacing: -0.02em; }
+.arrow { font-size: 46px; font-weight: 700; color: #6f7681; }
+.to { font-size: 92px; font-weight: 700; letter-spacing: -0.03em; }
+.hero .note { font-size: 24px; color: #aeb4bd; margin-top: 10px; }
+
+.kicker {
+  font-size: 21px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase;
+  color: #6f7681; margin: 40px 0 24px;
+}
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 52px 44px; }
+.num { font-size: 56px; font-weight: 700; line-height: 1; letter-spacing: -0.025em; }
+.lab { font-size: 23px; line-height: 1.32; color: #aeb4bd; margin-top: 10px; }
+
+.close { margin-top: auto; padding-top: 30px; }
+.close p { font-size: 27px; line-height: 1.4; }
+.close strong { font-weight: 700; }
+.site { font-size: 22px; font-weight: 700; letter-spacing: .05em; color: #6f7681; margin-top: 22px; }

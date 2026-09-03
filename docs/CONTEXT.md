@@ -1,4 +1,4 @@
-> STATUS 2026-08-21: The B2B outbound map page (public/automation-machine.html) is finished for BOTH desktop (3D board) and phone (scrolling cards) in the live site's design; full browser pass green in both modes (217 checks, 0 fail). Not published, live site untouched. | NEEDS-YOU: open public/automation-machine.html (desktop + phone); yes/no to publish; and say whether the Vita example link staying on the-vita-life.com/consult redirect is fine
+> STATUS 2026-09-03: Two new sales artefacts in offer/, both verified and neither sent. A one-page PDF (Anand-Iyer-How-This-Worked.pdf, 216 words, cut 82% from the first draft) leading on Rs 1.5 crore in 60 days, with the follow-up failure data as the argument and no price or signature. A 1x1 social square (Anand-Iyer-Outbound-1x1.png, 2160x2160) in the now-locked carousel look: Helvetica, white on near-black, no glow, no rules. Source lives in offer/carousel/ with sources.md naming what backs every figure. The new /carousel skill (~/.claude/skills/carousel/) owns the style and the renderer. | NEEDS-YOU: say whether the square and the PDF go out as they are; and the 0.8 to 8.2 percent reply rate on both has no store behind it, you retired it once and reinstated it today, so confirm before either is published
 
 ---
 
@@ -166,22 +166,18 @@ Hero → Content multiplication (1→100s: carousels/videos/posters/blogs/newsle
 ### ▶ Parked thread (/experience)
 User is going to: generate the 5 stills (prompts in `docs/IMMERSIVE_3D_PROMPTS.md` C) → generate videos (Veo prompts, section A) → render all clips WITHOUT text → drop clips into `public/experience/video/`. THEN: build the cinematic `/experience` route = scroll-scrub each clip per section using the `scroll-video.html` frame-sequence engine + editable DOM text/CTA overlays, 7 sections (no FAQ), mobile fallback, wire CTA to the audit form. Replace the R3F bubble scaffolding. Deploy (anand-site is report-only / protected): `gh auth switch --user anandiyerknight && git push vercel main` after approval.
 
-## Next Session Starts Here (automation-machine map)
+## Next Session Starts Here (offer artefacts)
 
-Built 2026-08-21, working tree on branch `rebrand-tokens` (the new files are branch-agnostic): **`public/automation-machine.html`** — the B2B outbound offer as a site-native 3D interactive system map (monochrome + Geist matched to the LIVE site's CSS, not the unshipped rebrand). Hub + 8 machines + 38 agents, click-through panels with real example links, the masked real target list as a modal. Content source of truth: `~/CODE/automation-machine-deck/content.py`.
+Built 2026-09-03, nothing sent:
+- `offer/Anand-Iyer-How-This-Worked.pdf` - one page, 216 words, no price, no signature.
+- `offer/Anand-Iyer-Outbound-1x1.png` - 2160x2160 social square. Source in `offer/carousel/`.
+- `offer/carousel/sources.md` - what backs every figure, and which ones are recycled.
 
-Mobile (added same day, user order): under 760px the board is replaced by a native scrolling flow — hub overview card, 8 machine cards in 01..08 order that expand agents inline, bottom-sheet detail panels, same modal + links, CTA top and bottom; breakpoint change reloads. Desktop got margin/wire/arc polish (perimeter-routed feedback arcs, resting-view camera nudged clear of the headline, intro fades once a machine opens).
+To make another square: `/carousel`. The skill holds the locked CSS, the template and the
+content rules. Do not change the font or the palette; both were rejected once already.
 
-Verification state: full real-browser pass GREEN on the final build in BOTH modes — 217 checks, 215 PASS, 0 FAIL, 2 UNTESTED with reasons (pinch = touch hardware only; window-resize refit = fixed headless window, same routine proven by the Fit button). Log `logs/ui-check-2026-08-21.md` incl. the re-verification addendum. Re-run any time: `uv run --python 3.12 --with websocket-client python scripts/checkui-automation-machine.py`. Finding for Anand: vita-lp-hni.vercel.app now redirects to the-vita-life.com/consult — the example link works but lands on a consult page (same URL also used by /system and the deck).
-
-1. Anand opens `public/automation-machine.html` in his browser → approve / edit / veto.
-2. On his yes, publish WITHOUT shipping the rebrand: `git checkout main` → `git checkout rebrand-tokens -- public/automation-machine.html logs/ui-check-2026-08-21.md scripts/checkui-automation-machine.py` → commit → `gh auth switch --user anandiyerknight && git push vercel main` → live at anandiyer.co.in/automation-machine.html. **NEVER merge or push the rebrand-tokens branch itself — that ships the whole unapproved emerald rebrand.**
-3. Then, separate approval: swap the all-text B2B flagship card in `components/features/ServicesSection.tsx` to open the map.
-Side note to give Anand: the live site's favicon 404s (pre-existing, one small fix).
-(Old /system thread archived in `docs/SESSION_LOG.md` — overlaps this page's purpose; decide its fate after the map verdict.)
-
-
----
+Open: his yes on sending either artefact, and a decision on the 0.8 to 8.2 percent reply rate,
+which has no store behind it.
 
 # REBRAND + ARCHITECTURE CONSOLIDATION (2026-07-11, branch `rebrand-tokens`, NOT yet merged/deployed)
 
