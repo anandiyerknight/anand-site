@@ -1,4 +1,4 @@
-> STATUS 2026-09-03: Two new sales artefacts in offer/, both verified and neither sent. A one-page PDF (Anand-Iyer-How-This-Worked.pdf, 216 words, cut 82% from the first draft) leading on Rs 1.5 crore in 60 days, with the follow-up failure data as the argument and no price or signature. A 1x1 social square (Anand-Iyer-Outbound-1x1.png, 2160x2160) in the now-locked carousel look: Helvetica, white on near-black, no glow, no rules. Source lives in offer/carousel/ with sources.md naming what backs every figure. The new /carousel skill (~/.claude/skills/carousel/) owns the style and the renderer. | NEEDS-YOU: say whether the square and the PDF go out as they are; and the 0.8 to 8.2 percent reply rate on both has no store behind it, you retired it once and reinstated it today, so confirm before either is published
+> STATUS 2026-09-03: EIGHT-SLIDE CAROUSEL BUILT AND RENDERED, nothing published. offer/carousel/slide-01 to slide-08, all 2160x2160, all four gates green and every PNG read by eye. The arc: the crore, the math of 1,000 companies becoming 64,000 touchpoints, email against WhatsApp, finding the 8,000, what a human cannot do, the buyers you already have, social on autopilot, and day 45. Anand ruled 8.2% is the one reply figure used everywhere, so 13% is gone from the deck. No price on any slide. sources.md separates illustrative worked examples from third-party and stated figures. | NEEDS-YOU: say whether the eight slides go out, and the 8.2 percent still has no store behind it
 
 ---
 
@@ -168,20 +168,15 @@ User is going to: generate the 5 stills (prompts in `docs/IMMERSIVE_3D_PROMPTS.m
 
 ## Next Session Starts Here (offer artefacts)
 
-Built 2026-09-03, nothing sent:
+Built 2026-09-03, nothing published:
+- `offer/carousel/slide-01.png` to `slide-08.png` - the eight-slide carousel, 2160x2160 each.
+  Sources in `offer/carousel/slide-0N.html`, style from `~/.claude/skills/carousel/`.
+- `offer/carousel/sources.md` - now grades three kinds of figure: ILLUSTRATIVE MODEL (worked
+  example arithmetic, never described on a slide as measured), THIRD PARTY, and ANAND STATED.
 - `offer/Anand-Iyer-How-This-Worked.pdf` - one page, 216 words, no price, no signature.
-- `offer/Anand-Iyer-Outbound-1x1.png` - 2160x2160 social square. Source in `offer/carousel/`.
-- `offer/carousel/sources.md` - what backs every figure, and which ones are recycled.
+- `offer/Anand-Iyer-Outbound-1x1.png` - the original square, identical to slide-01.png.
 
-To make another square: `/carousel`. The skill holds the locked CSS, the template and the
-content rules. Do not change the font or the palette; both were rejected once already.
-
-Open: his yes on sending either artefact, and a decision on the 0.8 to 8.2 percent reply rate,
-which has no store behind it.
-
-# REBRAND + ARCHITECTURE CONSOLIDATION (2026-07-11, branch `rebrand-tokens`, NOT yet merged/deployed)
-
-Full token-deepened visual rebrand + component consolidation. **Awaiting Anand's screenshot review before merge to main + `git push vercel main`.**
+Waiting on Anand: publish the eight or not. The 8.2 percent reply figure has no store behind it.
 
 ## What changed (visual)
 - **Display font: Clash Display** (Fontshare, ITF Free Font License) — `app/fonts/ClashDisplay-Variable.woff2` via `next/font/local` as `--font-clash`; `.font-display` weight 600. Body stays Geist. Unused Inter load removed.
