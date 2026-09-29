@@ -7,7 +7,7 @@ import { newsletterIssues } from "@/lib/newsletters";
 export const metadata: Metadata = {
   title: "The Automation Series — Free Case Studies | Anand Iyer",
   description:
-    "21 one-page case studies on automating content, outreach and revenue for small Indian businesses. Each shows what they did and the money saved or earned. Free to download.",
+    "21 practical case studies on automating content, outreach and revenue for small Indian businesses. Read each one as a standalone page, with the math behind the system.",
 };
 
 export default function NewslettersPage() {
@@ -26,7 +26,7 @@ export default function NewslettersPage() {
           <p className="mt-6 md:mt-8 text-base md:text-lg text-[var(--color-ink-2)] leading-relaxed max-w-2xl">
             Every issue is a one-page case study: a real-world example, what they did, and the money
             saved or earned. From ecommerce listings to cold outreach to the newsletter machine itself.
-            Free to download, one at a time.
+            Read the system, then share the page.
           </p>
           <p className="mt-4 text-xs md:text-sm text-[var(--color-mute)] italic max-w-2xl">
             Scenario numbers are illustrative models built to make the math concrete, not named client results.
