@@ -7,7 +7,7 @@ import { newsletterIssues } from "@/lib/newsletters";
 export const metadata: Metadata = {
   title: "The Automation Series — Free Case Studies | Anand Iyer",
   description:
-    "20 one-page case studies on automating content, outreach and revenue for small Indian businesses. Each shows what they did and the money saved or earned. Free to download.",
+    "21 one-page case studies on automating content, outreach and revenue for small Indian businesses. Each shows what they did and the money saved or earned. Free to download.",
 };
 
 export default function NewslettersPage() {
@@ -21,7 +21,7 @@ export default function NewslettersPage() {
             The Automation Series
           </div>
           <h1 className="mt-5 font-display text-[clamp(2.2rem,6vw,5rem)] leading-[0.95] tracking-tight max-w-4xl">
-            20 systems. One page each. <span className="italic">The math, not the hype.</span>
+            21 systems. One page each. <span className="italic">The math, not the hype.</span>
           </h1>
           <p className="mt-6 md:mt-8 text-base md:text-lg text-[var(--color-ink-2)] leading-relaxed max-w-2xl">
             Every issue is a one-page case study: a real-world example, what they did, and the money

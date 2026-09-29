@@ -5,7 +5,7 @@ export type NewsletterIssue = {
   blurb: string;
 };
 
-// The 20-issue automation series. PDFs + hero images live in /public/newsletters/<slug>.{pdf,png}.
+// The 21-issue automation series. PDFs + hero images live in /public/newsletters/<slug>.{pdf,png}.
 export const newsletterIssues: NewsletterIssue[] = [
   { num: "01", slug: "01-master-list", title: "The Automation Map", blurb: "Eight things your business can automate this quarter, the complete map with the math." },
   { num: "02", slug: "02-listing-velocity", title: "Listing Velocity", blurb: "Your competitor lists 40 products a week. You list 4. The listing bottleneck, solved at 10× speed." },
@@ -27,4 +27,5 @@ export const newsletterIssues: NewsletterIssue[] = [
   { num: "18", slug: "18-sequence-math", title: "Sequence Math", blurb: "Two-thirds of replies arrive after the first email. The 5-touch sequence that claims them." },
   { num: "19", slug: "19-newsletter-sales-asset", title: "The Newsletter", blurb: "A newsletter is not content. It is a sales asset with a 20-issue runway." },
   { num: "20", slug: "20-full-stack", title: "The Full Stack", blurb: "₹8L in, ₹66L pipeline out. All eight systems assembled into one growth machine." },
+  { num: "21", slug: "21-cold-outbound", title: "The 60-Day Outbound Case Study", blurb: "64,000 touchpoints became 1,920 conversations, approximately 240 real leads, and ₹1.5 crore closed in 60 days." },
 ];
