@@ -11,7 +11,7 @@ export function Footer() {
             <br />
             <span className="italic grad-text">the engine.</span>
           </h2>
-          <a href="#audit" className="btn-primary text-sm self-end">
+          <a href="/?source=footer#audit" className="btn-primary text-sm self-end">
             Submit Brief
             <span aria-hidden>→</span>
           </a>
@@ -57,11 +57,11 @@ export function Footer() {
             </div>
             <ul className="space-y-2">
               {[
-                ["Proof", "#proof"],
-                ["Stack", "#stack"],
-                ["Work", "#work"],
-                ["Cases", "#cases"],
-                ["Audit", "#audit"],
+                ["Proof", "/#proof"],
+                ["Stack", "/#stack"],
+                ["Work", "/#work"],
+                ["Cases", "/#cases"],
+                ["Audit", "/?source=footer-index#audit"],
               ].map(([l, h]) => (
                 <li key={h}>
                   <a

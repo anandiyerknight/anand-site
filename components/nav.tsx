@@ -29,7 +29,7 @@ export function Nav() {
       }`}
     >
       <div className="px-6 md:px-10 flex items-center justify-between gap-8">
-        <Link href="#top" className="flex items-baseline gap-3 group">
+        <Link href="/" className="flex items-baseline gap-3 group">
           <span className="font-display italic text-2xl tracking-tight">Anand Iyer</span>
           <span className="font-mono text-[10px] tracking-[0.22em] uppercase text-[var(--color-mute)] group-hover:text-[var(--color-cyan)] transition-colors">
             / AI Architect
@@ -50,7 +50,7 @@ export function Nav() {
         </ul>
 
         <div className="flex items-center gap-2 md:gap-4">
-          <a href="#audit" className="btn-primary !py-2 md:!py-2.5 !px-3 md:!px-4 !text-xs md:!text-[10px]">
+          <a href="/?source=nav#audit" className="btn-primary !py-2 md:!py-2.5 !px-3 md:!px-4 !text-xs md:!text-[10px]">
             <span>Request an Audit</span>
             <span aria-hidden>→</span>
           </a>
