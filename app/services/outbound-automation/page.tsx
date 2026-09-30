@@ -40,14 +40,40 @@ export default function OutboundAutomationPage() {
     areaServed: "Worldwide",
     url: "https://anandiyer.co.in/services/outbound-automation",
   };
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      serviceSchema,
+      {
+        "@type": "FAQPage",
+        mainEntity: faqs.map(([question, answer]) => ({
+          "@type": "Question",
+          name: question,
+          acceptedAnswer: { "@type": "Answer", text: answer },
+        })),
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: "https://anandiyer.co.in" },
+          { "@type": "ListItem", position: 2, name: "Outbound automation", item: "https://anandiyer.co.in/services/outbound-automation" },
+        ],
+      },
+    ],
+  };
 
   return (
     <main className="relative">
       <Nav />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
 
       <header className="px-6 md:px-10 pt-32 md:pt-44 pb-16 md:pb-24 border-b border-[var(--color-rule)]">
         <div className="max-w-7xl mx-auto">
+          <div className="flex flex-wrap items-center gap-2 font-mono text-[10px] tracking-[0.18em] uppercase text-[var(--color-mute)]">
+            <Link href="/" className="hover:text-[var(--color-ink)] transition-colors">Home</Link>
+            <span aria-hidden>/</span>
+            <span>Outbound automation</span>
+          </div>
           <div className="font-mono text-[10px] tracking-[0.22em] uppercase text-[var(--color-mute)]">Revenue infrastructure · Outbound</div>
           <div className="mt-10 grid lg:grid-cols-[1.1fr_0.9fr] gap-10 lg:gap-24 items-end">
             <div>
