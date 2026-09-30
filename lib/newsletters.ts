@@ -5,7 +5,7 @@ export type NewsletterIssue = {
   blurb: string;
 };
 
-// The 21-issue automation series. Public issue pages and hero images live under /newsletters/.
+// The automation series. Public issue pages and hero images live under /newsletters/.
 export const newsletterIssues: NewsletterIssue[] = [
   { num: "01", slug: "01-master-list", title: "The Automation Map", blurb: "Eight things your business can automate this quarter, the complete map with the math." },
   { num: "02", slug: "02-listing-velocity", title: "Listing Velocity", blurb: "Your competitor lists 40 products a week. You list 4. The listing bottleneck, solved at 10× speed." },
