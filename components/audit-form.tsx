@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { track } from "@vercel/analytics";
 import { Magnetic } from "./magnetic";
 import { Reveal } from "./reveal";
 
@@ -41,13 +42,19 @@ export function AuditForm() {
       phone: `${countryCode.code} ${phone}`,
       source: new URLSearchParams(window.location.search).get("source") || "homepage",
     };
+    track("audit_submit_started", { source: payload.source });
     try {
       const res = await fetch("/api/audit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
-      setState(res.ok ? "ok" : "err");
+      if (res.ok) {
+        track("audit_submitted", { source: payload.source });
+        setState("ok");
+      } else {
+        setState("err");
+      }
     } catch {
       setState("err");
     }
