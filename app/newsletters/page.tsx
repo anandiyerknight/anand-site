@@ -21,9 +21,39 @@ export const metadata: Metadata = {
 };
 
 export default function NewslettersPage() {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "CollectionPage",
+        "@id": "https://anandiyer.co.in/newsletters#collection",
+        name: "The Automation Series — Free Case Studies",
+        description:
+          "21 practical case studies on automating content, outreach and revenue for small Indian businesses.",
+        url: "https://anandiyer.co.in/newsletters",
+        isPartOf: { "@id": "https://anandiyer.co.in/#website" },
+        mainEntity: { "@id": "https://anandiyer.co.in/newsletters#issues" },
+      },
+      {
+        "@type": "ItemList",
+        "@id": "https://anandiyer.co.in/newsletters#issues",
+        name: "Automation Series case studies",
+        numberOfItems: newsletterIssues.length,
+        itemListElement: newsletterIssues.map((issue, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          name: issue.title,
+          url: `https://anandiyer.co.in/newsletters/${issue.slug}`,
+          description: issue.blurb,
+        })),
+      },
+    ],
+  };
+
   return (
     <main className="relative">
       <Nav />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
 
       <section className="px-6 md:px-10 pt-32 md:pt-44 pb-10 md:pb-16 border-b border-[var(--color-rule)]">
         <div className="max-w-7xl mx-auto">
