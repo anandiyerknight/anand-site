@@ -4,7 +4,7 @@ import { Footer } from "@/components/footer";
 import { Nav } from "@/components/nav";
 
 const description =
-  "Build a repeatable content operations system that turns founder input into approved, on-brand assets for every channel without making the founder the production bottleneck.";
+  "Build a repeatable content system that turns founder input into approved, on-brand assets across channels—without making the founder the production bottleneck.";
 
 export const metadata: Metadata = {
   title: "AI Content Automation for Founders | Anand Iyer",
