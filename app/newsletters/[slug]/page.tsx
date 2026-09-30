@@ -140,8 +140,7 @@ export default async function NewsletterIssuePage({ params }: NewsletterPageProp
               <div className="lg:sticky lg:top-28 border-t border-[var(--color-rule)] pt-5">
                 <div className="font-mono text-[10px] tracking-[0.2em] uppercase text-[var(--color-mute)]">Issue {issue.num} / {newsletterIssues.length}</div>
                 <p className="mt-4 text-sm text-[var(--color-ink-2)] leading-relaxed">{issue.blurb}</p>
-                <div className="mt-7 flex flex-col gap-3">
-                  <a href={`/newsletters/${issue.slug}.pdf`} target="_blank" rel="noreferrer" className="btn-primary !rounded-none !text-[10px]">Download PDF <span aria-hidden>↓</span></a>
+                <div className="mt-7">
                   <Link href="/newsletters" className="btn-ghost !rounded-none !text-[10px]">Browse all issues <span aria-hidden>→</span></Link>
                 </div>
               </div>
