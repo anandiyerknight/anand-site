@@ -43,9 +43,21 @@ export default async function NewsletterIssuePage({ params }: NewsletterPageProp
   const caseStudy = newsletterCaseStudies[slug];
   if (!issue || !caseStudy) notFound();
 
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: caseStudy.headline,
+    description: caseStudy.profileHtml.replace(/<[^>]+>/g, ""),
+    image: `https://anandiyer.co.in/newsletters/${issue.slug}.png`,
+    author: { "@type": "Person", name: "Anand Iyer", url: "https://anandiyer.co.in" },
+    publisher: { "@type": "Person", name: "Anand Iyer", url: "https://anandiyer.co.in" },
+    mainEntityOfPage: `https://anandiyer.co.in/newsletters/${issue.slug}`,
+  };
+
   return (
     <main className="relative">
       <Nav />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <article>
         <header className="px-6 md:px-10 pt-32 md:pt-44 pb-12 md:pb-20 border-b border-[var(--color-rule)]">
           <div className="max-w-6xl mx-auto">
