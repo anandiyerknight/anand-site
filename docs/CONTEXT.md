@@ -101,23 +101,22 @@ Fixed: `data.phone.replace(/^\+(\d+)\s/, "($1) ")` → sends `(91) XXXXXXXXXX` i
 
 # Newsletters section (added 2026-06-15)
 
-**Live:** https://anandiyer.co.in/newsletters — gated free downloads of the 20-issue automation case-study series.
+**Live:** https://anandiyer.co.in/newsletters — public pages for the 21-issue automation case-study series.
 
 - **Route:** `app/newsletters/page.tsx` (static) → renders `components/newsletter-library.tsx` (client).
-- **Data:** `lib/newsletters.ts` (20 issues: num, slug, title, blurb).
-- **Assets:** `public/newsletters/<slug>.pdf` + `<slug>.png` (hero thumbnail). Source PDFs live in `~/CODE/gmail/newsletters/<slug>/case-study.pdf`; re-copy after regenerating.
-- **Lead wall:** first download opens a form (name + email + optional company) → `POST /api/newsletter` → captured BOTH via `addBriefToSheet` (same Google Sheet as the audit form, Brief = "Newsletter download: Issue NN — Title") AND `sendBriefNotification` (email to zingaboink@gmail.com). After first submit, localStorage `nl_lead` skips the form but still logs each download. Slug is validated against `newsletterIssues` (path-traversal returns 400).
+- **Data:** `lib/newsletters.ts` (21 issues: num, slug, title, blurb) plus `lib/newsletter-pages.ts` (full inline case-study content).
+- **Assets:** `public/newsletters/<slug>.png` hero images. Newsletter PDFs and download gates were removed; every case study is read directly on its public route.
+- **Lead path:** case-study CTAs link to the homepage audit form with a `source=newsletter-<slug>` attribution tag.
 - **Nav:** "Newsletters" link added to `components/nav.tsx` (hash links changed to `/#...` so they work from non-home routes).
 
 # Work showcase (added 2026-06-20)
 
 **Live:** https://anandiyer.co.in/work — public portfolio grid + a teaser on the home page. Plus the `/addwork` skill that adds new work in one command.
 
-- **Data (single source of truth):** `lib/work.ts` — `WorkItem[]` with a discriminated `type`: `landing-page` (cover screenshot + `liveUrl`), `carousel` (`gallery[]` → lightbox), `guide` (`pdf`, gated download), `case-study` (`caseStudyId` → reuses `lib/case-studies.ts`). Helper `hasCaseStudy()`. Each item owns `public/work/<slug>/` (cover.png / 01.png… / *.pdf).
-- **Pages/components:** `app/work/page.tsx` (static) → `components/work-showcase.tsx` (client: filter tabs, per-type cards, gated-download form reusing the `nl_lead` localStorage + lead modal, case-study modal). Carousel lightbox = `components/work-lightbox.tsx`. Home teaser = `components/work-grid.tsx` (renders `featured` items into `<section id="work-grid">`, fills the nav's pre-existing dead `/#work-grid` anchor; wired into `app/page.tsx` after `AppsShowcase`).
-- **Gated guide downloads:** `POST /api/work-download` mirrors `/api/newsletter` — validates slug against `workItems` (type `guide`), `addBriefToSheet` (Brief = "Work download: <title>") + `sendBriefNotification`. No new backend/env needed.
+- **Data (single source of truth):** `lib/work.ts` — `WorkItem[]` with a discriminated `type`: `landing-page` (cover screenshot + `liveUrl`), `carousel` (`gallery[]` → lightbox), and `case-study` (`caseStudyId` → reuses `lib/case-studies.ts`). Helper `hasCaseStudy()`.
+- **Pages/components:** `app/work/page.tsx` (static) → `components/work-showcase.tsx` (client: filter tabs, per-type cards, carousel lightbox, case-study modal). Home teaser = `components/work-grid.tsx` (renders `featured` items into `<section id="work-grid">`).
 - **Reused orphan:** `lib/case-studies.ts` + `components/case-studies.tsx` existed but rendered nowhere — `/work` now surfaces them (GutGuru/Kvarski via `caseStudyId` on their cards, Ecole as a standalone case-study card).
-- **Seeded (current):** 4 landing pages (Vita+, GutGuru, Bihari Swad, Kvarski-dashboard) + 1 Ecole case study. The carousel + guide types are still fully supported by the system but none are seeded (user removed the B2B carousels and GutGuru guide PDFs 2026-06-20 — too monochrome / not wanted on the page). Re-add curated ones anytime via `/addwork`.
+- **Seeded (current):** 4 landing pages (Vita+, GutGuru, Bihari Swad, Kvarski-dashboard) + 1 Ecole case study. No download-only PDF guides are supported or seeded.
 - **Card styling (2026-06-20):** cards are solid `bg-[var(--color-bg-2)]` with a subtle `ring-1 ring-[var(--color-rule)]` (NO `.glass` — its unlayered `rgba(255,255,255,.1)` border beat the Tailwind border util and showed as visible white edges; NO brandColor top-border hairline either). Filter tabs are derived from the types present in `workItems`.
 - **Adding work:** run **`/addwork`** (`~/.claude/skills/addwork/SKILL.md`) — screenshots the live page via Brave 9666, copies assets, appends to `lib/work.ts`, builds, stops before deploy. No component edits needed; the grid `.map()`s the data.
 

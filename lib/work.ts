@@ -1,4 +1,4 @@
-export type WorkType = "landing-page" | "carousel" | "guide" | "case-study";
+export type WorkType = "landing-page" | "carousel" | "case-study";
 
 export type WorkItem = {
   slug: string; // unique; also the public/work/<slug>/ folder name
@@ -14,15 +14,13 @@ export type WorkItem = {
   cover?: string; // /work/<slug>/cover.png
   // carousel
   gallery?: string[]; // ["/work/<slug>/01.png", ...] for the lightbox
-  // guide (gated download)
-  pdf?: string; // /work/<slug>/<file>.pdf
   // case-study — references existing data in lib/case-studies.ts (not duplicated)
   caseStudyId?: string;
 };
 
 // Single source of truth for the /work showcase. Assets live in public/work/<slug>/.
 // New items are appended by the /addwork skill — no component changes needed.
-// (carousel + guide types are still supported by the system; none are seeded right now.)
+// (carousel support remains available; no download-only assets are used.)
 export const workItems: WorkItem[] = [
   // ---------- Landing pages ----------
   {
