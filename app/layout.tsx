@@ -36,6 +36,9 @@ export const metadata: Metadata = {
     url: "https://anandiyer.co.in",
     siteName: "Anand Iyer",
   },
+  verification: {
+    google: "cp7juH7Ka8yJItFO7cHn_cvNaGimroZrurPSx7MWX1s",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
