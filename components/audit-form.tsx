@@ -39,6 +39,7 @@ export function AuditForm() {
     const payload = {
       ...Object.fromEntries(fd.entries()),
       phone: `${countryCode.code} ${phone}`,
+      source: new URLSearchParams(window.location.search).get("source") || "homepage",
     };
     try {
       const res = await fetch("/api/audit", {

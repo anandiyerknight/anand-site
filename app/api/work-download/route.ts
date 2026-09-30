@@ -29,6 +29,7 @@ export async function POST(req: Request) {
         social: null,
         phone: null,
         brief,
+        source: "work-download",
         timestamp: new Date().toISOString(),
       });
     } catch (e) {

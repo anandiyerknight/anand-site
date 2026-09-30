@@ -13,6 +13,7 @@ export async function POST(req: Request) {
         social: body.social || null,
         phone: body.phone || null,
         brief: body.brief,
+        source: body.source || "homepage",
         timestamp: new Date().toISOString(),
       });
     } catch (e) {

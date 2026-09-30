@@ -6,6 +6,7 @@ export async function addBriefToSheet(data: {
   phone: string | null;
   brief: string;
   timestamp: string;
+  source?: string | null;
 }) {
   if (!process.env.GOOGLE_SCRIPT_URL) {
     console.log("[SHEETS] Skipped (GOOGLE_SCRIPT_URL not configured)");
@@ -23,6 +24,7 @@ export async function addBriefToSheet(data: {
       social: data.social || "",
       phone: data.phone ? data.phone.replace(/^\+(\d+)\s/, "($1) ") : "",
       brief: data.brief,
+      source: data.source || "",
     }),
   });
 
