@@ -117,11 +117,11 @@ export function AuditForm() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="field">
                         <label htmlFor="name">▸ Name</label>
-                        <input id="name" name="name" required placeholder="Your name" />
+                        <input id="name" name="name" required autoComplete="name" placeholder="Your name" />
                       </div>
                       <div className="field">
                         <label htmlFor="email">▸ Email</label>
-                        <input id="email" name="email" required type="email" placeholder="you@company.com" />
+                        <input id="email" name="email" required type="email" autoComplete="email" placeholder="you@company.com" />
                       </div>
                     </div>
 
@@ -129,7 +129,7 @@ export function AuditForm() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="field">
                         <label htmlFor="company">▸ Company</label>
-                        <input id="company" name="company" required placeholder="Brand / venture" />
+                        <input id="company" name="company" required autoComplete="organization" placeholder="Brand / venture" />
                       </div>
                       <div className="field">
                         <label htmlFor="social">▸ IG / Website</label>
@@ -137,6 +137,8 @@ export function AuditForm() {
                           id="social"
                           name="social"
                           required
+                          type="url"
+                          autoComplete="url"
                           placeholder="@handle or https://..."
                         />
                       </div>
@@ -147,6 +149,7 @@ export function AuditForm() {
                       <label htmlFor="phone">▸ Phone</label>
                       <div className="flex gap-0 border-b-2 border-[var(--color-rule-2)] focus-within:border-[var(--color-cyan)] transition-colors">
                         <select
+                          aria-label="Country code"
                           value={countryCode.label}
                           onChange={(e) => {
                             const found = countryCodes.find((c) => c.label === e.target.value);
@@ -166,6 +169,8 @@ export function AuditForm() {
                           name="phone"
                           required
                           type="tel"
+                          autoComplete="tel"
+                          aria-describedby={phoneError ? "phone-error" : undefined}
                           placeholder={`${countryCode.digits}-digit number`}
                           onChange={(e) => { if (phoneError) validatePhone(e.target.value); }}
                           className="flex-1 bg-transparent py-3 text-[var(--color-ink)] outline-none border-none placeholder:text-[var(--color-mute)]"
@@ -173,7 +178,7 @@ export function AuditForm() {
                         />
                       </div>
                       {phoneError && (
-                        <p className="mt-1 font-mono text-[10px] text-[var(--color-magenta)]">
+                        <p id="phone-error" role="alert" className="mt-1 font-mono text-[10px] text-[var(--color-magenta)]">
                           {phoneError}
                         </p>
                       )}
