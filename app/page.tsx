@@ -23,6 +23,37 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "You're a creative director AND an engineer — how?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "15 years in both worlds taught me they're not separate. Creative direction without engineering is a spec; engineering without creative is just infrastructure. The leverage emerges at the intersection. I build systems that solve creative problems at scale.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "What exactly do you build?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Custom AI-native platforms, video automation pipelines, revenue systems, trading infrastructure, and content engines. Whatever compounds your leverage and removes friction from high-volume repetitive work. Every system is production-grade, documented, and transferable.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Who is this NOT for?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "If you're still evaluating, exploring, or learning, this isn't for you. I work with founders and teams who already know they need systems built and are ready to deploy. You need capital, conviction, and the discipline to operationalize.",
+        },
+      },
+    ],
+  };
+
   return (
     <main className="relative">
       <Nav />
@@ -76,10 +107,14 @@ export default function Page() {
       </CollapsibleSection>
 
       <CollapsibleSection title="FAQ" description="How I work, who this is for, and what to expect">
-        <FAQ />
+      <FAQ />
       </CollapsibleSection>
 
       <Footer />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
     </main>
   );
 }
