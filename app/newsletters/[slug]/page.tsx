@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Footer } from "@/components/footer";
 import { Nav } from "@/components/nav";
@@ -92,7 +93,15 @@ export default async function NewsletterIssuePage({ params }: NewsletterPageProp
                 <p className="mt-8 text-lg md:text-xl text-[var(--color-ink-2)] leading-relaxed max-w-2xl">{caseStudy.headline}</p>
               </div>
               <div className="border border-[var(--color-rule)] bg-[var(--color-bg-2)] p-3">
-                <img src={`/newsletters/${issue.slug}.png`} alt={issue.title} className="block w-full h-auto" />
+                <Image
+                  src={`/newsletters/${issue.slug}.png`}
+                  alt={issue.title}
+                  width={1200}
+                  height={675}
+                  sizes="(max-width: 1024px) 100vw, 40vw"
+                  className="block w-full h-auto"
+                  priority={issue.num === "21"}
+                />
               </div>
             </div>
           </div>
