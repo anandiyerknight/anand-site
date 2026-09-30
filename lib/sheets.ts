@@ -7,10 +7,10 @@ export async function addBriefToSheet(data: {
   brief: string;
   timestamp: string;
   source?: string | null;
-}) {
+}): Promise<boolean> {
   if (!process.env.GOOGLE_SCRIPT_URL) {
     console.log("[SHEETS] Skipped (GOOGLE_SCRIPT_URL not configured)");
-    return;
+    return false;
   }
 
   const res = await fetch(process.env.GOOGLE_SCRIPT_URL, {
@@ -33,4 +33,5 @@ export async function addBriefToSheet(data: {
   }
 
   console.log("[SHEETS] Row added successfully");
+  return true;
 }

@@ -14,10 +14,11 @@ export async function sendBriefNotification(data: {
   company: string;
   stage: string | null;
   brief: string;
-}) {
+  source?: string | null;
+}): Promise<boolean> {
   if (!process.env.GMAIL_USER || !process.env.NOTIFICATION_EMAIL || !process.env.GMAIL_APP_PASSWORD) {
     console.log("[MAILER] Skipped (not configured)");
-    return;
+    return false;
   }
 
   try {
@@ -30,6 +31,7 @@ export async function sendBriefNotification(data: {
         <p><strong>Company:</strong> ${data.company}</p>
         <p><strong>Stage:</strong> ${data.stage || "—"}</p>
         <p><strong>Contact:</strong> ${data.name} (${data.email})</p>
+        <p><strong>Source:</strong> ${data.source || "homepage"}</p>
         <hr />
         <h3>The Brief</h3>
         <p>${data.brief.replace(/\n/g, "<br />")}</p>
@@ -39,6 +41,7 @@ export async function sendBriefNotification(data: {
     });
 
     console.log("[MAILER] Email sent successfully");
+    return true;
   } catch (error) {
     console.error("[MAILER] Failed to send email:", error);
     throw error;
