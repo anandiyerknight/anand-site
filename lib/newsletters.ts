@@ -28,4 +28,5 @@ export const newsletterIssues: NewsletterIssue[] = [
   { num: "19", slug: "19-newsletter-sales-asset", title: "The Newsletter", blurb: "A newsletter is not content. It is a sales asset with a 20-issue runway." },
   { num: "20", slug: "20-full-stack", title: "The Full Stack", blurb: "₹8L in, ₹66L pipeline out. All eight systems assembled into one growth machine." },
   { num: "21", slug: "21-cold-outbound", title: "The 60-Day Outbound Case Study", blurb: "64,000 touchpoints became 1,920 conversations, approximately 240 real leads, and ₹1.5 crore closed in 60 days." },
+  { num: "22", slug: "22-brief-to-asset-loop", title: "The Brief-to-Asset Loop", blurb: "One founder brief becomes 12 approved assets without twelve separate production starts." },
 ];

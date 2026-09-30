@@ -1296,4 +1296,65 @@ export const newsletterCaseStudies: Record<string, NewsletterCaseStudy> = {
       "button": "Reply MODEL →"
     }
   }
+  ,"22-brief-to-asset-loop": {
+    "eyebrow": "Illustrative model",
+    "headline": "One founder brief became 12 approved assets without 12 separate production starts.",
+    "profileLabel": "The model",
+    "profileHtml": "An <b>illustrative content workflow</b> for a founder-led B2B team with useful ideas, inconsistent publishing, and no appetite for twelve separate production cycles.",
+    "situation": [
+      "The founder had the raw material: calls, voice notes, customer questions and strong opinions. The bottleneck was turning each idea into a brief, a draft, a review cycle and a finished asset.",
+      "That made content feel like twelve unrelated jobs. The model treats it as one source moving through a controlled queue, with human approval kept at the point where judgment matters."
+    ],
+    "steps": [
+      "Capture one founder brief and structure it into the core point, proof, audience and call to action.",
+      "Generate a long-form draft, short post, carousel outline, email, and supporting variations from the same approved source.",
+      "Route every draft through one review queue instead of starting a new production conversation for every channel.",
+      "Approve the source once, then adapt the finished assets to the channels where the audience already pays attention."
+    ],
+    "resultsTitle": "The model, one source",
+    "hero": {
+      "value": "12 approved assets",
+      "label": "An illustrative output from one structured founder brief, not a named client result."
+    },
+    "metrics": [
+      {
+        "value": "1",
+        "label": "source brief to keep the idea coherent"
+      },
+      {
+        "value": "1 queue",
+        "label": "approval path instead of scattered reviews"
+      },
+      {
+        "value": "4 channels",
+        "label": "adapted from the same approved source"
+      },
+      {
+        "value": "0",
+        "label": "new blank pages after the source is approved"
+      }
+    ],
+    "beforeAfter": [
+      {
+        "label": "Production start",
+        "before": "one per asset",
+        "after": "one source"
+      },
+      {
+        "label": "Review flow",
+        "before": "scattered",
+        "after": "one queue"
+      },
+      {
+        "label": "Founder input",
+        "before": "repeated",
+        "after": "captured once"
+      }
+    ],
+    "cta": {
+      "heading": "Have ideas trapped in your head?",
+      "body": "Reply \"CONTENT\" and I will map the source-to-asset workflow for your business. Free, no call.",
+      "button": "Reply CONTENT →"
+    }
+  }
 };
