@@ -137,7 +137,6 @@ export function AuditForm() {
                           id="social"
                           name="social"
                           required
-                          type="url"
                           autoComplete="url"
                           placeholder="@handle or https://..."
                         />
