@@ -13,6 +13,11 @@ export async function POST(req: Request) {
       phone: body.phone ? String(body.phone).trim() : null,
       brief: String(body.brief || "").trim(),
       source: body.source ? String(body.source).trim() : "homepage",
+      landingPath: body.landingPath ? String(body.landingPath).trim() : "/",
+      referrerOrigin: body.referrerOrigin ? String(body.referrerOrigin).trim() : null,
+      utmSource: body.utmSource ? String(body.utmSource).trim() : null,
+      utmMedium: body.utmMedium ? String(body.utmMedium).trim() : null,
+      utmCampaign: body.utmCampaign ? String(body.utmCampaign).trim() : null,
       timestamp: new Date().toISOString(),
     };
 

@@ -41,6 +41,11 @@ export function AuditForm() {
       ...Object.fromEntries(fd.entries()),
       phone: `${countryCode.code} ${phone}`,
       source: new URLSearchParams(window.location.search).get("source") || "homepage",
+      landingPath: `${window.location.pathname}${window.location.hash}`,
+      referrerOrigin: document.referrer ? new URL(document.referrer).origin : "",
+      utmSource: new URLSearchParams(window.location.search).get("utm_source") || "",
+      utmMedium: new URLSearchParams(window.location.search).get("utm_medium") || "",
+      utmCampaign: new URLSearchParams(window.location.search).get("utm_campaign") || "",
     };
     track("audit_submit_started", { source: payload.source });
     try {

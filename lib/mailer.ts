@@ -15,6 +15,11 @@ export async function sendBriefNotification(data: {
   stage: string | null;
   brief: string;
   source?: string | null;
+  landingPath?: string | null;
+  referrerOrigin?: string | null;
+  utmSource?: string | null;
+  utmMedium?: string | null;
+  utmCampaign?: string | null;
 }): Promise<boolean> {
   if (!process.env.GMAIL_USER || !process.env.NOTIFICATION_EMAIL || !process.env.GMAIL_APP_PASSWORD) {
     console.log("[MAILER] Skipped (not configured)");
@@ -32,6 +37,9 @@ export async function sendBriefNotification(data: {
         <p><strong>Stage:</strong> ${data.stage || "—"}</p>
         <p><strong>Contact:</strong> ${data.name} (${data.email})</p>
         <p><strong>Source:</strong> ${data.source || "homepage"}</p>
+        <p><strong>Landing path:</strong> ${data.landingPath || "/"}</p>
+        <p><strong>Referrer origin:</strong> ${data.referrerOrigin || "—"}</p>
+        <p><strong>UTM:</strong> ${[data.utmSource, data.utmMedium, data.utmCampaign].filter(Boolean).join(" / ") || "—"}</p>
         <hr />
         <h3>The Brief</h3>
         <p>${data.brief.replace(/\n/g, "<br />")}</p>

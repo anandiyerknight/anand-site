@@ -7,6 +7,11 @@ export async function addBriefToSheet(data: {
   brief: string;
   timestamp: string;
   source?: string | null;
+  landingPath?: string | null;
+  referrerOrigin?: string | null;
+  utmSource?: string | null;
+  utmMedium?: string | null;
+  utmCampaign?: string | null;
 }): Promise<boolean> {
   if (!process.env.GOOGLE_SCRIPT_URL) {
     console.log("[SHEETS] Skipped (GOOGLE_SCRIPT_URL not configured)");
@@ -25,6 +30,11 @@ export async function addBriefToSheet(data: {
       phone: data.phone ? data.phone.replace(/^\+(\d+)\s/, "($1) ") : "",
       brief: data.brief,
       source: data.source || "",
+      landingPath: data.landingPath || "/",
+      referrerOrigin: data.referrerOrigin || "",
+      utmSource: data.utmSource || "",
+      utmMedium: data.utmMedium || "",
+      utmCampaign: data.utmCampaign || "",
     }),
   });
 
