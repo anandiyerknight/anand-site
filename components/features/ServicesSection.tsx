@@ -151,6 +151,14 @@ export function ServicesSection() {
             </Reveal>
           ))}
         </div>
+        <div className="mt-7 flex flex-wrap gap-5">
+          <Link href="/services/outbound-automation" className="font-mono text-[10px] tracking-[0.16em] uppercase text-[var(--color-cyan)] hover:text-white transition-colors">
+            Explore outbound automation <span aria-hidden className="ml-2">→</span>
+          </Link>
+          <Link href="/services/content-automation" className="font-mono text-[10px] tracking-[0.16em] uppercase text-[var(--color-cyan)] hover:text-white transition-colors">
+            Explore content automation <span aria-hidden className="ml-2">→</span>
+          </Link>
+        </div>
       </div>
     </section>
   );
