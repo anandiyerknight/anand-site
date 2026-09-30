@@ -144,7 +144,9 @@ export default async function NewsletterIssuePage({ params }: NewsletterPageProp
               <section className="border border-[var(--color-rule)] bg-[var(--color-bg-2)] p-6 md:p-8">
                 <h2 className="font-display text-3xl leading-tight">{caseStudy.cta.heading}</h2>
                 <p className="mt-4 text-base text-[var(--color-ink-2)] leading-relaxed">{caseStudy.cta.body}</p>
-                <div className="mt-6 inline-flex btn-primary !rounded-none !text-[10px]">{caseStudy.cta.button}</div>
+                <Link href="/#audit" className="mt-6 inline-flex btn-primary !rounded-none !text-[10px]">
+                  {caseStudy.cta.button}
+                </Link>
               </section>
             </div>
 

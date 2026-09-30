@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Nav } from "@/components/nav";
 import { Hero } from "@/components/hero";
 import { ServicesSection } from "@/components/features/ServicesSection";
@@ -14,6 +15,12 @@ import { FAQ } from "@/components/faq";
 import { AuditForm } from "@/components/audit-form";
 import { Footer } from "@/components/footer";
 import { CollapsibleSection } from "@/components/collapsible-section";
+
+export const metadata: Metadata = {
+  title: "AI Automation & Revenue Infrastructure for Founders | Anand Iyer",
+  description:
+    "Anand Iyer builds AI-powered content, marketing, and outbound systems that help ambitious founders create demand and convert it into revenue.",
+};
 
 export default function Page() {
   return (
