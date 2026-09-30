@@ -8,6 +8,14 @@ export const metadata: Metadata = {
   title: "Work · Landing Pages & Case Studies | Anand Iyer",
   description:
     "Selected work: live landing pages and the case studies behind them. The brands, the builds, and the math behind them.",
+  alternates: { canonical: "/work" },
+  openGraph: {
+    title: "Work · Landing Pages & Case Studies | Anand Iyer",
+    description:
+      "Selected work: live landing pages and the case studies behind them. The brands, the builds, and the math behind them.",
+    type: "website",
+    url: "https://anandiyer.co.in/work",
+  },
 };
 
 export default function WorkPage() {

@@ -8,6 +8,14 @@ export const metadata: Metadata = {
   title: "The Automation Series — Free Case Studies | Anand Iyer",
   description:
     "21 practical case studies on automating content, outreach and revenue for small Indian businesses. Read each one as a standalone page, with the math behind the system.",
+  alternates: { canonical: "/newsletters" },
+  openGraph: {
+    title: "The Automation Series — Free Case Studies | Anand Iyer",
+    description:
+      "21 practical case studies on automating content, outreach and revenue for small Indian businesses.",
+    type: "website",
+    url: "https://anandiyer.co.in/newsletters",
+  },
 };
 
 export default function NewslettersPage() {

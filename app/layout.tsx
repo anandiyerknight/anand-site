@@ -26,11 +26,14 @@ export const metadata: Metadata = {
   description:
     "We deploy custom, automated pipelines that handle the heavy lifting of Content, Marketing, and Web Ops — collapsing weeks of manual labor into minutes of high-performance output.",
   metadataBase: new URL("https://anandiyer.co.in"),
+  alternates: { canonical: "/" },
   openGraph: {
     title: "Anand Iyer — Architect of Revenue Infrastructure",
     description:
       "Done-For-You Revenue Infrastructure for ambitious founders. 15+ years of Tier-1 production pedigree.",
     type: "website",
+    url: "https://anandiyer.co.in",
+    siteName: "Anand Iyer",
   },
 };
 
