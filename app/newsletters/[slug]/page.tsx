@@ -25,11 +25,11 @@ export async function generateMetadata({ params }: NewsletterPageProps): Promise
   if (!issue || !caseStudy) return {};
 
   return {
-    title: `${caseStudy.headline} | Anand Iyer`,
+    title: `${issue.title} | Anand Iyer`,
     description: caseStudy.profileHtml.replace(/<[^>]+>/g, ""),
     alternates: { canonical: `/newsletters/${issue.slug}` },
     openGraph: {
-      title: caseStudy.headline,
+      title: issue.title,
       description: caseStudy.profileHtml.replace(/<[^>]+>/g, ""),
       type: "article",
       images: [`/newsletters/${issue.slug}.png`],
@@ -51,6 +51,7 @@ export default async function NewsletterIssuePage({ params }: NewsletterPageProp
     image: `https://anandiyer.co.in/newsletters/${issue.slug}.png`,
     author: { "@type": "Person", name: "Anand Iyer", url: "https://anandiyer.co.in" },
     publisher: { "@type": "Person", name: "Anand Iyer", url: "https://anandiyer.co.in" },
+    articleSection: issue.title,
     mainEntityOfPage: `https://anandiyer.co.in/newsletters/${issue.slug}`,
   };
 
