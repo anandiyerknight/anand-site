@@ -4,7 +4,7 @@ import { newsletterIssues } from "@/lib/newsletters";
 const siteUrl = "https://anandiyer.co.in";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const corePages = ["", "/system", "/work", "/experience", "/newsletters", "/services/outbound-automation", "/services/content-automation"];
+  const corePages = ["", "/work", "/newsletters", "/services/outbound-automation", "/services/content-automation"];
   const generatedAt = new Date();
 
   return [
