@@ -1,4 +1,5 @@
 import { Reveal } from "../reveal";
+import Link from "next/link";
 
 interface ServiceItem {
   eyebrow: string;
@@ -111,6 +112,9 @@ export function ServicesSection() {
                     </span>
                   ))}
                 </div>
+                <Link href="/services/outbound-automation" className="mt-6 inline-flex font-mono text-[10px] tracking-[0.16em] uppercase text-[var(--color-cyan)] hover:text-white transition-colors">
+                  See the outbound system <span aria-hidden className="ml-2">→</span>
+                </Link>
               </div>
             </div>
           </article>
