@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Nav } from "@/components/nav";
 import { Footer } from "@/components/footer";
 import { NewsletterLibrary } from "@/components/newsletter-library";
@@ -39,6 +40,28 @@ export default function NewslettersPage() {
           <p className="mt-4 text-xs md:text-sm text-[var(--color-mute)] italic max-w-2xl">
             Scenario numbers are illustrative models built to make the math concrete, not named client results.
           </p>
+
+          <div className="mt-10 grid grid-cols-1 md:grid-cols-12 gap-5 border-y border-[var(--color-rule)] py-6 md:py-8">
+            <div className="md:col-span-7">
+              <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-[var(--color-cyan)]">
+                Want the system behind the case study?
+              </p>
+              <h2 className="mt-3 font-display text-2xl md:text-3xl leading-tight">
+                Turn the math into an operating system for your business.
+              </h2>
+            </div>
+            <div className="md:col-span-5 flex flex-wrap content-start gap-4 md:justify-end md:pt-1">
+              <Link href="/services/outbound-automation" className="btn-ghost !rounded-none !text-[10px]">
+                Outbound automation <span aria-hidden>→</span>
+              </Link>
+              <Link href="/services/content-automation" className="btn-ghost !rounded-none !text-[10px]">
+                Content automation <span aria-hidden>→</span>
+              </Link>
+              <Link href="/?source=automation-series#audit" className="btn-primary !rounded-none !text-[10px]">
+                Request an audit <span aria-hidden>→</span>
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
 
