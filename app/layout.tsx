@@ -49,12 +49,27 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "Person",
-              name: "Anand Iyer",
-              url: "https://anandiyer.co.in",
-              jobTitle: "Revenue Infrastructure Architect",
-              description: "Anand Iyer builds automated content, marketing, and web operations systems for ambitious founders.",
-              knowsAbout: ["revenue infrastructure", "marketing automation", "outbound systems", "content operations"],
+              "@graph": [
+                {
+                  "@type": "Person",
+                  "@id": "https://anandiyer.co.in/#person",
+                  name: "Anand Iyer",
+                  url: "https://anandiyer.co.in",
+                  image: "https://anandiyer.co.in/profile.jpg",
+                  jobTitle: "Revenue Infrastructure Architect",
+                  description: "Anand Iyer builds automated content, marketing, and web operations systems for ambitious founders.",
+                  sameAs: ["https://www.linkedin.com/in/anand-iyer-3322a320/"],
+                  knowsAbout: ["revenue infrastructure", "marketing automation", "outbound systems", "content operations"],
+                },
+                {
+                  "@type": "WebSite",
+                  "@id": "https://anandiyer.co.in/#website",
+                  name: "Anand Iyer",
+                  url: "https://anandiyer.co.in",
+                  description: "AI-powered content, marketing, and outbound systems for ambitious founders.",
+                  publisher: { "@id": "https://anandiyer.co.in/#person" },
+                },
+              ],
             }),
           }}
         />
