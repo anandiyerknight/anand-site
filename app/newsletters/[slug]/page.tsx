@@ -54,17 +54,37 @@ export default async function NewsletterIssuePage({ params }: NewsletterPageProp
     articleSection: issue.title,
     mainEntityOfPage: `https://anandiyer.co.in/newsletters/${issue.slug}`,
   };
+  const issueIndex = newsletterIssues.findIndex((candidate) => candidate.slug === issue.slug);
+  const relatedIssues = [newsletterIssues[issueIndex - 1], newsletterIssues[issueIndex + 1]].filter(Boolean);
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      articleSchema,
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: "https://anandiyer.co.in" },
+          { "@type": "ListItem", position: 2, name: "Automation Series", item: "https://anandiyer.co.in/newsletters" },
+          { "@type": "ListItem", position: 3, name: issue.title, item: `https://anandiyer.co.in/newsletters/${issue.slug}` },
+        ],
+      },
+    ],
+  };
 
   return (
     <main className="relative">
       <Nav />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
       <article>
         <header className="px-6 md:px-10 pt-32 md:pt-44 pb-12 md:pb-20 border-b border-[var(--color-rule)]">
           <div className="max-w-6xl mx-auto">
-            <Link href="/newsletters" className="font-mono text-[10px] tracking-[0.2em] uppercase text-[var(--color-mute)] hover:text-[var(--color-ink)] transition-colors">
-              ← All newsletters
-            </Link>
+            <div className="flex flex-wrap items-center gap-2 font-mono text-[10px] tracking-[0.18em] uppercase text-[var(--color-mute)]">
+              <Link href="/" className="hover:text-[var(--color-ink)] transition-colors">Home</Link>
+              <span aria-hidden>/</span>
+              <Link href="/newsletters" className="hover:text-[var(--color-ink)] transition-colors">Automation series</Link>
+              <span aria-hidden>/</span>
+              <span>{issue.title}</span>
+            </div>
             <div className="mt-12 grid lg:grid-cols-[1.15fr_0.85fr] gap-10 lg:gap-20 items-end">
               <div>
                 <div className="font-mono text-[11px] tracking-[0.22em] uppercase text-[var(--color-mute)]">{caseStudy.eyebrow}</div>
@@ -149,6 +169,21 @@ export default async function NewsletterIssuePage({ params }: NewsletterPageProp
                   {caseStudy.cta.button}
                 </Link>
               </section>
+
+              {relatedIssues.length > 0 && (
+                <nav aria-label="Continue the automation series" className="mt-16 border-t border-[var(--color-rule)] pt-8">
+                  <div className="font-mono text-[10px] tracking-[0.2em] uppercase text-[var(--color-mute)]">Continue the series</div>
+                  <div className="mt-5 grid gap-3 sm:grid-cols-2">
+                    {relatedIssues.map((relatedIssue) => (
+                      <Link key={relatedIssue.slug} href={`/newsletters/${relatedIssue.slug}`} className="border border-[var(--color-rule)] bg-[var(--color-bg-2)] p-5 hover:border-[var(--color-cyan)] transition-colors">
+                        <div className="font-mono text-[10px] tracking-[0.16em] uppercase text-[var(--color-mute)]">Issue {relatedIssue.num}</div>
+                        <div className="mt-3 font-display text-xl leading-tight">{relatedIssue.title}</div>
+                        <div className="mt-3 text-sm text-[var(--color-ink-2)] leading-relaxed">{relatedIssue.blurb}</div>
+                      </Link>
+                    ))}
+                  </div>
+                </nav>
+              )}
             </div>
 
             <aside className="lg:pt-1">
