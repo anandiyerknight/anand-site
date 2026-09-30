@@ -20,6 +20,14 @@ export const metadata: Metadata = {
   title: "AI Automation & Revenue Infrastructure for Founders | Anand Iyer",
   description:
     "Anand Iyer builds AI-powered content, marketing, and outbound systems that help ambitious founders create demand and convert it into revenue.",
+  openGraph: {
+    title: "AI Automation & Revenue Infrastructure for Founders | Anand Iyer",
+    description:
+      "Anand Iyer builds AI-powered content, marketing, and outbound systems that help ambitious founders create demand and convert it into revenue.",
+    type: "website",
+    url: "https://anandiyer.co.in",
+    images: [{ url: "/profile.jpg", width: 864, height: 1184, alt: "Anand Iyer" }],
+  },
 };
 
 export default function Page() {

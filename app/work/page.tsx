@@ -15,6 +15,7 @@ export const metadata: Metadata = {
       "Selected work: live landing pages and the case studies behind them. The brands, the builds, and the math behind them.",
     type: "website",
     url: "https://anandiyer.co.in/work",
+    images: [{ url: "/profile.jpg", width: 864, height: 1184, alt: "Anand Iyer" }],
   },
 };
 

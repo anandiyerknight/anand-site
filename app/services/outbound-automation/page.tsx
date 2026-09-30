@@ -13,6 +13,7 @@ export const metadata: Metadata = {
     description:
       "A multi-channel outbound system that researches accounts, personalizes messages, runs follow-ups, and routes real conversations.",
     type: "website",
+    images: [{ url: "/profile.jpg", width: 864, height: 1184, alt: "Anand Iyer" }],
   },
 };
 

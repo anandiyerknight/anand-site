@@ -10,7 +10,12 @@ export const metadata: Metadata = {
   title: "AI Content Automation for Founders | Anand Iyer",
   description,
   alternates: { canonical: "/services/content-automation" },
-  openGraph: { title: "AI Content Automation for Founders | Anand Iyer", description, type: "website" },
+  openGraph: {
+    title: "AI Content Automation for Founders | Anand Iyer",
+    description,
+    type: "website",
+    images: [{ url: "/profile.jpg", width: 864, height: 1184, alt: "Anand Iyer" }],
+  },
 };
 
 const steps = [

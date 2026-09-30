@@ -35,6 +35,7 @@ export const metadata: Metadata = {
     type: "website",
     url: "https://anandiyer.co.in",
     siteName: "Anand Iyer",
+    images: [{ url: "/profile.jpg", width: 864, height: 1184, alt: "Anand Iyer" }],
   },
   verification: {
     google: "cp7juH7Ka8yJItFO7cHn_cvNaGimroZrurPSx7MWX1s",

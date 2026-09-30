@@ -16,6 +16,7 @@ export const metadata: Metadata = {
       "21 practical case studies on automating content, outreach and revenue for small Indian businesses.",
     type: "website",
     url: "https://anandiyer.co.in/newsletters",
+    images: [{ url: "/profile.jpg", width: 864, height: 1184, alt: "Anand Iyer" }],
   },
 };
 
