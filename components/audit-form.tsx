@@ -77,7 +77,7 @@ export function AuditForm() {
             </h2>
           </Reveal>
           <p className="mt-6 md:mt-8 text-[var(--color-ink-2)] text-base md:text-lg leading-relaxed max-w-md">
-            Currently accepting 6 new systems builds for Q3 2026.
+            Currently accepting 6 new system builds.
           </p>
           <p className="mt-8 md:mt-12 text-xs md:text-sm text-[var(--color-mute)] italic">
             If you're still evaluating, this isn't for you.
