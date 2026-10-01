@@ -1356,5 +1356,66 @@ export const newsletterCaseStudies: Record<string, NewsletterCaseStudy> = {
       "body": "Reply \"CONTENT\" and I will map the source-to-asset workflow for your business. Free, no call.",
       "button": "Reply CONTENT →"
     }
+  },
+  "23-lead-handoff-loop": {
+    "eyebrow": "Illustrative model",
+    "headline": "A captured lead is not a qualified lead until the next action is obvious.",
+    "profileLabel": "The model",
+    "profileHtml": "An <b>illustrative lead-routing workflow</b> for a founder-led B2B team that captures demand but loses momentum between the form, the inbox, the CRM and the person who should reply.",
+    "situation": [
+      "The team had a working form and a steady stream of enquiries. The problem came after submission: some leads went to email, some to a spreadsheet, and some waited for a founder to remember the context.",
+      "That makes response time a systems problem, not a motivation problem. The model gives every new lead a next action, an owner and a fallback before the conversation goes cold."
+    ],
+    "steps": [
+      "Capture the source, landing page, request and urgency with the lead instead of forwarding a blank notification.",
+      "Classify intent into three simple tiers: ready to talk, needs context, and not yet qualified.",
+      "Route the lead to the right owner with a visible response target and a fallback when that owner is unavailable.",
+      "Review the exception queue daily so no high-intent lead disappears between tools or handoffs."
+    ],
+    "resultsTitle": "The model, one workflow",
+    "hero": {
+      "value": "5-minute first action",
+      "label": "An illustrative operating target for acknowledging and routing a high-intent enquiry, not a named client result."
+    },
+    "metrics": [
+      {
+        "value": "1 queue",
+        "label": "single view of new and unassigned enquiries"
+      },
+      {
+        "value": "3 tiers",
+        "label": "simple intent bands for routing and follow-up"
+      },
+      {
+        "value": "2 owners",
+        "label": "primary owner plus an explicit fallback"
+      },
+      {
+        "value": "0 hidden",
+        "label": "high-intent leads left without a next action"
+      }
+    ],
+    "beforeAfter": [
+      {
+        "label": "Lead record",
+        "before": "blank alert",
+        "after": "context attached"
+      },
+      {
+        "label": "Ownership",
+        "before": "someone should reply",
+        "after": "owner + fallback"
+      },
+      {
+        "label": "Exceptions",
+        "before": "buried",
+        "after": "daily queue"
+      }
+    ],
+    "cta": {
+      "heading": "Losing leads between tools?",
+      "body": "Reply \"ROUTE\" and I will map the handoff loop for your current form, inbox and CRM. Free, no call.",
+      "button": "Reply ROUTE →"
+    }
   }
 };

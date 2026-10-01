@@ -29,4 +29,5 @@ export const newsletterIssues: NewsletterIssue[] = [
   { num: "20", slug: "20-full-stack", title: "The Full Stack", blurb: "₹8L in, ₹66L pipeline out. All eight systems assembled into one growth machine." },
   { num: "21", slug: "21-cold-outbound", title: "The 60-Day Outbound Case Study", blurb: "64,000 touchpoints became 1,920 conversations, approximately 240 real leads, and ₹1.5 crore closed in 60 days." },
   { num: "22", slug: "22-brief-to-asset-loop", title: "The Brief-to-Asset Loop", blurb: "One founder brief becomes 12 approved assets without twelve separate production starts." },
+  { num: "23", slug: "23-lead-handoff-loop", title: "The Lead Handoff Loop", blurb: "A lead can be captured and still lost in the handoff. The routing model that keeps intent moving." },
 ];
