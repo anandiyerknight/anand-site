@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Nav } from "@/components/nav";
 import { Footer } from "@/components/footer";
 import { NewsletterLibrary } from "@/components/newsletter-library";
+import { SubstackSignup } from "@/components/substack-signup";
 import { newsletterIssues } from "@/lib/newsletters";
 
 export const metadata: Metadata = {
@@ -95,6 +96,8 @@ export default function NewslettersPage() {
           </div>
         </div>
       </section>
+
+      <SubstackSignup />
 
       <section className="px-6 md:px-10 py-12 md:py-20">
         <div className="max-w-7xl mx-auto">
