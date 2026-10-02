@@ -1417,5 +1417,66 @@ export const newsletterCaseStudies: Record<string, NewsletterCaseStudy> = {
       "body": "Reply \"ROUTE\" and I will map the handoff loop for your current form, inbox and CRM. Free, no call.",
       "button": "Reply ROUTE →"
     }
+  },
+  "24-qualification-queue": {
+    "eyebrow": "Illustrative model",
+    "headline": "A lead does not need more follow-up. It needs the right next step.",
+    "profileLabel": "The model",
+    "profileHtml": "An <b>illustrative qualification workflow</b> for a small B2B team that receives enquiries with different levels of intent but treats every new lead as the same task.",
+    "situation": [
+      "The team had a steady stream of form fills and messages, but the queue mixed urgent buying signals with early research and incomplete requests. The result was predictable: the team either over-worked weak leads or let good ones wait.",
+      "Qualification is not a gate that makes people fill out a longer form. It is a decision system that gives each lead a useful next action while keeping the human conversation easy to start."
+    ],
+    "steps": [
+      "Capture the problem, timing, company context and requested outcome before assigning a priority.",
+      "Place each enquiry into one of three lanes: ready to talk, needs context, or nurture.",
+      "Give every lane a different next action instead of sending the same generic reply to everyone.",
+      "Review the queue weekly and move leads when new context changes their intent."
+    ],
+    "resultsTitle": "The model, one queue",
+    "hero": {
+      "value": "3 qualification lanes",
+      "label": "An illustrative operating model, not a named client result."
+    },
+    "metrics": [
+      {
+        "value": "4 signals",
+        "label": "problem, timing, context and desired outcome"
+      },
+      {
+        "value": "3 lanes",
+        "label": "ready, needs context, and nurture"
+      },
+      {
+        "value": "1 next step",
+        "label": "a clear action for every enquiry"
+      },
+      {
+        "value": "0 generic",
+        "label": "leads receiving an identical response by default"
+      }
+    ],
+    "beforeAfter": [
+      {
+        "label": "Priority",
+        "before": "first in, first worked",
+        "after": "intent-based queue"
+      },
+      {
+        "label": "Reply",
+        "before": "same message",
+        "after": "lane-specific action"
+      },
+      {
+        "label": "Review",
+        "before": "gut feel",
+        "after": "weekly movement"
+      }
+    ],
+    "cta": {
+      "heading": "Have a mixed-quality lead queue?",
+      "body": "Reply \"QUALIFY\" and I will map the three-lane model to your current form, inbox and follow-up process. Free, no call.",
+      "button": "Reply QUALIFY →"
+    }
   }
 };
