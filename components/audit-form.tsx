@@ -47,7 +47,15 @@ export function AuditForm() {
       utmMedium: new URLSearchParams(window.location.search).get("utm_medium") || "",
       utmCampaign: new URLSearchParams(window.location.search).get("utm_campaign") || "",
     };
-    track("audit_submit_started", { source: payload.source });
+    const attribution = {
+      source: payload.source,
+      landing_path: payload.landingPath,
+      referrer_origin: payload.referrerOrigin || "direct",
+      utm_source: payload.utmSource || "none",
+      utm_medium: payload.utmMedium || "none",
+      utm_campaign: payload.utmCampaign || "none",
+    };
+    track("audit_submit_started", attribution);
     try {
       const res = await fetch("/api/audit", {
         method: "POST",
@@ -55,7 +63,7 @@ export function AuditForm() {
         body: JSON.stringify(payload),
       });
       if (res.ok) {
-        track("audit_submitted", { source: payload.source });
+        track("audit_submitted", attribution);
         setState("ok");
       } else {
         setState("err");
