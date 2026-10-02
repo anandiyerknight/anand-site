@@ -15,6 +15,7 @@ import { FAQ } from "@/components/faq";
 import { AuditForm } from "@/components/audit-form";
 import { Footer } from "@/components/footer";
 import { CollapsibleSection } from "@/components/collapsible-section";
+import { SubstackSignup } from "@/components/substack-signup";
 
 export const metadata: Metadata = {
   title: "AI Automation & Revenue Infrastructure for Founders | Anand Iyer",
@@ -117,6 +118,8 @@ export default function Page() {
       <CollapsibleSection title="FAQ" description="How I work, who this is for, and what to expect">
       <FAQ />
       </CollapsibleSection>
+
+      <SubstackSignup />
 
       <Footer />
       <script
