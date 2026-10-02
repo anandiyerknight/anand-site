@@ -4,6 +4,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Footer } from "@/components/footer";
 import { Nav } from "@/components/nav";
+import { SubstackSignup } from "@/components/substack-signup";
 import { newsletterCaseStudies } from "@/lib/newsletter-pages";
 import { newsletterIssues } from "@/lib/newsletters";
 
@@ -207,6 +208,7 @@ export default async function NewsletterIssuePage({ params }: NewsletterPageProp
           </div>
         </div>
       </article>
+      <SubstackSignup />
       <Footer />
     </main>
   );
