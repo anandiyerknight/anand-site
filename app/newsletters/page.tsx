@@ -6,15 +6,17 @@ import { NewsletterLibrary } from "@/components/newsletter-library";
 import { SubstackSignup } from "@/components/substack-signup";
 import { newsletterIssues } from "@/lib/newsletters";
 
+const issueCount = newsletterIssues.length;
+
 export const metadata: Metadata = {
   title: "The Automation Series — Free Case Studies | Anand Iyer",
   description:
-    "22 practical case studies on automating content, outreach and revenue for small Indian businesses. Read each one as a standalone page, with the math behind the system.",
+    `${issueCount} practical case studies on automating content, outreach and revenue for small Indian businesses. Read each one as a standalone page, with the math behind the system.`,
   alternates: { canonical: "/newsletters" },
   openGraph: {
     title: "The Automation Series — Free Case Studies | Anand Iyer",
     description:
-      "22 practical case studies on automating content, outreach and revenue for small Indian businesses.",
+      `${issueCount} practical case studies on automating content, outreach and revenue for small Indian businesses.`,
     type: "website",
     url: "https://anandiyer.co.in/newsletters",
     images: [{ url: "/profile.jpg", width: 864, height: 1184, alt: "Anand Iyer" }],
@@ -30,7 +32,7 @@ export default function NewslettersPage() {
         "@id": "https://anandiyer.co.in/newsletters#collection",
         name: "The Automation Series — Free Case Studies",
         description:
-          "22 practical case studies on automating content, outreach and revenue for small Indian businesses.",
+          `${issueCount} practical case studies on automating content, outreach and revenue for small Indian businesses.`,
         url: "https://anandiyer.co.in/newsletters",
         isPartOf: { "@id": "https://anandiyer.co.in/#website" },
         mainEntity: { "@id": "https://anandiyer.co.in/newsletters#issues" },
@@ -62,7 +64,7 @@ export default function NewslettersPage() {
             The Automation Series
           </div>
           <h1 className="mt-5 font-display text-[clamp(2.2rem,6vw,5rem)] leading-[0.95] tracking-tight max-w-4xl">
-            22 systems. One page each. <span className="italic">The math, not the hype.</span>
+            {issueCount} systems. One page each. <span className="italic">The math, not the hype.</span>
           </h1>
           <p className="mt-6 md:mt-8 text-base md:text-lg text-[var(--color-ink-2)] leading-relaxed max-w-2xl">
             Every issue is a one-page case study: a real-world example, what they did, and the money
