@@ -152,6 +152,10 @@ export function Hero() {
               <span aria-hidden>→</span>
             </a>
           </Magnetic>
+          <a href="#subscribe" className="btn-ghost text-xs md:text-sm px-6 md:px-8">
+            Get the newsletter
+            <span aria-hidden>→</span>
+          </a>
         </motion.div>
 
 
