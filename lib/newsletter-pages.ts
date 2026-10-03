@@ -1478,5 +1478,66 @@ export const newsletterCaseStudies: Record<string, NewsletterCaseStudy> = {
       "body": "Reply \"QUALIFY\" and I will map the three-lane model to your current form, inbox and follow-up process. Free, no call.",
       "button": "Reply QUALIFY →"
     }
+  },
+  "25-ai-lead-qualification": {
+    "eyebrow": "Illustrative model",
+    "headline": "AI should sort the queue. People should decide what happens next.",
+    "profileLabel": "The model",
+    "profileHtml": "An <b>illustrative AI lead qualification workflow</b> for a small B2B team that needs to separate buying intent from incomplete or early-stage enquiries without hiding the reasoning behind a score.",
+    "situation": [
+      "The team was receiving leads from several pages and channels. Every enquiry landed in the same queue, so the person replying had to reconstruct the context before deciding whether to respond, ask a question, or wait.",
+      "The useful role for AI is not to make the final sales decision. It is to read the available context, surface the signals, explain the suggested lane, and leave a human with a clear next action."
+    ],
+    "steps": [
+      "Collect the page, source, request, company context and timing with each enquiry so the model sees the same evidence a human would need.",
+      "Ask the model to extract intent signals and return a short reason for its suggested lane instead of an unexplained score.",
+      "Route the enquiry into ready to talk, needs context, or nurture, with a different next action for each lane.",
+      "Keep a human approval point for high-value, ambiguous or sensitive enquiries, then feed the decision back into the weekly review."
+    ],
+    "resultsTitle": "The model, one decision loop",
+    "hero": {
+      "value": "1 human decision",
+      "label": "The final qualification decision stays reviewable; the AI handles the sorting and explanation around it."
+    },
+    "metrics": [
+      {
+        "value": "5 signals",
+        "label": "page, source, request, context and timing"
+      },
+      {
+        "value": "3 lanes",
+        "label": "ready, needs context, and nurture"
+      },
+      {
+        "value": "1 reason",
+        "label": "a short explanation beside the suggested lane"
+      },
+      {
+        "value": "0 black boxes",
+        "label": "important decisions made without a visible rationale"
+      }
+    ],
+    "beforeAfter": [
+      {
+        "label": "Intake",
+        "before": "same queue",
+        "after": "context attached"
+      },
+      {
+        "label": "AI output",
+        "before": "mystery score",
+        "after": "lane + reason"
+      },
+      {
+        "label": "Ownership",
+        "before": "fully automated",
+        "after": "human approval where needed"
+      }
+    ],
+    "cta": {
+      "heading": "Want a qualification workflow you can inspect?",
+      "body": "Reply \"QUALIFY\" and I will map the AI-assisted decision loop to your current form, inbox and follow-up process. Free, no call.",
+      "button": "Reply QUALIFY →"
+    }
   }
 };
