@@ -1539,5 +1539,66 @@ export const newsletterCaseStudies: Record<string, NewsletterCaseStudy> = {
       "body": "Reply \"QUALIFY\" and I will map the AI-assisted decision loop to your current form, inbox and follow-up process. Free, no call.",
       "button": "Reply QUALIFY →"
     }
+  },
+  "26-lead-routing-automation": {
+    "eyebrow": "Illustrative model",
+    "headline": "A qualified lead is not a win until someone owns the next action.",
+    "profileLabel": "The model",
+    "profileHtml": "An <b>illustrative lead-routing workflow</b> for a small B2B team that can identify buying intent but still loses momentum when ownership, timing or fallback rules are unclear.",
+    "situation": [
+      "Qualification answers one question: how ready is this enquiry? Routing answers the next one: who does what now? Without that second decision, a good lead becomes another item in a shared inbox.",
+      "The useful system makes the route visible. It carries the evidence into the handoff, gives one person a specific next action and creates a fallback before the lead has to chase the team."
+    ],
+    "steps": [
+      "Carry the lead's page, source, request, qualification lane and unanswered question into the handoff so the owner does not restart the investigation.",
+      "Map each lane to one next action: contact now, ask for missing context, or schedule the next nurture touch.",
+      "Assign one owner with a response window, then name the fallback owner before the route is considered complete.",
+      "Log the outcome and review exceptions weekly: late handoffs, unclear ownership, repeated questions and leads that changed lanes."
+    ],
+    "resultsTitle": "The route, one accountable handoff",
+    "hero": {
+      "value": "1 next action",
+      "label": "Every route ends with an owner, a response window and a fallback."
+    },
+    "metrics": [
+      {
+        "value": "3 lanes",
+        "label": "ready, needs context, and nurture"
+      },
+      {
+        "value": "1 owner",
+        "label": "one person accountable for the next move"
+      },
+      {
+        "value": "1 fallback",
+        "label": "a named backup when the owner is unavailable"
+      },
+      {
+        "value": "0 orphan paths",
+        "label": "no route ends without a next action"
+      }
+    ],
+    "beforeAfter": [
+      {
+        "label": "Context",
+        "before": "reconstructed later",
+        "after": "attached at handoff"
+      },
+      {
+        "label": "Ownership",
+        "before": "shared inbox",
+        "after": "one accountable owner"
+      },
+      {
+        "label": "Coverage",
+        "before": "hope someone replies",
+        "after": "owner + fallback"
+      }
+    ],
+    "cta": {
+      "heading": "Where do your qualified leads disappear?",
+      "body": "Reply \"ROUTE\" and I will map the owner, response window and fallback for one lead path in your current system. Free, no call.",
+      "button": "Reply ROUTE →"
+    }
   }
 };

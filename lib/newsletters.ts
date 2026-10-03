@@ -32,4 +32,5 @@ export const newsletterIssues: NewsletterIssue[] = [
   { num: "23", slug: "23-lead-handoff-loop", title: "The Lead Handoff Loop", blurb: "A lead can be captured and still lost in the handoff. The routing model that keeps intent moving." },
   { num: "24", slug: "24-qualification-queue", title: "The Qualification Queue", blurb: "Not every enquiry deserves the same next step. A practical three-lane model for qualifying leads without losing momentum." },
   { num: "25", slug: "25-ai-lead-qualification", title: "AI Lead Qualification Workflow", blurb: "How to qualify inbound leads with AI without handing every customer decision to a machine." },
+  { num: "26", slug: "26-lead-routing-automation", title: "Lead Routing Automation", blurb: "A qualified lead is not a win until someone owns the next action. The routing model that prevents orphaned demand." },
 ];
