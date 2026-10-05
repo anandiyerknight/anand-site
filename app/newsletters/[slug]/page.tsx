@@ -50,12 +50,13 @@ export default async function NewsletterIssuePage({ params }: NewsletterPageProp
     "@type": "Article",
     headline: caseStudy.headline,
     description: caseStudy.profileHtml.replace(/<[^>]+>/g, ""),
-    image: `https://anandiyer.co.in/newsletters/${issue.slug}.png`,
+    image: `https://anandiyer.co.in${caseStudy.image ?? `/newsletters/${issue.slug}.png`}`,
     author: { "@type": "Person", name: "Anand Iyer", url: "https://anandiyer.co.in" },
     publisher: { "@type": "Person", name: "Anand Iyer", url: "https://anandiyer.co.in" },
     articleSection: issue.title,
     mainEntityOfPage: `https://anandiyer.co.in/newsletters/${issue.slug}`,
   };
+  const imageSrc = caseStudy.image ?? `/newsletters/${issue.slug}.png`;
   const issueIndex = newsletterIssues.findIndex((candidate) => candidate.slug === issue.slug);
   const relatedIssues = [newsletterIssues[issueIndex - 1], newsletterIssues[issueIndex + 1]].filter(Boolean);
   const structuredData = {
@@ -95,7 +96,7 @@ export default async function NewsletterIssuePage({ params }: NewsletterPageProp
               </div>
               <div className="border border-[var(--color-rule)] bg-[var(--color-bg-2)] p-3">
                 <Image
-                  src={`/newsletters/${issue.slug}.png`}
+                  src={imageSrc}
                   alt={issue.title}
                   width={1200}
                   height={675}

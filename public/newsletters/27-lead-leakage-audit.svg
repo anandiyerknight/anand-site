@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">The Lead Leakage Audit</title>
+  <desc id="desc">Four checkpoints for finding where qualified leads disappear.</desc>
+  <rect width="1200" height="675" fill="#0b0b0b"/>
+  <g fill="none" stroke="#343434" stroke-width="2">
+    <path d="M72 114H1128M72 555H1128"/>
+    <path d="M72 114V555M1128 114V555"/>
+  </g>
+  <text x="72" y="78" fill="#9a9a9a" font-family="monospace" font-size="16" letter-spacing="4">AUTOMATION SERIES / ISSUE 27</text>
+  <text x="72" y="210" fill="#f4f4f4" font-family="Arial, sans-serif" font-size="68" font-weight="700">The Lead</text>
+  <text x="72" y="284" fill="#f4f4f4" font-family="Arial, sans-serif" font-size="68" font-weight="700">Leakage Audit</text>
+  <text x="72" y="348" fill="#b6b6b6" font-family="Arial, sans-serif" font-size="24">Find the first broken checkpoint between interest and ownership.</text>
+  <g font-family="monospace">
+    <rect x="72" y="420" width="230" height="74" fill="#161616" stroke="#f4f4f4"/>
+    <text x="94" y="450" fill="#f4f4f4" font-size="17">01 / SOURCE</text>
+    <text x="94" y="477" fill="#8ee6d4" font-size="14">where it started</text>
+    <rect x="327" y="420" width="230" height="74" fill="#161616" stroke="#f4f4f4"/>
+    <text x="349" y="450" fill="#f4f4f4" font-size="17">02 / EVIDENCE</text>
+    <text x="349" y="477" fill="#8ee6d4" font-size="14">what they asked</text>
+    <rect x="582" y="420" width="230" height="74" fill="#161616" stroke="#f4f4f4"/>
+    <text x="604" y="450" fill="#f4f4f4" font-size="17">03 / OWNER</text>
+    <text x="604" y="477" fill="#8ee6d4" font-size="14">who acts next</text>
+    <rect x="837" y="420" width="291" height="74" fill="#8ee6d4"/>
+    <text x="859" y="450" fill="#0b0b0b" font-size="17">04 / RECOVERY</text>
+    <text x="859" y="477" fill="#0b0b0b" font-size="14">what happens if late</text>
+  </g>
+</svg>

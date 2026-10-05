@@ -1,6 +1,7 @@
 export type NewsletterMetric = { value: string; label: string };
 export type NewsletterBeforeAfter = { label: string; before: string; after: string };
 export type NewsletterCaseStudy = {
+  image?: string;
   eyebrow: string;
   headline: string;
   profileLabel: string;
@@ -1599,6 +1600,68 @@ export const newsletterCaseStudies: Record<string, NewsletterCaseStudy> = {
       "heading": "Where do your qualified leads disappear?",
       "body": "Reply \"ROUTE\" and I will map the owner, response window and fallback for one lead path in your current system. Free, no call.",
       "button": "Reply ROUTE →"
+    }
+  },
+  "27-lead-leakage-audit": {
+    "image": "/newsletters/27-lead-leakage-audit.svg",
+    "eyebrow": "Illustrative model",
+    "headline": "Most lead leakage is not a traffic problem. It is a missing checkpoint between interest and ownership.",
+    "profileLabel": "The audit",
+    "profileHtml": "A <b>four-point lead-leakage audit</b> for a small business that receives enquiries from forms, WhatsApp, email or social but cannot reliably explain where a qualified lead went next.",
+    "situation": [
+      "A lead can be real, relevant and ready — and still disappear. The usual cause is not one dramatic failure. It is a chain of small gaps: the source is lost, the qualification answer is not carried forward, the owner is unclear, or the follow-up has no deadline.",
+      "The audit treats each enquiry as a traceable path. Start with the first signal, follow the handoff, and mark the first point where evidence, ownership or timing becomes ambiguous. That point is the leak to fix first."
+    ],
+    "steps": [
+      "Trace the source: record the page, campaign, channel and original request so the next person sees the same context as the first responder.",
+      "Check the qualification handoff: confirm that the evidence and lane — ready, needs context or nurture — travel with the lead instead of being reconstructed later.",
+      "Test ownership: name the person responsible for the next action and the response window. A shared inbox is a queue, not an owner.",
+      "Test recovery: define the fallback, log the outcome and review the first broken checkpoint each week before adding more volume."
+    ],
+    "resultsTitle": "The output, one visible leak",
+    "hero": {
+      "value": "4 checkpoints",
+      "label": "source, evidence, ownership and recovery — enough to locate the first broken handoff."
+    },
+    "metrics": [
+      {
+        "value": "1 source",
+        "label": "where the enquiry started"
+      },
+      {
+        "value": "1 lane",
+        "label": "the next step implied by the evidence"
+      },
+      {
+        "value": "1 owner",
+        "label": "accountable for the next action"
+      },
+      {
+        "value": "1 fallback",
+        "label": "the recovery path when timing slips"
+      }
+    ],
+    "beforeAfter": [
+      {
+        "label": "Source",
+        "before": "lost in the inbox",
+        "after": "attached to the record"
+      },
+      {
+        "label": "Ownership",
+        "before": "someone should reply",
+        "after": "one named owner"
+      },
+      {
+        "label": "Recovery",
+        "before": "manual chasing",
+        "after": "owner + fallback"
+      }
+    ],
+    "cta": {
+      "heading": "Find the first broken checkpoint",
+      "body": "Reply \"LEAK\" and I will help you map one lead path from first signal to next action. Free, no call.",
+      "button": "Reply LEAK →"
     }
   }
 };
