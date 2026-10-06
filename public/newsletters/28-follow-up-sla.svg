@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">The Follow-Up SLA</title>
+  <desc id="desc">Three clocks for first response, next decision, and recovery.</desc>
+  <rect width="1200" height="675" fill="#0b0b0b"/>
+  <g fill="none" stroke="#343434" stroke-width="2">
+    <path d="M72 114H1128M72 555H1128"/>
+    <path d="M72 114V555M1128 114V555"/>
+  </g>
+  <text x="72" y="78" fill="#9a9a9a" font-family="monospace" font-size="16" letter-spacing="4">AUTOMATION SERIES / ISSUE 28</text>
+  <text x="72" y="210" fill="#f4f4f4" font-family="Arial, sans-serif" font-size="68" font-weight="700">The Follow-Up</text>
+  <text x="72" y="284" fill="#f4f4f4" font-family="Arial, sans-serif" font-size="68" font-weight="700">SLA</text>
+  <text x="72" y="348" fill="#b6b6b6" font-family="Arial, sans-serif" font-size="24">“We followed up” is not a process. A process has a clock.</text>
+  <g font-family="monospace">
+    <circle cx="190" cy="454" r="44" fill="#161616" stroke="#f4f4f4" stroke-width="2"/>
+    <text x="175" y="463" fill="#8ee6d4" font-size="24">01</text>
+    <text x="260" y="447" fill="#f4f4f4" font-size="20">FIRST RESPONSE</text>
+    <text x="260" y="478" fill="#8d8d8d" font-size="15">acknowledge with context</text>
+    <circle cx="600" cy="454" r="44" fill="#161616" stroke="#f4f4f4" stroke-width="2"/>
+    <text x="585" y="463" fill="#8ee6d4" font-size="24">02</text>
+    <text x="670" y="447" fill="#f4f4f4" font-size="20">NEXT DECISION</text>
+    <text x="670" y="478" fill="#8d8d8d" font-size="15">make the route explicit</text>
+    <circle cx="1000" cy="454" r="44" fill="#8ee6d4"/>
+    <text x="985" y="463" fill="#0b0b0b" font-size="24">03</text>
+    <text x="1070" y="447" text-anchor="end" fill="#8ee6d4" font-size="20">RECOVERY</text>
+    <text x="1070" y="478" text-anchor="end" fill="#8d8d8d" font-size="15">change the follow-up job</text>
+  </g>
+</svg>

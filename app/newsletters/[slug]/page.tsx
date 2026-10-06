@@ -25,6 +25,7 @@ export async function generateMetadata({ params }: NewsletterPageProps): Promise
   const issue = newsletterIssues.find((candidate) => candidate.slug === slug);
   const caseStudy = newsletterCaseStudies[slug];
   if (!issue || !caseStudy) return {};
+  const imageSrc = caseStudy.image ?? `/newsletters/${issue.slug}.png`;
 
   return {
     title: `${issue.title} | Anand Iyer`,
@@ -34,7 +35,7 @@ export async function generateMetadata({ params }: NewsletterPageProps): Promise
       title: issue.title,
       description: caseStudy.profileHtml.replace(/<[^>]+>/g, ""),
       type: "article",
-      images: [`/newsletters/${issue.slug}.png`],
+      images: [imageSrc],
     },
   };
 }

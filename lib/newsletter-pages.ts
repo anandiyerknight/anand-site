@@ -1663,5 +1663,67 @@ export const newsletterCaseStudies: Record<string, NewsletterCaseStudy> = {
       "body": "Reply \"LEAK\" and I will help you map one lead path from first signal to next action. Free, no call.",
       "button": "Reply LEAK →"
     }
+  },
+  "28-follow-up-sla": {
+    "image": "/newsletters/28-follow-up-sla.svg",
+    "eyebrow": "Illustrative model",
+    "headline": "“We followed up” is not a process. A process has a clock, an owner and a next decision.",
+    "profileLabel": "The model",
+    "profileHtml": "A <b>three-clock follow-up SLA</b> for a small revenue team that receives genuine enquiries but treats every unanswered lead as the same kind of problem.",
+    "situation": [
+      "Most follow-up systems measure activity: messages sent, reminders created, calls attempted. That is the wrong scoreboard. The buyer experiences only one question: did the next useful step happen while the context was still alive?",
+      "An unanswered lead can mean three different things. The team replied too slowly. The buyer needs a decision or missing detail. Or the timing is wrong and the lead needs a respectful recovery path. One generic reminder cannot solve all three."
+    ],
+    "steps": [
+      "Set the first-response clock: define the maximum time before a human or approved automation acknowledges the enquiry with context, not a blank receipt.",
+      "Set the decision clock: after the first exchange, assign the next decision — qualify, propose, ask one missing question, or close the loop — with one owner and a due time.",
+      "Set the recovery clock: if the buyer goes quiet, choose a different useful follow-up rather than repeating the same “just checking in” message.",
+      "Review clock failures weekly: separate slow responses, unclear decisions and poor recovery so the fix matches the leak."
+    ],
+    "resultsTitle": "The operating rule",
+    "hero": {
+      "value": "3 clocks",
+      "label": "first response, next decision, and recovery — each with its own owner and deadline."
+    },
+    "metrics": [
+      {
+        "value": "01",
+        "label": "first response: acknowledge with context"
+      },
+      {
+        "value": "02",
+        "label": "next decision: make the route explicit"
+      },
+      {
+        "value": "03",
+        "label": "recovery: change the follow-up job"
+      },
+      {
+        "value": "1 owner",
+        "label": "every clock ends with accountability"
+      }
+    ],
+    "beforeAfter": [
+      {
+        "label": "Scoreboard",
+        "before": "messages sent",
+        "after": "decisions moved"
+      },
+      {
+        "label": "Reminder",
+        "before": "same message again",
+        "after": "new useful job"
+      },
+      {
+        "label": "Deadline",
+        "before": "when possible",
+        "after": "clock + owner"
+      }
+    ],
+    "cta": {
+      "heading": "Stop counting reminders",
+      "body": "Reply \"CLOCKS\" and I will help you separate first response, next decision and recovery in one lead path. Free, no call.",
+      "button": "Reply CLOCKS →"
+    }
   }
 };
