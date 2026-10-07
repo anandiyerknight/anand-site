@@ -35,4 +35,5 @@ export const newsletterIssues: NewsletterIssue[] = [
   { num: "26", slug: "26-lead-routing-automation", title: "Lead Routing Automation", blurb: "A qualified lead is not a win until someone owns the next action. The routing model that prevents orphaned demand." },
   { num: "27", slug: "27-lead-leakage-audit", title: "The Lead Leakage Audit", blurb: "Where qualified leads disappear between enquiry and follow-up — a four-point audit for finding the gaps." },
   { num: "28", slug: "28-follow-up-sla", title: "The Follow-Up SLA", blurb: "A useful follow-up process has three clocks: first response, next decision, and recovery when the buyer goes quiet." },
+  { num: "29", slug: "29-organic-traffic-audit", title: "The Organic Traffic Audit", blurb: "Search impressions are not visitors. A practical SEO measurement loop from query to page to qualified lead." },
 ];

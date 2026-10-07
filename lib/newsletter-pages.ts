@@ -1725,5 +1725,44 @@ export const newsletterCaseStudies: Record<string, NewsletterCaseStudy> = {
       "body": "Reply \"CLOCKS\" and I will help you separate first response, next decision and recovery in one lead path. Free, no call.",
       "button": "Reply CLOCKS →"
     }
+  },
+  "29-organic-traffic-audit": {
+    "image": "/newsletters/29-organic-traffic-audit.svg",
+    "eyebrow": "Illustrative model",
+    "headline": "Search impressions are not visitors. The useful unit is one question, one page, one measured next step.",
+    "profileLabel": "The audit",
+    "profileHtml": "An <b>illustrative organic-traffic audit</b> for a small service business that publishes regularly but cannot tell whether a page is earning search attention, bringing real visitors, or creating qualified demand.",
+    "situation": [
+      "A content calendar can look productive while the measurement is empty. A page may receive an impression without a click, a click without a meaningful visit, or a visit without a clear path to the next decision. Treating all three as “traffic” hides the exact problem.",
+      "The audit starts by separating the signals. Search Console shows whether Google displayed the page and whether someone clicked. Analytics shows whether a person arrived and engaged. The lead path shows whether the page helped a qualified reader take action. Each tool answers a different question.",
+      "This is a model, not a claimed client result. Its value is the order of operations: find the query, inspect the page, repair the mismatch, then measure the next window without turning impressions into a success story."
+    ],
+    "steps": [
+      "Choose one search question and one intended reader. Write the page promise in the same language as the question instead of beginning with a broad topic label.",
+      "Pair the query with the page in Search Console. Separate impressions, clicks, click-through rate and average position; do not call an impression a visit.",
+      "Check the landing page in analytics. Confirm organic source, user/session, engagement and the next action, then inspect whether the page answers the question before asking for anything.",
+      "Make one repair: tighten the title, answer the question earlier, add a relevant internal link, or clarify the CTA. Record the change and compare the next 28-day window with the prior one."
+    ],
+    "resultsTitle": "The measurement loop",
+    "hero": {
+      "value": "1 query → 1 page",
+      "label": "Follow one search question through visibility, click, visit and qualified next action."
+    },
+    "metrics": [
+      { "value": "01", "label": "Search Console: was the page shown?" },
+      { "value": "02", "label": "Search Console: did the searcher click?" },
+      { "value": "03", "label": "Analytics: did a real user arrive and engage?" },
+      { "value": "04", "label": "Lead path: did the next action become measurable?" }
+    ],
+    "beforeAfter": [
+      { "label": "Topic", "before": "broad idea", "after": "specific question" },
+      { "label": "Scoreboard", "before": "impressions = traffic", "after": "users + engagement" },
+      { "label": "Improvement", "before": "publish more", "after": "repair one mismatch" }
+    ],
+    "cta": {
+      "heading": "Find the gap in one page",
+      "body": "Reply \"AUDIT\" with one page or search question. I will map the visibility, visit and lead signals that should be checked next. Free, no call.",
+      "button": "Reply AUDIT →"
+    }
   }
 };

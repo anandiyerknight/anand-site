@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">The Organic Traffic Audit</title>
+  <desc id="desc">A four-step measurement loop from search question to qualified next action.</desc>
+  <rect width="1200" height="675" fill="#0b0b0b"/>
+  <g fill="none" stroke="#343434" stroke-width="2"><path d="M72 114H1128M72 555H1128"/><path d="M72 114V555M1128 114V555"/></g>
+  <text x="72" y="78" fill="#9a9a9a" font-family="monospace" font-size="16" letter-spacing="4">AUTOMATION SERIES / ISSUE 29</text>
+  <text x="72" y="210" fill="#f4f4f4" font-family="Arial, sans-serif" font-size="68" font-weight="700">The Organic</text>
+  <text x="72" y="284" fill="#f4f4f4" font-family="Arial, sans-serif" font-size="68" font-weight="700">Traffic Audit</text>
+  <text x="72" y="348" fill="#b6b6b6" font-family="Arial, sans-serif" font-size="24">Search impressions are not visitors.</text>
+  <g font-family="monospace" font-size="17">
+    <rect x="72" y="416" width="210" height="78" fill="#161616" stroke="#f4f4f4" stroke-width="2"/><text x="96" y="448" fill="#8ee6d4" font-size="18">01</text><text x="96" y="476" fill="#f4f4f4">QUESTION</text>
+    <path d="M282 455H330" stroke="#8ee6d4" stroke-width="2"/>
+    <rect x="330" y="416" width="210" height="78" fill="#161616" stroke="#f4f4f4" stroke-width="2"/><text x="354" y="448" fill="#8ee6d4" font-size="18">02</text><text x="354" y="476" fill="#f4f4f4">PAGE</text>
+    <path d="M540 455H588" stroke="#8ee6d4" stroke-width="2"/>
+    <rect x="588" y="416" width="210" height="78" fill="#161616" stroke="#f4f4f4" stroke-width="2"/><text x="612" y="448" fill="#8ee6d4" font-size="18">03</text><text x="612" y="476" fill="#f4f4f4">VISIT</text>
+    <path d="M798 455H846" stroke="#8ee6d4" stroke-width="2"/>
+    <rect x="846" y="416" width="282" height="78" fill="#8ee6d4"/><text x="870" y="448" fill="#0b0b0b" font-size="18">04</text><text x="870" y="476" fill="#0b0b0b">NEXT ACTION</text>
+  </g>
+</svg>
