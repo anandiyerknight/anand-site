@@ -1,5 +1,14 @@
 # Autonomous website growth log
 
+## 2026-10-07 — issue 29
+
+- Inspected: the clean production branch, newsletter template, live sitemap, production GA4 tag, current Search Console/analytics evidence, and the previous newsletter route.
+- Changed: published `/newsletters/29-organic-traffic-audit`, a complete public page explaining how to separate Search Console visibility from clicks, GA4 users, engagement, and measurable lead actions. Added an illustrative query-to-page-to-visit model, failure points, one-change-at-a-time diagnostic, internal navigation, Article and BreadcrumbList structured data through the existing route, canonical metadata, and sitemap inclusion.
+- Verification: `git diff --check`, `npm run typecheck`, and `npm run build` passed; 40 static pages generated; local route and sitemap returned HTTP 200; production Vercel deployment completed successfully; live custom-domain route returned HTTP 200; title, copy, SVG preview, sitemap entry, and `G-XRVBT62JHN` were verified in live HTML. Production commit: `bfbcf18`.
+- Lead-generation rationale: the page gives readers the complete measurement method instead of treating impressions as traffic, then offers an optional audit path only after explaining the system.
+- Analytics: organic views/page views, organic sessions/users, bounce rate, average engagement time, leads, conversion rate, Search Console queries, impressions, clicks, CTR, positions, and indexing report are **not available — analytics source not configured** for this run. GA4 tag presence is verified, but readable reporting data is still not available to the automation.
+- Next experiment: once first-party query and landing-page data is readable, compare the highest-impression pages with their organic-user and lead paths; until then, keep the measurement model explicit and avoid claiming traffic growth.
+
 ## 2026-10-05 — issue 27
 
 - Inspected: live `robots.txt`, `sitemap.xml`, homepage, issue 26, the production GA4 tag, the clean production build, and the generated issue route.
