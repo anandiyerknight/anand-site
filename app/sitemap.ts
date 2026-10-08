@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { newsletterIssues } from "@/lib/newsletters";
 
 const siteUrl = "https://anandiyer.co.in";
-const siteLastModified = "2026-10-07";
+const siteLastModified = "2026-10-08";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const corePages = ["", "/work", "/newsletters", "/services/outbound-automation", "/services/content-automation"];

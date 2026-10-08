@@ -1764,5 +1764,44 @@ export const newsletterCaseStudies: Record<string, NewsletterCaseStudy> = {
       "body": "Reply \"AUDIT\" with one page or search question. I will map the visibility, visit and lead signals that should be checked next. Free, no call.",
       "button": "Reply AUDIT →"
     }
+  },
+  "30-organic-traffic-without-paid-tools": {
+    "image": "/newsletters/30-organic-traffic-without-paid-tools.svg",
+    "eyebrow": "Illustrative model",
+    "headline": "You do not need an expensive keyword database to start. You need a question, a useful answer and a way to see what happened.",
+    "profileLabel": "The operating model",
+    "profileHtml": "A <b>free-tool organic growth model</b> for a small service business that wants search traffic but cannot justify a paid SEO subscription. It uses first-party performance data when available and public research only to generate hypotheses.",
+    "situation": [
+      "Paid tools can make SEO feel like a spreadsheet problem: collect thousands of keywords, sort by difficulty, and publish until the list is empty. That is expensive motion if the pages do not answer a real question or create a useful next step.",
+      "A smaller site can begin with a tighter loop. Search Console shows the questions and pages Google is already associating. Search suggestions and public results reveal adjacent language. The page itself must do the hard work: answer clearly, show the method, link to the next relevant explanation, and make the optional next action obvious.",
+      "The constraint is important: free research does not reveal every competitor's private keyword data, and no tool can guarantee rankings. The model is designed to learn from measured signals instead of pretending that a large keyword list is proof of demand."
+    ],
+    "steps": [
+      "Start with a real buyer problem and write one narrow search question. Prefer a question you can answer completely over a broad keyword with no clear reader or outcome.",
+      "Use Search Console for first-party evidence: queries, impressions, clicks, CTR, average position and the page receiving the signal. Use autocomplete, People Also Ask and public SERPs only to expand the question set, clearly labeled as research.",
+      "Build one standalone page that answers the question in the first section, then adds the mechanism, example, limitations, checklist and relevant internal links. Do not hide the answer behind a PDF or form.",
+      "Measure the chain separately: visibility in Search Console, organic users and engagement in analytics, then qualified actions in the lead path. Change one variable at a time and review a long enough window to avoid mistaking noise for growth."
+    ],
+    "resultsTitle": "The free SEO stack",
+    "hero": {
+      "value": "1 useful page",
+      "label": "A focused answer is the unit of work; tools only help you choose and measure the next improvement."
+    },
+    "metrics": [
+      { "value": "01", "label": "Search Console: query, click, CTR and position" },
+      { "value": "02", "label": "Free research: suggestions, related questions and SERPs" },
+      { "value": "03", "label": "Analytics: organic user, session and engagement" },
+      { "value": "04", "label": "Lead path: qualified action and conversion rate" }
+    ],
+    "beforeAfter": [
+      { "label": "Research", "before": "buy a giant list", "after": "start with a real question" },
+      { "label": "Content", "before": "thin teaser", "after": "complete useful answer" },
+      { "label": "Learning", "before": "assume rankings", "after": "measure the next window" }
+    ],
+    "cta": {
+      "heading": "Build the first free SEO loop",
+      "body": "Reply \"SEARCH\" with one buyer question. I will help you turn it into a useful page and a simple measurement plan. Free, no call.",
+      "button": "Reply SEARCH →"
+    }
   }
 };

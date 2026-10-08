@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Organic Traffic Without Paid Tools</title>
+  <desc id="desc">A free SEO loop using a buyer question, useful page, search data and measurement.</desc>
+  <rect width="1200" height="675" fill="#0b0b0b"/>
+  <g fill="none" stroke="#343434" stroke-width="2"><path d="M72 114H1128M72 555H1128"/><path d="M72 114V555M1128 114V555"/></g>
+  <text x="72" y="78" fill="#9a9a9a" font-family="monospace" font-size="16" letter-spacing="4">AUTOMATION SERIES / ISSUE 30</text>
+  <text x="72" y="206" fill="#f4f4f4" font-family="Arial, sans-serif" font-size="62" font-weight="700">Organic Traffic</text>
+  <text x="72" y="278" fill="#f4f4f4" font-family="Arial, sans-serif" font-size="62" font-weight="700">Without Paid Tools</text>
+  <text x="72" y="344" fill="#b6b6b6" font-family="Arial, sans-serif" font-size="24">One question. One useful page. One measured loop.</text>
+  <g font-family="monospace" font-size="17">
+    <circle cx="168" cy="456" r="48" fill="#161616" stroke="#f4f4f4" stroke-width="2"/><text x="151" y="463" fill="#8ee6d4" font-size="18">01</text><text x="244" y="463" fill="#f4f4f4">QUESTION</text>
+    <path d="M340 456H410" stroke="#8ee6d4" stroke-width="2"/>
+    <circle cx="478" cy="456" r="48" fill="#161616" stroke="#f4f4f4" stroke-width="2"/><text x="461" y="463" fill="#8ee6d4" font-size="18">02</text><text x="554" y="463" fill="#f4f4f4">PAGE</text>
+    <path d="M620 456H690" stroke="#8ee6d4" stroke-width="2"/>
+    <circle cx="758" cy="456" r="48" fill="#161616" stroke="#f4f4f4" stroke-width="2"/><text x="741" y="463" fill="#8ee6d4" font-size="18">03</text><text x="834" y="463" fill="#f4f4f4">DATA</text>
+    <path d="M900 456H960" stroke="#8ee6d4" stroke-width="2"/>
+    <circle cx="1028" cy="456" r="48" fill="#8ee6d4"/><text x="1011" y="463" fill="#0b0b0b" font-size="18">04</text><text x="1120" y="463" text-anchor="end" fill="#8ee6d4">NEXT</text>
+  </g>
+</svg>

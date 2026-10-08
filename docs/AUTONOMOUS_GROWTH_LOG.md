@@ -1,5 +1,14 @@
 # Autonomous website growth log
 
+## 2026-10-08 — issue 30
+
+- Inspected: the clean production branch, newsletter template, live crawl paths, sitemap generation, production GA4 tag, current Search Console/analytics evidence, and the previous organic-traffic page.
+- Changed: published `/newsletters/30-organic-traffic-without-paid-tools`, a complete public page explaining how to grow organic traffic with first-party Search Console data, free query research, useful pages, internal links, and honest measurement. Added the mechanism, limitations, failure modes, measurement stack, optional CTA, Article and BreadcrumbList structured data through the existing route, canonical metadata, and sitemap inclusion.
+- Verification: `git diff --check`, `npm run typecheck`, and `npm run build` passed; 41 static pages generated; local route and sitemap returned HTTP 200; the route contains the new page copy and `G-XRVBT62JHN`; production deployment verification is pending after push. No analytics values were inferred.
+- Lead-generation rationale: the page answers the reader's “how do I grow traffic without expensive tools?” question directly, then connects the measurement loop to an optional audit path without gating the explanation.
+- Analytics: organic views/page views, organic sessions/users, bounce rate, average engagement time, leads, conversion rate, Search Console queries, impressions, clicks, CTR, positions, and indexing report are **not available — analytics source not configured** for this run. GA4 tag presence is verified, but readable reporting data is still not available to the automation.
+- Next experiment: when first-party query and landing-page data is readable, compare the new page with the previous organic-traffic audit and improve the page with the strongest measured search intent.
+
 ## 2026-10-07 — issue 29
 
 - Inspected: the clean production branch, newsletter template, live sitemap, production GA4 tag, current Search Console/analytics evidence, and the previous newsletter route.
