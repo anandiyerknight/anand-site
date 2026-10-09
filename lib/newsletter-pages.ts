@@ -1803,5 +1803,47 @@ export const newsletterCaseStudies: Record<string, NewsletterCaseStudy> = {
       "body": "Reply \"SEARCH\" with one buyer question. I will help you turn it into a useful page and a simple measurement plan. Free, no call.",
       "button": "Reply SEARCH →"
     }
+  },
+  "31-ai-assisted-marketing-system": {
+    "image": "/newsletters/31-ai-assisted-marketing-system.svg",
+    "eyebrow": "Illustrative operating model",
+    "headline": "AI does not fix a vague marketing system. It makes a clear one move faster.",
+    "profileLabel": "The model",
+    "profileHtml": "An <b>AI-assisted marketing system</b> for a founder-led team that has ideas, customer signals and leads, but loses momentum between insight, content, follow-up and revenue action.",
+    "situation": [
+      "The common mistake is to start with a tool: generate more posts, automate more messages, or add another dashboard. That increases activity without answering the important question: which customer signal should change what the team does next?",
+      "A useful system treats AI as an assistant inside a chain, not as the chain itself. A human chooses the commercial priority. AI helps turn raw evidence into a brief, a set of useful assets, a ranked next action and a record of what happened. The owner still approves the promise, the audience and the decision.",
+      "This is an illustrative model, not a claimed client result. Its value is the handoff design: every stage produces an input the next stage can use, and every stage has a stop condition when the evidence is weak."
+    ],
+    "steps": [
+      "Capture the signal: collect one real buyer question, objection, lost-deal reason, sales call note or product interaction. Do not begin with a blank prompt.",
+      "Write the decision brief: state the audience, commercial problem, proof available, promise you can support, channel and the action you want the reader to take. AI can draft options; the owner selects the claim.",
+      "Produce the asset set: turn the approved brief into one primary explanation, supporting short-form pieces, a reply prompt and the internal link or follow-up route. Reuse the argument, not empty variations.",
+      "Route the response: record the source, question, intent, owner and next deadline. A useful response is not a lead until somebody owns the next decision.",
+      "Review the revenue signal: compare qualified replies, conversations, follow-up completion and opportunities. If attention rises without useful replies, change the message or audience before increasing volume."
+    ],
+    "resultsTitle": "The operating loop",
+    "hero": {
+      "value": "1 signal → 5 handoffs",
+      "label": "signal, brief, assets, response route and revenue review — with human approval at the commercial decisions."
+    },
+    "metrics": [
+      { "value": "01", "label": "Signal: a real buyer question or business event" },
+      { "value": "02", "label": "Brief: audience, problem, proof and next action" },
+      { "value": "03", "label": "Assets: one argument adapted to useful formats" },
+      { "value": "04", "label": "Route: source, owner, intent and deadline" },
+      { "value": "05", "label": "Review: qualified replies and revenue movement" }
+    ],
+    "beforeAfter": [
+      { "label": "Starting point", "before": "blank prompt", "after": "real buyer signal" },
+      { "label": "AI's job", "before": "invent more content", "after": "accelerate an approved argument" },
+      { "label": "Lead handling", "before": "inbox ownership", "after": "owner + next decision" },
+      { "label": "Scoreboard", "before": "assets published", "after": "qualified conversations" }
+    ],
+    "cta": {
+      "heading": "Find the missing handoff",
+      "body": "Reply \"SYSTEM\" with one marketing or follow-up bottleneck. I will help you map the signal, handoffs and next measurable decision. Free, no call.",
+      "button": "Reply SYSTEM →"
+    }
   }
 };

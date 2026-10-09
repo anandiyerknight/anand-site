@@ -37,4 +37,5 @@ export const newsletterIssues: NewsletterIssue[] = [
   { num: "28", slug: "28-follow-up-sla", title: "The Follow-Up SLA", blurb: "A useful follow-up process has three clocks: first response, next decision, and recovery when the buyer goes quiet." },
   { num: "29", slug: "29-organic-traffic-audit", title: "The Organic Traffic Audit", blurb: "Search impressions are not visitors. A practical SEO measurement loop from query to page to qualified lead." },
   { num: "30", slug: "30-organic-traffic-without-paid-tools", title: "Organic Traffic Without Paid Tools", blurb: "How to grow search traffic with Search Console, useful pages, internal links, and honest measurement." },
+  { num: "31", slug: "31-ai-assisted-marketing-system", title: "The AI-Assisted Marketing System", blurb: "A practical operating loop from market signal to useful content, follow-up, and measurable revenue action." },
 ];
