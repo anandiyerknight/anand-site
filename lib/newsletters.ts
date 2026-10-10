@@ -38,4 +38,5 @@ export const newsletterIssues: NewsletterIssue[] = [
   { num: "29", slug: "29-organic-traffic-audit", title: "The Organic Traffic Audit", blurb: "Search impressions are not visitors. A practical SEO measurement loop from query to page to qualified lead." },
   { num: "30", slug: "30-organic-traffic-without-paid-tools", title: "Organic Traffic Without Paid Tools", blurb: "How to grow search traffic with Search Console, useful pages, internal links, and honest measurement." },
   { num: "31", slug: "31-ai-assisted-marketing-system", title: "The AI-Assisted Marketing System", blurb: "A practical operating loop from market signal to useful content, follow-up, and measurable revenue action." },
+  { num: "32", slug: "32-ai-marketing-automation-small-business", title: "AI Marketing Automation for Small Businesses", blurb: "What to automate first, what to keep human, and how to calculate whether the system is creating revenue or just more output." },
 ];

@@ -1846,4 +1846,45 @@ export const newsletterCaseStudies: Record<string, NewsletterCaseStudy> = {
       "button": "Reply SYSTEM →"
     }
   }
+  ,"32-ai-marketing-automation-small-business": {
+    "image": "/newsletters/32-ai-marketing-automation-small-business.svg",
+    "eyebrow": "Practical operating model",
+    "headline": "Small businesses should not automate marketing everywhere. They should automate the delay between a real signal and the next useful action.",
+    "profileLabel": "The decision",
+    "profileHtml": "A <b>small-business marketing system</b> with limited time, uneven demand and a growing pile of follow-up, content and reporting work. The model below separates work AI can accelerate from decisions a human still owns.",
+    "situation": [
+      "The usual automation mistake is starting with a channel: automate email, generate social posts, connect a CRM, add a chatbot. The business becomes faster at producing activity, but nobody can say which activity moved a buyer closer to a decision.",
+      "A better starting point is the delay. Where does useful information arrive and then wait? A buyer asks a question, a sales call reveals an objection, a lead fills a form, or an old opportunity goes quiet. That signal should create a short chain: understand it, produce the right response, assign an owner and check what happened.",
+      "This is a model, not a claimed client result. It is designed to be usable with a small team: one source of truth, one approval point for commercial claims and one weekly review of qualified movement."
+    ],
+    "steps": [
+      "Choose one delay: start with the gap that is closest to money, such as slow first response, repeated content production or leads with no next owner. Do not automate three gaps at once.",
+      "Define the input: record the exact signal the system receives, such as form fields, a call note, an unanswered question or a lead that has been idle for seven days. If the input is vague, the output will be vague.",
+      "Let AI prepare, not decide: use it to classify the signal, draft a response, extract the buyer's problem and suggest the next action. A human approves pricing, promises, proof and sensitive customer replies.",
+      "Create a route: every output needs a source, intent, owner and deadline. A drafted reply sitting in a shared inbox is not automation; it is a new queue.",
+      "Measure the delay and the outcome: track time to first useful response, follow-up completion, qualified conversations and opportunities created. Stop or change the workflow if output increases but qualified movement does not."
+    ],
+    "resultsTitle": "The first automation scoreboard",
+    "hero": {
+      "value": "1 delay → 4 checks",
+      "label": "input quality, human approval, ownership and qualified movement — the minimum loop before adding volume."
+    },
+    "metrics": [
+      { "value": "01", "label": "Delay: where buyer information waits" },
+      { "value": "02", "label": "Input: the evidence the system can read" },
+      { "value": "03", "label": "Route: owner plus a clear deadline" },
+      { "value": "04", "label": "Outcome: qualified movement, not activity" }
+    ],
+    "beforeAfter": [
+      { "label": "Starting point", "before": "automate a channel", "after": "remove one delay" },
+      { "label": "AI's role", "before": "make the decision", "after": "prepare the decision" },
+      { "label": "Lead record", "before": "name + status", "after": "signal + owner + clock" },
+      { "label": "Review", "before": "assets produced", "after": "qualified movement" }
+    ],
+    "cta": {
+      "heading": "Find the first delay worth automating",
+      "body": "Reply \"DELAY\" with the point where a buyer signal currently waits. I will help you map the smallest useful workflow. Free, no call.",
+      "button": "Reply DELAY →"
+    }
+  }
 };
