@@ -1887,4 +1887,46 @@ export const newsletterCaseStudies: Record<string, NewsletterCaseStudy> = {
       "button": "Reply DELAY →"
     }
   }
+  ,"33-customer-question-loop": {
+    "image": "/newsletters/33-customer-question-loop.svg",
+    "eyebrow": "Illustrative operating model",
+    "headline": "The best sales content is often hiding in the questions your team keeps answering badly.",
+    "profileLabel": "The model",
+    "profileHtml": "A <b>customer-question loop</b> for a small business that receives enquiries through calls, WhatsApp, email or a shop floor, but lets each answer disappear after the conversation ends.",
+    "situation": [
+      "Most businesses treat a customer question as a one-time support task. Someone asks, “Which option is right for me?” or “What happens after I pay?” A team member answers from memory, the sale either happens or does not, and the same question returns next week.",
+      "That repetition is not just workload. It is a map of what buyers do not understand yet. If the business turns those questions into clear explanations, it can help the next buyer before they ask, give the team a better starting point, and see which gaps keep slowing a sale.",
+      "This is an illustrative model, not a claimed client result. The point is the loop: collect the real question, answer it once in depth, adapt it to the places buyers look, and measure whether the next conversation moves further.",
+    ],
+    "steps": [
+      "Collect the exact question: copy the buyer's words from a call note, WhatsApp thread, email, review or sales objection. Do not rewrite it into vague marketing language.",
+      "Answer the decision behind it: explain the trade-off, who the option suits, what it costs or requires, what can go wrong and what the buyer should do next. A useful answer reduces uncertainty, not just word count.",
+      "Make one source explanation: publish the complete answer on a page or document the team can trust. Then adapt the same argument into a short post, a reply script, a sales message and a follow-up link.",
+      "Route it into the next conversation: when the question appears again, send the relevant explanation and ask one useful follow-up question. Record the source, the buyer's intent and the next action.",
+      "Review the repeats: count which questions recur, which answers create qualified replies and which still end in confusion. Improve the explanation before producing more variations.",
+    ],
+    "resultsTitle": "The question loop",
+    "hero": {
+      "value": "1 real question → 5 useful assets",
+      "label": "one complete explanation, one short post, one reply script, one follow-up message and one learning signal.",
+    },
+    "metrics": [
+      { "value": "01", "label": "Question: the buyer's exact words" },
+      { "value": "02", "label": "Answer: the trade-off and next step" },
+      { "value": "03", "label": "Assets: one argument adapted carefully" },
+      { "value": "04", "label": "Route: source, intent and owner" },
+      { "value": "05", "label": "Learning: repeat questions and qualified movement" },
+    ],
+    "beforeAfter": [
+      { "label": "Source", "before": "blank content brief", "after": "real buyer question" },
+      { "label": "Answer", "before": "different reply each time", "after": "one useful explanation" },
+      { "label": "Content", "before": "generic topic", "after": "decision support" },
+      { "label": "Review", "before": "posts published", "after": "questions resolved" },
+    ],
+    "cta": {
+      "heading": "Find the question worth answering next",
+      "body": "Reply \"QUESTION\" with the question your team answers every week. I will help you turn it into one useful explanation and the smaller assets around it. Free, no call.",
+      "button": "Reply QUESTION →",
+    },
+  }
 };
