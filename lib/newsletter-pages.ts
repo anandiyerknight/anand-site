@@ -1929,4 +1929,46 @@ export const newsletterCaseStudies: Record<string, NewsletterCaseStudy> = {
       "button": "Reply QUESTION →",
     },
   }
+  ,"34-quote-follow-up-system": {
+    "image": "/newsletters/34-quote-follow-up-system.svg",
+    "eyebrow": "Illustrative operating model",
+    "headline": "A quote does not go cold because the buyer needs more reminders. It goes cold when the next reply feels like work.",
+    "profileLabel": "The model",
+    "profileHtml": "A <b>quote follow-up system</b> for an owner-led business that sends estimates, proposals or price options, then waits without knowing what the buyer is unsure about.",
+    "situation": [
+      "The usual follow-up message says, “Just checking in.” It puts the burden back on the buyer without adding anything useful. If the buyer is comparing options, waiting for a partner, unsure about the scope or worried about price, a reminder does not remove the obstacle.",
+      "A better follow-up gives the buyer one small reason to reply. It makes the next step easier, names the uncertainty the business can help with and gives the buyer permission to say no, pause or change the request. That makes the conversation more honest and often more useful.",
+      "This is an illustrative model, not a claimed client result. It works best when the quote is real, the scope is clear and the business can answer questions quickly. It is not a way to pressure people who have already opted out or clearly declined."
+    ],
+    "steps": [
+      "Record the buying situation: when the quote is sent, write down what the buyer is deciding, who else is involved, the expected timing and the one concern they mentioned. Do not reduce the conversation to a price and a status.",
+      "Send the first useful follow-up: after a reasonable review window, send one sentence that points to the likely question. For example: “The part people usually compare is installation time. I can show you the two options in three lines if that helps.”",
+      "Give one choice: offer a simple reply path such as “reply with A if the scope is right, B if you want a smaller version, or C if the timing has changed.” A small choice is easier to answer than “What do you think?”",
+      "Change the evidence, not the pressure: the second follow-up should add a useful detail, such as a short example, a clearer scope, a timeline, a limitation or a comparison. Never invent a deadline, customer story or scarcity claim.",
+      "Close the loop cleanly: after the final agreed touch, say what will happen next and leave the door open. Mark the quote as paused, declined, won or needs a new scope. A respectful close protects future demand and keeps the team from chasing the same uncertainty."
+    ],
+    "resultsTitle": "The quote follow-up loop",
+    "hero": {
+      "value": "1 quote → 4 useful replies",
+      "label": "clarify the concern, offer a smaller choice, add evidence and close the loop without manufacturing pressure."
+    },
+    "metrics": [
+      { "value": "01", "label": "Context: what the buyer is actually deciding" },
+      { "value": "02", "label": "Question: the uncertainty worth resolving" },
+      { "value": "03", "label": "Choice: the smallest reply path" },
+      { "value": "04", "label": "Evidence: a useful detail, not a louder reminder" },
+      { "value": "05", "label": "Close: won, paused, declined or needs a new scope" }
+    ],
+    "beforeAfter": [
+      { "label": "First message", "before": "just checking in", "after": "name the likely concern" },
+      { "label": "Reply path", "before": "what do you think?", "after": "choose A, B or C" },
+      { "label": "Second touch", "before": "repeat the price", "after": "add one useful detail" },
+      { "label": "Final state", "before": "keep chasing", "after": "close the loop clearly" }
+    ],
+    "cta": {
+      "heading": "Rewrite one cold quote",
+      "body": "Reply \"QUOTE\" with the buyer's last question, with names and private details removed. I will help you turn it into a useful follow-up sequence. Free, no call.",
+      "button": "Reply QUOTE →"
+    }
+  }
 };
