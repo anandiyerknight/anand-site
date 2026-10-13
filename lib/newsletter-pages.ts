@@ -1971,4 +1971,46 @@ export const newsletterCaseStudies: Record<string, NewsletterCaseStudy> = {
       "button": "Reply QUOTE →"
     }
   }
+  ,"35-recover-lost-enquiries": {
+    "image": "/newsletters/35-recover-lost-enquiries.svg",
+    "eyebrow": "Illustrative operating model",
+    "headline": "A quiet enquiry is not always lost. Sometimes the next message simply asks the buyer to do too much work.",
+    "profileLabel": "The model",
+    "profileHtml": "A <b>lost-enquiry recovery system</b> for an owner-led business that receives interest through WhatsApp, calls, forms or referrals, then sees some conversations disappear before a clear yes or no.",
+    "situation": [
+      "When an enquiry goes quiet, the default response is usually another reminder. That treats every silence as the same problem, even though the buyer may be comparing options, waiting for someone else, unsure about the fit, or simply no longer interested.",
+      "The useful move is to reduce the work required for an honest reply. Give the buyer a relevant answer, a smaller choice and a clean way to pause. This protects the relationship while showing the business which part of the buying experience is creating silence.",
+      "This is an illustrative model, not a claimed client result. It works only when the original enquiry is genuine, the business respects opt-outs and the team can answer the question it raises. The goal is clarity, not pressure."
+    ],
+    "steps": [
+      "Write the last known intent: copy the buyer's actual question, requested item, timing and concern. Do not label the conversation simply as 'follow-up pending'.",
+      "Choose the likely reason for silence: fit, timing, price, missing information or no current interest. If you cannot tell, say so and ask one narrow question rather than sending a long explanation.",
+      "Send one useful clarification: answer the most likely uncertainty in two or three lines. For example: “The smaller option removes installation and suits teams starting with one location. Would that be closer to what you need?”",
+      "Offer three honest exits: let the buyer reply with “smaller”, “later” or “not now”. Each answer gives the business a useful next step without making the buyer write an explanation.",
+      "Close or reschedule visibly: if there is no reply after the agreed final touch, stop chasing. Record whether the enquiry needs a future date, a different offer or no further contact, then use the pattern to fix the original page or script."
+    ],
+    "resultsTitle": "The recovery sequence",
+    "hero": {
+      "value": "1 quiet enquiry → 3 honest exits",
+      "label": "a smaller option, a later date or a clear no, each easier to answer than another reminder."
+    },
+    "metrics": [
+      { "value": "01", "label": "Intent: the buyer's last real question" },
+      { "value": "02", "label": "Reason: the likely source of silence" },
+      { "value": "03", "label": "Help: one useful clarification" },
+      { "value": "04", "label": "Exits: smaller, later or not now" },
+      { "value": "05", "label": "Review: fix the source of repeated silence" }
+    ],
+    "beforeAfter": [
+      { "label": "Opening", "before": "just checking in", "after": "answer the likely doubt" },
+      { "label": "Reply", "before": "tell me what you think", "after": "smaller, later or not now" },
+      { "label": "Silence", "before": "keep sending reminders", "after": "set one final touch" },
+      { "label": "Learning", "before": "mark lost", "after": "find the repeated obstacle" }
+    ],
+    "cta": {
+      "heading": "Repair one quiet enquiry",
+      "body": "Reply \"RECOVER\" with the buyer's last question, with names and private details removed. I will help you write the smallest useful next message. Free, no call.",
+      "button": "Reply RECOVER →"
+    }
+  }
 };
