@@ -1,4 +1,4 @@
-export type WorkType = "landing-page" | "carousel" | "case-study";
+export type WorkType = "software" | "landing-page" | "carousel" | "case-study";
 
 export type WorkItem = {
   slug: string; // unique; also the public/work/<slug>/ folder name
@@ -9,9 +9,9 @@ export type WorkItem = {
   brandColor?: string; // accent used in subtle places (not a card border)
   featured?: boolean; // surfaces on the home teaser
   order?: number; // sort within its group (lower first)
-  // landing-page
+  // software and landing pages
   liveUrl?: string; // external link, opens new tab
-  cover?: string; // /work/<slug>/cover.png
+  cover?: string; // image in /work/<slug>/
   // carousel
   gallery?: string[]; // ["/work/<slug>/01.png", ...] for the lightbox
   // case-study — references existing data in lib/case-studies.ts (not duplicated)
@@ -22,6 +22,20 @@ export type WorkItem = {
 // New items are appended by the /addwork skill — no component changes needed.
 // (carousel support remains available; no download-only assets are used.)
 export const workItems: WorkItem[] = [
+  // ---------- Software ----------
+  {
+    slug: "care-club",
+    type: "software",
+    title: "Care Club",
+    category: "Full-stack software · B2B commerce",
+    blurb:
+      "We designed and built a cross-border ordering platform with a buyer portal, a seller admin dashboard, and a shared API. It handles country-specific catalogues, order approvals, invoices, buyer credit, and shipping.",
+    liveUrl: "https://careclubstore.com/",
+    cover: "/work/care-club/cover.jpg",
+    featured: true,
+    order: 0,
+  },
+
   // ---------- Landing pages ----------
   {
     slug: "vita-plus",

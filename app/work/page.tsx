@@ -5,14 +5,14 @@ import { WorkShowcase } from "@/components/work-showcase";
 import { workItems } from "@/lib/work";
 
 export const metadata: Metadata = {
-  title: "Work · Landing Pages & Case Studies | Anand Iyer",
+  title: "Work · Software, Landing Pages & Case Studies | Anand Iyer",
   description:
-    "Selected work: live landing pages and the case studies behind them. The brands, the builds, and the math behind them.",
+    "Explore custom software, live landing pages, and case studies from Anand Iyer.",
   alternates: { canonical: "/work" },
   openGraph: {
-    title: "Work · Landing Pages & Case Studies | Anand Iyer",
+    title: "Work · Software, Landing Pages & Case Studies | Anand Iyer",
     description:
-      "Selected work: live landing pages and the case studies behind them. The brands, the builds, and the math behind them.",
+      "Explore custom software, live landing pages, and case studies from Anand Iyer.",
     type: "website",
     url: "https://anandiyer.co.in/work",
     images: [{ url: "/profile.jpg", width: 864, height: 1184, alt: "Anand Iyer" }],
@@ -33,8 +33,7 @@ export default function WorkPage() {
             The brands. The builds. <span className="italic">The math behind them.</span>
           </h1>
           <p className="mt-6 md:mt-8 text-base md:text-lg text-[var(--color-ink-2)] leading-relaxed max-w-2xl">
-            Live landing pages and the case studies behind them. Open the real sites, read the
-            results.
+            Explore the software and websites we designed and built, and read the case studies behind them.
           </p>
         </div>
       </section>

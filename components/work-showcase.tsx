@@ -10,6 +10,7 @@ import { caseStudies, type CaseStudy } from "@/lib/case-studies";
 
 type FilterKey = WorkType | "all";
 const FILTER_DEFS: { key: WorkType; label: string }[] = [
+  { key: "software", label: "Software" },
   { key: "landing-page", label: "Landing Pages" },
   { key: "carousel", label: "Carousels" },
 ];
@@ -72,7 +73,7 @@ export function WorkShowcase({ items }: { items: WorkItem[] }) {
           const cardCase = item.type === "case-study" ? caseById(item.caseStudyId) : null;
           return (
             <Reveal key={item.slug} delay={(idx % 3) * 0.06}>
-              <div className="flex flex-col overflow-hidden h-full rounded-3xl bg-[var(--color-bg-2)] ring-1 ring-[var(--color-rule)] hover:ring-[var(--color-mute)] transition-shadow duration-300">
+              <div id={item.slug} className="scroll-mt-28 flex flex-col overflow-hidden h-full rounded-3xl bg-[var(--color-bg-2)] ring-1 ring-[var(--color-rule)] hover:ring-[var(--color-mute)] transition-shadow duration-300">
                 {/* Visual area */}
                 {item.type === "carousel" && item.gallery?.length ? (
                   <button
@@ -128,14 +129,14 @@ export function WorkShowcase({ items }: { items: WorkItem[] }) {
 
                   {/* Actions */}
                   <div className="mt-5 flex flex-wrap items-center gap-3">
-                    {item.type === "landing-page" && item.liveUrl && (
+                    {(item.type === "software" || item.type === "landing-page") && item.liveUrl && (
                       <a
                         href={item.liveUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="btn-primary !py-2.5 !px-4 !text-[10px]"
                       >
-                        <span>Visit live</span>
+                        <span>{item.type === "software" ? "Visit buyer portal" : "Visit live"}</span>
                         <span aria-hidden>↗</span>
                       </a>
                     )}

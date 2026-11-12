@@ -21,7 +21,7 @@ export function WorkGrid() {
             </div>
             <Reveal>
               <h2 className="font-display text-[clamp(2.2rem,5vw,4.5rem)] leading-[0.95] tracking-tight">
-                Landing pages <span className="italic">and the brands behind them.</span>
+                Custom software <span className="italic">and landing pages.</span>
               </h2>
             </Reveal>
           </div>
@@ -31,11 +31,11 @@ export function WorkGrid() {
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
           {featured.map((item, i) => (
             <Reveal key={item.slug} delay={(i % 3) * 0.06}>
               <Link
-                href="/work"
+                href={item.type === "software" ? `/work#${item.slug}` : "/work"}
                 className="group flex flex-col overflow-hidden h-full rounded-3xl bg-[var(--color-bg-2)] ring-1 ring-[var(--color-rule)] hover:ring-[var(--color-mute)] transition-shadow duration-300"
               >
                 <div className="relative aspect-[1200/675] bg-[var(--color-bg-2)] border-b border-[var(--color-rule)] overflow-hidden">
@@ -44,7 +44,7 @@ export function WorkGrid() {
                       src={item.cover ?? item.gallery![0]}
                       alt={item.title}
                       fill
-                      sizes="(max-width: 768px) 100vw, 33vw"
+                      sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
                       className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
                     />
                   ) : (
