@@ -191,7 +191,7 @@ export function AuditForm() {
                       )}
                     </div>
 
-                    {/* Brief */}
+                    <div hidden><input name="contact_website" aria-label="Leave blank" tabIndex={-1} autoComplete="off" /></div><div className="field"><label htmlFor="audit-project-type">▸ What do you want built?</label><select id="audit-project-type" name="project_type" required defaultValue=""><option value="" disabled>Select a project type</option><option value="custom_software">Custom software for a business workflow</option><option value="ai_second_brain">AI second brain for company knowledge</option></select></div>
                     <div className="field">
                       <label htmlFor="brief">▸ The Brief</label>
                       <textarea
