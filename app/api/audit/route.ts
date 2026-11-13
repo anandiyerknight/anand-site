@@ -5,7 +5,7 @@ import { sendBriefNotification } from "@/lib/mailer";
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const lead = {
+    if (body.contact_website != null && body.contact_website !== "") return NextResponse.json({ ok: false, error: "Invalid submission" }, { status: 422 }); const projectType = body.project_type === "custom_software" ? "Custom software for a business workflow" : body.project_type === "ai_second_brain" ? "AI second brain for company knowledge" : null; if (!projectType) return NextResponse.json({ ok: false, error: "Select a supported project type" }, { status: 422 }); const lead = {
       name: String(body.name || "").trim(),
       email: String(body.email || "").trim(),
       company: String(body.company || "").trim(),
@@ -25,7 +25,9 @@ export async function POST(req: Request) {
       return NextResponse.json({ ok: false, error: "Required fields are missing" }, { status: 400 });
     }
 
-    const results = await Promise.allSettled([
+    lead.brief = `Project type: ${projectType}
+
+${lead.brief}`; const results = await Promise.allSettled([
       addBriefToSheet(lead),
       sendBriefNotification({ ...lead, stage: lead.source }),
     ]);
