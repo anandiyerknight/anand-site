@@ -26,8 +26,8 @@ export const workItems: WorkItem[] = [
   {
     slug: "care-club",
     type: "software",
-    title: "Care Club",
-    category: "Full-stack software · B2B commerce",
+    title: "Careclub Pharma",
+    category: "Full-stack software · Pharma commerce",
     blurb:
       "We designed and built a cross-border ordering platform with a buyer portal, a seller admin dashboard, and a shared API. It handles country-specific catalogues, order approvals, invoices, buyer credit, and shipping.",
     liveUrl: "https://careclubstore.com/",
