@@ -63,7 +63,7 @@ export function AuditForm() {
         body: JSON.stringify(payload),
       });
       if (res.ok) {
-        track("audit_submitted", attribution); try { type Pixel = (...args: unknown[]) => void; const browser = window as Window & { oaiq?: Pixel }; if (!browser.oaiq) { const pending: unknown[][] = []; const queue = Object.assign((...args: unknown[]) => { pending.push(args); }, { q: pending }); browser.oaiq = queue; queue("init", { pixelId: "BVajMb71vCbLTTp8odr3Vo" }); const script = document.createElement("script"); script.async = true; script.src = "https://bzrcdn.openai.com/sdk/oaiq.min.js"; document.head.appendChild(script); } browser.oaiq("measure", "lead_created", { type: "customer_action" }); } catch (error) { console.warn("Audit conversion measurement failed", error); }
+        track("audit_submitted", attribution); try { type Pixel = (...args: unknown[]) => void; const browser = window as Window & { oaiq?: Pixel }; if (!browser.oaiq) { const pending: unknown[][] = []; const queue = Object.assign((...args: unknown[]) => { pending.push(args); }, { q: pending }); browser.oaiq = queue; queue("init", { pixelId: "Dr6Lt8Ui3qEkPTuzgvxn2u" }); const script = document.createElement("script"); script.async = true; script.src = "https://bzrcdn.openai.com/sdk/oaiq.min.js"; document.head.appendChild(script); } browser.oaiq("measure", "lead_created", { type: "customer_action" }); } catch (error) { console.warn("Audit conversion measurement failed", error); }
         setState("ok");
       } else {
         setState("err");
