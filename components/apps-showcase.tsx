@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Reveal } from "./reveal";
+import { careclubPharma } from "@/lib/work";
 
 const apps = [
   {
@@ -73,21 +74,16 @@ const apps = [
     ],
   },
   {
-    name: "LinkedIn Outreach Harness",
-    shortDesc: "Browser-harness automation for LinkedIn at scale — dual scraper, CDP/AX-tree modal navigation, and connection flow automation.",
-    fullDesc: "A production-grade LinkedIn outreach system built on browser-harness automation. Dual scraper (DDG keyword + LinkedIn URL), CDP/AX-tree modal navigation that bypasses DOM limitations, connection request automation with sent-invitation verification, and a real-time outreach dashboard.",
-    tags: ["Automation", "Outreach", "Harness"],
-    color: "from-sky-500/20 to-blue-600/20",
-    kpis: [
-      { label: "Outreach setup", before: "manual", after: "automated" },
-      { label: "Scraper modes", before: "0", after: "2" },
-    ],
+    name: careclubPharma.title,
+    shortDesc: "Custom software for cross-border pharma ordering, from catalogue to dispatch.",
+    fullDesc: careclubPharma.blurb,
+    tags: ["Full-stack software", "Pharma commerce"],
+    color: "from-green-500/20 to-emerald-500/20",
+    kpis: [],
     gallery: [
-      { title: "System Dashboard", desc: "Live system health, API status, and outreach metrics", image: "/images/apps/linkedin-1.png" },
-      { title: "Leads Pipeline", desc: "ICP-qualified leads with scoring and status tracking", image: "/images/apps/linkedin-2.png" },
-      { title: "Outreach Manager", desc: "Connection request queue with message templates", image: "/images/apps/linkedin-3.png" },
-      { title: "Scheduler", desc: "Automated daily outreach with rate-limit controls", image: "/images/apps/linkedin-4.png" },
+      { title: "Buyer portal", desc: "Country-specific catalogues, orders, invoices, and buyer credit.", image: careclubPharma.cover },
     ],
+    liveUrl: careclubPharma.liveUrl,
   },
   {
     name: "Vita+ Brand Automation",
@@ -250,6 +246,16 @@ export function AppsShowcase() {
                 <div>
                   <h2 className="font-display text-3xl md:text-4xl mb-2">{selectedApp.name}</h2>
                   <p className="text-[var(--color-ink-2)] text-lg">{selectedApp.fullDesc}</p>
+                  {selectedApp.liveUrl && (
+                    <a
+                      href={selectedApp.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-4 inline-block text-sm text-[var(--color-cyan)] underline underline-offset-4"
+                    >
+                      Visit buyer portal <span aria-hidden="true">↗</span>
+                    </a>
+                  )}
                 </div>
                 <button
                   onClick={() => setSelectedApp(null)}

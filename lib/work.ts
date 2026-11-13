@@ -18,23 +18,23 @@ export type WorkItem = {
   caseStudyId?: string;
 };
 
+export const careclubPharma = {
+  slug: "care-club",
+  type: "software",
+  title: "Careclub Pharma",
+  category: "Full-stack software · Pharma commerce",
+  blurb:
+    "We designed and built a cross-border ordering platform with a buyer portal, a seller admin dashboard, and a shared API. It handles country-specific catalogues, order approvals, invoices, buyer credit, and shipping.",
+  liveUrl: "https://careclubstore.com/",
+  cover: "/work/care-club/cover.jpg",
+  order: 0,
+} satisfies WorkItem;
+
 // Single source of truth for the /work showcase. Assets live in public/work/<slug>/.
 // New items are appended by the /addwork skill — no component changes needed.
 // (carousel support remains available; no download-only assets are used.)
 export const workItems: WorkItem[] = [
-  // ---------- Software ----------
-  {
-    slug: "care-club",
-    type: "software",
-    title: "Careclub Pharma",
-    category: "Full-stack software · Pharma commerce",
-    blurb:
-      "We designed and built a cross-border ordering platform with a buyer portal, a seller admin dashboard, and a shared API. It handles country-specific catalogues, order approvals, invoices, buyer credit, and shipping.",
-    liveUrl: "https://careclubstore.com/",
-    cover: "/work/care-club/cover.jpg",
-    featured: true,
-    order: 0,
-  },
+  careclubPharma,
 
   // ---------- Landing pages ----------
   {
