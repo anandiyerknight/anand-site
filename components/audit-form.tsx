@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { track } from "@vercel/analytics";
+import { companyRevenueBands } from "@/lib/company-revenue";
 import { Magnetic } from "./magnetic";
 import { Reveal } from "./reveal";
 
@@ -14,6 +15,25 @@ const countryCodes = [
   { label: "🇸🇬 +65", code: "+65", country: "SG", digits: 8 },
   { label: "🇦🇪 +971", code: "+971", country: "AE", digits: 9 },
 ];
+
+function measureAdLead() {
+  type Pixel = (...args: unknown[]) => void;
+  const browser = window as Window & { oaiq?: Pixel };
+
+  if (!browser.oaiq) {
+    const pending: unknown[][] = [];
+    const queue = Object.assign((...args: unknown[]) => pending.push(args), { q: pending });
+    browser.oaiq = queue;
+    queue("init", { pixelId: "Dr6Lt8Ui3qEkPTuzgvxn2u" });
+
+    const script = document.createElement("script");
+    script.async = true;
+    script.src = "https://bzrcdn.openai.com/sdk/oaiq.min.js";
+    document.head.appendChild(script);
+  }
+
+  browser.oaiq("measure", "lead_created", { type: "customer_action" });
+}
 
 export function AuditForm() {
   const [state, setState] = useState<State>("idle");
@@ -63,7 +83,15 @@ export function AuditForm() {
         body: JSON.stringify(payload),
       });
       if (res.ok) {
-        track("audit_submitted", attribution); try { type Pixel = (...args: unknown[]) => void; const browser = window as Window & { oaiq?: Pixel }; if (!browser.oaiq) { const pending: unknown[][] = []; const queue = Object.assign((...args: unknown[]) => { pending.push(args); }, { q: pending }); browser.oaiq = queue; queue("init", { pixelId: "Dr6Lt8Ui3qEkPTuzgvxn2u" }); const script = document.createElement("script"); script.async = true; script.src = "https://bzrcdn.openai.com/sdk/oaiq.min.js"; document.head.appendChild(script); } browser.oaiq("measure", "lead_created", { type: "customer_action" }); } catch (error) { console.warn("Audit conversion measurement failed", error); }
+        const result = await res.json();
+        track("audit_submitted", attribution);
+        if (result.adConversionEligible === true) {
+          try {
+            measureAdLead();
+          } catch (error) {
+            console.warn("Audit conversion measurement failed", error);
+          }
+        }
         setState("ok");
       } else {
         setState("err");
@@ -79,16 +107,13 @@ export function AuditForm() {
         <div className="md:col-span-5 flex flex-col justify-center">
           <Reveal>
             <h2 className="font-display text-[clamp(1.8rem,5vw,4.5rem)] leading-[0.95] tracking-tight">
-              Not everyone
+              Custom software
               <br />
-              <span className="italic">qualifies.</span>
+              <span className="italic">for your business.</span>
             </h2>
           </Reveal>
           <p className="mt-6 md:mt-8 text-[var(--color-ink-2)] text-base md:text-lg leading-relaxed max-w-md">
-            Currently accepting 6 new system builds.
-          </p>
-          <p className="mt-8 md:mt-12 text-xs md:text-sm text-[var(--color-mute)] italic">
-            If you're still evaluating, this isn't for you.
+            Tell us what your team needs built. We design and build software for existing companies, from internal workflows to customer-facing platforms.
           </p>
         </div>
 
@@ -191,7 +216,28 @@ export function AuditForm() {
                       )}
                     </div>
 
-                    <div hidden><input name="contact_website" aria-label="Leave blank" tabIndex={-1} autoComplete="off" /></div><div className="field"><label htmlFor="audit-project-type">▸ What do you want built?</label><select id="audit-project-type" name="project_type" required defaultValue=""><option value="" disabled>Select a project type</option><option value="custom_software">Custom software for a business workflow</option><option value="ai_second_brain">AI second brain for company knowledge</option></select></div>
+                    <div hidden>
+                      <input name="contact_website" aria-label="Leave blank" tabIndex={-1} autoComplete="off" />
+                    </div>
+                    <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                      <div className="field">
+                        <label htmlFor="audit-project-type">▸ What do you want built?</label>
+                        <select id="audit-project-type" name="project_type" required defaultValue="">
+                          <option value="" disabled>Select a project type</option>
+                          <option value="custom_software">Custom software for a business workflow</option>
+                          <option value="ai_second_brain">AI second brain for company knowledge</option>
+                        </select>
+                      </div>
+                      <div className="field">
+                        <label htmlFor="audit-company-revenue">▸ Annual company revenue</label>
+                        <select id="audit-company-revenue" name="company_revenue" required defaultValue="">
+                          <option value="" disabled>Select a revenue band</option>
+                          {companyRevenueBands.map(({ value, label }) => (
+                            <option key={value} value={value}>{label}</option>
+                          ))}
+                        </select>
+                      </div>
+                    </div>
                     <div className="field">
                       <label htmlFor="brief">▸ The Brief</label>
                       <textarea
@@ -199,7 +245,7 @@ export function AuditForm() {
                         name="brief"
                         required
                         rows={4}
-                        placeholder="What should the system do? What's broken? What's the deadline?"
+                        placeholder="What should the software do, who will use it, and when do you need it?"
                       />
                     </div>
 
@@ -210,7 +256,7 @@ export function AuditForm() {
                           className="w-full md:w-auto btn-primary px-8 py-3 text-sm font-semibold shadow-xl hover:shadow-2xl active:scale-95"
                           disabled={state === "submitting"}
                         >
-                          {state === "submitting" ? "Sending…" : "Request an Audit"}
+                          {state === "submitting" ? "Sending…" : "Send project brief"}
                           <span aria-hidden>{state === "submitting" ? "·" : "→"}</span>
                         </button>
                       </Magnetic>

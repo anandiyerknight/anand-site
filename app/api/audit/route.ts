@@ -1,11 +1,31 @@
 import { NextResponse } from "next/server";
 import { addBriefToSheet } from "@/lib/sheets";
 import { sendBriefNotification } from "@/lib/mailer";
+import { companyRevenueBands } from "@/lib/company-revenue";
 
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    if (body.contact_website != null && body.contact_website !== "") return NextResponse.json({ ok: false, error: "Invalid submission" }, { status: 422 }); const projectType = body.project_type === "custom_software" ? "Custom software for a business workflow" : body.project_type === "ai_second_brain" ? "AI second brain for company knowledge" : null; if (!projectType) return NextResponse.json({ ok: false, error: "Select a supported project type" }, { status: 422 }); const lead = {
+    if (body.contact_website != null && body.contact_website !== "") {
+      return NextResponse.json({ ok: false, error: "Invalid submission" }, { status: 422 });
+    }
+
+    const projectType =
+      body.project_type === "custom_software"
+        ? "Custom software for a business workflow"
+        : body.project_type === "ai_second_brain"
+          ? "AI second brain for company knowledge"
+          : null;
+    if (!projectType) {
+      return NextResponse.json({ ok: false, error: "Select a supported project type" }, { status: 422 });
+    }
+
+    const revenueBand = companyRevenueBands.find(({ value }) => value === body.company_revenue);
+    if (!revenueBand) {
+      return NextResponse.json({ ok: false, error: "Select a company revenue band" }, { status: 422 });
+    }
+
+    const lead = {
       name: String(body.name || "").trim(),
       email: String(body.email || "").trim(),
       company: String(body.company || "").trim(),
@@ -25,9 +45,14 @@ export async function POST(req: Request) {
       return NextResponse.json({ ok: false, error: "Required fields are missing" }, { status: 400 });
     }
 
-    lead.brief = `Project type: ${projectType}
+    lead.brief = [
+      `Project type: ${projectType}`,
+      `Annual company revenue: ${revenueBand.label}`,
+      "",
+      lead.brief,
+    ].join("\n");
 
-${lead.brief}`; const results = await Promise.allSettled([
+    const results = await Promise.allSettled([
       addBriefToSheet(lead),
       sendBriefNotification({ ...lead, stage: lead.source }),
     ]);
@@ -38,7 +63,10 @@ ${lead.brief}`; const results = await Promise.allSettled([
       return NextResponse.json({ ok: false, error: "Lead capture is temporarily unavailable" }, { status: 503 });
     }
 
-    return NextResponse.json({ ok: true });
+    return NextResponse.json({
+      ok: true,
+      adConversionEligible: revenueBand.value !== "below_10_cr",
+    });
   } catch (e) {
     console.error("[AUDIT] error", e);
     return NextResponse.json({ ok: false }, { status: 500 });

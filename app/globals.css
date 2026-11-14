@@ -326,6 +326,7 @@
   font-weight: 500;
 }
 .field input,
+.field select,
 .field textarea {
   border: none;
   border-bottom: 2px solid var(--color-rule-2);
@@ -340,10 +341,12 @@
   box-sizing: border-box;
 }
 .field input:hover,
+.field select:hover,
 .field textarea:hover {
   border-color: var(--color-rule);
 }
 .field input:focus,
+.field select:focus,
 .field textarea:focus {
   border-color: var(--color-cyan);
   box-shadow: 0 2px 0 var(--color-cyan);
@@ -354,8 +357,13 @@
   opacity: 0.8;
 }
 
+.field select {
+  color-scheme: dark;
+}
+
 @media (max-width: 768px) {
   .field input,
+  .field select,
   .field textarea {
     font-size: 16px;
     padding: 1.25rem 0;
